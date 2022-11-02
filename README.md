@@ -1,4 +1,4 @@
-## Acknowledgements
+## Acknowledgments
 
 * [dot](https://github.com/folke/dot)
 * [config_manager](https://github.com/tjdevries/config_manager)
