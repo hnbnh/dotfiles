@@ -1,3 +1,7 @@
+# ~/dotfiles
+
+![screenshot](./assets/screenshot.png)
+
 ## Acknowledgments
 
 * [dot](https://github.com/folke/dot)
