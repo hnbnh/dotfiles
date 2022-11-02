@@ -1,0 +1,8 @@
+- name: Setup Linux Workstation
+  hosts: local
+  roles:
+    - system
+    - bin
+    - packages
+    - fonts
+    - dotfiles

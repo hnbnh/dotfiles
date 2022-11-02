@@ -1,0 +1,28 @@
+[core]
+	editor = nvim
+  pager  = delta
+
+[init]
+	defaultBranch = "main"
+
+[user]
+	name  = hnbnh
+  email = huynhninhbinh123@gmail.com
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  features     = hnbnh
+  navigate     = true    # use n and N to move between diff sections
+  side-by-side = true    # display side-by-side diffs
+  line-numbers = true    # display line numbers
+
+[merge]
+  conflictstyle = diff3
+  
+[diff]
+  colorMoved = default
+
+[include]
+  path = ~/.config/git/.themes.gitconfig

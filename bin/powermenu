@@ -1,0 +1,74 @@
+#!/bin/env bash
+
+uptime="Uptime: $(uptime -p | sed -e 's/up //g')"
+
+# Options
+poweroff=' Poweroff'
+reboot=' Reboot'
+lock=' Lock'
+suspend='鈴 Suspend'
+logout=' Logout'
+
+yes=' Yes'
+no=' No'
+
+# Rofi CMD
+rofi_cmd() {
+	rofi -dmenu \
+    -i \
+		-mesg "$1" \
+		-theme-str '@import "options.theme.rasi"'
+}
+
+# Pass variables to rofi dmenu
+run_rofi() {
+	printf "$poweroff\n$suspend\n$logout\n$reboot\n$lock\n" | rofi_cmd "$1"
+}
+
+confirm() {
+	printf "$yes\n$no" | rofi_cmd "$1"
+}
+
+# Execute Command
+run_cmd() {
+	ok="$(confirm 'Are you sure?')"
+
+	if [[ "$ok" == "$yes" ]]; then
+		if [[ $1 == '--poweroff' ]]; then
+			systemctl poweroff
+		elif [[ $1 == '--reboot' ]]; then
+			systemctl reboot
+		elif [[ $1 == '--suspend' ]]; then
+		  systemctl suspend
+		elif [[ $1 == '--logout' ]]; then
+			if [[ "$DESKTOP_SESSION" == 'awesome' ]]; then
+				killall gammastep
+				echo 'awesome.quit()' | awesome-client
+			fi
+		elif [[ $1 == '--lock' ]]; then
+      betterlockscreen --lock blur
+		fi
+	else
+		exit 0
+	fi
+}
+
+chosen=$(run_rofi "$uptime")
+
+case ${chosen} in
+$poweroff)
+	run_cmd --poweroff
+	;;
+$reboot)
+	run_cmd --reboot
+	;;
+$lock)
+	run_cmd --lock
+	;;
+$suspend)
+	run_cmd --suspend
+	;;
+$logout)
+	run_cmd --logout
+	;;
+esac

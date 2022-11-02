@@ -1,0 +1,29 @@
+configuration {
+	disable-history: false;
+  display-drun: "Applications:";
+  display-window: "Windows:";
+  drun-display-format: "{name}";
+  font: "FiraCode Nerd Font 14";
+  modi: "window,run,drun";
+  icon-theme: "Papirus";
+
+  kb-row-up: "Up,Control+k,ISO_Left_Tab";
+  kb-row-down: "Down,Control+j";
+
+  kb-accept-entry: "Control+y,Return,KP_Enter";
+  kb-remove-to-eol: "";
+
+  matching: "fuzzy";
+  sort: true;
+  sorting-method: "fzf";
+  show-icons: true;
+
+  filebrowser {
+    directories-first: true;
+    sorting-method:    "name";
+  }
+}
+
+@theme "~/.config/rofi/blurry.theme.rasi"
+
+/* vim: ft=sass

@@ -1,0 +1,12 @@
+#!/bin/env bash
+run() {
+  if ! pgrep -f $1 ;
+  then
+    "$@"&
+  fi
+}
+
+run nm-applet
+run gammastep
+run ibus-daemon -drx
+run picom --experimental-backends -b

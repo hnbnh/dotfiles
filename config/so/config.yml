@@ -1,0 +1,7 @@
+api_key: ~
+limit: 20
+lucky: true
+sites:
+- stackoverflow
+search_engine: google
+copy_cmd: xclip -sel clip

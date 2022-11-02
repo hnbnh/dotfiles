@@ -1,0 +1,159 @@
+* {
+	transparent: #00000000;
+
+  white: white / 10%;
+
+  background-light: @white;
+  background-selected: @white;
+  background-active: #2D4F6733;
+	foreground: white / 70%;
+  border-color: #7AA89F;
+	urgent: #E91E6366;
+	urgent-selected: #E91E6377;
+
+  background-color: #1F1F28;
+}
+
+window {
+	transparency: "real";
+	location: center;
+	anchor: center;
+	x-offset: 0px;
+  width: 50%;
+	orientation: vertical;
+	border-radius: 12px;
+  border: 5;
+  border-color: @border-color;
+}
+
+prompt {
+	enabled: false;
+}
+
+button {
+	action: "ok";
+	str: " ";
+	expand: false;
+	text-color: @foreground;
+	background-color: @transparent;
+}
+
+/* To make the `Search` text appear centered. */
+button2 {
+	action: "ok";
+	str: " ";
+	expand: false;
+	text-color: @transparent;
+	background-color: @transparent;
+}
+
+entry {
+	background-color: @transparent;
+	text-color: @foreground;
+	expand: true;
+	vertical-align: 0.5;
+	horizontal-align: 0.5;
+	placeholder: "Search";
+	placeholder-color: @foreground;
+	blink: true;
+}
+
+entry-wrapper {
+	orientation: horizontal;
+  horizontal-align: 0.5;
+	vertical-align: 0.5;
+	spacing: 4px;
+	background-color: @transparent;
+	children: [ button, entry, button2 ];
+}
+
+inputbar {
+	background-color: @background-light;
+	text-color: @foreground;
+	expand: false;
+	border-radius: 24px;
+  margin: 0px 10em 0px 10em;
+	padding: 10px 10px 10px 10px;
+	position: north;
+	children: [ entry-wrapper ];
+}
+
+message {
+  text-color: @foreground;
+}
+
+textbox {
+  padding: 10px;
+  text-color: inherit;
+  background-color: @transparent;
+  horizontal-align: 0.5;
+  vertical-align: 0.5;
+}
+
+listview {
+	background-color: @transparent;
+	columns: 2;
+  lines: 10;
+	spacing: 5px;
+	cycle: true;
+	dynamic: true;
+	layout: vertical;
+}
+
+mainbox {
+	children: [ inputbar, listview ];
+	spacing: 25px;
+	padding: 40px 25px 25px 25px;
+}
+
+element {
+	background-color: @transparent;
+	text-color: @foreground;
+	border-radius: 6px;
+	padding: 5px 10px 5px 10px;
+}
+
+element-icon {
+  background-color: @transparent;
+	size: 36px;
+	border: 0;
+}
+
+element-text {
+  background-color: @transparent;
+	text-color: @foreground;
+	expand: true;
+	horizontal-align: 0;
+	vertical-align: 0.5;
+	margin: 0 10px 0 10px;
+}
+
+element normal.urgent,
+element alternate.urgent {
+	background-color: @urgent;
+	text-color: @foreground;
+	border-radius: 9px;
+}
+
+element normal.active,
+element alternate.active {
+	background-color: @background-active;
+	text-color: @foreground;
+}
+
+element selected {
+	background-color: @background-selected;
+	text-color: @foreground;
+}
+
+element selected.urgent {
+	background-color: @urgent-selected;
+	text-color: @foreground;
+}
+
+element selected.active {
+	background-color: @background-active;
+	color: @foreground-selected;
+}
+
+/* vim: ft=sass

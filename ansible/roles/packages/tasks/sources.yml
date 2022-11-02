@@ -1,0 +1,58 @@
+- name: Get Ubuntu code name
+  shell: sed 's/UBUNTU_CODENAME=//;t;d' /etc/os-release
+  register: ubuntu_codename
+  changed_when: no
+
+- name: Set Ubuntu code name
+  set_fact:
+    UBUNTU_CODENAME: "{{ ubuntu_codename.stdout }}"
+
+# FIXME: Deprecated apt-key
+# https://github.com/ansible/ansible/issues/78063
+- name: Add ppa repositories
+  become: true
+  shell: "add-apt-repository -y {{ item | join(' ') }}"
+  loop:
+    - ppa:obsproject/obs-studio
+    - ppa:bamboo-engine/ibus-bamboo
+    - ppa:linrunner/tlp
+    - ppa:papirus/papirus
+    - ppa:longsleep/golang-backports
+    - ppa:neovim-ppa/unstable
+
+- name: Create /etc/apt/keyrings
+  become: true
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: Add keys & sources
+  become: true
+  get_url:
+    url: "{{ item.url }}"
+    dest: "/etc/apt/trusted.gpg.d/{{ item.dest }}"
+    mode: '0644'
+  loop:
+    - url: https://download.docker.com/linux/ubuntu/gpg
+      dest: docker.asc
+    - url: https://repo.charm.sh/apt/gpg.key
+      dest: glow.asc # glow markdown
+    - url: https://deb.beekeeperstudio.io/beekeeper.key
+      dest: beekeeper.asc
+
+- name: Add source list
+  become: true
+  apt_repository:
+    repo: "{{ item.repo }}"
+    filename: "{{ item.filename }}"
+    state: present
+  loop:
+    - repo: deb [trusted=yes arch=amd64] https://download.konghq.com/insomnia-ubuntu/ default all
+      filename: insomnia
+    - repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ UBUNTU_CODENAME }} stable"
+      filename: docker
+    - repo: "deb https://repo.charm.sh/apt/ * *"
+      filename: glow
+    - repo: deb https://deb.beekeeperstudio.io stable main
+      filename: beekeeper

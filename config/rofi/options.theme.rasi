@@ -1,0 +1,18 @@
+window {
+  width: 500px;
+}
+
+mainbox {
+	children: [ message, listview ];
+}
+
+element {
+  children: [ element-text ];
+}
+
+listview {
+	lines: 5;
+	columns: 1;
+}
+
+/* vim ft=sass

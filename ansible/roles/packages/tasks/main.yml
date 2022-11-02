@@ -1,0 +1,68 @@
+- include_tasks: sources.yml
+
+- name: Apt update
+  become: true
+  apt:
+    update_cache: yes
+  changed_when: no
+
+- name: Install dependencies
+  become: true
+  apt:
+    pkg: "{{ DEPS }}"
+    install_recommends: no
+
+- name: Install packages from repository
+  become: true
+  apt:
+    pkg:
+      #### wm ####
+      - awesome
+      #### cli ####
+      - zsh
+      - ffmpeg
+      - ffmpegthumbnailer
+      - tlp
+      - golang-go
+      - imagemagick
+      - aria2
+      - nala
+      - ripgrep
+      - gammastep
+      - glow
+      - djvulibre-bin
+      - poppler-utils # pdf to image
+      # - gnome-epub-thumbnailer # available in 22.10
+      - python3-venv
+      - torbrowser-launcher
+      - brightnessctl
+      #### gui ####
+      - picom
+      - rofi
+      - obs-studio
+      - ibus
+      - ibus-bamboo
+      - beekeeper-studio
+      #### tui ####
+      - w3m # text-based web browser
+      - wine-installer # Mint only
+      - insomnia
+      - papirus-icon-theme
+      - papirus-folders
+      - flameshot
+      - lxappearance
+      - mpv
+      - okular
+      - zathura
+      #### docker ####
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+      #### font ####
+      - fonts-open-sans
+      - fonts-manrope
+    install_recommends: yes
+
+- include_tasks: latest.yml
+- include_tasks: post-install.yml

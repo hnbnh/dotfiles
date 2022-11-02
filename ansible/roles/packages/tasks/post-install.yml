@@ -1,0 +1,32 @@
+- name: Apt clean & remove
+  become: true
+  apt:
+    autoremove: yes
+    autoclean: yes
+  changed_when: no
+
+- name: Create docker group
+  become: true
+  group:
+    name: docker
+    state: present
+
+- name: Add user to docker group
+  become: true
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    groups: docker
+    append: yes
+
+- name: Post install (become)
+  become: true
+  shell: |
+    tlp start
+    chsh -s $(which zsh)
+  changed_when: no
+
+- name: Post install
+  shell: |
+    papirus-folders -C teal --theme Papirus
+    betterlockscreen -u ~/.config/wallpapers/wolf-minimalist-wallpaper-1600×900.jpg
+  changed_when: no

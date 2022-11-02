@@ -1,0 +1,85 @@
+- name: Switch to local server
+  shell: mint-switch-to-local-mirror
+  changed_when: no
+
+- name: Customize /etc/environment
+  become: true
+  lineinfile:
+    dest: "/etc/environment"
+    state: present
+    regexp: "^{{ item.key }}="
+    line: "{{ item.key }}={{ item.value }}"
+  loop:
+    - key: EDITOR
+      value: nvim
+    - key: GTK_IM_MODULE
+      value: ibus
+    - key: QT_IM_MODULE
+      value: ibus
+    - key: XMODIFIERS
+      value: "@im=ibus"
+    - key: QT4_IM_MODULE
+      value: ibus
+    - key: CLUTTER_IM_MODULE
+      value: ibus
+    - key: GLFW_IM_MODULE
+      value: ibus
+
+- name: Copy files
+  become: true
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "0644"
+  loop:
+    - description: keyd
+      src: keyd.conf
+      dest: /etc/keyd/default.conf
+    - description: Touchpad
+      src: touchpad.conf
+      dest: /etc/X11/xorg.conf.d/30-touchpad.conf
+    - description: Lock screen when going to sleep/suspend
+      src: betterlockscreen@.service
+      dest: /usr/lib/systemd/system/betterlockscreen@.service
+
+- name: systemd
+  become: true
+  systemd:
+    name: "{{ item.name }}"
+    enabled: "{{ item.enabled }}"
+    state: "{{ item.state }}"
+  loop:
+    - name: keyd
+      enabled: yes
+      state: started
+    - name: NetworkManager-wait-online.service
+      enabled: no
+      state: stopped
+    - name: bluetooth
+      enabled: no
+      state: stopped
+
+- name: Prefer libinput over synaptics
+  become: true
+  file:
+    src: /usr/share/X11/xorg.conf.d/40-libinput.conf
+    dest: /etc/X11/xorg.conf.d/40-libinput.conf
+    state: link
+
+- name: Enable firewall
+  become: true
+  community.general.ufw:
+    state: enabled
+    policy: allow
+
+- name: Add dpkg architectures
+  become: true
+  lineinfile:
+    dest: "/var/lib/dpkg/arch"
+    line: "{{ item }}"
+    create: yes
+  loop:
+    - amd64
+    - i386

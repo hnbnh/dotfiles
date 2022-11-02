@@ -1,0 +1,14 @@
+[delta "hnbnh"]
+    dark = true
+    file-style = omit
+    zero-style = syntax
+    syntax-theme = gruvbox-dark
+    hunk-header-decoration-style = green box
+    hunk-header-file-style = yellow ul bold
+    hunk-header-line-number-style = yellow ul bold
+    hunk-header-style = line-number syntax bold italic
+    line-numbers-left-style = green
+    line-numbers-minus-style = red bold
+    line-numbers-plus-style = green bold
+    line-numbers-right-style = green
+    line-numbers-zero-style = white italic

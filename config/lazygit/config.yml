@@ -1,0 +1,18 @@
+git:
+  paging:
+    colorArg: always
+    pager: delta --paging=never
+gui:
+  mouseEvents: false
+  showIcons: true
+  branchColors:
+    'feat': '#76946A'
+    'fix': '#C34043'
+    'refactor': '#DCA561'
+    'docs': '#6A9589'
+  theme:
+    selectedLineBgColor:
+      - default
+    selectedRangeBgColor:
+      - default
+  expandFocusedSidePanel: true

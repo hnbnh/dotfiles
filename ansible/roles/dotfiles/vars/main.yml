@@ -1,0 +1,4 @@
+IBUS_CONFIG:
+  general/engines-order: "['BambooUs', 'Bamboo']"
+  general/preload-engines: "['BambooUs', 'Bamboo']"
+  general/use-global-engine: "true"
