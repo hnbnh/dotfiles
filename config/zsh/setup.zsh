@@ -10,7 +10,7 @@ fpath=(~/.zsh $fpath)
 eval "`fnm env`"
 
 # nnn
-export NNN_PLUG='f:fzcd;p:preview-tui;d:diffs;t:nmount'
+export NNN_PLUG='f:fzcd;p:preview-tui;d:diffs;t:nmount;z:autojump'
 export NNN_FIFO=/tmp/nnn.fifo
 export PAGER="less -Ri"
 export ICONLOOKUP=1
