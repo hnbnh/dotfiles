@@ -7,7 +7,7 @@ local lsp_servers = {
   "pyright",
   "rust_analyzer",
   "tsserver",
-  "eslint-lsp",
+  "eslint",
   "gopls",
   "yamlls",
   "prismals",
