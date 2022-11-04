@@ -5,6 +5,7 @@ local dap = require("dap")
 local dui = require("dapui")
 local hop = require("hop")
 local tint = require("tint")
+local lsp_lines = require("lsp_lines")
 
 local utils = require("utils")
 
@@ -108,6 +109,10 @@ wk.register({
       t = { utils.toggle_spell, "Toggle spell check" },
       -- https://github.com/nickjj/dotfiles/blob/master/.vimrc
       p = { "<cmd>normal! mz[s1z=`z<cr>", "Pick first suggestion" },
+    },
+    l = {
+      name = "+lsp",
+      t = { lsp_lines.toggle, "Toggle lsp lines" },
     },
   },
   ["<F5>"] = { dap.continue, "Continue" },

@@ -14,7 +14,9 @@ local signs = {
   { name = "DiagnosticSignInfo", text = "" },
 }
 local config = {
-  -- virtual_text = false,
+  virtual_text = false,
+  -- For lsp_lines.nvim
+  virtual_lines = true,
   signs = { active = signs },
   update_in_insert = true,
   underline = false,

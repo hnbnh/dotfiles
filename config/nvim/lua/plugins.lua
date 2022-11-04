@@ -62,6 +62,10 @@ packer.startup({
     use("WhoIsSethDaniel/mason-tool-installer.nvim")
     use({ "folke/trouble.nvim", config = [[require("config.trouble")]] })
     use("b0o/schemastore.nvim")
+    use({
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      config = [[require("lsp_lines").setup({ underline = true })]],
+    })
 
     -- **** Status line **** --
     use({ "nvim-lualine/lualine.nvim", event = "VimEnter", config = [[require("config.lualine")]] })
