@@ -74,7 +74,9 @@ o.pumblend = 10 -- Pseudo transparency for completion menu
 o.winblend = 5 -- Pseudo transparency for floating window
 o.complete:append({ "kspell" }) -- Insert mode completion with `spell` turned on (<C-p> or <C-n>)
 -- o.complete:remove{"w", "b", "u", "t"}
+o.spell = true
 o.spelllang = "en"
+o.spelloptions = 'camel'
 o.spellsuggest:append({ 9 }) -- Show 9 spell suggestions at most
 o.virtualedit = "block" -- Virtual block edit
 o.synmaxcol = 200 -- Text after this column number is not highlighted

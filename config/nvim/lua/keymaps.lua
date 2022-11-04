@@ -6,6 +6,8 @@ local dui = require("dapui")
 local hop = require("hop")
 local tint = require("tint")
 
+local utils = require("utils")
+
 vim.g.mapleader = ","
 
 -- ************************************** --
@@ -100,6 +102,12 @@ wk.register({
       t = { dap.terminate, "Terminate debugger" },
       l = { dap.run_last, "Run last" },
       b = { dap.toggle_breakpoint, "Toggle breakpoint" },
+    },
+    s = {
+      name = "+spell",
+      t = { utils.toggle_spell, "Toggle spell check" },
+      -- https://github.com/nickjj/dotfiles/blob/master/.vimrc
+      p = { "<cmd>normal! mz[s1z=`z<cr>", "Pick first suggestion" },
     },
   },
   ["<F5>"] = { dap.continue, "Continue" },
