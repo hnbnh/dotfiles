@@ -155,13 +155,13 @@ packer.startup({
     -- **** Layout **** --
     -- use({ "beauwilliams/focus.nvim", config = [[require("config.focus")]] })
 
-    -- -- Embed Neovim in a web browser
-    -- use({
-    --   "glacambre/firenvim",
-    --   run = function()
-    --     vim.fn["firenvim#install"](0)
-    --   end,
-    -- })
+    -- **** Browser **** --
+    use({
+      "glacambre/firenvim",
+      run = function()
+        vim.fn["firenvim#install"](0)
+      end,
+    })
 
     if PACKER_BOOTSTRAP then
       require("packer").sync()
