@@ -46,6 +46,8 @@
       repo: nnn
     - user: rvaiya
       repo: keyd
+    - user: mwh
+      repo: dragon # Drag and drop
 
 - name: Install packages from source
   shell: "{{ item.cmd }}"
@@ -58,6 +60,8 @@
       dir: Orchis-theme
     - cmd: ./install-i3lock-color.sh
       dir: i3lock-color
+    - cmd: make install
+      dir: dragon
 
 - name: Install packages from source (become)
   become: true
