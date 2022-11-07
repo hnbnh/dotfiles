@@ -1,4 +1,5 @@
 auth
+clangd
 cmd
 cmp
 config
@@ -29,6 +30,7 @@ nvim
 popup
 prisma
 px
+quickfix
 sql
 src
 svg
