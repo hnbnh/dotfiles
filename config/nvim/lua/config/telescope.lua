@@ -20,6 +20,7 @@ telescope.setup({
         ["<C-k>"] = require("telescope.actions").move_selection_previous,
         ["<C-t>"] = trouble.open_with_trouble,
         ["<Tab>"] = nil,
+        ["<C-d>"] = "delete_buffer",
       },
       n = { ["<C-t>"] = trouble.open_with_trouble },
     },
@@ -35,6 +36,14 @@ telescope.setup({
       require("telescope.themes").get_dropdown({
         -- even more opts
       }),
+    },
+  },
+  pickers = {
+    buffers = {
+      show_all_buffers = true,
+      sort_lastused = true,
+      theme = "dropdown",
+      previewer = false,
     },
   },
 })
