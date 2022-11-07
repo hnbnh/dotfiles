@@ -7,12 +7,7 @@ null_ls.setup({
   sources = {
     fmt.black, -- Python
     fmt.prettierd, -- Js/Ts
-    fmt.gofmt,
-    fmt.shfmt, -- Shell
     fmt.stylua,
-    fmt.rustfmt,
-    fmt.clang_format,
-    fmt.yamlfmt,
-    -- fmt.prismaFmt,
+    fmt.beautysh,
   },
 })

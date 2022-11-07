@@ -138,8 +138,9 @@ packer.startup({
     use({ "mxsdev/nvim-dap-vscode-js" })
 
     -- **** Languages **** --
-    use({ "ellisonleao/glow.nvim", branch = "main" })
+    use({ "ellisonleao/glow.nvim", branch = "main", cmd = { "Glow" } })
     use("simrat39/rust-tools.nvim")
+    use("jose-elias-alvarez/typescript.nvim")
 
     -- **** Icon **** --
     use({

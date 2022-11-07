@@ -12,11 +12,11 @@ local lsp_servers = {
   "yamlls",
   "prismals",
   "bashls",
+  "clangd",
 }
 local dap_servers = { "codelldb", "debugpy", "js-debug-adapter", "delve" }
 local linter_servers = {}
--- TODO: rustfmt
-local formatter_servers = { "black", "clang-format", "prettierd", "shfmt", "stylua", "yamlfmt" }
+local formatter_servers = { "black", "prettierd", "stylua", "beautysh" }
 local without_lsp_servers = utils.join(dap_servers, linter_servers, formatter_servers)
 
 require("mason").setup({
@@ -56,6 +56,8 @@ for _, server in pairs(lsp_servers) do
         ),
       },
     })
+  elseif server == "tsserver" then
+    require("typescript").setup({ server = opts })
   else
     lspconfig[server].setup(opts)
   end

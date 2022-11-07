@@ -107,6 +107,9 @@ M.on_attach = function(client, bufnr)
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- HACK: Work around for clangd warning about different offset_encodings
+-- https://github.com/neovim/neovim/pull/16694
+capabilities.offsetEncoding = { "utf-16" }
 M.capabilities = capabilities
 
 return M
