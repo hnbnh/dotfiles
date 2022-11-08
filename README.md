@@ -2,6 +2,11 @@
 
 ![screenshot](./assets/screenshot.png)
 
+## TODO
+
+- [ ] Support Fedora
+- [ ] Support Arch (EndeavourOS)
+
 ## Acknowledgments
 
 * [dot](https://github.com/folke/dot)
