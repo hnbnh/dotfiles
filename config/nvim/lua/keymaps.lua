@@ -114,6 +114,12 @@ wk.register({
       name = "+lsp",
       t = { lsp_lines.toggle, "Toggle lsp lines" },
     },
+    r = {
+      -- https://github.com/nickjj/dotfiles/blob/master/.vimrc
+      name = "+replace",
+      p = { ":%s///g<Left><Left>", "Replace" },
+      c = { ":%s///gc<Left><Left>", "Replace with confirmation" },
+    },
   },
   ["<F5>"] = { dap.continue, "Continue" },
   ["<F10>"] = { dap.step_over, "Step over" },
