@@ -35,7 +35,7 @@ packer.startup({
     -- **** Editing **** --
     use({ "numToStr/Comment.nvim", event = "BufRead", config = [[require("config.comment")]] })
     use({ "lukas-reineke/indent-blankline.nvim", event = "VimEnter", config = [[require("config.indent-blankline")]] })
-    use({ "machakann/vim-swap", event = "VimEnter" })
+    use({ "mizlan/iswap.nvim", event = "VimEnter", cmd = "IsSwap", config = [[require("iswap").setup()]] })
     use({ "kylechui/nvim-surround", event = "VimEnter", config = [[require("config.surround")]] })
     use({ "godlygeek/tabular", cmd = { "Tabularize" } })
     use({ "andymass/vim-matchup", event = "BufReadPost", config = [[require("config.matchup")]] })

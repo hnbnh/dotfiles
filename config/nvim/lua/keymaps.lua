@@ -105,10 +105,11 @@ wk.register({
       b = { dap.toggle_breakpoint, "Toggle breakpoint" },
     },
     s = {
-      name = "+spell",
+      name = "+spell | +swap",
       t = { utils.toggle_spell, "Toggle spell check" },
       -- https://github.com/nickjj/dotfiles/blob/master/.vimrc
       p = { "<cmd>normal! mz[s1z=`z<cr>", "Pick first suggestion" },
+      w = { "<cmd>ISwap<cr>", "Swap words" },
     },
     l = {
       name = "+lsp",
