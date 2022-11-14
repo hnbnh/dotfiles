@@ -1,5 +1,3 @@
-local trouble = require("trouble.providers.telescope")
-
 local telescope = require("telescope")
 
 telescope.setup({
@@ -18,11 +16,9 @@ telescope.setup({
       i = {
         ["<C-j>"] = require("telescope.actions").move_selection_next,
         ["<C-k>"] = require("telescope.actions").move_selection_previous,
-        ["<C-t>"] = trouble.open_with_trouble,
         ["<Tab>"] = nil,
         ["<C-d>"] = "delete_buffer",
       },
-      n = { ["<C-t>"] = trouble.open_with_trouble },
     },
   },
   extensions = {

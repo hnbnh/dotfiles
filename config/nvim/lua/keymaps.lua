@@ -6,6 +6,7 @@ local dui = require("dapui")
 local hop = require("hop")
 local tint = require("tint")
 local lsp_lines = require("lsp_lines")
+local spectre = require("spectre")
 
 local utils = require("utils")
 
@@ -38,7 +39,7 @@ wk.register({
 --
 -- ************************************** --
 wk.register({
-  s = { hop.hint_char2, "Hop char 2" },
+  s = { hop.hint_char1, "Hop char" },
   ["<c-p>"] = { tb.resume, "Resume previous picker" },
   ["<leader>"] = {
     ["/"] = { tb.live_grep, "Live grep" },
@@ -120,6 +121,7 @@ wk.register({
       name = "+replace",
       p = { ":%s///g<Left><Left>", "Replace" },
       c = { ":%s///gc<Left><Left>", "Replace with confirmation" },
+      s = { spectre.open, "Replace with spectre" },
     },
   },
   ["<F5>"] = { dap.continue, "Continue" },
