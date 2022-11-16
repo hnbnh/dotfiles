@@ -30,7 +30,7 @@ packer.startup({
     use({ "kyazdani42/nvim-web-devicons", event = "VimEnter" })
 
     -- **** Key binding **** --
-    use({ "folke/which-key.nvim", event = "VimEnter", config = [[require("config.which-key")]] })
+    use({ "folke/which-key.nvim", config = [[require("config.which-key")]] })
 
     -- **** Editing **** --
     use({ "numToStr/Comment.nvim", event = "BufRead", config = [[require("config.comment")]] })

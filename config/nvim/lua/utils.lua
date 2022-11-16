@@ -14,15 +14,6 @@ M.join = function(...)
   return merged
 end
 
-M.bind = function(f, args)
-  return function()
-    if args ~= nil then
-      return f(table.unpack(args))
-    end
-    return f()
-  end
-end
-
 M.toggle_spell = function()
   vim.opt.spell = not (vim.opt.spell:get())
 end

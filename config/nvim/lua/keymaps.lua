@@ -124,6 +124,50 @@ wk.register({
       s = { spectre.open, "Replace with spectre" },
     },
   },
+  ["["] = {
+    name = "+goto previous",
+    d = { vim.diagnostic.goto_prev, "Diagnostic" },
+    e = {
+      function()
+        vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+      end,
+      "Error",
+    },
+    w = {
+      function()
+        vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN })
+      end,
+      "Warning",
+    },
+    h = {
+      function()
+        vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.HINT })
+      end,
+      "Hint",
+    },
+  },
+  ["]"] = {
+    name = "+goto next",
+    d = { vim.diagnostic.goto_next, "Go to next diagnostic" },
+    e = {
+      function()
+        vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+      end,
+      "Error",
+    },
+    w = {
+      function()
+        vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN })
+      end,
+      "Warning",
+    },
+    h = {
+      function()
+        vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.HINT })
+      end,
+      "Hint",
+    },
+  },
   ["<F5>"] = { dap.continue, "Continue" },
   ["<F10>"] = { dap.step_over, "Step over" },
   ["<F11>"] = { dap.step_into, "Step into" },

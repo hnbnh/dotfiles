@@ -1,7 +1,5 @@
 local tb = require("telescope.builtin")
 local wk = require("which-key")
-local bind = require("utils").bind
-local constants = require("constants")
 
 local M = {}
 
@@ -16,7 +14,7 @@ local signs = {
 local config = {
   virtual_text = false,
   -- For lsp_lines.nvim
-  virtual_lines = true,
+  virtual_lines = { only_current_line = true },
   signs = { active = signs },
   update_in_insert = true,
   underline = false,
@@ -62,8 +60,6 @@ local function lsp_highlight_document(client, bufnr)
 end
 
 local function lsp_keymaps(bufnr)
-  local border_opts = constants.border_opts
-
   wk.register({
     buffer = bufnr,
     g = {
@@ -76,14 +72,12 @@ local function lsp_keymaps(bufnr)
       R = { "<cmd>Trouble lsp_references<cr>", "Trouble references" },
       s = { vim.lsp.buf.signature_help, "Signature help" },
     },
-    ["[d"] = { bind(vim.diagnostic.goto_prev, { border_opts }), "Go to previous diagnostic" },
-    ["]d"] = { bind(vim.diagnostic.goto_next, { border_opts }), "Go to next diagnostic" },
     ["<leader>"] = {
       r = {
         name = "+rename",
         n = { vim.lsp.buf.rename, "Rename" },
       },
-      o = { bind(vim.diagnostic.open_float, { border_opts }), "Open float" },
+      o = { vim.diagnostic.open_float, "Open float" },
       q = { "<cmd>TroubleToggle quickfix<cr>", "Toggle quickfix" },
       c = { vim.lsp.buf.code_action, "Code action" },
       p = { vim.lsp.buf.format, "Format" },
