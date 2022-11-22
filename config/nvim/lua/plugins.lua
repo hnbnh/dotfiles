@@ -50,7 +50,6 @@ packer.startup({
     use({ "tpope/vim-repeat", event = "VimEnter" })
     use({ "norcalli/nvim-colorizer.lua", event = "VimEnter", config = [[require("colorizer").setup()]] })
     use({ "nacro90/numb.nvim", event = "BufEnter", config = [[require("numb").setup()]] })
-    use({ "echasnovski/mini.pairs", event = "BufEnter", branch = "stable", config = [[require('mini.pairs').setup()]] })
 
     -- **** File explorer **** --
     use({ "mcchrish/nnn.vim", config = [[require("config.nnn")]] })
@@ -70,7 +69,6 @@ packer.startup({
     use("b0o/schemastore.nvim")
     use({
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-      event = "BufEnter",
       config = [[require("lsp_lines").setup({ underline = true })]],
     })
 
