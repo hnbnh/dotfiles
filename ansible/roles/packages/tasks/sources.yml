@@ -38,8 +38,8 @@
       dest: docker.asc
     - url: https://repo.charm.sh/apt/gpg.key
       dest: glow.asc # glow markdown
-    - url: https://deb.beekeeperstudio.io/beekeeper.key
-      dest: beekeeper.asc
+    - url: https://dbeaver.io/debs/dbeaver.gpg.key
+      dest: dbeaver.asc
 
 - name: Add source list
   become: true
@@ -54,5 +54,5 @@
       filename: docker
     - repo: "deb https://repo.charm.sh/apt/ * *"
       filename: glow
-    - repo: deb https://deb.beekeeperstudio.io stable main
-      filename: beekeeper
+    - repo: deb https://dbeaver.io/debs/dbeaver-ce /
+      filename: dbeaver
