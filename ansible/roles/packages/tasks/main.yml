@@ -43,6 +43,7 @@
       - ibus
       - ibus-bamboo
       - dbeaver-ce
+      - code
       #### tui ####
       - w3m # text-based web browser
       - wine-installer # Mint only

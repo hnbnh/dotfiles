@@ -40,6 +40,8 @@
       dest: glow.asc # glow markdown
     - url: https://dbeaver.io/debs/dbeaver.gpg.key
       dest: dbeaver.asc
+    - url: https://packages.microsoft.com/keys/microsoft.asc
+      dest: microsoft.asc
 
 - name: Add source list
   become: true
@@ -56,3 +58,5 @@
       filename: glow
     - repo: deb https://dbeaver.io/debs/dbeaver-ce /
       filename: dbeaver
+    - repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+      filename: vscode
