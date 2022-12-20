@@ -146,6 +146,7 @@ packer.startup({
     use({ "ellisonleao/glow.nvim", branch = "main", cmd = { "Glow" } })
     use("simrat39/rust-tools.nvim")
     use("jose-elias-alvarez/typescript.nvim")
+    use("terrastruct/d2-vim")
 
     -- **** Icon **** --
     use({
