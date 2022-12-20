@@ -39,7 +39,7 @@ wk.register({
 --
 -- ************************************** --
 wk.register({
-  s = { hop.hint_char1, "Hop char" },
+  f = { hop.hint_char1, "Hop char" },
   ["<c-p>"] = { tb.resume, "Resume previous picker" },
   ["<leader>"] = {
     ["/"] = { tb.live_grep, "Live grep" },
