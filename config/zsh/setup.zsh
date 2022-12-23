@@ -14,6 +14,8 @@ export NNN_PLUG='f:fzcd;p:preview-tui;g:diffs;t:nmount;z:autojump;d:dragdrop'
 export NNN_FIFO=/tmp/nnn.fifo
 export PAGER="less -Ri"
 export ICONLOOKUP=1
+BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
+export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
