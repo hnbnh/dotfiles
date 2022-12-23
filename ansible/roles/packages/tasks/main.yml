@@ -23,7 +23,6 @@
       - ffmpeg
       - ffmpegthumbnailer
       - tlp
-      - golang-go
       - imagemagick
       - aria2
       - nala

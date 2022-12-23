@@ -13,6 +13,9 @@
   when: rustup_exists is failed
   shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
+- name: Install go
+  shell: curl -LO https://get.golang.org/$(uname)/go_installer && chmod +x go_installer && ./go_installer && rm go_installer
+
 - name: Update rust
   when: rustup_exists is succeeded
   shell: rustup update
