@@ -35,6 +35,7 @@
       - python3-venv
       - torbrowser-launcher
       - brightnessctl
+      - asciinema
       #### gui ####
       - picom
       - rofi
