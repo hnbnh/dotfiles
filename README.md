@@ -1,5 +1,7 @@
 # ~/dotfiles
 
+![screenshot](./assets/2022-12-27_13-46.png)
+
 ![screenshot](./assets/screenshot.png)
 
 ## TODO

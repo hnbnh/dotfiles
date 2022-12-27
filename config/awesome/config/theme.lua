@@ -11,7 +11,7 @@ local theme = {}
 theme.transparent = "#00000000"
 theme.font = "JetBrains Mono Nerd Font Bold 12"
 
-theme.black = "#3B3B47"
+theme.black = "#16161D"
 theme.red = "#E46876"
 theme.yellow = "#F2D98C"
 theme.orange = "#FFA066"
@@ -50,7 +50,7 @@ theme.taglist_fg_focus = theme.bg_normal
 theme.taglist_fg_occupied = theme.green
 
 -- wallpaper
-theme.wallpaper = gears.surface.load_uncached(constants.wallpapers .. "wolf-minimalist-wallpaper-1600×900.jpg")
+theme.wallpaper = gears.surface.load_uncached(constants.wallpapers .. "teal-liquid.jpg")
 
 -- bar
 theme.bar_height = dpi(60)
