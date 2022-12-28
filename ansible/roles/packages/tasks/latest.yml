@@ -111,6 +111,7 @@
     # Waiting for a stable release ...
     # - gobang
     - diskonaut
+    - kdash
 
 - name: Install packages with go
   shell: "go install {{ item }}"
