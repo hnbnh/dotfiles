@@ -101,6 +101,7 @@ wk.register({
       p = { ":%s///g<Left><Left>", "Replace" },
       c = { ":%s///gc<Left><Left>", "Replace with confirmation" },
       s = { "<cmd>lua require('spectre').open()<cr>", "Replace with spectre" },
+      r = { "<cmd>lua require('ssr').open()<cr>", "Replace with ssr" },
     },
   },
   ["["] = {

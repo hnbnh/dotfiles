@@ -27,6 +27,7 @@ return {
     end,
   },
   { "tpope/vim-repeat", event = "BufReadPost" },
+  { "tpope/vim-unimpaired", event = "BufReadPost" },
   {
     "NvChad/nvim-colorizer.lua",
     event = "BufReadPre",

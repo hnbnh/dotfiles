@@ -83,11 +83,13 @@ local function lsp_keymaps(bufnr)
       p = { vim.lsp.buf.format, "Format" },
       s = {
         name = "+symbol",
-        o = {
-          function()
-            tb.lsp_document_symbols({ sorting_strategy = "ascending" })
-          end,
-          "Document symbols",
+        a = {
+          "<cmd>AerialToggle<cr>",
+          "Aerial symbols",
+        },
+        t = {
+          "<cmd>Telescope aerial<cr>",
+          "Telescope aerial",
         },
       },
     },

@@ -7,7 +7,13 @@ return {
     event = "BufReadPre",
     config = { char = "│", show_current_context = true },
   },
-  { "nvim-lualine/lualine.nvim", event = "VimEnter" },
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "BufReadPost",
+    config = function()
+      require("lualine").setup()
+    end,
+  },
   {
     "kevinhwang91/nvim-hlslens",
     event = "BufRead",
@@ -129,7 +135,11 @@ return {
     "nvim-zh/colorful-winsep.nvim",
     event = "BufReadPre",
     config = function()
-      require("colorful-winsep").setup()
+      local c = require("kanagawa.colors").setup()
+
+      require("colorful-winsep").setup({
+        highlight = { bg = c.sumiInk1, fg = c.roninYellow },
+      })
     end,
   },
 }

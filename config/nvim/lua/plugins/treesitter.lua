@@ -99,4 +99,5 @@ return {
     end,
   },
   { "folke/twilight.nvim", cmd = "Twilight" },
+  { "cshuaimin/ssr.nvim" },
 }

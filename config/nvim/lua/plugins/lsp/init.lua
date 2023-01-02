@@ -34,4 +34,18 @@ return {
     },
     cmd = { "TroubleToggle", "Trouble" },
   },
+  {
+    "stevearc/aerial.nvim",
+    event = "BufReadPost",
+    cmd = { "AerialToggle" },
+    keys = "<leader>at",
+    config = function()
+      require("telescope").load_extension("aerial")
+      require("aerial").setup({
+        layout = {
+          min_width = 35,
+        },
+      })
+    end,
+  },
 }
