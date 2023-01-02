@@ -8,4 +8,5 @@ return {
   },
   { "ellisonleao/glow.nvim", cmd = "Glow" },
   { "terrastruct/d2-vim", ft = { "d2" } },
+  { "dstein64/vim-startuptime", cmd = "StartupTime" },
 }
