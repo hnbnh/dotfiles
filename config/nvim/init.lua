@@ -1,8 +1,5 @@
-require("autocommands")
-require("globals")
-require("options")
-
-vim.schedule(function()
-  require("keymaps")
-  require("plugins")
-end)
+require("hnbnh.autocommands")
+require("hnbnh.globals")
+require("hnbnh.options")
+require("hnbnh.lazy")
+require("hnbnh.keymaps")

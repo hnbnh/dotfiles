@@ -1,5 +1,6 @@
 local lspconfig = require("lspconfig")
-local utils = require("utils")
+local utils = require("hnbnh.utils")
+local lsp_path = "plugins.lsp"
 
 local lsp_servers = {
   "jsonls",
@@ -38,10 +39,10 @@ require("mason-tool-installer").setup({
 
 for _, server in pairs(lsp_servers) do
   local opts = {
-    on_attach = require("config.lsp.handlers").on_attach,
-    capabilities = require("config.lsp.handlers").capabilities,
+    on_attach = require(lsp_path .. ".handlers").on_attach,
+    capabilities = require(lsp_path .. ".handlers").capabilities,
   }
-  local has_custom_opts, server_custom_opts = pcall(require, "config.lsp.settings." .. server)
+  local has_custom_opts, server_custom_opts = pcall(require, lsp_path .. ".settings." .. server)
   if has_custom_opts then
     opts = vim.tbl_deep_extend("force", server_custom_opts, opts)
   end

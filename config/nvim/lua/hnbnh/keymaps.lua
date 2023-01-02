@@ -1,16 +1,5 @@
-local tb = require("telescope.builtin")
 local wk = require("which-key")
-local hui = require("harpoon.ui")
-local dap = require("dap")
-local dui = require("dapui")
-local hop = require("hop")
-local tint = require("tint")
-local lsp_lines = require("lsp_lines")
-local spectre = require("spectre")
-
-local utils = require("utils")
-
-vim.g.mapleader = ","
+local utils = require("hnbnh.utils")
 
 -- ************************************** --
 --
@@ -39,14 +28,13 @@ wk.register({
 --
 -- ************************************** --
 wk.register({
-  f = { hop.hint_char1, "Hop char" },
-  ["<c-p>"] = { tb.resume, "Resume previous picker" },
+  f = {"<cmd>lua require('hop').hint_char2()<cr>", "Hop char" },
+  ["<c-p>"] = { "<cmd>Telescope resume<cr>", "Resume previous picker" },
   ["<leader>"] = {
-    ["/"] = { tb.live_grep, "Live grep" },
+    ["/"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
     t = {
-      name = "+twilight | +telescope | +tint",
+      name = "+twilight | +telescope",
       w = { "<cmd>Twilight<cr>", "Toggle twilight" },
-      t = { tint.toggle, "Toggle tint" },
     },
     w = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
     g = {
@@ -54,13 +42,13 @@ wk.register({
       s = {
         name = "+status | +stage",
         {
-          t = { tb.git_status, "Git status" },
+          t = { "<cmd>Telescope git_status<cr>", "Git status" },
         },
       },
     },
     b = {
       name = "+buffer",
-      f = { tb.buffers, "List of buffers" },
+      f = { "<cmd>Telescope buffers<cr>", "List of buffers" },
     },
     f = {
       name = "+file | +focus",
@@ -78,32 +66,20 @@ wk.register({
     },
     h = {
       name = "+harpoon",
-      a = { require("harpoon.mark").add_file, "Add a file" },
-      t = { hui.toggle_quick_menu, "Toggle" },
-      n = { hui.goto_next, "Next" },
-      p = { hui.goto_previous, "Previous" },
+      a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add a file" },
+      t = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Toggle" },
+      n = { "<cmd>lua require('harpoon.ui').goto_next()<cr>", "Next" },
+      p = { "<cmd>lua require('harpoon.ui').goto_previous()<cr>", "Previous" },
     },
     n = { ":NnnPicker %:p:h<CR>", "Toggle nnn picker" },
-    z = { "<Cmd>WindowsMaximize<CR>", "Maximize window" },
+    z = { "<cmd>WindowsMaximize<CR>", "Maximize window" },
     d = {
       name = "+dap/debug",
-      o = {
-        function()
-          dui.open()
-          tint.disable()
-        end,
-        "Open debugger ui",
-      },
-      c = {
-        function()
-          dui.close()
-          tint.enable()
-        end,
-        "Close debugger ui",
-      },
-      t = { dap.terminate, "Terminate debugger" },
-      l = { dap.run_last, "Run last" },
-      b = { dap.toggle_breakpoint, "Toggle breakpoint" },
+      o = { "<cmd>lua require('dapui').open()<cr>", "Open debugger ui" },
+      c = { "<cmd>lua require('dapui').close()<cr>", "Close debugger ui" },
+      t = { "<cmd>lua require('dap').terminate()<cr>", "Terminate debugger" },
+      l = { "<cmd>lua require('dap').run_last()<cr>", "Run last" },
+      b = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Toggle breakpoint" },
     },
     s = {
       name = "+spell | +swap",
@@ -114,14 +90,17 @@ wk.register({
     },
     l = {
       name = "+lsp",
-      t = { lsp_lines.toggle, "Toggle lsp lines" },
+      t = {
+        "<cmd>lua require('lsp_lines').toggle()<CR>",
+        "Toggle lsp lines",
+      },
     },
     r = {
       -- https://github.com/nickjj/dotfiles/blob/master/.vimrc
       name = "+replace",
       p = { ":%s///g<Left><Left>", "Replace" },
       c = { ":%s///gc<Left><Left>", "Replace with confirmation" },
-      s = { spectre.open, "Replace with spectre" },
+      s = { "<cmd>lua require('spectre').open()<cr>", "Replace with spectre" },
     },
   },
   ["["] = {
@@ -168,10 +147,10 @@ wk.register({
       "Hint",
     },
   },
-  ["<F5>"] = { dap.continue, "Continue" },
-  ["<F10>"] = { dap.step_over, "Step over" },
-  ["<F11>"] = { dap.step_into, "Step into" },
-  ["<F12"] = { dap.step_out, "Step out" },
+  ["<F5>"] = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
+  ["<F10>"] = { "<cmd>lua require('dap').step_over()<cr>", "Step over" },
+  ["<F11>"] = { "<cmd>lua require('dap').step_into()<cr>", "Step into" },
+  ["<F12"] = { "<cmd>lua require('dap').step_out()<cr>", "Step out" },
 })
 
 -- ********************************************* --
@@ -180,7 +159,7 @@ wk.register({
 --
 -- ********************************************* --
 wk.register({
-  ["<c-p>"] = { tb.resume, "Resume previous picker" },
+  ["<c-p>"] = { "<cmd>Telescope resume<cr>", "Resume previous picker" },
   ["<c-o>"] = { "<cmd>IconPickerInsert<cr>", "Pick icon" },
   -- Terminal-like
   ["<c-a>"] = { "<HOME>", "Go to the beginning" },
