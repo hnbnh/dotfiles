@@ -2,7 +2,6 @@ return {
   {
     "rebelot/kanagawa.nvim",
     lazy = false,
-    event = "VimEnter",
     config = function()
       local kanagawa = require("kanagawa")
 
@@ -15,6 +14,7 @@ return {
           LualineGitChange = { link = "GitSignsAdd" },
           LualineGitDelete = { link = "GitSignsDelete" },
           TreesitterContext = { bg = c.sumiInk3 },
+          NnnBorder = { fg = c.sumiInk4 },
         },
       })
 

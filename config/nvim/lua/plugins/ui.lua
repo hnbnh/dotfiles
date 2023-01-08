@@ -7,13 +7,7 @@ return {
     event = "BufReadPre",
     config = { char = "│", show_current_context = true },
   },
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "BufReadPost",
-    config = function()
-      require("lualine").setup()
-    end,
-  },
+  { "nvim-lualine/lualine.nvim", event = "VeryLazy", config = true },
   {
     "kevinhwang91/nvim-hlslens",
     event = "BufRead",
@@ -34,14 +28,7 @@ return {
       })
     end,
   },
-  {
-    "phaazon/hop.nvim",
-    config = function()
-      vim.defer_fn(function()
-        require("hop").setup()
-      end, 2000)
-    end,
-  },
+  { "phaazon/hop.nvim", config = true },
   {
     "lewis6991/gitsigns.nvim",
     event = "BufRead",
@@ -133,7 +120,7 @@ return {
   },
   {
     "nvim-zh/colorful-winsep.nvim",
-    event = "BufReadPre",
+    event = "WinNew",
     config = function()
       local c = require("kanagawa.colors").setup()
 

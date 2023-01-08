@@ -11,35 +11,17 @@ return {
   },
   { "mizlan/iswap.nvim", cmd = "ISwap" },
   { "godlygeek/tabular", cmd = "Tabularize" },
-  {
-    "kylechui/nvim-surround",
-    event = "BufReadPost",
-    config = function()
-      require("nvim-surround").setup()
-    end,
-  },
+  { "kylechui/nvim-surround", event = "VeryLazy", config = true },
   {
     "andymass/vim-matchup",
-    event = "BufReadPost",
+    event = "VeryLazy",
     config = function()
       vim.g.matchup_matchparen_deferred = 1
       vim.g.matchup_matchparen_offscreen = { method = "status_manual" }
     end,
   },
-  { "tpope/vim-repeat", event = "BufReadPost" },
-  { "tpope/vim-unimpaired", event = "BufReadPost" },
-  {
-    "NvChad/nvim-colorizer.lua",
-    event = "BufReadPre",
-    config = function()
-      require("colorizer").setup()
-    end,
-  },
-  {
-    "nacro90/numb.nvim",
-    event = "BufReadPost",
-    config = function()
-      require("numb").setup()
-    end,
-  },
+  { "tpope/vim-repeat", event = "VeryLazy" },
+  { "tpope/vim-unimpaired", event = "VeryLazy" },
+  { "NvChad/nvim-colorizer.lua", event = "VeryLazy", config = true },
+  { "nacro90/numb.nvim", event = "VeryLazy", config = true },
 }

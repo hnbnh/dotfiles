@@ -1,23 +1,17 @@
 return {
   {
     "zbirenbaum/copilot-cmp",
-    event = "VimEnter",
+    event = "VeryLazy",
     dependencies = {
-      "copilot.lua",
+      {
+        "zbirenbaum/copilot.lua",
+        config = true,
+      },
     },
     config = function()
       require("copilot_cmp").setup()
     end,
   },
-  {
-    "zbirenbaum/copilot.lua",
-    config = function()
-      vim.defer_fn(function()
-        require("copilot").setup()
-      end, 100)
-    end,
-  },
-  { "L3MON4D3/LuaSnip", dependencies = { "nvim-cmp", "rafamadriz/friendly-snippets" } },
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -30,6 +24,8 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp-document-symbol",
       "saadparwaiz1/cmp_luasnip",
+      "L3MON4D3/LuaSnip",
+      "rafamadriz/friendly-snippets",
     },
     config = function()
       local cmp = require("cmp")
