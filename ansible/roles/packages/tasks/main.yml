@@ -28,7 +28,6 @@
       - nala
       - ripgrep
       - gammastep
-      - glow
       - djvulibre-bin
       - poppler-utils # pdf to image
       # - gnome-epub-thumbnailer # available in 22.10

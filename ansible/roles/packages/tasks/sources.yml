@@ -35,8 +35,6 @@
   loop:
     - url: https://download.docker.com/linux/ubuntu/gpg
       dest: docker.asc
-    - url: https://repo.charm.sh/apt/gpg.key
-      dest: glow.asc # glow markdown
     - url: https://dbeaver.io/debs/dbeaver.gpg.key
       dest: dbeaver.asc
     - url: https://packages.microsoft.com/keys/microsoft.asc
@@ -53,8 +51,6 @@
       filename: insomnia
     - repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ UBUNTU_CODENAME }} stable"
       filename: docker
-    - repo: "deb https://repo.charm.sh/apt/ * *"
-      filename: glow
     - repo: deb https://dbeaver.io/debs/dbeaver-ce /
       filename: dbeaver
     - repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
