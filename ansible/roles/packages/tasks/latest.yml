@@ -1,9 +1,3 @@
-# HACK: Deprecated package
-- name: Fix libssl.so.1.1 error
-  become: true
-  apt:
-    deb: http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
-
 - name: Check if rustup is installed
   shell: command -v rustup
   register: rustup_exists

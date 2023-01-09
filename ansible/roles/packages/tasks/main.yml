@@ -64,5 +64,6 @@
       - fonts-manrope
     install_recommends: yes
 
+- include_tasks: deb.yml
 - include_tasks: latest.yml
 - include_tasks: post-install.yml
