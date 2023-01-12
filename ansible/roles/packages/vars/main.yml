@@ -33,23 +33,30 @@ REPOS:
   - user: junegunn
     repo: fzf
     cmd: ./install --key-bindings --completion --no-update-rc
+    version: 0.35.1
   - user: Raymo111
     repo: i3lock-color
     cmd: ./install-i3lock-color.sh
+    version: aeb9982ded73b55d317f0323a138bffea4cda3eb
   - user: betterlockscreen
     repo: betterlockscreen
     branch: main
+    version: 5cb876d9cd7794eb622c4e80302560b05d54e5d7
   - user: vinceliuice
     repo: Orchis-theme
     cmd: ./install.sh -t green
+    version: d169ec78a5d7525637bcc83ee6bca464cbe02bbb
   - user: mwh
     repo: dragon # Drag and drop
     cmd: make install
+    version: 0a56eb2d032d9b99e628471ef522b239c07dfa3b
   - user: jarun
     repo: nnn
     become: true
     cmd: make O_NERD=1 O_GITSTATUS=1 clean install
+    version: 4.7
   - user: rvaiya
     repo: keyd
     become: true
     cmd: make && make install
+    version: 2.4.2
