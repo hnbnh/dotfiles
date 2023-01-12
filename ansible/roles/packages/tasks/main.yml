@@ -1,4 +1,4 @@
-- include_tasks: sources.yml
+- include_tasks: apt-sources.yml
 
 - name: Apt update
   become: true
@@ -65,5 +65,7 @@
     install_recommends: yes
 
 - include_tasks: deb.yml
+- include_tasks: repo.yml
+- include_tasks: manager.yml
 - include_tasks: latest.yml
 - include_tasks: post-install.yml

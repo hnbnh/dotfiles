@@ -1,0 +1,39 @@
+- name: Clone repos
+  git:
+    repo: "https://github.com/{{ item.user }}/{{ item.repo }}.git"
+    dest: "~/.repos/{{ item.repo }}"
+    single_branch: yes
+    depth: 1
+    version: "{{ item.branch | default('master') }}"
+  loop: "{{ REPOS }}"
+
+- name: Install packages from source
+  shell: "{{ item.cmd }}"
+  args:
+    chdir: "{{ lookup('env', 'HOME') }}/.repos/{{ item.repo }}"
+  loop: "{{ REPOS }}"
+  when: item.cmd is defined and item.become is not defined
+
+# TODO: Can't merge this task with previous one, need to resolve
+- name: Install packages from source (become)
+  become: true
+  shell: "{{ item.cmd }}"
+  args:
+    chdir: "{{ lookup('env', 'HOME') }}/.repos/{{ item.repo }}"
+  loop: "{{ REPOS }}"
+  when: item.cmd is defined and item.become is defined
+
+- name: Copy binary files
+  become: true
+  copy:
+    src: "~/.repos/{{ item.src }}"
+    dest: "/usr/local/bin/{{ item.dest }}"
+    mode: "0755"
+  loop:
+    - src: betterlockscreen/betterlockscreen
+      dest: betterlockscreen
+    - src: nnn/nnn
+      dest: nnn
+
+- name: Install nnn plugins
+  shell: curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh

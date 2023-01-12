@@ -1,12 +1,9 @@
-# HACK: Deprecated package
-- name: Fix libssl.so.1.1 error
-  become: true
-  apt:
-    deb: http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
-
-- name: Install packages from deb file
+- name: Install packages from a deb file
   become: true
   apt:
     deb: "{{ item.url }}"
   loop:
+    - url: http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
+      desc: Fix libssl.so.1.1 error
     - url: https://github.com/cli/cli/releases/download/v2.21.2/gh_2.21.2_linux_amd64.deb
+      desc: GitHub cli

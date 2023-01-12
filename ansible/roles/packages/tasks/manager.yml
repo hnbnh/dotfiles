@@ -1,0 +1,33 @@
+- name: Install packages with cargo
+  community.general.cargo:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - hyperfine
+    - fnm
+    - tealdeer # tldr
+    - git-delta
+    - bat
+    - fd-find
+    - zoxide
+    - starship
+    - so # stackoverflow
+    # Waiting for a stable release ...
+    # - gobang
+    - diskonaut
+    - kdash
+
+- name: Install packages with go
+  shell: "go install {{ item }}"
+  loop:
+    - github.com/jesseduffield/lazygit@latest
+    - github.com/jesseduffield/lazydocker@latest
+    - github.com/charmbracelet/glow@latest
+
+- name: Install packages with pip
+  pip:
+    name: "{{ item }}"
+    extra_args: --user --upgrade
+  loop:
+    - ueberzug
+    - yt-dlp

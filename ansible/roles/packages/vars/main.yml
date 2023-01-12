@@ -1,9 +1,55 @@
 BUILD_DEPS: [build-essential, libssl-dev, libarchive-dev, libarchive-tools]
 
-I3LOCK_COLOR_DEPS: [autoconf, gcc, make, pkg-config, libpam0g-dev, libcairo2-dev, libfontconfig1-dev, libxcb-composite0-dev, libev-dev, libx11-xcb-dev, libxcb-xkb-dev, libxcb-xinerama0-dev, libxcb-randr0-dev, libxcb-image0-dev, libxcb-util-dev, libxcb-xrm-dev, libxkbcommon-dev, libxkbcommon-x11-dev, libjpeg-dev]
+I3LOCK_COLOR_DEPS:
+  [
+    autoconf,
+    gcc,
+    make,
+    pkg-config,
+    libpam0g-dev,
+    libcairo2-dev,
+    libfontconfig1-dev,
+    libxcb-composite0-dev,
+    libev-dev,
+    libx11-xcb-dev,
+    libxcb-xkb-dev,
+    libxcb-xinerama0-dev,
+    libxcb-randr0-dev,
+    libxcb-image0-dev,
+    libxcb-util-dev,
+    libxcb-xrm-dev,
+    libxkbcommon-dev,
+    libxkbcommon-x11-dev,
+    libjpeg-dev,
+  ]
 
 NNN_DEPS: [pkg-config, libncursesw5-dev, libreadline-dev]
 
 DOCKER_DEPS: [ca-certificates, curl, gnupg, lsb-release]
 
 DEPS: "{{ BUILD_DEPS + I3LOCK_COLOR_DEPS + NNN_DEPS + DOCKER_DEPS }}"
+
+REPOS:
+  - user: junegunn
+    repo: fzf
+    cmd: ./install --key-bindings --completion --no-update-rc
+  - user: Raymo111
+    repo: i3lock-color
+    cmd: ./install-i3lock-color.sh
+  - user: betterlockscreen
+    repo: betterlockscreen
+    branch: main
+  - user: vinceliuice
+    repo: Orchis-theme
+    cmd: ./install.sh -t green
+  - user: mwh
+    repo: dragon # Drag and drop
+    cmd: make install
+  - user: jarun
+    repo: nnn
+    become: true
+    cmd: make O_NERD=1 O_GITSTATUS=1 clean install
+  - user: rvaiya
+    repo: keyd
+    become: true
+    cmd: make && make install
