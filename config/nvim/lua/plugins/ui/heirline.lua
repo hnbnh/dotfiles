@@ -257,31 +257,44 @@ M.setup = function()
       end,
       hl = { bold = true },
     },
+    Space,
     {
       condition = function(self)
         return self.has_changes
       end,
-      provider = " (",
+      provider = "(",
       hl = { bold = true },
     },
     {
       provider = function(self)
         local count = self.status_dict.added or 0
-        return count > 0 and ("  " .. count)
+        return count > 0 and (" " .. count)
       end,
       hl = { fg = "git_add", bold = true },
     },
     {
+      condition = function(self)
+        return (self.status_dict.added or 0) > 0 and (self.status_dict.removed or 0) > 0
+      end,
+      provider = " ",
+    },
+    {
       provider = function(self)
         local count = self.status_dict.removed or 0
-        return count > 0 and ("  " .. count)
+        return count > 0 and (" " .. count)
       end,
       hl = { fg = "git_del", bold = true },
     },
     {
+      condition = function(self)
+        return (self.status_dict.removed or 0) > 0 and (self.status_dict.changed or 0) > 0
+      end,
+      provider = " ",
+    },
+    {
       provider = function(self)
         local count = self.status_dict.changed or 0
-        return count > 0 and (" 柳" .. count)
+        return count > 0 and ("柳" .. count)
       end,
       hl = { fg = "git_change", bold = true },
     },
@@ -289,9 +302,10 @@ M.setup = function()
       condition = function(self)
         return self.has_changes
       end,
-      provider = " )",
+      provider = ")",
       hl = { bold = true },
     },
+    Space,
   }
 
   local DefaultStatusline = {
