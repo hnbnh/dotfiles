@@ -28,7 +28,7 @@ wk.register({
 --
 -- ************************************** --
 wk.register({
-  f = {"<cmd>lua require('hop').hint_char2()<cr>", "Hop char" },
+  f = { "<cmd>lua require('hop').hint_char2()<cr>", "Hop char" },
   ["<c-p>"] = { "<cmd>Telescope resume<cr>", "Resume previous picker" },
   ["<leader>"] = {
     ["/"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
@@ -48,7 +48,26 @@ wk.register({
     },
     b = {
       name = "+buffer",
-      f = { "<cmd>Telescope buffers<cr>", "List of buffers" },
+      f = { "<cmd>Telescope buffers<cr>", "List all buffers" },
+      p = {
+        function()
+          local tabline = require("heirline").tabline
+          local buflist = tabline._buflist[1]
+          buflist._picker_labels = {}
+          buflist._show_picker = true
+          vim.cmd.redrawtabline()
+          local char = vim.fn.getcharstr()
+          local bufnr = buflist._picker_labels[char]
+          if bufnr then
+            vim.api.nvim_win_set_buf(0, bufnr)
+          end
+          buflist._show_picker = false
+          vim.cmd.redrawtabline()
+        end,
+        "Pick a buffer",
+      },
+      h = { "<cmd>bprevious<cr>", "Previous buffer" },
+      l = { "<cmd>bnext<cr>", "Next buffer" },
     },
     f = {
       name = "+file | +focus",

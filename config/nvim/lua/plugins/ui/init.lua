@@ -1,13 +1,19 @@
 local keys = { { "n", "n" }, { "n", "N" } }
 
 return {
+  {
+    "rebelot/heirline.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("plugins.ui.heirline").setup()
+    end,
+  },
   { "folke/which-key.nvim" },
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
     config = { char = "│", show_current_context = true },
   },
-  { "nvim-lualine/lualine.nvim", event = "VeryLazy", config = true },
   {
     "kevinhwang91/nvim-hlslens",
     event = "BufRead",
@@ -113,7 +119,7 @@ return {
         "══════════════════════════════════"
       require("spectre").setup({
         line_sep_start = sep,
-        result_padding = "  👉 ",
+        result_padding = "  ",
         line_sep = sep,
       })
     end,
