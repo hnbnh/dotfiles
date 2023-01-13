@@ -15,6 +15,12 @@ return {
           require("lsp_lines").setup({ underline = true })
         end,
       },
+      {
+        "j-hui/fidget.nvim",
+        config = function()
+          require("fidget").setup({ text = { spinner = "dots" } })
+        end,
+      },
     },
     config = function()
       require(lsp_path .. ".configs")
