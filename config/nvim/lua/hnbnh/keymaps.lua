@@ -94,11 +94,19 @@ wk.register({
     z = { "<cmd>WindowsMaximize<CR>", "Maximize window" },
     d = {
       name = "+dap/debug",
-      o = { "<cmd>lua require('dapui').open()<cr>", "Open debugger ui" },
-      c = { "<cmd>lua require('dapui').close()<cr>", "Close debugger ui" },
-      t = { "<cmd>lua require('dap').terminate()<cr>", "Terminate debugger" },
-      l = { "<cmd>lua require('dap').run_last()<cr>", "Run last" },
+      T = { "<cmd>lua require('dap').terminate()<cr>", "Terminate debugger" },
+      t = { "<cmd>lua require('dapui').toggle()<cr>", "Toggle debugger ui" },
+      d = {
+        "+languages",
+        { r = { "<cmd>RustDebuggables<cr>", "RustDebuggables" } },
+      },
+      r = { "<cmd>lua require('dap').run_last()<cr>", "Run last" },
       b = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Toggle breakpoint" },
+      c = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
+      h = { "<cmd>lua require('dap').step_back()<cr>", "Step back" },
+      l = { "<cmd>lua require('dap').step_over()<cr>", "Step over" },
+      j = { "<cmd>lua require('dap').step_into()<cr>", "Step into" },
+      k = { "<cmd>lua require('dap').step_out()<cr>", "Step out" },
     },
     s = {
       name = "+spell | +swap",
@@ -167,10 +175,6 @@ wk.register({
       "Hint",
     },
   },
-  ["<F5>"] = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
-  ["<F10>"] = { "<cmd>lua require('dap').step_over()<cr>", "Step over" },
-  ["<F11>"] = { "<cmd>lua require('dap').step_into()<cr>", "Step into" },
-  ["<F12"] = { "<cmd>lua require('dap').step_out()<cr>", "Step out" },
 })
 
 -- ********************************************* --
