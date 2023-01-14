@@ -287,7 +287,11 @@ M.setup = function()
     },
     {
       condition = function(self)
-        return (self.status_dict.removed or 0) > 0 and (self.status_dict.changed or 0) > 0
+        local added_count = self.status_dict.added or 0
+        local changed_count = self.status_dict.changed or 0
+        local removed_count = self.status_dict.removed or 0
+
+        return (added_count > 0 or removed_count > 0) and changed_count > 0
       end,
       provider = " ",
     },
