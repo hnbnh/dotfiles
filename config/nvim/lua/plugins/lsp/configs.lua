@@ -14,6 +14,7 @@ local lsp_servers = {
   "prismals",
   "bashls",
   "clangd",
+  "taplo",
 }
 local dap_servers = { "codelldb", "debugpy", "js-debug-adapter", "delve" }
 local linter_servers = {}
