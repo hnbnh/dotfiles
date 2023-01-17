@@ -10,6 +10,7 @@ wk.register({
   -- Stay in indent mode
   ["<"] = { "<gv", "Indent left" },
   [">"] = { ">gv", "Indent right" },
+  y = { "ygv<esc>", "Yank without moving the cursor to the top" },
 }, { mode = "v" })
 
 -- ************************************** --
