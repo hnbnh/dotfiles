@@ -17,7 +17,6 @@
     - ppa:bamboo-engine/ibus-bamboo
     - ppa:linrunner/tlp
     - ppa:papirus/papirus
-    - ppa:neovim-ppa/unstable
 
 - name: Create /etc/apt/keyrings
   become: true
