@@ -35,9 +35,9 @@ return {
   {
     "folke/trouble.nvim",
     event = "BufReadPre",
-    config = {
-      auto_preview = false,
-    },
+    config = function()
+      require("trouble").setup({ auto_preview = false })
+    end,
     cmd = { "TroubleToggle", "Trouble" },
   },
   {

@@ -2,7 +2,7 @@ return {
   {
     "glacambre/firenvim",
     lazy = false,
-    run = function()
+    build = function()
       vim.fn["firenvim#install"](0)
     end,
   },

@@ -12,7 +12,9 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
-    config = { char = "│", show_current_context = true },
+    config = function()
+      require("indent_blankline").setup({ char = "│", show_current_context = true })
+    end,
   },
   {
     "kevinhwang91/nvim-hlslens",
