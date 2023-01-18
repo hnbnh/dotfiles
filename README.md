@@ -1,6 +1,6 @@
 # ~/dotfiles
 
-![screenshot](./assets/2022-12-27_13-46.png)
+![screenshot](./assets/2023-01-18_18-16.png)
 
 ![screenshot](./assets/screenshot.png)
 
