@@ -46,7 +46,6 @@ return {
           "typescript",
           "vim",
           "vue",
-          "wgsl",
           "yaml",
         },
         ignore_install = {}, -- List of parsers to ignore installing
