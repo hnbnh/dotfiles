@@ -1,4 +1,5 @@
 - include_tasks: apt-sources.yml
+- include_tasks: latest.yml
 
 - name: Apt update
   become: true
@@ -36,6 +37,7 @@
       - brightnessctl
       - asciinema
       #### gui ####
+      - brave-browser
       - picom
       - rofi
       - obs-studio
@@ -67,5 +69,4 @@
 - include_tasks: deb.yml
 - include_tasks: repo.yml
 - include_tasks: manager.yml
-- include_tasks: latest.yml
 - include_tasks: post-install.yml

@@ -33,11 +33,13 @@
     mode: '0644'
   loop:
     - url: https://download.docker.com/linux/ubuntu/gpg
-      dest: docker.asc
+      dest: docker.gpg
     - url: https://dbeaver.io/debs/dbeaver.gpg.key
-      dest: dbeaver.asc
+      dest: dbeaver.gpg
     - url: https://packages.microsoft.com/keys/microsoft.asc
       dest: microsoft.asc
+    - url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+      dest: brave.gpg
 
 - name: Add source list
   become: true
@@ -54,3 +56,5 @@
       filename: dbeaver
     - repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
       filename: vscode
+    - repo: deb https://brave-browser-apt-release.s3.brave.com/ stable main
+      filename: brave
