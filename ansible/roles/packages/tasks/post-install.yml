@@ -11,12 +11,16 @@
     name: docker
     state: present
 
-- name: Add user to docker group
+- name: Add user to some groups
   become: true
   user:
     name: "{{ lookup('env', 'USER') }}"
-    groups: docker
+    groups: "{{ item.groups }}"
     append: yes
+  loop:
+    - groups: docker
+    - groups: libvirt
+    - groups: kvm
 
 - name: Post install (become)
   become: true

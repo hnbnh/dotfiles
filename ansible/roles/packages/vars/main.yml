@@ -27,7 +27,9 @@ NNN_DEPS: [pkg-config, libncursesw5-dev, libreadline-dev]
 
 DOCKER_DEPS: [ca-certificates, curl, gnupg, lsb-release]
 
-DEPS: "{{ BUILD_DEPS + I3LOCK_COLOR_DEPS + NNN_DEPS + DOCKER_DEPS }}"
+KVM_DEPS: [qemu-kvm, virt-manager, libvirt-daemon-system, libvirt-clients, bridge-utils, virtinst]
+
+DEPS: "{{ BUILD_DEPS + I3LOCK_COLOR_DEPS + NNN_DEPS + DOCKER_DEPS + KVM_DEPS }}"
 
 REPOS:
   - user: junegunn
