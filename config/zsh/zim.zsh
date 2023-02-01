@@ -1,8 +1,3 @@
-# Start configuration added by Zim install {{{
-#
-# User configuration sourced by interactive shells
-#
-
 # -----------------
 # Zsh configuration
 # -----------------
@@ -19,7 +14,10 @@ setopt HIST_IGNORE_ALL_DUPS
 #
 
 # Set editor default keymap to emacs (`-e`) or vi (`-v`)
-bindkey -e
+bindkey -v
+export KEYTIMEOUT=1
+# Ctrl-f is not functioning after switching to vi mode, unsure of the reason
+bindkey '^f' autosuggest-accept
 
 # Prompt for spelling correction of commands.
 #setopt CORRECT
@@ -139,4 +137,3 @@ bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
-# }}} End configuration added by Zim install
