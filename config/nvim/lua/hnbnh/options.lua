@@ -87,6 +87,11 @@ o.cursorline = true -- Hightlight the current line
 o.signcolumn = "yes" -- Always show the sign column, otherwise it would shift the text each time
 o.termguicolors = true
 
+-- Fold
+o.foldmethod = "expr"
+o.foldexpr = "nvim_treesitter#foldexpr()"
+o.foldlevel = 99
+
 -- Put this at the end of the file
 if vim.g.started_by_firenvim then
   o.laststatus = 0
