@@ -110,11 +110,12 @@ wk.register({
       k = { "<cmd>lua require('dap').step_out()<cr>", "Step out" },
     },
     s = {
-      name = "+spell | +swap",
+      name = "+spell | +swap | +session",
       t = { utils.toggle_spell, "Toggle spell check" },
       -- https://github.com/nickjj/dotfiles/blob/master/.vimrc
       p = { "<cmd>normal! mz[s1z=`z<cr>", "Pick first suggestion" },
       w = { "<cmd>ISwap<cr>", "Swap words" },
+      r = { "<cmd>lua require('persistence').load()<cr>", "Restore session" },
     },
     l = {
       name = "+lsp",
