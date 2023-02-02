@@ -51,3 +51,7 @@ else
     fi
 fi
 unset __mamba_setup
+
+# vi mode
+# Ctrl-f is not functioning after switching to vi mode, unsure of the reason
+bindkey '^f' autosuggest-accept

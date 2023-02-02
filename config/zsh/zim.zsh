@@ -16,8 +16,6 @@ setopt HIST_IGNORE_ALL_DUPS
 # Set editor default keymap to emacs (`-e`) or vi (`-v`)
 bindkey -v
 export KEYTIMEOUT=1
-# Ctrl-f is not functioning after switching to vi mode, unsure of the reason
-bindkey '^f' autosuggest-accept
 
 # Prompt for spelling correction of commands.
 #setopt CORRECT
