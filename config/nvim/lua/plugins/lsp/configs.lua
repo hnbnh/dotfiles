@@ -4,7 +4,7 @@ local lsp_path = "plugins.lsp"
 
 local lsp_servers = {
   "jsonls",
-  "sumneko_lua",
+  "lua_ls",
   "pyright",
   "rust_analyzer",
   "tsserver",
