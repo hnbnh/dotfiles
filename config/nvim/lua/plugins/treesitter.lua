@@ -21,6 +21,7 @@ return {
           "comment", -- TODO, FIXME, ...
           "cpp",
           "css",
+          "cuda",
           "dockerfile",
           "gitignore",
           "go",
@@ -38,6 +39,7 @@ return {
           "prisma",
           "python",
           "regex",
+          "ruby",
           "rust",
           "scss",
           "sql",
