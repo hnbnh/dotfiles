@@ -36,6 +36,7 @@ return {
           "latex",
           "lua",
           "markdown",
+          "nix",
           "prisma",
           "python",
           "regex",
