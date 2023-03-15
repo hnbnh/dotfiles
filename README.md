@@ -8,6 +8,10 @@
 
 - [ ] Support Fedora
 - [ ] Support Arch (EndeavourOS)
+- [ ] Support macOS
+  - [ ] Configuration
+    - [ ] yabai, skhd
+    - [ ] sketchybar
 
 ## Acknowledgments
 
@@ -16,3 +20,4 @@
 * [nvim-config](https://github.com/jdhao/nvim-config)
 * [LunarVim](https://github.com/LunarVim/LunarVim)
 * [linux-setup](https://github.com/khuedoan/linux-setup)
+* [macos-setup](https://github.com/khuedoan/macos-setup)
