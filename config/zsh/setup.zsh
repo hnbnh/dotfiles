@@ -52,6 +52,9 @@ else
 fi
 unset __mamba_setup
 
+# Nix
+export PATH="/run/current-system/sw/bin:$PATH"
+
 # vi mode
 # Ctrl-f is not functioning after switching to vi mode, unsure of the reason
 bindkey '^f' autosuggest-accept
