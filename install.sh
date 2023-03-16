@@ -56,6 +56,7 @@ function setup_macos {
     yes | ./result/bin/darwin-installer
 
     /nix/var/nix/profiles/default/bin/nix --experimental-features 'nix-command flakes' build ./\#darwinConfigurations.$(hostname -s).system
+    ./result/sw/bin/darwin-rebuild switch --flake .
 }
 
 function main() {
