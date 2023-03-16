@@ -79,6 +79,7 @@
       "brave-browser"
       "flameshot"
       "insomnia"
+      "karabiner-elements"
       "notion-enhanced"
       "obs"
       "visual-studio-code"
@@ -100,10 +101,6 @@
       NSAutomaticQuoteSubstitutionEnabled = false;
       NSAutomaticSpellingCorrectionEnabled = false;
     };
-  };
-
-  services.karabiner-elements = {
-    enable = true;
   };
 
   # Auto upgrade nix package and the daemon service.
