@@ -9,10 +9,8 @@
     aria
     bat
     curl
-    dbeaver
     delta
     diskonaut
-    docker
     fd
     fnm
     fzf
@@ -24,7 +22,6 @@
     hyperfine
     jq
     kdash
-    kitty
     lazydocker
     lazygit
     micromamba
@@ -34,11 +31,9 @@
     nodePackages.yarn
     ripgrep
     rustup
-    slack
     so
     starship
     tealdeer
-    tor
     tree
     unzip
     w3m
@@ -73,15 +68,21 @@
       { name = "homebrew/cask"; }
     ];
     brews = [
-      "mpv"
+      # 
     ];
     casks = [
       "brave-browser"
+      "dbeaver-community"
+      "docker"
       "flameshot"
       "insomnia"
       "karabiner-elements"
+      "kitty"
+      "mpv"
       "notion-enhanced"
       "obs"
+      "slack"
+      "tor-browser"
       "visual-studio-code"
       "wine-stable"
     ];
