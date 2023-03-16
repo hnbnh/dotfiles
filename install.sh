@@ -47,7 +47,7 @@ function setup_macos {
     # Install homebrew
     if ! have brew; then
         curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o /tmp/brew-install.sh
-        NONINTERACTIVE=1 bash /tmp/brew-install.sh
+        NONINTERACTIVE=1 sudo -u $USERNAME bash /tmp/brew-install.sh
     fi
 
     # Set up nix-darwin
