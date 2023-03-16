@@ -4,11 +4,22 @@
 
 ![screenshot](./assets/screenshot.png)
 
+## Install
+
+# For macOS
+
+Change username & MacBook name to `hnbnh`
+
+```bash
+sudo ./install.sh
+```
+
 ## TODO
 
 - [ ] Support Fedora
 - [ ] Support Arch (EndeavourOS)
 - [ ] Support macOS
+  - [ ] Add flake.lock
   - [ ] Configuration
     - [ ] yabai, skhd
     - [ ] sketchybar
