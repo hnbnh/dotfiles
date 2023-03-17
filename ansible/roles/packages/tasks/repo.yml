@@ -32,8 +32,6 @@
   loop:
     - src: betterlockscreen/betterlockscreen
       dest: betterlockscreen
-    - src: nnn/nnn
-      dest: nnn
 
 - name: Install nnn plugins
   shell: curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
