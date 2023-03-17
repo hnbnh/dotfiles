@@ -78,6 +78,7 @@
       "insomnia"
       "karabiner-elements"
       "kitty"
+      "libreoffice"
       "mpv"
       "notion-enhanced"
       "obs"
