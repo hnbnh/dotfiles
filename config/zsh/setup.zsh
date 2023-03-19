@@ -1,3 +1,6 @@
+# Nix
+export PATH="/run/current-system/sw/bin:$PATH"
+
 # starship
 eval "$(starship init zsh)"
 
