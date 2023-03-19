@@ -6,10 +6,6 @@
 
 ## Install
 
-# For macOS
-
-Change username & MacBook name to `hnbnh`
-
 ```bash
 sudo ./install.sh
 ```
