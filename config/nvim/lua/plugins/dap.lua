@@ -6,7 +6,10 @@ return {
       { "theHamsta/nvim-dap-virtual-text" },
       { "mfussenegger/nvim-dap-python" },
       { "leoluz/nvim-dap-go" },
-      { "mxsdev/nvim-dap-vscode-js" },
+      {
+        "mxsdev/nvim-dap-vscode-js",
+        run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+      },
     },
     config = function()
       local dap = require("dap")

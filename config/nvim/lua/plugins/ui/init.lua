@@ -130,10 +130,10 @@ return {
     "nvim-zh/colorful-winsep.nvim",
     event = "WinNew",
     config = function()
-      local c = require("kanagawa.colors").setup()
+      local p = require("kanagawa.colors").setup().palette
 
       require("colorful-winsep").setup({
-        highlight = { bg = c.sumiInk1, fg = c.roninYellow },
+        highlight = { bg = p.sumiInk1, fg = p.roninYellow },
       })
     end,
   },

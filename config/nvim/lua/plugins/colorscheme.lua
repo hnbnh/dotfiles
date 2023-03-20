@@ -5,19 +5,18 @@ return {
     config = function()
       local kanagawa = require("kanagawa")
 
-      local c = require("kanagawa.colors").setup()
-
       kanagawa.setup({
-        overrides = {
-          LspInlayHint = { link = "Comment" },
-          LualineGitAdd = { link = "GitSignsAdd" },
-          LualineGitChange = { link = "GitSignsAdd" },
-          LualineGitDelete = { link = "GitSignsDelete" },
-          TreesitterContext = { bg = c.sumiInk3 },
-          NnnBorder = { fg = c.sumiInk4 },
-          EyelinerPrimary = { fg = c.peachRed, bold = true, underline = true },
-          EyelinerSecondary = { fg = c.springBlue, underline = true },
-        },
+        overrides = function(c)
+          local p = c.palette
+
+          return {
+            NvimSeparator = { fg = c.peachRed, bg = p.springBlue },
+            TreesitterContext = { bg = p.sumiInk3 },
+            NnnBorder = { fg = p.waveAqua2 },
+            EyelinerPrimary = { fg = p.peachRed, bold = true, underline = true },
+            EyelinerSecondary = { fg = p.springBlue, underline = true },
+          }
+        end,
       })
 
       vim.cmd.colorscheme("kanagawa")
