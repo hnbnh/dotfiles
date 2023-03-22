@@ -2,8 +2,6 @@
 
 ![screenshot](./assets/2023-01-18_18-16.png)
 
-![screenshot](./assets/screenshot.png)
-
 ## Install
 
 ```bash
