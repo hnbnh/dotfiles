@@ -34,8 +34,9 @@ wk.register({
   ["<leader>"] = {
     ["/"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
     t = {
-      name = "+twilight | +telescope",
+      name = "+toggle",
       w = { "<cmd>Twilight<cr>", "Toggle twilight" },
+      l = { "<cmd>lua require('lsp_lines').toggle()<CR>", "Toggle lsp lines" },
     },
     w = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
     g = {
@@ -47,29 +48,7 @@ wk.register({
         },
       },
     },
-    b = {
-      name = "+buffer",
-      f = { "<cmd>Telescope buffers<cr>", "List all buffers" },
-      p = {
-        function()
-          local tabline = require("heirline").tabline
-          local buflist = tabline._buflist[1]
-          buflist._picker_labels = {}
-          buflist._show_picker = true
-          vim.cmd.redrawtabline()
-          local char = vim.fn.getcharstr()
-          local bufnr = buflist._picker_labels[char]
-          if bufnr then
-            vim.api.nvim_win_set_buf(0, bufnr)
-          end
-          buflist._show_picker = false
-          vim.cmd.redrawtabline()
-        end,
-        "Pick a buffer",
-      },
-      h = { "<cmd>bprevious<cr>", "Previous buffer" },
-      l = { "<cmd>bnext<cr>", "Next buffer" },
-    },
+    b = { "<cmd>Telescope buffers<cr>", "List all buffers" },
     f = {
       name = "+file | +focus",
       r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
@@ -117,13 +96,6 @@ wk.register({
       w = { "<cmd>ISwap<cr>", "Swap words" },
       r = { "<cmd>lua require('persistence').load()<cr>", "Restore session" },
     },
-    l = {
-      name = "+lsp",
-      t = {
-        "<cmd>lua require('lsp_lines').toggle()<CR>",
-        "Toggle lsp lines",
-      },
-    },
     r = {
       -- https://github.com/nickjj/dotfiles/blob/master/.vimrc
       name = "+replace",
@@ -133,6 +105,8 @@ wk.register({
       r = { "<cmd>lua require('ssr').open()<cr>", "Replace with ssr" },
       f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace with spectre on current file" },
     },
+    l = { "<cmd>vsplit<cr>", "vsplit" },
+    j = { "<cmd>split<cr>", "split" },
   },
   ["["] = {
     name = "+goto previous",
