@@ -6,7 +6,7 @@
 	defaultBranch = "main"
 
 [user]
-	name  = hnbnh
+  name = hnbnh
   email = huynhninhbinh123@gmail.com
 
 [interactive]
@@ -26,3 +26,5 @@
 
 [include]
   path = ~/.config/git/.themes.gitconfig
+[pull]
+	ff = only
