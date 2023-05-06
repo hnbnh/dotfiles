@@ -27,4 +27,4 @@
 [include]
   path = ~/.config/git/.themes.gitconfig
 [pull]
-	ff = only
+	rebase = true
