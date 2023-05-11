@@ -49,15 +49,7 @@ wk.register({
       },
     },
     b = { "<cmd>Telescope buffers<cr>", "List all buffers" },
-    f = {
-      name = "+file | +focus",
-      r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-      c = {
-        name = "+focus",
-        t = { "<cmd>FocusToggle<cr>", "Focus toggle" },
-        f = { "<cmd>FocusSplitNicely<cr>", "Focus split nicely" },
-      },
-    },
+    f = { "<cmd>Telescope find_files<cr>", "Find files" },
     i = {
       name = "+icon",
       c = { "<cmd>IconPickerNormal<cr>", "Pick an icon" },
