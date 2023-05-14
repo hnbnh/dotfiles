@@ -92,6 +92,9 @@ o.foldmethod = "expr"
 o.foldexpr = "nvim_treesitter#foldexpr()"
 o.foldlevel = 99
 
+-- Status line
+o.laststatus = 3
+
 -- Put this at the end of the file
 if vim.g.started_by_firenvim then
   o.laststatus = 0
