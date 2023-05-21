@@ -10,7 +10,6 @@ return {
   },
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
   { "terrastruct/d2-vim", ft = { "d2" } },
-  { "dstein64/vim-startuptime", cmd = "StartupTime" },
   {
     "folke/persistence.nvim",
     event = "BufReadPre",
