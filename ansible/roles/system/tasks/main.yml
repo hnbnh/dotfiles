@@ -58,8 +58,8 @@
       enabled: no
       state: stopped
     - name: bluetooth
-      enabled: no
-      state: stopped
+      enabled: yes
+      state: started
 
 - name: Prefer libinput over synaptics
   become: true

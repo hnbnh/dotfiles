@@ -10,3 +10,4 @@ run nm-applet
 run gammastep
 run ibus-daemon -drx
 run picom --experimental-backends -b
+run blueman-applet
