@@ -12,6 +12,3 @@
 
 - name: kitty
   shell: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-
-- name: mamba
-  shell: curl micro.mamba.pm/install.sh | bash
