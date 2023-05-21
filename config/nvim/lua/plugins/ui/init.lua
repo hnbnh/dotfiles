@@ -129,6 +129,7 @@ return {
   {
     "levouh/tint.nvim",
     event = "BufRead",
+    enabled = false,
     config = function()
       require("tint").setup({
         ignore = { "WinSeparator", "Status.*", "IndentBlankline.*", "SignColumn", "EndOfBuffer" }, -- Highlight group patterns to ignore, see `string.find`
