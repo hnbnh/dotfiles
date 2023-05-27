@@ -17,6 +17,9 @@ sudo ./install.sh
   - [ ] Configuration
     - [ ] yabai, skhd
     - [ ] sketchybar
+    - Built-in
+        - [ ] Disable `Desktop & Dock` -> `Mission Control` -> `Automatically rearrange Spaces based on most recent use`
+        - [ ] Enable `Accessibility` -> `Display` -> `Reduce motion`
 
 ## Acknowledgments
 
