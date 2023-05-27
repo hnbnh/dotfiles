@@ -16,6 +16,7 @@ local lsp_servers = {
   "clangd",
   "taplo",
   "rnix",
+  "solargraph",
 }
 local dap_servers = { "codelldb", "debugpy", "js-debug-adapter", "delve" }
 local linter_servers = {}
