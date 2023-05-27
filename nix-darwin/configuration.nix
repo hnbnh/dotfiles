@@ -65,15 +65,28 @@
     enable = true;
     onActivation.cleanup = "zap";
     taps = [
-      { name = "homebrew/cask"; }
+      "homebrew/bundle"
+      "homebrew/cask"
+      "homebrew/cask-drivers"
+      "homebrew/cask-fonts"
+      "homebrew/core"
+      "homebrew/services"
+
+      "koekeishiya/formulae" # yabai
+      "FelixKratz/formulae" # sketchybar
     ];
+
     brews = [
-      # 
+      "mongodb-community"
+      "sketchybar"
+      "yabai"
+      "skhd"
     ];
     casks = [
       "brave-browser"
       "dbeaver-community"
       "docker"
+      "firefox"
       "flameshot"
       "insomnia"
       "karabiner-elements"
@@ -82,8 +95,10 @@
       "mpv"
       "notion-enhanced"
       "obs"
+      "sf-symbols"
       "slack"
       "tor-browser"
+      "utm"
       "visual-studio-code"
       "wine-stable"
     ];
