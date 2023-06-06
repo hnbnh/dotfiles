@@ -1,0 +1,21 @@
+- name: Install nixpkgs
+  cmd: curl -L https://nixos.org/nix/install | sh
+
+- name: Restart shell
+  cmd: exec bash
+
+- name: Install packages from nix
+  cmd: nix-env -iA nixpkgs.{{ item }}
+  loop:
+    - bottom
+    - brave
+    - browsh
+    - dbeaver-ce
+    - eva
+    - glow
+    - insomnia
+    - keyd
+    - lazydocker
+    - lazygit
+    - rtx
+    - startship

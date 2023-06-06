@@ -1,7 +1,3 @@
-- name: Switch to local server
-  shell: mint-switch-to-local-mirror
-  changed_when: no
-
 - name: Customize /etc/environment
   become: true
   lineinfile:
@@ -40,9 +36,6 @@
     - description: Touchpad
       src: touchpad.conf
       dest: /etc/X11/xorg.conf.d/30-touchpad.conf
-    - description: Lock screen when going to sleep/suspend
-      src: betterlockscreen@.service
-      dest: /usr/lib/systemd/system/betterlockscreen@.service
 
 - name: systemd
   become: true
@@ -57,9 +50,6 @@
     - name: NetworkManager-wait-online.service
       enabled: no
       state: stopped
-    - name: bluetooth
-      enabled: yes
-      state: started
 
 - name: Prefer libinput over synaptics
   become: true

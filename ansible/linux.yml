@@ -1,9 +1,9 @@
 - name: Setup Linux Workstation
   hosts: local
   roles:
+    - packages
     - system
     - bin
-    - packages
     - fonts
     # TODO: Clean up
     - dotfiles

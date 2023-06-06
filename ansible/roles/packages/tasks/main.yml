@@ -1,72 +1,79 @@
-- include_tasks: apt-sources.yml
-- include_tasks: latest.yml
+- include_tasks: repos.yml
 
-- name: Apt update
+- name: Install the 'Development tools' package group
   become: true
-  apt:
-    update_cache: yes
-  changed_when: no
-
-- name: Install dependencies
-  become: true
-  apt:
-    pkg: "{{ DEPS }}"
-    install_recommends: no
+  dnf:
+    name: '@Development tools'
+    state: present
 
 - name: Install packages from repository
   become: true
-  apt:
-    pkg:
-      #### wm ####
-      - awesome
-      #### cli ####
+  dnf:
+    name:
       - zsh
-      - ffmpeg
-      - ffmpegthumbnailer
-      - tlp
-      - imagemagick
+
+      # cli
+      - ImageMagick
       - aria2
-      - nala
-      - ripgrep
-      - gammastep
-      - djvulibre-bin
-      - poppler-utils # pdf to image
-      # - gnome-epub-thumbnailer # available in 22.10
-      - python3-venv
-      - torbrowser-launcher
-      - brightnessctl
       - asciinema
-      #### gui ####
-      - brave-browser
-      - picom
-      - rofi
-      - obs-studio
-      - ibus
-      - ibus-bamboo
-      - dbeaver-ce
-      - code
-      #### tui ####
-      - w3m # text-based web browser
-      - wine-installer # Mint only
-      - insomnia
-      - papirus-icon-theme
-      - papirus-folders
+      - bat
+      - brightnessctl
+      - diskonaut
+      - djvulibre # DjVu utilities
+      - fd-find
+      - ffmpeg-free
+      - ffmpegthumbs
+      - fzf
+      - gammastep
+      - git-delta
+      - gnome-epub-thumbnailer
+      - hyperfine
+      - navi
+      - poppler-utils # pdf to image
+      - ripgrep
+      - tealdeer # tldr
+      - torbrowser-launcher
+      - yt-dlp
+      - zoxide
+
+      # gui
+      - chromium
       - flameshot
+      - ibus
       - lxappearance
       - mpv
-      - okular
+      - obs-studio
+      - papirus-icon-theme
+      - rofi
+      - wine
+      - xournalpp
       - zathura
-      #### docker ####
+      - kitty
+
+      # tui
+      - neovim
+
+      # languages
+      - cargo
+      - rust
+      - golang
+
+      # ========== THIRD-PARTY REPOS ========= #
+
+      # cli
+      - gh # github
+
+      # docker
+      - containerd.io
       - docker-ce
       - docker-ce-cli
-      - containerd.io
       - docker-compose-plugin
-      #### font ####
-      - fonts-open-sans
-      - fonts-manrope
-    install_recommends: yes
 
-- include_tasks: deb.yml
-- include_tasks: repo.yml
-- include_tasks: manager.yml
+      # Input method
+      - ibus-bamboo # Vietnamese
+
+    state: latest
+
+- include_tasks: nix.yml
+- include_tasks: releases.yml
 - include_tasks: post-install.yml
