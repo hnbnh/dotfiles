@@ -1,11 +1,11 @@
 - name: Install nixpkgs
-  cmd: curl -L https://nixos.org/nix/install | sh
+  shell: curl -L https://nixos.org/nix/install | sh
 
 - name: Restart shell
-  cmd: exec bash
+  shell: exec bash
 
 - name: Install packages from nix
-  cmd: nix-env -iA nixpkgs.{{ item }}
+  shell: nix-env -iA nixpkgs.{{ item }}
   loop:
     - bottom
     - brave
