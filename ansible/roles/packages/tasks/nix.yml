@@ -1,8 +1,9 @@
 - name: Install nixpkgs
-  shell: curl -L https://nixos.org/nix/install | sh
+  # TODO: Install via Multi-user installation
+  shell: sh <(curl -L https://nixos.org/nix/install) --no-daemon --yes
 
-- name: Restart shell
-  shell: exec bash
+- name: Activate nix
+  shell: . /home/hnbnh/.nix-profile/etc/profile.d/nix.sh
 
 - name: Install packages from nix
   shell: nix-env -iA nixpkgs.{{ item }}
