@@ -1,6 +1,6 @@
 - name: Download executables
   ansible.builtin.get_url:
-    url: {{ item }}
+    url: "{{ item }}"
     dest: /usr/local/bin/nnn
     mode: "0755"
   loop:
