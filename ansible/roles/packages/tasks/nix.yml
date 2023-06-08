@@ -2,11 +2,8 @@
   # TODO: Install via Multi-user installation
   shell: sh <(curl -L https://nixos.org/nix/install) --no-daemon --yes
 
-- name: Activate nix
-  shell: . /home/hnbnh/.nix-profile/etc/profile.d/nix.sh
-
 - name: Install packages from nix
-  shell: nix-env -iA nixpkgs.{{ item }}
+  shell: ~/.nix-profile/bin/nix-env -iA nixpkgs.{{ item }}
   loop:
     - bottom
     - brave
