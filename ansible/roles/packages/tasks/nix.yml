@@ -8,7 +8,7 @@
     - bottom
     - brave
     - browsh
-    - dbeaver-ce
+    - dbeaver
     - eva
     - gh
     - glow
@@ -17,4 +17,4 @@
     - lazydocker
     - lazygit
     - rtx
-    - startship
+    - starship
