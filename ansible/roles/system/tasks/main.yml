@@ -44,9 +44,10 @@
     enabled: "{{ item.enabled }}"
     state: "{{ item.state }}"
   loop:
-    - name: keyd
-      enabled: yes
-      state: started
+    # FIXME: Can't enable keyd
+    # - name: keyd
+    #   enabled: yes
+    #   state: started
     - name: NetworkManager-wait-online.service
       enabled: no
       state: stopped
