@@ -4,6 +4,9 @@
   become: true
   dnf:
     name:
+      - python3-pip
+      - ufw
+      - util-linux-user
       - zsh
 
       # cli

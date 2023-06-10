@@ -1,4 +1,5 @@
 - name: Download executables
+  become: true
   ansible.builtin.get_url:
     url: "{{ item }}"
     dest: /usr/local/bin/nnn

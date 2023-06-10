@@ -15,12 +15,13 @@
     - groups: libvirt
     - groups: kvm
 
-- name: Post install (become)
+- name: Change shell from bash to zsh
   become: true
-  shell: |
-    chsh -s $(which zsh)
-    cp $(which keyd) /usr/bin/keyd
-  changed_when: no
+  shell: chsh -s $(which zsh)
+
+- name: Copy keyd binary
+  become: true
+  shell: cp "{{ ansible_env.HOME }}/.nix-profile/bin/keyd" /usr/bin
 
 # TODO: Commit plugins directory
 - name: Install nnn plugins

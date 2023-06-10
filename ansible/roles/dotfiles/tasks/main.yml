@@ -16,6 +16,7 @@
     src: "{{item.path}}"
     dest: "~/.config/{{item.path | basename}}"
     state: link
+    force: yes
   loop: "{{ dot_config.files }}"
   loop_control:
     label: "~/.config/{{item.path | basename}}"
@@ -25,6 +26,7 @@
     src: "~/.config/{{ item.src }}"
     dest: "~/{{ item.dest }}"
     state: link
+    force: yes
   loop:
     - src: zsh/.zshrc
       dest: .zshrc
@@ -40,6 +42,12 @@
       dest: .ripgreprc
     - src: yt-dlp/yt-dlp.conf
       dest: yt-dlp.conf
+
+- name: Install required packages
+  pip:
+    name: "{{ item }}"
+  loop:
+    - psutil
 
 - name: ibus config
   dconf:
