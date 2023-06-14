@@ -71,6 +71,14 @@
 
     state: latest
 
+- name: Remove packages
+  become: true
+  dnf:
+    name:
+      - dnf-automatic
+    state: absent
+
+
 - include_tasks: nix.yml
 - include_tasks: releases.yml
 - include_tasks: post-install.yml
