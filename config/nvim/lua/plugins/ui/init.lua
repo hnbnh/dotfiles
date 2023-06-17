@@ -1,13 +1,143 @@
 local keys = { { "n", "n" }, { "n", "N" } }
+local utils = require("hnbnh.utils")
 
 return {
   {
     "rebelot/heirline.nvim",
     event = "VeryLazy",
+    enabled = false,
     config = function()
       require("plugins.ui.heirline").setup()
     end,
   },
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    opts = function()
+      return {
+        options = {
+          theme = "auto",
+          component_separators = " ",
+          globalstatus = true,
+          disabled_filetypes = { statusline = { "dashboard", "alpha" } },
+          section_separators = { left = "", right = "" },
+        },
+        sections = {
+          lualine_a = { "mode" },
+          lualine_b = { "branch" },
+          lualine_c = {
+            {
+              "diagnostics",
+              symbols = {
+                error = " ",
+                warn = " ",
+                hint = " ",
+                info = " ",
+              },
+            },
+            {
+              "diff",
+              symbols = {
+                added = " ",
+                modified = " ",
+                removed = " ",
+              },
+            },
+            {
+              "filetype",
+              icon_only = true,
+              separator = "",
+              padding = {
+                left = 1,
+                right = 0,
+              },
+            },
+            { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+          },
+          lualine_x = {
+            {
+              function()
+                return "  " .. require("dap").status()
+              end,
+              cond = function()
+                return package.loaded["dap"] and require("dap").status() ~= ""
+              end,
+              color = utils.fg("Debug"),
+            },
+          },
+          lualine_y = {
+            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            { "location", padding = { left = 0, right = 1 } },
+          },
+          lualine_z = {
+            function()
+              return " " .. os.date("%R")
+            end,
+          },
+        },
+        extensions = { "neo-tree", "quickfix" },
+      }
+    end,
+  },
+  {
+    "akinsho/bufferline.nvim",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        diagnostics = "nvim_lsp",
+        always_show_bufferline = false,
+        diagnostics_indicator = function(_, _, diag)
+          local icons = require("lazyvim.config").icons.diagnostics
+          local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+            .. (diag.warning and icons.Warn .. diag.warning or "")
+          return vim.trim(ret)
+        end,
+        offsets = {
+          {
+            filetype = "neo-tree",
+            text = "Neo-tree",
+            highlight = "Directory",
+            text_align = "left",
+          },
+        },
+      },
+    },
+  },
+  {
+    "b0o/incline.nvim",
+    event = "BufReadPre",
+    config = function()
+      require("incline").setup()
+      local colors = require("catppuccin.palettes").get_palette("mocha")
+
+      require("incline").setup({
+        highlight = {
+          groups = {
+            InclineNormal = { guibg = colors.yellow, guifg = colors.crust },
+            InclineNormalNC = { guifg = colors.yellow, guibg = colors.crust },
+          },
+        },
+        window = {
+          padding_char = "",
+          margin = { vertical = 0, horizontal = 1 },
+        },
+        render = function(props)
+          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+          local icon, color = require("nvim-web-devicons").get_icon_color(filename)
+          return { { icon, guifg = color }, { " " }, { filename } }
+        end,
+      })
+    end,
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    cmd = "Neotree",
+    config = function()
+      require("neo-tree").setup()
+    end,
+  },
+  { "HiPhish/nvim-ts-rainbow2" },
   { "folke/which-key.nvim" },
   {
     "lukas-reineke/indent-blankline.nvim",

@@ -1,4 +1,5 @@
 return {
   { "nvim-lua/plenary.nvim" },
-  { "kyazdani42/nvim-web-devicons" }
+  { "nvim-tree/nvim-web-devicons" },
+  { "MunifTanjim/nui.nvim" },
 }

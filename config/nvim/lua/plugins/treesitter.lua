@@ -102,6 +102,11 @@ return {
           enable = true,
           disable = {},
         },
+        rainbow = {
+          enable = true,
+          query = "rainbow-parens",
+          strategy = require("ts-rainbow").strategy.global,
+        },
       })
     end,
   },
