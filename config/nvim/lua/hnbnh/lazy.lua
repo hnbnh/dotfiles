@@ -9,7 +9,7 @@ vim.g.mapleader = "," -- make sure to set `mapleader` before lazy so your mappin
 
 require("lazy").setup("plugins", {
   defaults = { lazy = true, version = nil },
-  install = { colorscheme = { "kanagawa" } },
+  install = { colorscheme = { "catppuccin" } },
   checker = { enabled = false },
   performance = {
     rtp = {
