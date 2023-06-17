@@ -131,7 +131,21 @@ return {
     branch = "v2.x",
     cmd = "Neotree",
     config = function()
-      require("neo-tree").setup()
+      require("neo-tree").setup({
+        filesystem = {
+          window = {
+            mappings = {
+              ["Y"] = "yank_path",
+            },
+          },
+          commands = {
+            yank_path = function(state)
+              vim.fn.setreg("+", state.tree:get_node().path)
+              print("Yanked path to clipboard")
+            end,
+          },
+        },
+      })
     end,
   },
   { "HiPhish/nvim-ts-rainbow2" },

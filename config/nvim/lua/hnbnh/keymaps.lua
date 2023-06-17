@@ -33,11 +33,7 @@ wk.register({
   ["<c-p>"] = { "<cmd>Telescope resume<cr>", "Resume previous picker" },
   ["<leader>"] = {
     ["/"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
-    t = {
-      name = "+toggle",
-      w = { "<cmd>Twilight<cr>", "Toggle twilight" },
-      l = { "<cmd>lua require('lsp_lines').toggle()<CR>", "Toggle lsp lines" },
-    },
+    t = { "<cmd>Neotree<cr>", "Open neo-tree" },
     w = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
     g = {
       name = "+git",
