@@ -1,6 +1,15 @@
 local keys = { { "n", "n" }, { "n", "N" } }
 local utils = require("hnbnh.utils")
 
+local icons = {
+  diagnostics = {
+    error = " ",
+    warn = " ",
+    hint = " ",
+    info = " ",
+  },
+}
+
 return {
   {
     "rebelot/heirline.nvim",
@@ -29,10 +38,10 @@ return {
             {
               "diagnostics",
               symbols = {
-                error = " ",
-                warn = " ",
-                hint = " ",
-                info = " ",
+                error = icons.diagnostics.error,
+                warn = icons.diagnostics.warn,
+                hint = icons.diagnostics.hint,
+                info = icons.diagnostics.info,
               },
             },
             {
@@ -87,9 +96,8 @@ return {
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
-          local icons = require("lazyvim.config").icons.diagnostics
-          local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-            .. (diag.warning and icons.Warn .. diag.warning or "")
+          local ret = (diag.error and icons.diagnostics.error .. diag.error .. " " or "")
+            .. (diag.warning and icons.diagnostics.warn .. diag.warning or "")
           return vim.trim(ret)
         end,
         offsets = {
@@ -130,12 +138,18 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
     cmd = "Neotree",
+    lazy = false,
     config = function()
       require("neo-tree").setup({
         filesystem = {
+          use_libuv_file_watcher = true,
           window = {
             mappings = {
               ["Y"] = "yank_path",
+            },
+            fuzzy_finder_mappings = {
+              ["<C-j>"] = "move_cursor_down",
+              ["<C-k>"] = "move_cursor_up",
             },
           },
           commands = {
@@ -143,6 +157,14 @@ return {
               vim.fn.setreg("+", state.tree:get_node().path)
               print("Yanked path to clipboard")
             end,
+          },
+        },
+        window = {
+          mappings = {
+            ["l"] = "open",
+            ["L"] = "focus_preview",
+            ["h"] = "close_node",
+            ["/"] = "fuzzy_sorter",
           },
         },
       })

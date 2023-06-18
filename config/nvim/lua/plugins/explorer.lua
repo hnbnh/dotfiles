@@ -2,6 +2,7 @@ return {
   {
     "luukvbaal/nnn.nvim",
     lazy = false,
+    enabled = false,
     config = function()
       require("nnn").setup({
         picker = {
