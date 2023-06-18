@@ -1,3 +1,5 @@
+export XDG_CONFIG_HOME=~/.config
+
 # Nix
 export PATH="/run/current-system/sw/bin:$PATH"
 
