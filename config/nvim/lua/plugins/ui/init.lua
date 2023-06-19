@@ -164,7 +164,6 @@ return {
             ["l"] = "open",
             ["L"] = "focus_preview",
             ["h"] = "close_node",
-            ["/"] = "fuzzy_sorter",
           },
         },
       })
@@ -322,4 +321,5 @@ return {
       })
     end,
   },
+  { "pwntester/octo.nvim", cmd = "Octo", config = true },
 }
