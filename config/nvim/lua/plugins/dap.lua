@@ -2,7 +2,23 @@ return {
   {
     "mfussenegger/nvim-dap",
     dependencies = {
-      { "rcarriga/nvim-dap-ui" },
+      {
+        "rcarriga/nvim-dap-ui",
+        config = function(_, opts)
+          local dap = require("dap")
+          local dapui = require("dapui")
+          dapui.setup(opts)
+          dap.listeners.after.event_initialized["dapui_config"] = function()
+            dapui.open({})
+          end
+          dap.listeners.before.event_terminated["dapui_config"] = function()
+            dapui.close({})
+          end
+          dap.listeners.before.event_exited["dapui_config"] = function()
+            dapui.close({})
+          end
+        end,
+      },
       { "theHamsta/nvim-dap-virtual-text" },
       { "mfussenegger/nvim-dap-python" },
       { "leoluz/nvim-dap-go" },
@@ -22,7 +38,6 @@ return {
 
       -- ######## Setup languages ########
 
-      -- Activate mamba env then run dap
       dap_python.setup("python")
       dap_python.resolve_python = function()
         return "python"

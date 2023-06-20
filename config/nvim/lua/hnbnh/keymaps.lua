@@ -63,7 +63,8 @@ wk.register({
     d = {
       name = "+dap/debug",
       T = { "<cmd>lua require('dap').terminate()<cr>", "Terminate debugger" },
-      t = { "<cmd>lua require('dapui').toggle()<cr>", "Toggle debugger ui" },
+      u = { "<cmd>lua require('dapui').toggle()<cr>", "Toggle debugger ui" },
+      e = { "<cmd>lua require('dapui').eval()<cr>", "Eval" },
       d = {
         "+languages",
         { r = { "<cmd>RustDebuggables<cr>", "RustDebuggables" } },
