@@ -25,4 +25,5 @@ return {
   { "NvChad/nvim-colorizer.lua", event = "VeryLazy", config = true },
   { "nacro90/numb.nvim", event = "VeryLazy", config = true },
   { "tpope/vim-fugitive", event = "VeryLazy" },
+  { "smjonas/inc-rename.nvim", cmd = "IncRename", config = true },
 }

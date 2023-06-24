@@ -75,7 +75,7 @@ local function lsp_keymaps(bufnr)
     ["<leader>"] = {
       r = {
         name = "+rename",
-        n = { vim.lsp.buf.rename, "Rename" },
+        n = { ":IncRename ", "Rename" },
       },
       o = { vim.diagnostic.open_float, "Open float" },
       q = { "<cmd>TroubleToggle quickfix<cr>", "Toggle quickfix" },
