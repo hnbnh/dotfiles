@@ -34,7 +34,6 @@ return {
             WinSeparator = { fg = colors.overlay0 },
           }
         end,
-        dim_inactive = { enabled = true },
         integrations = {
           neotree = true,
         },
