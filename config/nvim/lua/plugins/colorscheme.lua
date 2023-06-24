@@ -29,6 +29,12 @@ return {
     lazy = false,
     config = function()
       require("catppuccin").setup({
+        custom_highlights = function(colors)
+          return {
+            WinSeparator = { fg = colors.overlay0 },
+          }
+        end,
+        dim_inactive = { enabled = true },
         integrations = {
           neotree = true,
         },
