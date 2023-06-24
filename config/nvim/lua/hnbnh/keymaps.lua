@@ -24,7 +24,6 @@ map("x", "K", ":move '<-2<CR>gv-gv", { desc = "Move line up" })
 --
 -- ************************************** --
 map("n", "<c-p>", "<cmd>Telescope resume<cr>", { desc = "Resume previous picker" })
-map("n", "<c-o>", "<cmd>IconPickerInsert<cr>", { desc = "Pick icon" })
 
 -- Go to next
 map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })

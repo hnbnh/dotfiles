@@ -146,6 +146,8 @@ return {
           window = {
             mappings = {
               ["Y"] = "yank_path",
+              ["<space>"] = "none",
+              ["s"] = "none",
             },
             fuzzy_finder_mappings = {
               ["<C-j>"] = "move_cursor_down",
@@ -294,7 +296,7 @@ return {
     end,
   },
   {
-    "windwp/nvim-spectre",
+    "nvim-pack/nvim-spectre",
     config = function()
       local sep =
         "══════════════════════════════════"

@@ -1,5 +1,5 @@
 require("hnbnh.autocommands")
 require("hnbnh.globals")
 require("hnbnh.options")
-require("hnbnh.lazy")
 require("hnbnh.keymaps")
+require("hnbnh.lazy")
