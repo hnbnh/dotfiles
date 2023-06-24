@@ -1,6 +1,7 @@
 return {
   {
     "glacambre/firenvim",
+    enabled = false,
     lazy = false,
     cond = not not vim.g.started_by_firenvim,
     build = function()

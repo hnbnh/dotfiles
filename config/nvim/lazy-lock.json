@@ -18,7 +18,6 @@
   "d2-vim": { "branch": "master", "commit": "981c87dccb63df2887cc41b96e84bf550f736c57" },
   "dressing.nvim": { "branch": "master", "commit": "5fb5cce0cbfcedeadbcee43e5674e8c9a9f28d4a" },
   "fidget.nvim": { "branch": "main", "commit": "f1c375ba68839eaa4a65efdf2aa078c0da0548fe" },
-  "firenvim": { "branch": "master", "commit": "3c4babfa0a561d1dc3640a902e67ca0b8af70927" },
   "flash.nvim": { "branch": "main", "commit": "ef472fcf80b2041fcd066c24e0553c65aa332571" },
   "friendly-snippets": { "branch": "main", "commit": "5749f093759c29e3694053d048ceb940fe12c3d3" },
   "gitsigns.nvim": { "branch": "main", "commit": "a36bc3360d584d39b4fb076d855c4180842d4444" },
