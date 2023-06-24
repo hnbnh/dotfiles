@@ -1,158 +1,68 @@
-local wk = require("which-key")
-local utils = require("hnbnh.utils")
+local map = vim.keymap.set
+local severity = vim.diagnostic.severity
 
 -- ************************************** --
 --
 --          Visual & Selection
 --
 -- ************************************** --
-wk.register({
-  -- Stay in indent mode
-  ["<"] = { "<gv", "Indent left" },
-  [">"] = { ">gv", "Indent right" },
-  y = { "ygv<esc>", "Yank without moving the cursor to the top" },
-}, { mode = "v" })
+map("v", "<", "<gv", { desc = "Indent left" })
+map("v", ">", ">gv", { desc = "Indent right" })
+map("v", "y", "ygv<esc>", { desc = "Yank without moving the cursor to the top" })
 
 -- ************************************** --
 --
 --                  Visual
 --
 -- ************************************** --
-wk.register({
-  J = { ":move '>+1<CR>gv-gv", "Move line down" },
-  K = { ":move '<-2<CR>gv-gv", "Move line up" },
-}, { mode = "x" })
+map("x", "J", ":move '>+1<CR>gv-gv", { desc = "Move line down" })
+map("x", "K", ":move '<-2<CR>gv-gv", { desc = "Move line up" })
 
 -- ************************************** --
 --
 --                Normal
 --
 -- ************************************** --
-wk.register({
-  f = { "<cmd>lua require('hop').hint_char2()<cr>", "Hop char" },
-  ["<c-p>"] = { "<cmd>Telescope resume<cr>", "Resume previous picker" },
-  ["<leader>"] = {
-    ["/"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
-    t = { "<cmd>Neotree<cr>", "Open neo-tree" },
-    w = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
-    g = {
-      name = "+git",
-      s = {
-        name = "+status | +stage",
-        {
-          t = { "<cmd>Telescope git_status<cr>", "Git status" },
-        },
-      },
-    },
-    b = { "<cmd>Telescope buffers<cr>", "List all buffers" },
-    f = { "<cmd>Telescope find_files<cr>", "Find files" },
-    i = {
-      name = "+icon",
-      c = { "<cmd>IconPickerNormal<cr>", "Pick an icon" },
-      y = { "<cmd>IconPickerYank<cr>", "Copy an icon" },
-    },
-    h = {
-      name = "+harpoon",
-      a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add a file" },
-      t = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Toggle" },
-      n = { "<cmd>lua require('harpoon.ui').goto_next()<cr>", "Next" },
-      p = { "<cmd>lua require('harpoon.ui').goto_previous()<cr>", "Previous" },
-    },
-    n = { ":NnnPicker %:p:h<CR>", "Toggle nnn picker" },
-    z = { "<cmd>WindowsMaximize<CR>", "Maximize window" },
-    d = {
-      name = "+dap/debug",
-      T = { "<cmd>lua require('dap').terminate()<cr>", "Terminate debugger" },
-      u = { "<cmd>lua require('dapui').toggle()<cr>", "Toggle debugger ui" },
-      e = { "<cmd>lua require('dapui').eval()<cr>", "Eval" },
-      d = {
-        "+languages",
-        { r = { "<cmd>RustDebuggables<cr>", "RustDebuggables" } },
-      },
-      r = { "<cmd>lua require('dap').run_last()<cr>", "Run last" },
-      b = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Toggle breakpoint" },
-      c = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
-      h = { "<cmd>lua require('dap').step_back()<cr>", "Step back" },
-      l = { "<cmd>lua require('dap').step_over()<cr>", "Step over" },
-      j = { "<cmd>lua require('dap').step_into()<cr>", "Step into" },
-      k = { "<cmd>lua require('dap').step_out()<cr>", "Step out" },
-    },
-    s = {
-      name = "+spell | +swap | +session",
-      t = { utils.toggle_spell, "Toggle spell check" },
-      -- https://github.com/nickjj/dotfiles/blob/master/.vimrc
-      p = { "<cmd>normal! mz[s1z=`z<cr>", "Pick first suggestion" },
-      w = { "<cmd>ISwap<cr>", "Swap words" },
-      r = { "<cmd>lua require('persistence').load()<cr>", "Restore session" },
-    },
-    r = {
-      -- https://github.com/nickjj/dotfiles/blob/master/.vimrc
-      name = "+replace",
-      p = { ":%s///g<Left><Left>", "Replace" },
-      c = { ":%s///gc<Left><Left>", "Replace with confirmation" },
-      s = { "<cmd>lua require('spectre').open()<cr>", "Replace with spectre" },
-      r = { "<cmd>lua require('ssr').open()<cr>", "Replace with ssr" },
-      f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace with spectre on current file" },
-    },
-    l = { "<cmd>vsplit<cr>", "vsplit" },
-    j = { "<cmd>split<cr>", "split" },
-  },
-  ["["] = {
-    name = "+goto previous",
-    d = { vim.diagnostic.goto_prev, "Diagnostic" },
-    e = {
-      function()
-        vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
-      end,
-      "Error",
-    },
-    w = {
-      function()
-        vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN })
-      end,
-      "Warning",
-    },
-    h = {
-      function()
-        vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.HINT })
-      end,
-      "Hint",
-    },
-  },
-  ["]"] = {
-    name = "+goto next",
-    d = { vim.diagnostic.goto_next, "Go to next diagnostic" },
-    e = {
-      function()
-        vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
-      end,
-      "Error",
-    },
-    w = {
-      function()
-        vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN })
-      end,
-      "Warning",
-    },
-    h = {
-      function()
-        vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.HINT })
-      end,
-      "Hint",
-    },
-  },
-})
+map("n", "<c-p>", "<cmd>Telescope resume<cr>", { desc = "Resume previous picker" })
+map("n", "<c-o>", "<cmd>IconPickerInsert<cr>", { desc = "Pick icon" })
+
+-- Go to next
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+
+map("n", "]e", function()
+  vim.diagnostic.goto_next({ severity = severity.ERROR })
+end, { desc = "Go to next error" })
+
+map("n", "]w", function()
+  vim.diagnostic.goto_next({ severity = severity.WARN })
+end, { desc = "Go to next warning" })
+
+map("n", "]h", function()
+  vim.diagnostic.goto_next({ severity = severity.HINT })
+end, { desc = "Go to next hint" })
+
+-- Go to previous
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+
+map("n", "[e", function()
+  vim.diagnostic.goto_prev({ severity = severity.ERROR })
+end, { desc = "Go to previous error" })
+
+map("n", "[w", function()
+  vim.diagnostic.goto_prev({ severity = severity.WARN })
+end, { desc = "Go to previous warning" })
+
+map("n", "[h", function()
+  vim.diagnostic.goto_prev({ severity = severity.HINT })
+end, { desc = "Go to previous hint" })
 
 -- ********************************************* --
 --
 --                    Insert
 --
 -- ********************************************* --
-wk.register({
-  ["<c-p>"] = { "<cmd>Telescope resume<cr>", "Resume previous picker" },
-  ["<c-o>"] = { "<cmd>IconPickerInsert<cr>", "Pick icon" },
-  -- Terminal-like
-  ["<c-a>"] = { "<HOME>", "Go to the beginning" },
-  ["<c-e>"] = { "<END>", "Go to the end" },
-  ["<c-d>"] = { "<DEL>", "Delete next char" },
-}, { mode = "i" })
+map({ "n", "v" }, "<c-p>", "<cmd>Telescope resume<cr>", { desc = "Resume previous picker" })
+map("i", "<c-o>", "<cmd>IconPickerInsert<cr>", { desc = "Pick icon" })
+map("i", "<c-a>", "<HOME>", { desc = "Go to the beginning" })
+map("i", "<c-e>", "<END>", { desc = "Go to the end" })
+map("i", "<c-d>", "<DEL>", { desc = "Delete next char" })

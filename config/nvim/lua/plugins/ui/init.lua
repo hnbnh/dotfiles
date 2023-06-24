@@ -188,7 +188,6 @@ return {
     },
     event = { "WinNew" },
   },
-  { "folke/which-key.nvim" },
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
@@ -216,7 +215,7 @@ return {
       })
     end,
   },
-  { "phaazon/hop.nvim", config = true },
+  { "phaazon/hop.nvim", enabled = false, config = true },
   {
     "lewis6991/gitsigns.nvim",
     event = "BufRead",
