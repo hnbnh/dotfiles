@@ -69,6 +69,9 @@ return {
             theme = "dropdown",
             previewer = false,
           },
+          find_files = {
+            hidden = true,
+          },
         },
       })
 
