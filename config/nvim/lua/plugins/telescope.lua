@@ -9,7 +9,7 @@ local select_default_and_expand_neotree = function(prompt_bufnr)
   local cwd = vim.fn.getcwd()
   local relative_path = Path:new(selected_entry.path):make_relative(cwd)
 
-  vim.cmd("Neotree reveal_file=" .. relative_path)
+  vim.cmd("Neotree filesystem show " .. relative_path)
 end
 
 return {
