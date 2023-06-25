@@ -258,8 +258,6 @@ return {
                   B = { gs.reset_buffer, "Reset buffer" },
                 },
                 p = { gs.preview_hunk, "Preview hunk" },
-                -- TODO: Close the left window to quit
-                d = { gs.diffthis, "Diff this" },
               },
             },
             ["]c"] = { prev_or_next("]c", gs.next_hunk), "Go to next hunk" },
@@ -356,5 +354,24 @@ return {
       })
     end,
     opts = {},
+  },
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+    config = function()
+      local actions = require("diffview.actions")
+      require("diffview").setup({
+        keymaps = {
+          view = {
+            { "n", "<leader>ch", actions.conflict_choose("ours"), { desc = "Choose the left window" } },
+            { "n", "<leader>cm", actions.conflict_choose("all"), { desc = "Choose the middle window" } },
+            { "n", "<leader>cl", actions.conflict_choose("theirs"), { desc = "Choose the right window" } },
+            { "n", "<leader>cH", actions.conflict_choose_all("ours"), { desc = "Choose the left window" } },
+            { "n", "<leader>cM", actions.conflict_choose_all("all"), { desc = "Choose the middle window" } },
+            { "n", "<leader>cL", actions.conflict_choose_all("theirs"), { desc = "Choose the right window" } },
+          },
+        },
+      })
+    end,
   },
 }

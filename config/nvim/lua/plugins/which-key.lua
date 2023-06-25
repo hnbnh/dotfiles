@@ -11,6 +11,7 @@ return {
       w = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
       g = {
         name = "+git",
+        d = { "<cmd>DiffviewOpen<cr>", "Diffview" },
         s = {
           name = "+status | +stage",
           {
