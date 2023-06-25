@@ -65,3 +65,18 @@ map("i", "<c-o>", "<cmd>IconPickerInsert<cr>", { desc = "Pick icon" })
 map("i", "<c-a>", "<HOME>", { desc = "Go to the beginning" })
 map("i", "<c-e>", "<END>", { desc = "Go to the end" })
 map("i", "<c-d>", "<DEL>", { desc = "Delete next char" })
+
+-- ********************************************* --
+--
+--                  MISC MODE
+--
+-- ********************************************* --
+map({ "n", "x", "o" }, "s", function()
+  require("flash").jump()
+end, { desc = "Flash" })
+map({ "o", "x" }, "S", function()
+  require("flash").treesitter()
+end, { desc = "Flash treesitter" })
+map({ "o" }, "r", function()
+  require("flash").remote()
+end, { desc = "Remote flash" })
