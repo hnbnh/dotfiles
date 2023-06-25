@@ -27,7 +27,13 @@ return {
   { "tpope/vim-fugitive", event = "VeryLazy" },
   { "smjonas/inc-rename.nvim", cmd = "IncRename", config = true },
   { "ThePrimeagen/refactoring.nvim", config = true },
-  { "gbprod/yanky.nvim", event = "VeryLazy", opts = {} },
+  {
+    "gbprod/yanky.nvim",
+    event = "VeryLazy",
+    opts = {
+      highlight = { timer = 300 },
+    },
+  },
   {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
