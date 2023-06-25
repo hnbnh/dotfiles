@@ -22,6 +22,16 @@ return {
         end,
       },
     },
+    opts = {
+      capabilities = {
+        textDocument = {
+          foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true,
+          },
+        },
+      },
+    },
     config = function()
       require(lsp_path .. ".configs")
       require(lsp_path .. ".handlers").setup()

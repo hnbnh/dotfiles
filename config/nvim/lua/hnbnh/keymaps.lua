@@ -67,6 +67,9 @@ map("n", "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)", { desc = "Yanky put inde
 map("n", "=p", "<Plug>(YankyPutAfterFilter)", { desc = "Yanky put after filter" })
 map("n", "=P", "<Plug>(YankyPutBeforeFilter)", { desc = "Yanky put before filter" })
 
+map("n", "zR", "<cmd>lua require('ufo').openAllFolds()<cr>", { desc = "Open all folds" })
+map("n", "zM", "<cmd>lua require('ufo').closeAllFolds()<cr>", { desc = "Close all folds" })
+
 -- ********************************************* --
 --
 --                    Insert
