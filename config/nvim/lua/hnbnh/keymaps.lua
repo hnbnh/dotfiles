@@ -55,12 +55,23 @@ map("n", "[h", function()
   vim.diagnostic.goto_prev({ severity = severity.HINT })
 end, { desc = "Go to previous hint" })
 
+-- Yanky
+map("n", "[y", "<Plug>(YankyCycleBackward)", { desc = "Yanky cycle backward" })
+map("n", "]y", "<Plug>(YankyCycleForward)", { desc = "Yaunky cycle forward" })
+map("n", "[p", "<Plug>(YankyPutIndentBeforeLinewise)", { desc = "Yanky put indent before linewise" })
+map("n", "]p", "<Plug>(YankyPutIndentAfterLinewise)", { desc = "Yanky put indent after linewise" })
+map("n", ">p", "<Plug>(YankyPutIndentAfterShiftRight)", { desc = "Yanky put indent after shift right" })
+map("n", "<p", "<Plug>(YankyPutIndentAfterShiftLeft)", { desc = "Yanky put indent after shift left" })
+map("n", ">P", "<Plug>(YankyPutIndentBeforeShiftRight)", { desc = "Yanky put indent before shift right" })
+map("n", "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)", { desc = "Yanky put indent before shift left" })
+map("n", "=p", "<Plug>(YankyPutAfterFilter)", { desc = "Yanky put after filter" })
+map("n", "=P", "<Plug>(YankyPutBeforeFilter)", { desc = "Yanky put before filter" })
+
 -- ********************************************* --
 --
 --                    Insert
 --
 -- ********************************************* --
-map({ "n", "v" }, "<c-p>", "<cmd>Telescope resume<cr>", { desc = "Resume previous picker" })
 map("i", "<c-o>", "<cmd>IconPickerInsert<cr>", { desc = "Pick icon" })
 map("i", "<c-a>", "<HOME>", { desc = "Go to the beginning" })
 map("i", "<c-e>", "<END>", { desc = "Go to the end" })
@@ -71,6 +82,11 @@ map("i", "<c-d>", "<DEL>", { desc = "Delete next char" })
 --                  MISC MODE
 --
 -- ********************************************* --
+
+-- Telescope
+map({ "n", "v" }, "<c-p>", "<cmd>Telescope resume<cr>", { desc = "Resume previous picker" })
+
+-- Flash
 map({ "n", "x", "o" }, "s", function()
   require("flash").jump()
 end, { desc = "Flash" })
@@ -80,3 +96,10 @@ end, { desc = "Flash treesitter" })
 map({ "o" }, "r", function()
   require("flash").remote()
 end, { desc = "Remote flash" })
+
+-- Yanky
+map({ "n", "x" }, "y", "<Plug>(YankyYank)", { desc = "Yank" })
+map({ "n", "x" }, "p", "<Plug>(YankyPutAfter)", { desc = "Put after" })
+map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)", { desc = "Put before" })
+map({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)", { desc = "GPut after" })
+map({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)", { desc = "GPut before" })

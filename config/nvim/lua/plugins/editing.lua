@@ -27,4 +27,5 @@ return {
   { "tpope/vim-fugitive", event = "VeryLazy" },
   { "smjonas/inc-rename.nvim", cmd = "IncRename", config = true },
   { "ThePrimeagen/refactoring.nvim", config = true },
+  { "gbprod/yanky.nvim", event = "VeryLazy", opts = {} },
 }
