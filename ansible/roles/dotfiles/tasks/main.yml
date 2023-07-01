@@ -40,6 +40,8 @@
       dest: .ripgreprc
     - src: yt-dlp/yt-dlp.conf
       dest: yt-dlp.conf
+    - src: starship/starship.toml
+      dest: .config/starship.toml
 
 - name: ibus config
   dconf:
