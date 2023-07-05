@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 local icons = require("icons")
 local colors = require("colors").get_current_colors()
+local theme = require("colors").get_current_theme()
 local utils = require("utils")
 
 local act = wezterm.action
@@ -10,11 +11,11 @@ local super_mod = "SUPER|SHIFT"
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local background = colors.mantle
-  local foreground = colors.overlay1
+	local foreground = colors.overlay1
 
 	if tab.is_active then
-    background = colors.crust
-		foreground = colors.text
+		background = theme.tab_bar.active_tab.bg_color
+		foreground = theme.tab_bar.active_tab.fg_color
 	end
 
 	local pane = tab.active_pane
@@ -29,7 +30,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		{ Background = { Color = background } },
 		{ Foreground = { Color = foreground } },
 		{ Text = "   " .. title .. " " },
-		{ Foreground = { Color = icon.Foreground } },
+		{ Foreground = { Color = tab.is_active and foreground or icon.Foreground } },
 		{ Text = " " .. icon.Text .. "  " },
 	}
 end)
@@ -43,6 +44,12 @@ return {
 	use_fancy_tab_bar = false,
 	tab_bar_at_bottom = true,
 	window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
+	inactive_pane_hsb = {
+		saturation = 0.6,
+		brightness = 0.55,
+	},
+	enable_scroll_bar = true,
+	scrollback_lines = 10000,
 	keys = {
 		-- Pane
 		{ mods = mod, key = "h", action = act.ActivatePaneDirection("Left") },
@@ -64,6 +71,4 @@ return {
 		-- Misc
 		{ mods = super_mod, key = "p", action = act.ActivateCommandPalette },
 	},
-	enable_scroll_bar = true,
-	scrollback_lines = 10000,
 }
