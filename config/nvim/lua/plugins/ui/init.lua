@@ -157,7 +157,7 @@ return {
           commands = {
             yank_path = function(state)
               vim.fn.setreg("+", state.tree:get_node().path)
-              print("Yanked path to clipboard")
+              vim.notify("Yanked path to clipboard")
             end,
           },
         },
@@ -372,6 +372,22 @@ return {
           },
         },
       })
+    end,
+  },
+  {
+    "rcarriga/nvim-notify",
+    event = "VeryLazy",
+    opts = {
+      timeout = 3000,
+      max_height = function()
+        return math.floor(vim.o.lines * 0.75)
+      end,
+      max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+      end,
+    },
+    config = function()
+      vim.notify = require("notify")
     end,
   },
 }
