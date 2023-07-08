@@ -1,27 +1,5 @@
 return {
   {
-    "luukvbaal/nnn.nvim",
-    lazy = false,
-    enabled = false,
-    config = function()
-      require("nnn").setup({
-        picker = {
-          cmd = "nnn -H -G -o -A",
-          style = {
-            width = 0.9, -- percentage relative to terminal size when < 1, absolute otherwise
-            height = 0.8, -- ^
-            xoffset = 0.5, -- ^
-            yoffset = 0.5, -- ^
-            border = "single", -- border decoration for example "rounded"(:h nvim_open_win)
-          },
-          session = "", -- or "global" / "local" / "shared"
-          fullscreen = false, -- whether to fullscreen picker window when current tab is empty
-        },
-        replace_netrw = "picker",
-      })
-    end,
-  },
-  {
     "ThePrimeagen/harpoon",
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()

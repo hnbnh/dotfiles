@@ -12,14 +12,6 @@ local icons = {
 
 return {
   {
-    "rebelot/heirline.nvim",
-    event = "VeryLazy",
-    enabled = false,
-    config = function()
-      require("plugins.ui.heirline").setup()
-    end,
-  },
-  {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
@@ -75,7 +67,7 @@ return {
             },
           },
           lualine_y = {
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            { "progress", separator = " ",                  padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
           },
           lualine_z = {
@@ -97,7 +89,7 @@ return {
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
           local ret = (diag.error and icons.diagnostics.error .. diag.error .. " " or "")
-            .. (diag.warning and icons.diagnostics.warn .. diag.warning or "")
+              .. (diag.warning and icons.diagnostics.warn .. diag.warning or "")
           return vim.trim(ret)
         end,
         offsets = {
@@ -217,7 +209,6 @@ return {
       })
     end,
   },
-  { "phaazon/hop.nvim", enabled = false, config = true },
   {
     "lewis6991/gitsigns.nvim",
     event = "BufRead",
@@ -297,7 +288,7 @@ return {
     "nvim-pack/nvim-spectre",
     config = function()
       local sep =
-        "══════════════════════════════════"
+      "══════════════════════════════════"
       require("spectre").setup({
         line_sep_start = sep,
         result_padding = "  ",
@@ -305,37 +296,9 @@ return {
       })
     end,
   },
-  {
-    "levouh/tint.nvim",
-    event = "BufRead",
-    enabled = false,
-    config = function()
-      require("tint").setup({
-        ignore = { "WinSeparator", "Status.*", "IndentBlankline.*", "SignColumn", "EndOfBuffer" }, -- Highlight group patterns to ignore, see `string.find`
-        ignorefunc = function(winid)
-          local bufid = vim.api.nvim_win_get_buf(winid)
-          local buftype = vim.api.nvim_buf_get_option(bufid, "buftype")
-
-          -- Tint normal buffer
-          return buftype ~= ""
-        end,
-      })
-    end,
-  },
-  { "stevearc/dressing.nvim", event = "VeryLazy", config = true },
-  {
-    "jinh0/eyeliner.nvim",
-    event = "VeryLazy",
-    enabled = false,
-    config = function()
-      require("eyeliner").setup({
-        highlight_on_key = true, -- show highlights only after keypress
-        dim = true, -- dim all other characters if set to true (recommended!)
-      })
-    end,
-  },
-  { "folke/flash.nvim", event = "VeryLazy", opts = {} },
-  { "pwntester/octo.nvim", cmd = "Octo", config = true },
+  { "stevearc/dressing.nvim",  event = "VeryLazy", config = true },
+  { "folke/flash.nvim",        event = "VeryLazy", opts = {} },
+  { "pwntester/octo.nvim",     cmd = "Octo",       config = true },
   {
     "luukvbaal/statuscol.nvim",
     event = "VeryLazy",
@@ -343,7 +306,7 @@ return {
       local builtin = require("statuscol.builtin")
       require("statuscol").setup({
         segments = {
-          { text = { "%s" }, click = "v:lua.ScSa" },
+          { text = { "%s" },             click = "v:lua.ScSa" },
           { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
           {
             text = { " ", builtin.foldfunc, " " },
@@ -363,11 +326,11 @@ return {
       require("diffview").setup({
         keymaps = {
           view = {
-            { "n", "<leader>ch", actions.conflict_choose("ours"), { desc = "Choose the left window" } },
-            { "n", "<leader>cm", actions.conflict_choose("all"), { desc = "Choose the middle window" } },
-            { "n", "<leader>cl", actions.conflict_choose("theirs"), { desc = "Choose the right window" } },
-            { "n", "<leader>cH", actions.conflict_choose_all("ours"), { desc = "Choose the left window" } },
-            { "n", "<leader>cM", actions.conflict_choose_all("all"), { desc = "Choose the middle window" } },
+            { "n", "<leader>ch", actions.conflict_choose("ours"),       { desc = "Choose the left window" } },
+            { "n", "<leader>cm", actions.conflict_choose("all"),        { desc = "Choose the middle window" } },
+            { "n", "<leader>cl", actions.conflict_choose("theirs"),     { desc = "Choose the right window" } },
+            { "n", "<leader>cH", actions.conflict_choose_all("ours"),   { desc = "Choose the left window" } },
+            { "n", "<leader>cM", actions.conflict_choose_all("all"),    { desc = "Choose the middle window" } },
             { "n", "<leader>cL", actions.conflict_choose_all("theirs"), { desc = "Choose the right window" } },
           },
         },
