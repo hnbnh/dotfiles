@@ -1,13 +1,22 @@
 return {
   jsonls = {
     on_new_config = function(new_config)
-      new_config.settings.json.schemas =
-          vim.tbl_deep_extend("force", new_config.settings.json.schemas or {}, require("schemastore").json.schemas())
+      new_config.settings.json.schemas = require("schemastore").json.schemas()
     end,
     settings = {
       json = {
         format = { enable = true },
         validate = { enable = true },
+      },
+    },
+  },
+  yamlls = {
+    on_new_config = function(new_config)
+      new_config.settings.yaml.schemas = require("schemastore").yaml.schemas()
+    end,
+    settings = {
+      yaml = {
+        schemaStore = { enable = false },
       },
     },
   },
@@ -31,7 +40,6 @@ return {
   tsserver = {},
   eslint = {},
   gopls = {},
-  yamlls = {},
   prismals = {},
   bashls = {},
   clangd = {},
