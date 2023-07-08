@@ -21,21 +21,6 @@ BLK="03" CHR="03" DIR="04" EXE="02" REG="07" HARDLINK="05" SYMLINK="05" MISSING=
 export NNN_COLORS="#04020301;4231"
 export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$UNKNOWN"
 
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# rust
-. "$HOME/.cargo/env"
-
-# go
-export PATH=$PATH:$HOME/.go/bin
-export PATH=$PATH:$HOME/go/bin
-
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
