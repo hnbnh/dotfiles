@@ -25,4 +25,9 @@ M.fg = function(name)
   return fg and { fg = string.format("#%06x", fg) }
 end
 
+M.dump = function(...)
+  local objects = vim.tbl_map(vim.inspect, { ... })
+  vim.notify(table.unpack(objects))
+end
+
 return M
