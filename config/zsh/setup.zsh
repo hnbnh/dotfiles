@@ -12,6 +12,9 @@ eval "$(starship init zsh)"
 # zoxide
 eval "$(zoxide init zsh)"
 
+# ripgrep
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/.ripgreprc
+
 # nnn
 export NNN_PLUG='f:fzcd;p:preview-tui;g:diffs;t:nmount;z:autojump;d:dragdrop'
 export NNN_FIFO=/tmp/nnn.fifo

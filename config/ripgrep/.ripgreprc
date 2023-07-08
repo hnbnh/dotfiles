@@ -7,11 +7,10 @@
 web:*.{html,css,js}*
 
 # Using glob patterns to include/exclude files or folders
---glob=!git/*
-
-# or
---glob
-!git/*
+--glob=!{.git,.svn,node_modules,Trash}
+--glob=!{build,dist,*.min.js,*.min.css}
+--glob=!*.{lock}
+--glob=!*{-lock}.*
 
 # Set the colors.
 --colors=line:none
@@ -19,3 +18,9 @@ web:*.{html,css,js}*
 
 # Because who cares about case!?
 --smart-case
+
+# Search hidden files and directories.
+--hidden
+
+# Follow symbolic links.
+--follow

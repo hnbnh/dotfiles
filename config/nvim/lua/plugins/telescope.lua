@@ -28,13 +28,9 @@ return {
         defaults = {
           prompt_prefix = " ",
           selection_caret = " ",
-          file_ignore_patterns = { ".git/" },
           vimgrep_arguments = {
             "rg",
-            "--hidden",
-            "--with-filename",
             "--column",
-            "--smart-case",
           },
           mappings = {
             i = {

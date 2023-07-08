@@ -36,8 +36,6 @@
       dest: .tmux.conf
     - src: betterlockscreen/betterlockscreenrc
       dest: .config/betterlockscreenrc
-    - src: ripgrep/.ripgreprc
-      dest: .ripgreprc
     - src: yt-dlp/yt-dlp.conf
       dest: yt-dlp.conf
     - src: starship/starship.toml
