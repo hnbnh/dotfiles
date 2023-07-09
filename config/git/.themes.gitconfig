@@ -1,14 +1,21 @@
 [delta "hnbnh"]
+    commit-decoration-style = bold box ul
     dark = true
+    file-decoration-style = none
     file-style = omit
-    zero-style = syntax
-    syntax-theme = gruvbox-dark
-    hunk-header-decoration-style = green box
-    hunk-header-file-style = yellow ul bold
-    hunk-header-line-number-style = yellow ul bold
-    hunk-header-style = line-number syntax bold italic
-    line-numbers-left-style = green
-    line-numbers-minus-style = red bold
-    line-numbers-plus-style = green bold
-    line-numbers-right-style = green
-    line-numbers-zero-style = white italic
+    hunk-header-decoration-style = "#cdd6f4" box ul
+    hunk-header-file-style = "#f9e2af"
+    hunk-header-line-number-style = bold "#003300"
+    hunk-header-style = file line-number syntax
+
+    line-numbers = true
+    line-numbers-left-format = "{nm:>4}  "
+    line-numbers-minus-style = bold "#f38ba8"
+
+    line-numbers-plus-style = bold "#a6e3a1"
+    line-numbers-right-format = "│{np:>4}  "
+    line-numbers-right-style = "#cdd6f4"
+
+    line-numbers-zero-style = "#6c7086"
+
+    syntax-theme = Nord
