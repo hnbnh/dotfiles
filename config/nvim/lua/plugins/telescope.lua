@@ -1,17 +1,3 @@
-local select_default_and_expand_neotree = function(prompt_bufnr)
-  local actions_state = require("telescope.actions.state")
-  local actions = require("telescope.actions")
-  local Path = require("plenary.path")
-
-  actions.select_default(prompt_bufnr)
-
-  local selected_entry = actions_state.get_selected_entry()
-  local cwd = vim.fn.getcwd()
-  local relative_path = Path:new(selected_entry.path):make_relative(cwd)
-
-  vim.cmd("Neotree filesystem show " .. relative_path)
-end
-
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -38,10 +24,6 @@ return {
               ["<C-k>"] = actions.move_selection_previous,
               ["<Tab>"] = nil,
               ["<C-d>"] = "delete_buffer",
-              ["<CR>"] = select_default_and_expand_neotree,
-            },
-            n = {
-              ["<CR>"] = select_default_and_expand_neotree,
             },
           },
         },

@@ -130,11 +130,13 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
     cmd = "Neotree",
-    lazy = false,
     config = function()
       require("neo-tree").setup({
         filesystem = {
           use_libuv_file_watcher = true,
+          filtered_items = {
+            hide_dotfiles = false,
+          },
           window = {
             mappings = {
               ["Y"] = "yank_path",
