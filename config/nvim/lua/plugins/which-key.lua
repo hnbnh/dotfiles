@@ -13,12 +13,10 @@ return {
       g = {
         name = "+git",
         d = { "<cmd>DiffviewOpen<cr>", "Diffview" },
-        s = {
-          name = "+status | +stage",
-          {
-            t = { "<cmd>Telescope git_status<cr>", "Git status" },
-          },
-        },
+        p = { "<cmd>Git pull<cr>", "Git pull" },
+        P = { "<cmd>Git push<cr>", "Git push" },
+        l = { "<cmd>Git blame<cr>", "Git blame" },
+        t = { "<cmd>Telescope git_status<cr>", "Git status" },
       },
       b = { "<cmd>Telescope buffers<cr>", "List all buffers" },
       f = { "<cmd>Telescope find_files<cr>", "Find files" },
