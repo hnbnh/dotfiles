@@ -36,12 +36,15 @@ return {
       "b0o/schemastore.nvim",
       {
         "jose-elias-alvarez/null-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = { "mason.nvim" },
         config = function()
           local null_ls = require("null-ls")
           local fmt = null_ls.builtins.formatting
           null_ls.setup({
             sources = {
-              fmt.black,     -- Python
+              -- TODO: Add eslint
+              fmt.black, -- Python
               fmt.prettierd, -- Js/Ts
               fmt.stylua,
               fmt.beautysh,
@@ -74,6 +77,12 @@ return {
     config = function(_, opts)
       local lspconfig = require("lspconfig")
       local lsp_utils = require("plugins.lsp.utils")
+      local lsp_format = require("plugins.lsp.format")
+
+      lsp_utils.update_signs()
+      lsp_utils.update_handlers()
+      lsp_utils.update_diagnostic_config()
+      lsp_format.setup()
 
       local default_opts = {
         on_attach = function(client, bufnr)
@@ -82,10 +91,6 @@ return {
         end,
         capabilities = vim.tbl_deep_extend("force", require("cmp_nvim_lsp").default_capabilities(), opts.capabilities),
       }
-
-      lsp_utils.update_signs()
-      lsp_utils.update_handlers()
-      lsp_utils.update_diagnostic_config()
 
       for server, server_opts in pairs(opts.servers) do
         local o = vim.tbl_deep_extend("force", server_opts, default_opts)
