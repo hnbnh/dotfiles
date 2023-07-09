@@ -27,11 +27,11 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
 	return {
 		{ Attribute = { Intensity = tab.is_active and "Bold" or "Normal" } },
-		{ Background = { Color = background } },
-		{ Foreground = { Color = foreground } },
-		{ Text = "   " .. title .. " " },
 		{ Foreground = { Color = tab.is_active and foreground or icon.Foreground } },
 		{ Text = " " .. icon.Text .. "  " },
+		{ Background = { Color = background } },
+		{ Foreground = { Color = foreground } },
+		{ Text = title .. " " },
 	}
 end)
 
