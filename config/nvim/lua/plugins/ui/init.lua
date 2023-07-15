@@ -241,6 +241,7 @@ return {
                 b = { gs.stage_buffer, "Stage buffer" },
                 B = { gs.reset_buffer, "Reset buffer" },
                 u = { gs.undo_stage_hunk, "Undo stage" },
+                o = { gs.preview_hunk, "Preview hunk" },
               },
             },
             ["]c"] = { prev_or_next("]c", gs.next_hunk), "Go to next hunk" },
