@@ -79,11 +79,6 @@ return {
       local lsp_utils = require("plugins.lsp.utils")
       local lsp_format = require("plugins.lsp.format")
 
-      lsp_utils.update_signs()
-      lsp_utils.update_handlers()
-      lsp_utils.update_diagnostic_config()
-      lsp_format.setup()
-
       local default_opts = {
         on_attach = function(client, bufnr)
           lsp_utils.lsp_keymaps(bufnr)
@@ -111,6 +106,11 @@ return {
           lspconfig[server].setup(o)
         end
       end
+
+      lsp_utils.update_signs()
+      lsp_utils.update_handlers()
+      lsp_utils.update_diagnostic_config()
+      lsp_format.setup()
     end,
   },
   {
