@@ -4,11 +4,13 @@ return {
     dependencies = {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "nvim-telescope/telescope-ui-select.nvim" },
+      { "nvim-telescope/telescope-live-grep-args.nvim" },
     },
     cmd = "Telescope",
     config = function()
       local telescope = require("telescope")
       local actions = require("telescope.actions")
+      local lga_actions = require("telescope-live-grep-args.actions")
 
       telescope.setup({
         defaults = {
@@ -20,6 +22,7 @@ return {
           },
           mappings = {
             i = {
+              ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
               ["<Tab>"] = nil,
@@ -55,6 +58,7 @@ return {
 
       telescope.load_extension("fzf")
       telescope.load_extension("ui-select")
+      telescope.load_extension("live_grep_args")
     end,
   },
 }

@@ -6,7 +6,7 @@ return {
     local utils = require("hnbnh.utils")
 
     wk.register({
-      ["/"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
+      ["/"] = { "<cmd>Telescope live_grep_args<cr>", "Live grep" },
       a = { t = { "<cmd>AerialToggle<cr>", "Toggle aerial" } },
       t = { "<cmd>Neotree<cr>", "Open neo-tree" },
       w = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
