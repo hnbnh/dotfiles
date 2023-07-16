@@ -7,7 +7,7 @@ configuration {
   modi: "window,run,drun";
   icon-theme: "Papirus";
 
-  kb-row-up: "Up,Control+k,ISO_Left_Tab";
+  kb-row-up: "Up,Control+k";
   kb-row-down: "Down,Control+j";
 
   kb-accept-entry: "Control+y,Return,KP_Enter";
