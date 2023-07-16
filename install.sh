@@ -27,7 +27,7 @@ function install_dots {
 
 function setup_linux {
     # Install ansible & plugins
-    have ansible || sudo dnf install ansible
+    have ansible || sudo dnf install ansible -y
 
     [ -d ~/.ansible/collections/ansible_collections/community ] || \
         ansible-galaxy collection install community.general
