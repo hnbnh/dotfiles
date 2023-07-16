@@ -9,6 +9,15 @@
       - util-linux-user
       - zsh
 
+      # Dev tools
+      - automake
+      - gcc
+      - gcc-c++
+      - kernel-devel
+      - libtool
+      - libyaml
+      - perl
+
       # cli
       - ImageMagick
       - aria2
