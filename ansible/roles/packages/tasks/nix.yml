@@ -1,0 +1,20 @@
+- name: Install nixpkgs
+  # TODO: Install via Multi-user installation
+  shell: sh <(curl -L https://nixos.org/nix/install) --no-daemon --yes
+
+- name: Install packages from nix
+  shell: ~/.nix-profile/bin/nix-env -iA nixpkgs.{{ item }}
+  loop:
+    - bottom
+    - brave
+    - browsh
+    - dbeaver
+    - eva
+    - gh
+    - glow
+    - insomnia
+    - keyd
+    - lazydocker
+    - lazygit
+    - rtx
+    - starship
