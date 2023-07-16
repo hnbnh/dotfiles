@@ -26,7 +26,6 @@ return {
           "gitignore",
           "go",
           "graphql",
-          "help", -- vim
           "html",
           "http",
           "java",
@@ -48,6 +47,7 @@ return {
           "tsx",
           "typescript",
           "vim",
+          "vimdoc",
           "vue",
           "yaml",
         },
