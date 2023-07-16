@@ -1,5 +1,11 @@
 - include_tasks: repos.yml
 
+- name: Install the 'Development tools' package group
+  become: true
+  dnf:
+    name: '@Development tools'
+    state: present
+
 - name: Install packages from repository
   become: true
   dnf:
