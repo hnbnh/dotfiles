@@ -21,6 +21,7 @@
     - key: GLFW_IM_MODULE
       value: ibus
 
+# TODO: Configure keyd from nixpkgs
 - name: Copy files
   become: true
   copy:
@@ -30,9 +31,6 @@
     group: root
     mode: "0644"
   loop:
-    - description: keyd
-      src: keyd.conf
-      dest: /etc/keyd/default.conf
     - description: Touchpad
       src: touchpad.conf
       dest: /etc/X11/xorg.conf.d/30-touchpad.conf
@@ -44,10 +42,6 @@
     enabled: "{{ item.enabled }}"
     state: "{{ item.state }}"
   loop:
-    # FIXME: Can't enable keyd
-    # - name: keyd
-    #   enabled: yes
-    #   state: started
     - name: NetworkManager-wait-online.service
       enabled: no
       state: stopped
