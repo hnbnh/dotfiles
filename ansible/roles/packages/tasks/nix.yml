@@ -8,6 +8,7 @@
     - bottom
     - brave
     - browsh
+    - cliphist
     - dbeaver
     - eva
     - gh
@@ -18,3 +19,4 @@
     - lazygit
     - rtx
     - starship
+    - wezterm
