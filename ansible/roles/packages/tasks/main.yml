@@ -43,32 +43,37 @@
       - navi
       - poppler-utils # pdf to image
       - ripgrep
+      - swaybg
       - tealdeer # tldr
       - torbrowser-launcher
       - yt-dlp
       - zoxide
 
       # gui
+      - calibre
       - chromium
       - flameshot
       - ibus
+      - kitty
       - lxappearance
       - mpv
+      - network-manager-applet
       - obs-studio
       - papirus-icon-theme
       - rofi
+      - rofimoji
+      - waybar
       - wine
       - xournalpp
       - zathura
-      - kitty
 
       # tui
       - neovim
 
       # languages
       - cargo
-      - rust
       - golang
+      - rust
 
       # ========== THIRD-PARTY REPOS ========= #
 
