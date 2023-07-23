@@ -3,7 +3,7 @@
 - name: Install the 'Development tools' package group
   become: true
   dnf:
-    name: '@Development tools'
+    name: "@Development tools"
     state: present
 
 - name: Install packages from repository
@@ -50,6 +50,7 @@
       - zoxide
 
       # gui
+      - blueman
       - calibre
       - chromium
       - flameshot
@@ -97,7 +98,6 @@
     name:
       - dnf-automatic
     state: absent
-
 
 - include_tasks: nix.yml
 - include_tasks: releases.yml
