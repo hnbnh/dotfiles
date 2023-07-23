@@ -20,6 +20,8 @@
       value: ibus
     - key: GLFW_IM_MODULE
       value: ibus
+    - key: XDG_DATA_DIRS
+      value: :/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/home/hnbnh/.nix-profile/share/
 
 # TODO: Configure keyd from nixpkgs
 - name: Copy files
