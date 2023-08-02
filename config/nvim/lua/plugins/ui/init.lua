@@ -165,7 +165,6 @@ return {
       })
     end,
   },
-  { "HiPhish/nvim-ts-rainbow2" },
   {
     "nvim-zh/colorful-winsep.nvim",
     config = true,
