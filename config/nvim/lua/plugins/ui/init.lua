@@ -289,7 +289,16 @@ return {
     end,
   },
   { "stevearc/dressing.nvim", event = "VeryLazy", config = true },
-  { "folke/flash.nvim", event = "VeryLazy", opts = {} },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {
+      search = {
+        incremental = true,
+        trigger = ";",
+      },
+    },
+  },
   { "pwntester/octo.nvim", cmd = "Octo", config = true },
   {
     "luukvbaal/statuscol.nvim",
