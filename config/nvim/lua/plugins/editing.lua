@@ -12,14 +12,6 @@ return {
   { "mizlan/iswap.nvim", cmd = "ISwap" },
   { "godlygeek/tabular", cmd = "Tabularize" },
   { "kylechui/nvim-surround", event = "VeryLazy", config = true },
-  {
-    "andymass/vim-matchup",
-    event = "VeryLazy",
-    config = function()
-      vim.g.matchup_matchparen_deferred = 1
-      vim.g.matchup_matchparen_offscreen = { method = "status_manual" }
-    end,
-  },
   { "tpope/vim-repeat", event = "VeryLazy" },
   { "tpope/vim-unimpaired", event = "VeryLazy" },
   { "NvChad/nvim-colorizer.lua", event = "VeryLazy", config = true },
