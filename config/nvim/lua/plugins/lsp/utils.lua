@@ -2,9 +2,9 @@ local buf = vim.lsp.buf
 
 local signs = {
   { name = "DiagnosticSignError", text = "" },
-  { name = "DiagnosticSignWarn",  text = "" },
-  { name = "DiagnosticSignHint",  text = "" },
-  { name = "DiagnosticSignInfo",  text = "" },
+  { name = "DiagnosticSignWarn", text = "" },
+  { name = "DiagnosticSignHint", text = "" },
+  { name = "DiagnosticSignInfo", text = "" },
 }
 
 return {
@@ -48,7 +48,6 @@ return {
         o = { vim.diagnostic.open_float, "Open float" },
         q = { ":q<cr>", "Quit" },
         c = { vim.lsp.buf.code_action, "Code action" },
-        p = { vim.lsp.buf.format, "Format" },
         s = {
           name = "+symbol",
           a = {
@@ -72,7 +71,7 @@ return {
   update_handlers = function()
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
     vim.lsp.handlers["textDocument/signatureHelp"] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+      vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
   end,
   update_diagnostic_config = function()
     vim.diagnostic.config({

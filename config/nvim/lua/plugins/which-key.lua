@@ -70,6 +70,7 @@ return {
       },
       l = { "<cmd>vsplit<cr>", "vsplit" },
       j = { "<cmd>split<cr>", "split" },
+      p = { "<cmd>Telescope projects<cr>", "Projects" },
       P = { "<cmd>lua require('telescope').extensions.yank_history.yank_history({})<cr>", "Paste from Yanky" },
     }, { mode = "n", prefix = "<leader>" })
 
