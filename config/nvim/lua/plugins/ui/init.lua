@@ -185,10 +185,21 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
-    config = function()
-      require("indent_blankline").setup({ char = "│", show_current_context = true })
-    end,
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      char = "│",
+      filetype_exclude = {
+        "help",
+        "dashboard",
+        "neo-tree",
+        "Trouble",
+        "lazy",
+        "mason",
+        "notify",
+      },
+      show_trailing_blankline_indent = false,
+      show_current_context = false,
+    },
   },
   {
     "kevinhwang91/nvim-hlslens",
