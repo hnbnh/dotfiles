@@ -33,9 +33,6 @@ return {
       local dap_go = require("dap-go")
       local dap_js = require("dap-vscode-js")
 
-      require("dapui").setup()
-      require("nvim-dap-virtual-text").setup()
-
       -- ######## Setup languages ########
 
       dap_python.setup("python")
