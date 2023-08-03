@@ -9,7 +9,7 @@ return {
       ["/"] = { "<cmd>Telescope live_grep_args<cr>", "Live grep" },
       a = { t = { "<cmd>AerialToggle<cr>", "Toggle aerial" } },
       t = { "<cmd>Neotree<cr>", "Open neo-tree" },
-      w = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
+      w = { "<cmd>Trouble workspace_diagnostics<cr>", "Toggle Trouble" },
       g = {
         name = "+git",
         d = { "<cmd>DiffviewOpen<cr>", "Diffview" },
