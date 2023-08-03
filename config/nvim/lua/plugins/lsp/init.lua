@@ -72,6 +72,9 @@ return {
           },
         },
       },
+      format = {
+        timeout_ms = 5000,
+      },
       servers = lsp_servers,
     },
     config = function(_, opts)
