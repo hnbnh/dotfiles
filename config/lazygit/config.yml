@@ -5,29 +5,29 @@ git:
 gui:
   mouseEvents: false
   showIcons: true
+  expandFocusedSidePanel: true
   branchColors:
-    'feat': '#76946A'
-    'fix': '#C34043'
-    'refactor': '#DCA561'
-    'docs': '#89b4fa'
-  # https://github.com/catppuccin/lazygit/blob/b2ecb6d41b6f54a82104879573c538e8bdaeb0bf/themes/mocha.yml
+    "feat": "#76946A"
+    "fix": "#C34043"
+    "refactor": "#DCA561"
+    "docs": "#89b4fa"
+  # https://github.com/catppuccin/lazygit/blob/b2ecb6d41b6f54a82104879573c538e8bdaeb0bf/themes/macchiato.yml
   theme:
-    lightTheme: false 
+    lightTheme: false
     activeBorderColor:
-      - "#a6e3a1" # Green
+      - "#a6da95" # Green
       - bold
     inactiveBorderColor:
-      - "#cdd6f4" # Text
+      - "#cad3f5" # Text
     optionsTextColor:
-      - "#89b4fa" # Blue
+      - "#8aadf4" # Blue
     selectedLineBgColor:
-      - "#313244" # Surface0
+      - "#363a4f" # Surface0
     selectedRangeBgColor:
-      - "#313244" # Surface0
+      - "#363a4f" # Surface0
     cherryPickedCommitBgColor:
-      - "#94e2d5" # Teal
+      - "#8bd5ca" # Teal
     cherryPickedCommitFgColor:
-      - "#89b4fa" # Blue
+      - "#8aadf4" # Blue
     unstagedChangesColor:
-      - red       # Red
-  expandFocusedSidePanel: true
+      - red # Red

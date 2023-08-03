@@ -36,10 +36,9 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 end)
 
 return {
-	font = wezterm.font("JetBrains Mono"),
 	font_size = 12.0,
 	line_height = 1.5,
-	color_scheme = "Catppuccin Mocha",
+	color_scheme = "Catppuccin Macchiato",
 	tab_max_width = 48,
 	use_fancy_tab_bar = false,
 	tab_bar_at_bottom = true,

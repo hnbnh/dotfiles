@@ -108,7 +108,7 @@ return {
     event = "BufReadPre",
     config = function()
       require("incline").setup()
-      local colors = require("catppuccin.palettes").get_palette("mocha")
+      local colors = require("catppuccin.palettes").get_palette("macchiato")
 
       require("incline").setup({
         highlight = {

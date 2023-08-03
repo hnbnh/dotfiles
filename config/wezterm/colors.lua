@@ -119,11 +119,11 @@ M.colors = {
 }
 
 M.get_current_colors = function()
-	return M.colors.mocha
+	return M.colors.macchiato
 end
 
 M.get_current_theme = function()
-	return wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
+	return wezterm.color.get_builtin_schemes()["Catppuccin Macchiato"]
 end
 
 return M
