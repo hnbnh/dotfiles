@@ -305,7 +305,6 @@ return {
     event = "VeryLazy",
     opts = {
       search = {
-        incremental = true,
         trigger = ";",
       },
     },
