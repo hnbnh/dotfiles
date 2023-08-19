@@ -84,7 +84,7 @@ o.cmdheight = 2 -- More space for nvim cmd line
 -- o.mouse = "a" -- Allow the mouse to be used (turn on later)
 o.smartindent = true
 o.cursorline = true -- Hightlight the current line
-o.signcolumn = "yes" -- Always show the sign column, otherwise it would shift the text each time
+o.signcolumn = "auto:9"
 o.termguicolors = true
 
 -- Fold
