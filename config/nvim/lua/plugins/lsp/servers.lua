@@ -45,5 +45,5 @@ return {
   clangd = {},
   taplo = {},
   rnix = {},
-  solargraph = {},
+  sorbet = {},
 }
