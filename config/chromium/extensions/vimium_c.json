@@ -1,0 +1,13 @@
+{
+  "name": "Vimium C",
+  "keyMappings": [
+    "#!no-check",
+    "mapKey J K",
+    "mapKey K J",
+    "map <c-o> goBack",
+    "map <c-i> goForward",
+    "map t Vomnibar.activateTabs",
+    ""
+  ],
+  "vimSync": true
+}
