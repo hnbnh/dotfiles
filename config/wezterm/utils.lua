@@ -5,8 +5,9 @@ M.basename = function(s)
 end
 
 M.strip_home_name = function(text)
-	local username = os.getenv("USER")
-	return text:gsub("/home/" .. username, "~")
+	local home = os.getenv("HOME")
+
+	return text:gsub(home, "~")
 end
 
 M.shorten_path = function(text)
