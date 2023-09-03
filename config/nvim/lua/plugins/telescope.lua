@@ -14,7 +14,11 @@ return {
 
       telescope.setup({
         defaults = {
-          prompt_prefix = " ",
+          sorting_strategy = "ascending",
+          layout_config = {
+            prompt_position = "top",
+          },
+          prompt_prefix = "  ",
           selection_caret = " ",
           vimgrep_arguments = {
             "rg",
