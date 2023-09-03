@@ -7,4 +7,12 @@ return {
     module = "persistence",
     config = true,
   },
+  {
+    "s1n7ax/nvim-window-picker",
+    version = "2.*",
+    opts = {
+      hint = "floating-big-letter",
+    },
+    config = true,
+  },
 }
