@@ -28,6 +28,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	return {
 		{ Attribute = { Intensity = tab.is_active and "Bold" or "Normal" } },
 		{ Foreground = { Color = tab.is_active and foreground or icon.Foreground } },
+		{ Text = pane.is_zoomed and " [Z]" or "" },
 		{ Text = " " .. icon.Text .. "  " },
 		{ Background = { Color = background } },
 		{ Foreground = { Color = foreground } },
