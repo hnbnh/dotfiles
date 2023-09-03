@@ -19,7 +19,7 @@ return {
         t = { "<cmd>Telescope git_status<cr>", "Git status" },
       },
       b = { "<cmd>Telescope buffers<cr>", "List all buffers" },
-      f = { "<cmd>Telescope find_files<cr>", "Find files" },
+      f = { "<cmd>Telescope find_files previewer=false<cr>", "Find files" },
       i = {
         name = "+icon",
         c = { "<cmd>IconPickerNormal<cr>", "Pick an icon" },
