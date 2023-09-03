@@ -5,6 +5,10 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "nvim-telescope/telescope-ui-select.nvim" },
       { "nvim-telescope/telescope-live-grep-args.nvim" },
+      {
+        "prochri/telescope-all-recent.nvim",
+        config = true,
+      },
     },
     cmd = "Telescope",
     config = function()
@@ -32,6 +36,9 @@ return {
               ["<Tab>"] = nil,
               ["<C-d>"] = "delete_buffer",
             },
+          },
+          cache_picker = {
+            num_pickers = 10,
           },
         },
         extensions = {
