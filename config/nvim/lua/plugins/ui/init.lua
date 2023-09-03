@@ -84,6 +84,7 @@ return {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
     opts = {
+      highlights = require("catppuccin.groups.integrations.bufferline").get(),
       options = {
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,

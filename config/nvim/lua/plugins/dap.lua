@@ -1,3 +1,5 @@
+local sign = vim.fn.sign_define
+
 return {
   {
     "mfussenegger/nvim-dap",
@@ -7,6 +9,11 @@ return {
         config = function(_, opts)
           local dap = require("dap")
           local dapui = require("dapui")
+
+          sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+          sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+          sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
+
           dapui.setup(opts)
           dap.listeners.after.event_initialized["dapui_config"] = function()
             dapui.open({})

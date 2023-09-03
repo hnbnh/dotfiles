@@ -13,7 +13,12 @@ return {
           }
         end,
         integrations = {
+          aerial = false,
+          harpoon = true,
+          lsp_trouble = true,
           neotree = true,
+          notify = true,
+          treesitter_context = true,
         },
       })
       vim.cmd.colorscheme("catppuccin-macchiato")
