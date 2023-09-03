@@ -62,7 +62,8 @@ return {
 		{ mods = mod, key = "}", action = act.ScrollByPage(-1) },
 		-- Split
 		{ mods = mod, key = ":", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-		{ mods = mod, key = '"', action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ mods = mod, key = "Enter", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ mods = mod, key = "q", action = act.CloseCurrentPane({ confirm = true }) },
 		{ mods = mod, key = ">", action = act.MoveTabRelative(1) },
 		{ mods = mod, key = "<", action = act.MoveTabRelative(-1) },
 		{ mods = mod, key = "m", action = act.TogglePaneZoomState },
