@@ -5,6 +5,7 @@
 - name: Install packages from nix
   shell: ~/.nix-profile/bin/nix-env -iA nixpkgs.{{ item }}
   loop:
+    - avizo
     - bottom
     - brave
     - browsh
@@ -18,5 +19,8 @@
     - lazydocker
     - lazygit
     - rtx
+    - so
     - starship
+    - waybar-hyprland
     - wezterm
+    - wuzz
