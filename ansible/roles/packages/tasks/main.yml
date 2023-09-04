@@ -23,6 +23,9 @@
       - libtool
       - libyaml
       - perl
+      - sqlite3
+      - sqlite-devel
+      - sqlite-tcl
 
       # cli
       - ImageMagick
@@ -46,6 +49,7 @@
       - swaybg
       - tealdeer # tldr
       - torbrowser-launcher
+      - wlogout
       - yt-dlp
       - zoxide
 
@@ -63,6 +67,8 @@
       - papirus-icon-theme
       - rofi
       - rofimoji
+      - swappy
+      - swaylock
       - waybar
       - wine
       - xournalpp
@@ -85,7 +91,7 @@
       - containerd.io
       - docker-ce
       - docker-ce-cli
-      - docker-compose-plugin
+      - docker-compose
 
       # Input method
       - ibus-bamboo # Vietnamese
