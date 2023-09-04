@@ -12,7 +12,17 @@ return {
       w = { "<cmd>Trouble workspace_diagnostics<cr>", "Toggle Trouble" },
       g = {
         name = "+git",
-        d = { "<cmd>DiffviewOpen<cr>", "Diffview" },
+        d = {
+          function()
+            local view = require("diffview.lib").get_current_view()
+            if view then
+              vim.cmd.DiffviewClose()
+            else
+              vim.cmd.DiffviewOpen()
+            end
+          end,
+          "Diffview",
+        },
         p = { "<cmd>Git pull<cr>", "Git pull" },
         P = { "<cmd>Git push<cr>", "Git push" },
         l = { "<cmd>Git blame<cr>", "Git blame" },
