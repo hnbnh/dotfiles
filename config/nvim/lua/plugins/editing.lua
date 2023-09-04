@@ -67,4 +67,9 @@ return {
       end)
     end,
   },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
+  },
 }
