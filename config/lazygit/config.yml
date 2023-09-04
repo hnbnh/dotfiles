@@ -18,7 +18,7 @@ gui:
       - "#a6da95" # Green
       - bold
     inactiveBorderColor:
-      - "#cad3f5" # Text
+      - "#6e738d" # Overlay0
     optionsTextColor:
       - "#8aadf4" # Blue
     selectedLineBgColor:
