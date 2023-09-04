@@ -69,6 +69,13 @@ return {
 		{ mods = mod, key = "m", action = act.TogglePaneZoomState },
 		{ mods = mod, key = "n", action = act.ActivateTabRelative(1) },
 		{ mods = mod, key = "p", action = act.ActivateTabRelative(-1) },
+		{
+			mods = mod,
+			key = "g",
+			action = wezterm.action_callback(function(_, pane)
+				pane:split({ args = { "lazygit" }, direction = "Bottom" })
+			end),
+		},
 		-- Misc
 		{ mods = super_mod, key = "p", action = act.ActivateCommandPalette },
 	},
