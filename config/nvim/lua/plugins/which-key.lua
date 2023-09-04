@@ -76,6 +76,7 @@ return {
 
     wk.register({
       r = { name = "+refactor", p = { "<cmd>lua require('refactoring').select_refactor()<cr>", "Refactor" } },
+      g = { name = "+git", b = { ":GBrowse!<cr>", "Git browse" } },
     }, { mode = "v", prefix = "<leader>" })
   end,
 }

@@ -82,6 +82,7 @@
   "typescript.nvim": { "branch": "main", "commit": "4de85ef699d7e6010528dcfbddc2ed4c2c421467" },
   "vim-fugitive": { "branch": "master", "commit": "572c8510123cbde02e8a1dafcd376c98e1e13f43" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
+  "vim-rhubarb": { "branch": "master", "commit": "ee69335de176d9325267b0fd2597a22901d927b1" },
   "vim-unimpaired": { "branch": "master", "commit": "6d44a6dc2ec34607c41ec78acf81657248580bf1" },
   "which-key.nvim": { "branch": "main", "commit": "7ccf476ebe0445a741b64e36c78a682c1c6118b7" },
   "yanky.nvim": { "branch": "main", "commit": "ef70e4e44095a17ab8611cb6630b727ccee0a271" }
