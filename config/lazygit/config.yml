@@ -14,6 +14,7 @@ gui:
   # https://github.com/catppuccin/lazygit/blob/b2ecb6d41b6f54a82104879573c538e8bdaeb0bf/themes/macchiato.yml
   theme:
     lightTheme: false
+    selectedBgColor: default
     activeBorderColor:
       - "#a6da95" # Green
       - bold
