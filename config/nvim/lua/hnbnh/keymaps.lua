@@ -70,6 +70,12 @@ map("n", "=P", "<Plug>(YankyPutBeforeFilter)", { desc = "Yanky put before filter
 map("n", "zR", "<cmd>lua require('ufo').openAllFolds()<cr>", { desc = "Open all folds" })
 map("n", "zM", "<cmd>lua require('ufo').closeAllFolds()<cr>", { desc = "Close all folds" })
 
+-- Window
+map("n", "<c-h>", "<c-w>h", { desc = "Go to left window" })
+map("n", "<c-j>", "<c-w>j", { desc = "Go to down window" })
+map("n", "<c-k>", "<c-w>k", { desc = "Go to up window" })
+map("n", "<c-l>", "<c-w>l", { desc = "Go to right window" })
+
 -- ********************************************* --
 --
 --                    Insert
