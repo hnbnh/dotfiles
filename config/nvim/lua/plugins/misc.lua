@@ -25,4 +25,9 @@ return {
     },
     config = true,
   },
+  {
+    "Dhanus3133/LeetBuddy.nvim",
+    cmd = { "LBQuestions", "LBQuestion", "LBReset", "LBTest", "LBSubmit" },
+    config = true,
+  },
 }
