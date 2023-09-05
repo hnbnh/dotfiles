@@ -73,4 +73,12 @@ return {
     event = "InsertEnter",
     opts = {},
   },
+  {
+    "smjonas/inc-rename.nvim",
+    cmd = "IncRename",
+    opts = {
+      input_buffer_type = "dressing",
+    },
+    config = true,
+  },
 }
