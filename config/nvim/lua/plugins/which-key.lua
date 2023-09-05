@@ -7,6 +7,7 @@ return {
 
     wk.register({
       ["/"] = { "<cmd>Telescope live_grep_args<cr>", "Live grep" },
+      q = { "<cmd>q<cr>", "Quit" },
       a = { t = { "<cmd>AerialToggle<cr>", "Toggle aerial" } },
       t = { "<cmd>Neotree reveal<cr>", "Open neo-tree" },
       w = { "<cmd>Trouble workspace_diagnostics<cr>", "Toggle Trouble" },

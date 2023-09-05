@@ -41,25 +41,13 @@ return {
         s = { vim.lsp.buf.signature_help, "Signature help" },
       },
       ["<leader>"] = {
-        r = {
-          name = "+rename",
-          n = { ":IncRename ", "Rename" },
-        },
-        o = { vim.diagnostic.open_float, "Open float" },
-        q = { ":q<cr>", "Quit" },
-        c = { vim.lsp.buf.code_action, "Code action" },
-        s = {
-          name = "+symbol",
-          a = {
-            "<cmd>AerialToggle<cr>",
-            "Aerial symbols",
-          },
-          t = {
-            "<cmd>Telescope aerial<cr>",
-            "Telescope aerial",
-          },
+        l = {
+          r = { ":IncRename ", "Rename" },
+          c = { vim.lsp.buf.code_action, "Code action" },
+          s = { "<cmd>Telescope aerial<cr>", "Telescope aerial" },
         },
       },
+      O = { vim.diagnostic.open_float, "Open float" },
       K = { vim.lsp.buf.hover, "Hover" },
     })
   end,
