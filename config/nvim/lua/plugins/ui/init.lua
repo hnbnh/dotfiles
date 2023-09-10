@@ -365,4 +365,5 @@ return {
       vim.notify = require("notify")
     end,
   },
+  { "echasnovski/mini.animate", event = "VeryLazy", config = true },
 }

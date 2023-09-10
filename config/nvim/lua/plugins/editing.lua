@@ -81,4 +81,5 @@ return {
     },
     config = true,
   },
+  { "echasnovski/mini.trailspace", event = "BufReadPost", config = true },
 }

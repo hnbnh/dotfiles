@@ -16,6 +16,7 @@ return {
           aerial = false,
           harpoon = true,
           lsp_trouble = true,
+          mini = true,
           neotree = true,
           notify = true,
           treesitter_context = true,
