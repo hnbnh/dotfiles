@@ -105,29 +105,6 @@ return {
     },
   },
   {
-    "b0o/incline.nvim",
-    event = "BufReadPre",
-    config = function()
-      require("incline").setup()
-      local colors = require("catppuccin.palettes").get_palette("macchiato")
-
-      require("incline").setup({
-        highlight = {
-          groups = {
-            InclineNormal = { guibg = colors.yellow, guifg = colors.crust },
-            InclineNormalNC = { guifg = colors.yellow, guibg = colors.crust },
-          },
-        },
-        window = { margin = { vertical = 0, horizontal = 1 } },
-        render = function(props)
-          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-          local icon, color = require("nvim-web-devicons").get_icon_color(filename)
-          return { { icon, guifg = color }, { " " }, { filename } }
-        end,
-      })
-    end,
-  },
-  {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     cmd = "Neotree",
