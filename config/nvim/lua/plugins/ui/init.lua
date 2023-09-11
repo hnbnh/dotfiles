@@ -365,4 +365,18 @@ return {
       vim.notify = require("notify")
     end,
   },
+  {
+    "Bekaboo/dropbar.nvim",
+    event = "BufReadPre",
+    config = true,
+    opts = {
+      sources = {
+        path = {
+          relative_to = function()
+            return vim.fn.expand("%:p:h")
+          end,
+        },
+      },
+    },
+  },
 }

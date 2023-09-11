@@ -13,7 +13,8 @@ return {
           }
         end,
         integrations = {
-          aerial = false,
+          aerial = true,
+          dropbar = true,
           harpoon = true,
           lsp_trouble = true,
           mini = true,
