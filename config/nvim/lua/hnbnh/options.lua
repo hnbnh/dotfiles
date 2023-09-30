@@ -92,7 +92,7 @@ o.foldmethod = "expr"
 o.foldexpr = "nvim_treesitter#foldexpr()"
 o.foldlevel = 99
 o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-o.foldcolumn = '1'
+o.foldcolumn = "1"
 o.foldlevelstart = 99
 o.foldenable = true
 
