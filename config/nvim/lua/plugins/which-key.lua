@@ -17,8 +17,10 @@ return {
           function()
             local view = require("diffview.lib").get_current_view()
             if view then
+              vim.g.autoformat_enabled = true
               vim.cmd.DiffviewClose()
             else
+              vim.g.autoformat_enabled = false
               vim.cmd.DiffviewOpen()
             end
           end,

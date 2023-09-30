@@ -1,5 +1,5 @@
 local utils = require("hnbnh.utils")
-local lsp_servers = require("plugins.lsp.servers")
+local lsps = require("plugins.lsp.servers")
 
 return {
   {
@@ -14,7 +14,7 @@ return {
       {
         "williamboman/mason-lspconfig.nvim",
         opts = {
-          ensure_installed = lsp_servers,
+          ensure_installed = lsps,
           automatic_installation = true,
         },
       },
@@ -22,12 +22,12 @@ return {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = true,
         config = function()
-          local dap_servers = { "codelldb", "debugpy", "js-debug-adapter", "delve" }
-          local linter_servers = {}
-          local formatter_servers = { "black", "prettierd", "stylua", "beautysh" }
-          local without_lsp_servers = utils.join(dap_servers, linter_servers, formatter_servers)
+          local daps = { "codelldb", "debugpy", "js-debug-adapter", "delve" }
+          local linters = {}
+          local formatters = { "black", "prettierd", "stylua", "beautysh" }
+          local without_lsps = utils.join(daps, linters, formatters)
           require("mason-tool-installer").setup({
-            ensure_installed = without_lsp_servers,
+            ensure_installed = without_lsps,
             auto_update = false,
             run_on_start = true,
           })
@@ -35,20 +35,25 @@ return {
       },
       "b0o/schemastore.nvim",
       {
-        "jose-elias-alvarez/null-ls.nvim",
+        "stevearc/conform.nvim",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = { "mason.nvim" },
         config = function()
-          local null_ls = require("null-ls")
-          local fmt = null_ls.builtins.formatting
-          null_ls.setup({
-            sources = {
-              -- TODO: Add eslint
-              fmt.black, -- Python
-              fmt.prettierd, -- Js/Ts
-              fmt.stylua,
-              fmt.beautysh,
+          require("conform").setup({
+            formatters_by_ft = {
+              bash = { "beautysh" },
+              lua = { "stylua" },
+              python = { "black" },
+              javascript = { "eslint" },
+              typescript = { "eslint" },
             },
+            format_on_save = function()
+              if not vim.g.autoformat_enabled then
+                return
+              end
+
+              return { timeout_ms = 5000, lsp_fallback = true }
+            end,
           })
         end,
       },
@@ -75,12 +80,11 @@ return {
       format = {
         timeout_ms = 5000,
       },
-      servers = lsp_servers,
+      servers = lsps,
     },
     config = function(_, opts)
       local lspconfig = require("lspconfig")
       local lsp_utils = require("plugins.lsp.utils")
-      local lsp_format = require("plugins.lsp.format")
 
       local default_opts = {
         on_attach = function(client, bufnr)
@@ -113,7 +117,6 @@ return {
       lsp_utils.update_signs()
       lsp_utils.update_handlers()
       lsp_utils.update_diagnostic_config()
-      lsp_format.setup()
     end,
   },
   {

@@ -25,7 +25,19 @@ return {
         },
         sections = {
           lualine_a = { "mode" },
-          lualine_b = { "branch" },
+          lualine_b = {
+            "branch",
+            {
+              function()
+                return "󰁨  " .. (vim.g.autoformat_enabled and "" or "")
+              end,
+              separator = " ",
+              padding = { left = 1, right = 1 },
+              color = function()
+                return vim.g.autoformat_enabled and "lualine_a_terminal" or "@text.danger"
+              end,
+            },
+          },
           lualine_c = {
             {
               "diagnostics",
