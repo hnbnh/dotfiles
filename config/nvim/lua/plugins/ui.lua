@@ -163,10 +163,16 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
-      char = "│",
-      filetype_exclude = {
+      indent = { char = "│" },
+      whitespace = { highlight = { "Whitespace", "NonText" } },
+      scope = {
+        char = "┋",
+        highlight = { "@function.builtin" },
+      },
+      exclude = {
         "help",
         "dashboard",
         "neo-tree",
@@ -175,8 +181,6 @@ return {
         "mason",
         "notify",
       },
-      show_trailing_blankline_indent = false,
-      show_current_context = false,
     },
   },
   {
