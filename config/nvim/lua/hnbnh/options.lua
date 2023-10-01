@@ -80,7 +80,6 @@ o.spelloptions = "camel"
 o.spellsuggest:append({ 9 }) -- Show 9 spell suggestions at most
 o.virtualedit = "block" -- Virtual block edit
 o.synmaxcol = 200 -- Text after this column number is not highlighted
-o.cmdheight = 2 -- More space for nvim cmd line
 -- o.mouse = "a" -- Allow the mouse to be used (turn on later)
 o.smartindent = true
 o.cursorline = true -- Hightlight the current line

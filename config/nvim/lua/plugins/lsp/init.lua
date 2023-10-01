@@ -63,10 +63,6 @@ return {
         url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         opts = { underline = true },
       },
-      {
-        "j-hui/fidget.nvim",
-        opts = { text = { spinner = "dots" } },
-      },
     },
     opts = {
       capabilities = {
