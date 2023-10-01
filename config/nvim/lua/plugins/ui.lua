@@ -319,6 +319,9 @@ return {
         search = {
           enabled = false,
         },
+        char = {
+          jump_labels = true,
+        },
       },
     },
   },
