@@ -141,7 +141,13 @@ map({ "n", "x", "o" }, "s", function()
   })
 end, { desc = "Flash" })
 map({ "n", "o", "x" }, "S", function()
-  require("flash").treesitter()
+  require("flash").treesitter({
+    label = {
+      rainbow = {
+        enabled = true,
+      },
+    },
+  })
 end, { desc = "Flash treesitter" })
 map({ "o" }, "r", function()
   require("flash").remote()
