@@ -426,6 +426,15 @@ return {
       messages = {
         enabled = false,
       },
+      notify = {
+        enabled = false,
+      },
+      popupmenu = {
+        enabled = true,
+      },
+      smart_move = {
+        enabled = true,
+      },
     },
   },
   {
