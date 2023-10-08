@@ -8,6 +8,7 @@ return {
         custom_highlights = function(colors)
           return {
             SatelliteSearch = { fg = colors.overlay0, bg = colors.peach },
+            SpellBad = { fg = colors.crust, bg = colors.red },
             WinSeparator = { fg = colors.overlay0 },
             YankyPut = { fg = colors.crust, bg = colors.green },
             YankyYanked = { fg = colors.crust, bg = colors.yellow },
