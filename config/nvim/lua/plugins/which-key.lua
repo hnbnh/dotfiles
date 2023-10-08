@@ -111,5 +111,10 @@ return {
         l = { "<cmd>ChatGPTRun code_readability_analysis<CR>", "Code Readability Analysis" },
       },
     }, { mode = { "n", "v" }, prefix = "<leader>" })
+
+    wk.register({
+      s = { ":g//normal @i" .. utils.duplicate("<left>", 10), "Search and apply macro" },
+      a = { ":normal @i<cr>", "Apply macro" },
+    }, { mode = "x", prefix = "<leader>" })
   end,
 }

@@ -30,4 +30,14 @@ M.dump = function(...)
   vim.notify(table.unpack(objects))
 end
 
+M.duplicate = function(s, n)
+  local result = ""
+
+  for _ = 1, n do
+    result = result .. s
+  end
+
+  return result
+end
+
 return M
