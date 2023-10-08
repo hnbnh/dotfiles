@@ -12,11 +12,4 @@ return {
       require("telescope").load_extension("harpoon")
     end,
   },
-  {
-    "ahmedkhalf/project.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("project_nvim").setup()
-    end,
-  },
 }
