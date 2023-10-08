@@ -13,6 +13,7 @@ return {
       w = { "<cmd>Trouble workspace_diagnostics<cr>", "Toggle Trouble" },
       g = {
         name = "+git",
+        g = { "<cmd>Neotree git_status<cr>", "Git" },
         d = {
           function()
             local view = require("diffview.lib").get_current_view()
