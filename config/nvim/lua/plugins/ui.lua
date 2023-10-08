@@ -417,7 +417,7 @@ return {
         inc_rename = true,
       },
       messages = {
-        view_search = false,
+        enabled = false,
       },
     },
   },
