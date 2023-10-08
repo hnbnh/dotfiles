@@ -39,6 +39,7 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         dependencies = { "mason.nvim" },
         config = function()
+          vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
           require("conform").setup({
             formatters_by_ft = {
               bash = { "beautysh" },
