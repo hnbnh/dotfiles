@@ -197,7 +197,7 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = { "BufReadPost", "BufNewFile" },
-    config = function(opts)
+    config = function(_, opts)
       local hooks = require("ibl.hooks")
       -- TODO: Deduplicate this with the setup in treesitter.lua
       local highlight = {
@@ -220,15 +220,16 @@ return {
     opts = {
       indent = { char = "│" },
       whitespace = { highlight = { "Whitespace", "NonText" } },
-      scope = { char = "┋" },
       exclude = {
-        "help",
-        "dashboard",
-        "neo-tree",
-        "Trouble",
-        "lazy",
-        "mason",
-        "notify",
+        filetypes = {
+          "help",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "lazy",
+          "mason",
+          "notify",
+        },
       },
     },
   },
