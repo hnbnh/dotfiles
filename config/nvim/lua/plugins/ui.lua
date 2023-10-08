@@ -1,6 +1,26 @@
 local keys = { { "n", "n" }, { "n", "N" } }
 local utils = require("hnbnh.utils")
 
+local prev_hunk = function()
+  local gs = require("gitsigns")
+
+  if vim.wo.diff then
+    vim.cmd("norm! [c")
+  else
+    gs.prev_hunk()
+  end
+end
+
+local next_hunk = function()
+  local gs = require("gitsigns")
+
+  if vim.wo.diff then
+    vim.cmd("norm! ]c")
+  else
+    gs.next_hunk()
+  end
+end
+
 local icons = {
   diagnostics = {
     error = " ",
@@ -235,59 +255,46 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = "BufRead",
-    config = function()
-      local wk = require("which-key")
-      local gs = require("gitsigns")
+    opts = {
+      on_attach = function(bufnr)
+        local gs = require("gitsigns")
+        local wk = require("which-key")
 
-      local prev_or_next = function(key, action)
-        return function()
-          if vim.wo.diff then
-            return key
-          end
-          vim.schedule(action)
-
-          return "<Ignore>"
-        end
-      end
-
-      gs.setup({
-        on_attach = function(bufnr)
-          wk.register({
-            buffer = bufnr,
-            ["<leader>"] = {
-              g = {
-                name = "+git",
-                h = { gs.stage_hunk, "Stage hunk" },
-                H = { gs.reset_hunk, "Reset hunk" },
-                b = { gs.stage_buffer, "Stage buffer" },
-                B = { gs.reset_buffer, "Reset buffer" },
-                u = { gs.undo_stage_hunk, "Undo stage" },
-                o = { gs.preview_hunk, "Preview hunk" },
-              },
+        wk.register({
+          buffer = bufnr,
+          ["<leader>"] = {
+            g = {
+              name = "+git",
+              h = { gs.stage_hunk, "Stage hunk" },
+              H = { gs.reset_hunk, "Reset hunk" },
+              b = { gs.stage_buffer, "Stage buffer" },
+              B = { gs.reset_buffer, "Reset buffer" },
+              u = { gs.undo_stage_hunk, "Undo stage" },
+              o = { gs.preview_hunk, "Preview hunk" },
             },
-            ["]c"] = { prev_or_next("]c", gs.next_hunk), "Go to next hunk" },
-            ["[c"] = { prev_or_next("[c", gs.prev_hunk), "Go to previous hunk" },
-          })
+          },
+          ["]c"] = { next_hunk, "Go to next hunk" },
+          ["[c"] = { prev_hunk, "Go to previous hunk" },
+        })
 
-          wk.register({
-            ["<leader>"] = {
-              g = {
-                name = "+git",
-                s = { name = "+stage", { h = { gs.stage_hunk, "Stage hunk" } } },
-                r = { name = "+reset", H = { gs.reset_hunk, "Reset hunk" } },
-              },
+        wk.register({
+          ["<leader>"] = {
+            g = {
+              name = "+git",
+              s = { name = "+stage", { h = { gs.stage_hunk, "Stage hunk" } } },
+              r = { name = "+reset", H = { gs.reset_hunk, "Reset hunk" } },
             },
-          }, { mode = "v" })
+          },
+        }, { mode = "v" })
 
-          wk.register({
-            i = {
-              name = "+gitsigns",
-              h = { gs.select_hunk, "Select hunk" },
-            },
-          }, { mode = { "o", "x" } })
-        end,
-      })
-    end,
+        wk.register({
+          i = {
+            name = "+gitsigns",
+            h = { gs.select_hunk, "Select hunk" },
+          },
+        }, { mode = { "o", "x" } })
+      end,
+    },
   },
   {
     "ziontee113/icon-picker.nvim",
