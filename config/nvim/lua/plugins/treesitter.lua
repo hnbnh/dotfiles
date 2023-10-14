@@ -5,8 +5,10 @@ return {
     event = "BufReadPost",
     dependencies = {
       { "nvim-treesitter/nvim-treesitter-textobjects" },
+      { "LiadOz/nvim-dap-repl-highlights" },
     },
     config = function()
+      require("nvim-dap-repl-highlights").setup()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "bash",
@@ -16,6 +18,7 @@ return {
           "cpp",
           "css",
           "cuda",
+          "dap_repl",
           "dockerfile",
           "gitignore",
           "go",
