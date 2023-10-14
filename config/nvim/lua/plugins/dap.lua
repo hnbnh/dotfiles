@@ -33,25 +33,24 @@ return {
         "mxsdev/nvim-dap-vscode-js",
         run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
       },
+      { "suketa/nvim-dap-ruby" },
     },
     config = function()
       local dap = require("dap")
       local dap_python = require("dap-python")
-      local dap_go = require("dap-go")
-      local dap_js = require("dap-vscode-js")
 
-      -- ######## Setup languages ########
-
+      require("dap-go").setup()
+      require("dap-ruby").setup()
+      require("dap-vscode-js").setup({
+        debugger_cmd = { "js-debug-adapter" },
+        adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
+      })
       dap_python.setup("python")
       dap_python.resolve_python = function()
         return "python"
       end
 
-      dap_go.setup()
-      dap_js.setup({
-        debugger_cmd = { "js-debug-adapter" },
-        adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
-      })
+      -- ######## Setup languages ########
 
       for _, language in ipairs({ "typescript", "javascript" }) do
         dap.configurations[language] = {
