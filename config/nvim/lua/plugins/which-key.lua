@@ -9,7 +9,13 @@ return {
       ["/"] = { "<cmd>Telescope live_grep_args<cr>", "Live grep" },
       q = { "<cmd>q<cr>", "Quit" },
       a = { t = { "<cmd>AerialToggle<cr>", "Toggle aerial" } },
-      t = { "<cmd>Neotree reveal<cr>", "Open neo-tree" },
+      t = {
+        name = "+test",
+        d = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Debug nearest" },
+        f = { [[<cmd>lua require('neotest').run.run(vim.fn.expand("%"))<cr>]], "Test current file" },
+        s = { '<cmd>lua require("neotest").summary.toggle()<CR>', "Neotest: Toggle test summary" },
+        t = { "<cmd>lua require('neotest').run.run()<cr>", "Test nearest" },
+      },
       w = { "<cmd>Trouble workspace_diagnostics<cr>", "Toggle Trouble" },
       g = {
         name = "+git",
@@ -46,7 +52,7 @@ return {
         n = { "<cmd>lua require('harpoon.ui').goto_next()<cr>", "Next" },
         p = { "<cmd>lua require('harpoon.ui').goto_previous()<cr>", "Previous" },
       },
-      n = { ":NnnPicker %:p:h<CR>", "Toggle nnn picker" },
+      n = { "<cmd>Neotree reveal<cr>", "Open neo-tree" },
       z = { "<cmd>WindowsMaximize<CR>", "Maximize window" },
       d = {
         name = "+dap/debug",

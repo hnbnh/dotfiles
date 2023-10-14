@@ -20,6 +20,7 @@ return {
           harpoon = true,
           lsp_trouble = true,
           mini = true,
+          neotest = true,
           neotree = true,
           notify = true,
           treesitter_context = true,
