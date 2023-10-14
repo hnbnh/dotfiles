@@ -29,10 +29,6 @@ return {
       { "theHamsta/nvim-dap-virtual-text" },
       { "mfussenegger/nvim-dap-python" },
       { "leoluz/nvim-dap-go" },
-      {
-        "mxsdev/nvim-dap-vscode-js",
-        run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
-      },
       { "suketa/nvim-dap-ruby" },
     },
     config = function()
@@ -41,14 +37,19 @@ return {
 
       require("dap-go").setup()
       require("dap-ruby").setup()
-      require("dap-vscode-js").setup({
-        debugger_cmd = { "js-debug-adapter" },
-        adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
-      })
       dap_python.setup("python")
       dap_python.resolve_python = function()
         return "python"
       end
+      dap.adapters["pwa-node"] = {
+        type = "server",
+        host = "localhost",
+        port = "${port}",
+        executable = {
+          command = vim.fn.exepath("js-debug-adapter"),
+          args = { "${port}" },
+        },
+      }
 
       -- ######## Setup languages ########
 
