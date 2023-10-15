@@ -79,4 +79,65 @@ return {
     config = true,
   },
   { "echasnovski/mini.trailspace", event = "BufReadPost", config = true },
+  {
+    "johmsalas/text-case.nvim",
+    config = true,
+    event = "VeryLazy",
+    keys = {
+      {
+        "gwc",
+        "<cmd>lua require('textcase').current_word('to_camel_case')<CR>",
+        mode = { "n", "x" },
+        desc = "camelCase",
+      },
+      {
+        "gwC",
+        "<cmd>lua require('textcase').current_word('to_constant_case')<CR>",
+        mode = { "n", "x" },
+        desc = "CONSTANT_CASE",
+      },
+      {
+        "gwd",
+        "<cmd>lua require('textcase').current_word('to_dash_case')<CR>",
+        mode = { "n", "x" },
+        desc = "dash-case",
+      },
+      {
+        "gwD",
+        "<cmd>lua require('textcase').current_word('to_dot_case')<CR>",
+        mode = { "n", "x" },
+        desc = "dot.case",
+      },
+      {
+        "gwp",
+        "<cmd>lua require('textcase').current_word('to_pascal_case')<CR>",
+        mode = { "n", "x" },
+        desc = "PascalCase",
+      },
+      {
+        "gwP",
+        "<cmd>lua require('textcase').current_word('to_phrase_case')<CR>",
+        mode = { "n", "x" },
+        desc = "Phrase Case",
+      },
+      {
+        "gws",
+        "<cmd>lua require('textcase').current_word('to_snake_case')<CR>",
+        mode = { "n", "x" },
+        desc = "snake_case",
+      },
+      {
+        "gwt",
+        "<cmd>lua require('textcase').current_word('to_title_case')<CR>",
+        mode = { "n", "x" },
+        desc = "Title Case",
+      },
+      {
+        "gwx",
+        "<cmd>lua require('textcase').current_word('to_path_case')<CR>",
+        mode = { "n", "x" },
+        desc = "path/case",
+      },
+    },
+  },
 }
