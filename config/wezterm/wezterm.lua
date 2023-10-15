@@ -38,12 +38,20 @@ end)
 
 return {
 	font_size = 12.0,
-	line_height = 1.5,
+	font = wezterm.font("Fira Code"),
+	line_height = 1.2,
 	color_scheme = "Catppuccin Macchiato",
 	tab_max_width = 48,
 	use_fancy_tab_bar = false,
 	tab_bar_at_bottom = true,
 	window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
+
+	webgpu_power_preference = "HighPerformance",
+	animation_fps = 1,
+	cursor_blink_ease_in = "Constant",
+	cursor_blink_ease_out = "Constant",
+	default_cursor_style = "BlinkingBar",
+
 	inactive_pane_hsb = {
 		saturation = 0.6,
 		brightness = 0.55,
