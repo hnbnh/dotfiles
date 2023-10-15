@@ -15,6 +15,7 @@ return {
       local telescope = require("telescope")
       local actions = require("telescope.actions")
       local lga_actions = require("telescope-live-grep-args.actions")
+      local trouble = require("trouble.providers.telescope")
 
       telescope.setup({
         defaults = {
@@ -35,6 +36,10 @@ return {
               ["<C-k>"] = actions.move_selection_previous,
               ["<Tab>"] = nil,
               ["<C-d>"] = "delete_buffer",
+              ["<C-t>"] = trouble.open_with_trouble,
+            },
+            n = {
+              ["<C-t>"] = trouble.open_with_trouble,
             },
           },
           cache_picker = {
