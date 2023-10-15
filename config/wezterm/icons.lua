@@ -21,7 +21,7 @@ local icons = {
 	},
 	lazygit = {
 		color = colors.red,
-		text = "",
+		text = "",
 	},
 	node = {
 		color = colors.green,
