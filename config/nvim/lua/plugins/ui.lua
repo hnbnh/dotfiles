@@ -333,7 +333,6 @@ return {
       },
     },
   },
-  { "pwntester/octo.nvim", cmd = "Octo", config = true },
   {
     "luukvbaal/statuscol.nvim",
     event = "VeryLazy",
