@@ -149,9 +149,6 @@ map({ "n", "o", "x" }, "S", function()
     },
   })
 end, { desc = "Flash treesitter" })
-map({ "o" }, "r", function()
-  require("flash").remote()
-end, { desc = "Remote flash" })
 
 -- Yanky
 map({ "n", "x" }, "y", "<Plug>(YankyYank)", { desc = "Yank" })
