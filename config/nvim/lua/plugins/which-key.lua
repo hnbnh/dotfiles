@@ -15,6 +15,7 @@ return {
         f = { [[<cmd>lua require('neotest').run.run(vim.fn.expand("%"))<cr>]], "Test current file" },
         s = { '<cmd>lua require("neotest").summary.toggle()<CR>', "Neotest: Toggle test summary" },
         t = { "<cmd>lua require('neotest').run.run()<cr>", "Test nearest" },
+        o = { "<cmd>Neotest output-panel<cr>", "Open test file" },
       },
       w = { "<cmd>Trouble workspace_diagnostics<cr>", "Toggle Trouble" },
       g = {
@@ -38,7 +39,7 @@ return {
         l = { "<cmd>Git blame<cr>", "Git blame" },
         t = { "<cmd>Telescope git_status<cr>", "Git status" },
       },
-      b = { "<cmd>Telescope buffers<cr>", "List all buffers" },
+      b = { "<cmd>Neotree buffers<cr>", "List all buffers" },
       f = { "<cmd>Telescope find_files previewer=false<cr>", "Find files" },
       i = {
         name = "+icon",
