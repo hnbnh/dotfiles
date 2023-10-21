@@ -11,6 +11,14 @@
     remote_src: true
   notify: update font cache
 
+- name: Installing Maple Mono
+  ansible.builtin.unarchive:
+    src: https://github.com/subframe7536/maple-font/releases/latest/download/MapleMono-ttf.zip
+    dest: ~/.local/share/fonts/{{item}}
+    creates: ~/.local/share/fonts/{{item}}/done
+    remote_src: true
+  notify: update font cache
+
 - name: Installed {{item}}
   copy:
     dest: ~/.local/share/fonts/{{item}}/done

@@ -38,7 +38,7 @@ end)
 
 return {
 	font_size = 12.0,
-	font = wezterm.font("Fira Code"),
+	font = wezterm.font({ family = "Maple Mono" }),
 	line_height = 1.2,
 	color_scheme = "Catppuccin Macchiato",
 	tab_max_width = 48,
