@@ -98,6 +98,7 @@ o.foldnestmax = 3
 
 -- Status line
 o.laststatus = 3
+o.splitkeep = "screen"
 
 -- Put this at the end of the file
 if vim.g.started_by_firenvim then
