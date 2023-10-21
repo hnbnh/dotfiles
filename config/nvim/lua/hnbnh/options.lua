@@ -94,6 +94,7 @@ o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 o.foldcolumn = "1"
 o.foldlevelstart = 99
 o.foldenable = true
+o.foldnestmax = 3
 
 -- Status line
 o.laststatus = 3

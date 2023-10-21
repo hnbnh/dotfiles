@@ -31,12 +31,28 @@ return {
     dependencies = "kevinhwang91/promise-async",
     event = "BufReadPost",
     opts = {
+      open_fold_hl_timeout = 400,
+      close_fold_kinds = { "imports", "comment" },
+      preview = {
+        win_config = {
+          border = { "", "─", "", "", "", "─", "", "" },
+          winblend = 0,
+        },
+        mappings = {
+          scrollU = "<C-u>",
+          scrollD = "<C-d>",
+          jumpTop = "[",
+          jumpBot = "]",
+        },
+      },
       fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}
-        local suffix = ("  %d "):format(endLnum - lnum)
+
+        local suffix = (" ↙ %d"):format(endLnum - lnum)
         local sufWidth = vim.fn.strdisplaywidth(suffix)
         local targetWidth = width - sufWidth
         local curWidth = 0
+
         for _, chunk in ipairs(virtText) do
           local chunkText = chunk[1]
           local chunkWidth = vim.fn.strdisplaywidth(chunkText)
@@ -59,14 +75,32 @@ return {
         return newVirtText
       end,
     },
-    init = function()
-      vim.keymap.set("n", "zR", function()
-        require("ufo").openAllFolds()
-      end)
-      vim.keymap.set("n", "zM", function()
-        require("ufo").closeAllFolds()
-      end)
-    end,
+    keys = {
+      {
+        "zR",
+        function()
+          require("ufo").openAllFolds()
+        end,
+        mode = { "n" },
+        desc = "Open all folds",
+      },
+      {
+        "zM",
+        function()
+          require("ufo").closeAllFolds()
+        end,
+        mode = { "n" },
+        desc = "Close all folds",
+      },
+      {
+        "zr",
+        function()
+          require("ufo").openFoldsExceptKinds()
+        end,
+        mode = { "n" },
+        desc = "Open folds except kinds",
+      },
+    },
   },
   {
     "windwp/nvim-autopairs",

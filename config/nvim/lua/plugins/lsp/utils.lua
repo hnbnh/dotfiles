@@ -48,7 +48,15 @@ return {
           o = { vim.diagnostic.open_float, "Open float" },
         },
       },
-      K = { vim.lsp.buf.hover, "Hover" },
+      K = {
+        function()
+          local winid = require("ufo").peekFoldedLinesUnderCursor()
+          if not winid then
+            vim.lsp.buf.hover()
+          end
+        end,
+        "Hover",
+      },
     })
   end,
   update_signs = function()
