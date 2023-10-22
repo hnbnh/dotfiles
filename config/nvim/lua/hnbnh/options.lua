@@ -57,7 +57,7 @@ o.fileencodings = "ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1"
 o.linebreak = true
 o.showbreak = "↪"
 
-o.scrolloff = 8 -- Minimum lines to keep above and below cursor when scrolling
+o.scrolloff = 1 -- Minimum lines to keep above and below cursor when scrolling
 o.showmode = false -- Disable showing current mode
 o.fileformats = "unix,dos" -- Fileformats to use for new files
 
