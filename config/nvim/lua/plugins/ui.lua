@@ -420,7 +420,12 @@ return {
         enabled = false,
       },
       bottom = {
-        "Trouble",
+        {
+          ft = "Trouble",
+          title = "Trouble",
+          pinned = true,
+          open = "Trouble",
+        },
         { ft = "qf", title = "QuickFix" },
         {
           ft = "help",
@@ -441,7 +446,7 @@ return {
             return vim.b[buf].neo_tree_source == "filesystem"
           end,
           pinned = true,
-          size = { height = 0.5 },
+          open = "Neotree",
         },
         { title = "Neotest Summary", ft = "neotest-summary" },
         {
@@ -462,7 +467,6 @@ return {
           pinned = true,
           open = "Neotree position=top buffers",
         },
-        "neo-tree",
       },
     },
   },
