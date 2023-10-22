@@ -30,3 +30,11 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
   nested = true,
 })
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = vim.api.nvim_create_augroup("Edgy", { clear = true }),
+  callback = function()
+    require("edgy").open()
+  end,
+  nested = true,
+})
