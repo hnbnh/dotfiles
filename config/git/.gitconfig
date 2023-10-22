@@ -20,7 +20,6 @@
 
 [merge]
   conflictstyle = diff3
-  
 [diff]
   colorMoved = default
 
@@ -30,3 +29,5 @@
 	rebase = true
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
+[push]
+	autoSetupRemote = true
