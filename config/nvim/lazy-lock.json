@@ -4,7 +4,6 @@
   "LeetBuddy.nvim": { "branch": "main", "commit": "7d9c78877d2c1eb1b8e7e75136ac58e05683d14e" },
   "LuaSnip": { "branch": "master", "commit": "80a8528f084a97b624ae443a6f50ff8074ba486b" },
   "aerial.nvim": { "branch": "master", "commit": "3a3baf0930444c78d19964fdb401bd3a6a23270f" },
-  "bufferline.nvim": { "branch": "main", "commit": "357cc8f8eeb64702e6fcf2995e3b9becee99a5d3" },
   "catppuccin": { "branch": "main", "commit": "dcef0a062de380885193fb0f919217d58b979753" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-cmdline": { "branch": "main", "commit": "8ee981b4a91f536f52add291594e89fb6645e451" },

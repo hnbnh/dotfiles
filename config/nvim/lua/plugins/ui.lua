@@ -113,30 +113,6 @@ return {
     end,
   },
   {
-    "akinsho/bufferline.nvim",
-    event = "VeryLazy",
-    opts = {
-      highlights = require("catppuccin.groups.integrations.bufferline").get(),
-      options = {
-        diagnostics = "nvim_lsp",
-        always_show_bufferline = false,
-        diagnostics_indicator = function(_, _, diag)
-          local ret = (diag.error and icons.diagnostics.error .. diag.error .. " " or "")
-            .. (diag.warning and icons.diagnostics.warn .. diag.warning or "")
-          return vim.trim(ret)
-        end,
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "Neo-tree",
-            highlight = "Directory",
-            text_align = "left",
-          },
-        },
-      },
-    },
-  },
-  {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     cmd = "Neotree",
