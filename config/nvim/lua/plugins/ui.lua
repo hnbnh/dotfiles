@@ -118,6 +118,14 @@ return {
     cmd = "Neotree",
     config = function()
       require("neo-tree").setup({
+        buffers = {
+          show_unloaded = true,
+          window = {
+            mappings = {
+              ["d"] = "buffer_delete",
+            },
+          },
+        },
         filesystem = {
           use_libuv_file_watcher = true,
           filtered_items = {
