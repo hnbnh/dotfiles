@@ -124,8 +124,40 @@ return {
   },
   {
     "folke/trouble.nvim",
-    opts = { auto_preview = false },
+    opts = { auto_preview = false, use_diagnostic_signs = true },
     cmd = { "TroubleToggle", "Trouble" },
+    keys = {
+      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document diagnostics" },
+      { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
+      { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "Location list" },
+      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix list" },
+      {
+        "[q",
+        function()
+          local trouble = require("trouble")
+
+          if trouble.is_open() then
+            trouble.previous({ skip_groups = true, jump = true })
+          else
+            vim.notify("Trouble is not open")
+          end
+        end,
+        desc = "Previous trouble item",
+      },
+      {
+        "]q",
+        function()
+          local trouble = require("trouble")
+
+          if trouble.is_open() then
+            trouble.next({ skip_groups = true, jump = true })
+          else
+            vim.notify("Trouble is not open")
+          end
+        end,
+        desc = "Next trouble item",
+      },
+    },
   },
   {
     "stevearc/aerial.nvim",

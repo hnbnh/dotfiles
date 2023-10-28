@@ -404,12 +404,7 @@ return {
         enabled = false,
       },
       bottom = {
-        {
-          ft = "Trouble",
-          title = "Trouble",
-          pinned = true,
-          open = "Trouble",
-        },
+        "Trouble",
         { ft = "qf", title = "QuickFix" },
         {
           ft = "help",

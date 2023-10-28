@@ -17,7 +17,6 @@ return {
         t = { "<cmd>lua require('neotest').run.run()<cr>", "Test nearest" },
         o = { "<cmd>Neotest output-panel<cr>", "Open test file" },
       },
-      w = { "<cmd>Trouble workspace_diagnostics<cr>", "Toggle Trouble" },
       g = {
         name = "+git",
         g = { "<cmd>Neotree git_status<cr>", "Git" },
