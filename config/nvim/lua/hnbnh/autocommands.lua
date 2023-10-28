@@ -1,11 +1,33 @@
+local function augroup(name)
+  return vim.api.nvim_create_augroup(name, { clear = true })
+end
+
 -- Windows to close with "q"
-vim.cmd(
-  [[autocmd FileType help,checkhealth,startuptime,qf,lspinfo,fugitive,fugitiveblame nnoremap <buffer><silent> q :close<CR>]]
-)
-vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("CloseWithQ"),
+  pattern = {
+    "checkhealth",
+    "fugitive",
+    "fugitiveblame",
+    "help",
+    "lspinfo",
+    "man",
+    "neotest-output",
+    "neotest-output-panel",
+    "neotest-summary",
+    "notify",
+    "qf",
+    "query",
+    "spectre_panel",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})
 
 vim.api.nvim_create_autocmd("VimEnter", {
-  group = vim.api.nvim_create_augroup("PersistenceRestore", { clear = true }),
+  group = augroup("PersistenceRestore"),
   callback = function()
     require("persistence").load()
   end,
@@ -13,7 +35,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 vim.api.nvim_create_autocmd("VimEnter", {
-  group = vim.api.nvim_create_augroup("Spell", { clear = true }),
+  group = augroup("Spell"),
   callback = function()
     ---@diagnostic disable-next-line: param-type-mismatch
     local spell_files = vim.fn.glob("~/dotfiles/config/nvim/spell/*.add", 1, 1)
@@ -28,13 +50,4 @@ vim.api.nvim_create_autocmd("VimEnter", {
       end
     end
   end,
-  nested = true,
-})
-
-vim.api.nvim_create_autocmd("VimEnter", {
-  group = vim.api.nvim_create_augroup("Edgy", { clear = true }),
-  callback = function()
-    require("edgy").open()
-  end,
-  nested = true,
 })
