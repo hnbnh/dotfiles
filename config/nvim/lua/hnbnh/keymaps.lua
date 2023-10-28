@@ -23,8 +23,6 @@ map("x", "K", ":move '<-2<CR>gv-gv", { desc = "Move line up" })
 --                Normal
 --
 -- ************************************** --
-map("n", "<c-p>", "<cmd>Telescope resume<cr>", { desc = "Resume previous picker" })
-
 -- Go to next
 map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 
@@ -88,9 +86,6 @@ map("i", "<c-d>", "<DEL>", { desc = "Delete next char" })
 --                  MISC MODE
 --
 -- ********************************************* --
-
--- Telescope
-map({ "n", "v" }, "<c-p>", "<cmd>Telescope resume<cr>", { desc = "Resume previous picker" })
 
 -- Flash
 map({ "n", "x", "o" }, "s", function()
