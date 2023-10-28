@@ -13,7 +13,6 @@ return {
   { "godlygeek/tabular", cmd = "Tabularize" },
   { "kylechui/nvim-surround", event = "VeryLazy", config = true },
   { "tpope/vim-repeat", event = "VeryLazy" },
-  { "tpope/vim-unimpaired", event = "VeryLazy" },
   { "NvChad/nvim-colorizer.lua", event = "VeryLazy", config = true },
   { "nacro90/numb.nvim", event = "VeryLazy", config = true },
   { "tpope/vim-fugitive", event = "VeryLazy" },
