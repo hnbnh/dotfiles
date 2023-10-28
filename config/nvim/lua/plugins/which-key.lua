@@ -8,7 +8,6 @@ return {
     wk.register({
       ["/"] = { "<cmd>Telescope live_grep_args<cr>", "Live grep" },
       q = { "<cmd>q<cr>", "Quit" },
-      a = { t = { "<cmd>AerialToggle<cr>", "Toggle aerial" } },
       t = {
         name = "+test",
         d = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Debug nearest" },

@@ -29,7 +29,6 @@ return {
           }
         end,
         integrations = {
-          aerial = true,
           dropbar = true,
           harpoon = true,
           lsp_trouble = true,

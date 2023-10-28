@@ -159,13 +159,4 @@ return {
       },
     },
   },
-  {
-    "stevearc/aerial.nvim",
-    cmd = { "AerialToggle" },
-    opts = { layout = { min_width = 35 } },
-    config = function(_, opts)
-      require("telescope").load_extension("aerial")
-      require("aerial").setup(opts)
-    end,
-  },
 }

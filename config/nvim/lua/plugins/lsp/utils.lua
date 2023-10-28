@@ -44,7 +44,6 @@ return {
         l = {
           r = { ":IncRename " .. vim.fn.expand("<cword>"), "Rename" },
           c = { vim.lsp.buf.code_action, "Code action" },
-          s = { "<cmd>Telescope aerial<cr>", "Telescope aerial" },
           o = { vim.diagnostic.open_float, "Open float" },
         },
       },
