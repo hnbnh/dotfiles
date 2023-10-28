@@ -24,7 +24,7 @@ return {
         config = function()
           local daps = { "codelldb", "debugpy", "js-debug-adapter", "delve" }
           local linters = {}
-          local formatters = { "black", "prettierd", "stylua", "beautysh" }
+          local formatters = { "black", "prettierd", "stylua", "beautysh", "rubocop" }
           local without_lsps = utils.join(daps, linters, formatters)
           require("mason-tool-installer").setup({
             ensure_installed = without_lsps,
@@ -41,11 +41,17 @@ return {
         config = function()
           vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
           require("conform").setup({
+            format = {
+              timeout_ms = 3000,
+              async = false,
+              quiet = false,
+            },
             formatters_by_ft = {
               bash = { "beautysh" },
               lua = { "stylua" },
               python = { "black" },
               javascript = { "eslint" },
+              ruby = { "rubocop" },
               typescript = { "eslint" },
             },
             format_on_save = function()

@@ -60,5 +60,10 @@ return {
   clangd = {},
   taplo = {},
   rnix = {},
-  solargraph = {},
+  solargraph = {
+    init_options = {
+      autoformat = false,
+      formatting = false,
+    },
+  },
 }
