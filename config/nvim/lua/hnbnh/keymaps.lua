@@ -46,3 +46,17 @@ map("n", "<c-h>", "<c-w>h", { desc = "Go to left window" })
 map("n", "<c-j>", "<c-w>j", { desc = "Go to down window" })
 map("n", "<c-k>", "<c-w>k", { desc = "Go to up window" })
 map("n", "<c-l>", "<c-w>l", { desc = "Go to right window" })
+
+-- Better up/down
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
+-- Buffer
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
+
+-- Clear search with <esc>
+map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+
+-- Save file
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
