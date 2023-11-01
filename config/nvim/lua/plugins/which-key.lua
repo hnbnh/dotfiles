@@ -90,7 +90,6 @@ return {
       l = { "<cmd>vsplit<cr>", "vsplit" },
       j = { "<cmd>split<cr>", "split" },
       p = { "<cmd>Telescope pickers<cr>", "Pickers history" },
-      P = { "<cmd>lua require('telescope').extensions.yank_history.yank_history({})<cr>", "Paste from Yanky" },
     }, { mode = "n", prefix = "<leader>" })
 
     wk.register({

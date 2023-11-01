@@ -21,6 +21,36 @@ return {
   {
     "gbprod/yanky.nvim",
     event = "VeryLazy",
+    keys = {
+      { "[y", "<Plug>(YankyCycleBackward)", { mode = { "n" }, desc = "Yanky cycle backward" } },
+      { "]y", "<Plug>(YankyCycleForward)", { mode = { "n" }, desc = "Yaunky cycle forward" } },
+      { "[p", "<Plug>(YankyPutIndentBeforeLinewise)", { mode = { "n" }, desc = "Yanky put indent before linewise" } },
+      { "]p", "<Plug>(YankyPutIndentAfterLinewise)", { mode = { "n" }, desc = "Yanky put indent after linewise" } },
+      {
+        ">p",
+        "<Plug>(YankyPutIndentAfterShiftRight)",
+        { mode = { "n" }, desc = "Yanky put indent after shift right" },
+      },
+      { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)", { mode = { "n" }, desc = "Yanky put indent after shift left" } },
+      {
+        ">P",
+        "<Plug>(YankyPutIndentBeforeShiftRight)",
+        { mode = { "n" }, desc = "Yanky put indent before shift right" },
+      },
+      {
+        "<P",
+        "<Plug>(YankyPutIndentBeforeShiftLeft)",
+        { mode = { "n" }, desc = "Yanky put indent before shift left" },
+      },
+      { "=p", "<Plug>(YankyPutAfterFilter)", { mode = { "n" }, desc = "Yanky put after filter" } },
+      { "=P", "<Plug>(YankyPutBeforeFilter)", { mode = { "n" }, desc = "Yanky put before filter" } },
+      { "y", "<Plug>(YankyYank)", { mode = { "n", "x" }, desc = "Yank" } },
+      { "p", "<Plug>(YankyPutAfter)", { mode = { "n", "x" }, desc = "Put after" } },
+      { "P", "<Plug>(YankyPutBefore)", { mode = { "n", "x" }, desc = "Put before" } },
+      { "gp", "<Plug>(YankyGPutAfter)", { mode = { "n", "x" }, desc = "GPut after" } },
+      { "gP", "<Plug>(YankyGPutBefore)", { mode = { "n", "x" }, desc = "GPut before" } },
+      { "<leader>P", "<cmd>lua require('telescope').extensions.yank_history.yank_history({})<cr>", "Paste from Yanky" },
+    },
     opts = {
       highlight = { timer = 300 },
     },
