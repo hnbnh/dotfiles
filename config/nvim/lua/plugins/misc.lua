@@ -82,7 +82,7 @@ return {
     "akinsho/toggleterm.nvim",
     keys = {
       {
-        "<esc>",
+        "<c-space>",
         "<c-\\><c-n>",
         desc = "Close terminal",
         mode = "t",
