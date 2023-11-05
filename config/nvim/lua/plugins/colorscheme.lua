@@ -7,6 +7,15 @@ return {
       require("catppuccin").setup({
         custom_highlights = function(colors)
           return {
+
+            DataViewerColumnRed = { fg = colors.red },
+            DataViewerColumnYellow = { fg = colors.yellow },
+            DataViewerColumnBlue = { fg = colors.blue },
+            DataViewerColumnOrange = { fg = colors.peach },
+            DataViewerColumnGreen = { fg = colors.green },
+            DataViewerColumnViolet = { fg = colors.mauve },
+            DataViewerColumnCyan = { fg = colors.sky },
+
             SatelliteSearch = { fg = colors.overlay0, bg = colors.peach },
             SpellBad = { fg = colors.crust, bg = colors.red },
 

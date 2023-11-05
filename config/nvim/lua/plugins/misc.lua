@@ -117,4 +117,21 @@ return {
       },
     },
   },
+  {
+    "vidocqh/data-viewer.nvim",
+    keys = {
+      { "<leader>vv", "<cmd>DataViewer<cr>", desc = "Data viewer", mode = { "n", "v" } },
+    },
+    opts = {
+      columnColorRoulette = {
+        "DataViewerColumnRed",
+        "DataViewerColumnYellow",
+        "DataViewerColumnBlue",
+        "DataViewerColumnOrange",
+        "DataViewerColumnGreen",
+        "DataViewerColumnViolet",
+        "DataViewerColumnCyan",
+      },
+    },
+  },
 }
