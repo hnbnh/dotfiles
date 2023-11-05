@@ -1,4 +1,3 @@
-local keys = { { "n", "n" }, { "n", "N" } }
 local utils = require("hnbnh.utils")
 
 local prev_hunk = function()
@@ -200,22 +199,25 @@ return {
   {
     "kevinhwang91/nvim-hlslens",
     event = "BufRead",
-    keys = keys,
-    config = function()
-      local wk = require("which-key")
-      require("hlslens").setup({ calm_down = true, nearest_only = true })
-
-      wk.register({
-        n = {
-          [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-          "Next match",
-        },
-        N = {
-          [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-          "Previous match",
-        },
-      })
-    end,
+    keys = {
+      {
+        "n",
+        function()
+          vim.fn.execute("normal! " .. vim.v.count1 .. "n" .. "zz")
+          require("hlslens").start()
+        end,
+        desc = "Next match",
+      },
+      {
+        "N",
+        function()
+          vim.fn.execute("normal! " .. vim.v.count1 .. "N" .. "zz")
+          require("hlslens").start()
+        end,
+        desc = "Previous match",
+      },
+    },
+    opts = { calm_down = true, nearest_only = true },
   },
   {
     "lewis6991/gitsigns.nvim",
