@@ -26,6 +26,7 @@ local Lazygit = Terminal("lazygit", {
 })
 local Rails_c = Terminal("rails c")
 local FloatTerm = Terminal()
+local Visidata = Terminal("vd")
 
 return {
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
@@ -104,6 +105,13 @@ return {
         "<c-t>c",
         function()
           Rails_c.new():toggle()
+        end,
+        desc = "Open rails console",
+      },
+      {
+        "<c-t>v",
+        function()
+          Visidata.new():toggle()
         end,
         desc = "Open rails console",
       },
