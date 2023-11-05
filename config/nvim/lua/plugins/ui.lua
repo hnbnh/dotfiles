@@ -265,7 +265,7 @@ return {
     "ziontee113/icon-picker.nvim",
     cmd = "IconPickerInsert",
     keys = {
-      { "<c-o>", "<cmd>IconPickerInsert<cr>", { mode = { "i", "n" }, desc = "Pick icon" } },
+      { "<leader>ic", "<cmd>IconPickerInsert<cr>", { mode = { "i", "n" }, desc = "Pick icon" } },
     },
     config = function()
       require("icon-picker").setup({

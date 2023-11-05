@@ -39,11 +39,6 @@ return {
       },
       b = { "<cmd>Neotree buffers<cr>", "List all buffers" },
       f = { "<cmd>Telescope find_files previewer=false<cr>", "Find files" },
-      i = {
-        name = "+icon",
-        c = { "<cmd>IconPickerNormal<cr>", "Pick an icon" },
-        y = { "<cmd>IconPickerYank<cr>", "Copy an icon" },
-      },
       h = {
         name = "+harpoon",
         a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add a file" },
