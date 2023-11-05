@@ -60,3 +60,7 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsea
 
 -- Save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+
+-- Better scrolling
+map("n", "<c-d>", "<c-d>zz", { desc = "Center cursor after scrolling down" })
+map("n", "<c-u>", "<c-u>zz", { desc = "Center cursor after scrolling up" })
