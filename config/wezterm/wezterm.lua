@@ -59,12 +59,6 @@ return {
 	enable_scroll_bar = true,
 	scrollback_lines = 10000,
 	keys = {
-		-- Pane
-		{ mods = mod, key = "h", action = act.ActivatePaneDirection("Left") },
-		{ mods = mod, key = "j", action = act.ActivatePaneDirection("Down") },
-		{ mods = mod, key = "k", action = act.ActivatePaneDirection("Up") },
-		{ mods = mod, key = "l", action = act.ActivatePaneDirection("Right") },
-		{ mods = mod, key = "o", action = act.PaneSelect({ alphabet = "", mode = "Activate" }) },
 		-- Scroll
 		{ mods = mod, key = "{", action = act.ScrollByPage(1) },
 		{ mods = mod, key = "}", action = act.ScrollByPage(-1) },
@@ -75,8 +69,8 @@ return {
 		{ mods = mod, key = ">", action = act.MoveTabRelative(1) },
 		{ mods = mod, key = "<", action = act.MoveTabRelative(-1) },
 		{ mods = mod, key = "m", action = act.TogglePaneZoomState },
-		{ mods = mod, key = "n", action = act.ActivateTabRelative(1) },
-		{ mods = mod, key = "p", action = act.ActivateTabRelative(-1) },
+		{ mods = mod, key = "l", action = act.ActivateTabRelative(1) },
+		{ mods = mod, key = "h", action = act.ActivateTabRelative(-1) },
 		{
 			mods = mod,
 			key = "g",
