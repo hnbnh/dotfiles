@@ -1,7 +1,3 @@
-keybinding:
-  universal:
-    quit-alt1: ''
-    return: '<c-c>'
 git:
   paging:
     colorArg: always
