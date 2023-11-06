@@ -86,16 +86,6 @@ o.cursorline = true -- Hightlight the current line
 o.signcolumn = "auto:9"
 o.termguicolors = true
 
--- Fold
-o.foldmethod = "expr"
-o.foldexpr = "nvim_treesitter#foldexpr()"
-o.foldlevel = 99
-o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-o.foldcolumn = "1"
-o.foldlevelstart = 99
-o.foldenable = true
-o.foldnestmax = 3
-
 -- Status line
 o.laststatus = 3
 o.splitkeep = "screen"
