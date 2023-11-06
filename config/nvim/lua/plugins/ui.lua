@@ -431,6 +431,11 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
+      cmdline = {
+        format = {
+          lua = false,
+        },
+      },
       lsp = {
         progress = {
           enabled = false,
