@@ -12,23 +12,6 @@ return {
       f = { "<cmd>Telescope find_files previewer=false<cr>", "Find files" },
       n = { "<cmd>Neotree reveal<cr>", "Open neo-tree" },
       z = { "<cmd>WindowsMaximize<CR>", "Maximize window" },
-      d = {
-        name = "+dap/debug",
-        T = { "<cmd>lua require('dap').terminate()<cr>", "Terminate debugger" },
-        u = { "<cmd>lua require('dapui').toggle()<cr>", "Toggle debugger ui" },
-        e = { "<cmd>lua require('dapui').eval()<cr>", "Eval" },
-        d = {
-          "+languages",
-          { r = { "<cmd>RustDebuggables<cr>", "RustDebuggables" } },
-        },
-        r = { "<cmd>lua require('dap').run_last()<cr>", "Run last" },
-        b = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Toggle breakpoint" },
-        c = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
-        h = { "<cmd>lua require('dap').step_back()<cr>", "Step back" },
-        l = { "<cmd>lua require('dap').step_over()<cr>", "Step over" },
-        j = { "<cmd>lua require('dap').step_into()<cr>", "Step into" },
-        k = { "<cmd>lua require('dap').step_out()<cr>", "Step out" },
-      },
       s = {
         name = "+spell | +swap | +session",
         t = { utils.toggle_spell, "Toggle spell check" },

@@ -3,6 +3,19 @@ local sign = vim.fn.sign_define
 return {
   {
     "mfussenegger/nvim-dap",
+    keys = {
+      { "<leader>dT", "<cmd>lua require('dap').terminate()<cr>", "Terminate debugger" },
+      { "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", "Debugger UI" },
+      { "<leader>de", "<cmd>lua require('dapui').eval()<cr>", "Eval" },
+      { "<leader>ddr", "<cmd>RustDebuggables<cr>", "RustDebuggables" },
+      { "<leader>dr", "<cmd>lua require('dap').run_last()<cr>", "Run last" },
+      { "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Toggle breakpoint" },
+      { "<leader>dc", "<cmd>lua require('dap').continue()<cr>", "Continue" },
+      { "<leader>dh", "<cmd>lua require('dap').step_back()<cr>", "Step back" },
+      { "<leader>dl", "<cmd>lua require('dap').step_over()<cr>", "Step over" },
+      { "<leader>dj", "<cmd>lua require('dap').step_into()<cr>", "Step into" },
+      { "<leader>dk", "<cmd>lua require('dap').step_out()<cr>", "Step out" },
+    },
     dependencies = {
       {
         "rcarriga/nvim-dap-ui",
