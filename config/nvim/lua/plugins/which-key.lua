@@ -8,27 +8,6 @@ return {
     wk.register({
       ["/"] = { "<cmd>Telescope live_grep_args<cr>", "Live grep" },
       q = { "<cmd>q<cr>", "Quit" },
-      g = {
-        name = "+git",
-        g = { "<cmd>Neotree git_status<cr>", "Git" },
-        d = {
-          function()
-            local view = require("diffview.lib").get_current_view()
-            if view then
-              vim.g.autoformat_enabled = true
-              vim.cmd.DiffviewClose()
-            else
-              vim.g.autoformat_enabled = false
-              vim.cmd.DiffviewOpen()
-            end
-          end,
-          "Diffview",
-        },
-        p = { "<cmd>Git pull<cr>", "Git pull" },
-        P = { "<cmd>Git push<cr>", "Git push" },
-        l = { "<cmd>Git blame<cr>", "Git blame" },
-        t = { "<cmd>Telescope git_status<cr>", "Git status" },
-      },
       b = { "<cmd>Neotree buffers<cr>", "List all buffers" },
       f = { "<cmd>Telescope find_files previewer=false<cr>", "Find files" },
       h = {
@@ -79,7 +58,6 @@ return {
 
     wk.register({
       r = { name = "+refactor", p = { "<cmd>lua require('refactoring').select_refactor()<cr>", "Refactor" } },
-      g = { name = "+git", b = { ":GBrowse!<cr>", "Git browse" } },
     }, { mode = "v", prefix = "<leader>" })
 
     wk.register({

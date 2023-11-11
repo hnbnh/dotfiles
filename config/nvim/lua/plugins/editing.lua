@@ -15,8 +15,6 @@ return {
   { "tpope/vim-repeat", event = "VeryLazy" },
   { "NvChad/nvim-colorizer.lua", event = "VeryLazy", config = true },
   { "nacro90/numb.nvim", event = "VeryLazy", config = true },
-  { "tpope/vim-fugitive", event = "VeryLazy" },
-  { "tpope/vim-rhubarb", event = "VeryLazy" },
   { "ThePrimeagen/refactoring.nvim", config = true },
   {
     "gbprod/yanky.nvim",
