@@ -8,14 +8,6 @@ return {
     wk.register({
       ["/"] = { "<cmd>Telescope live_grep_args<cr>", "Live grep" },
       q = { "<cmd>q<cr>", "Quit" },
-      t = {
-        name = "+test",
-        d = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Debug nearest" },
-        f = { [[<cmd>lua require('neotest').run.run(vim.fn.expand("%"))<cr>]], "Test current file" },
-        s = { '<cmd>lua require("neotest").summary.toggle()<CR>', "Neotest: Toggle test summary" },
-        t = { "<cmd>lua require('neotest').run.run()<cr>", "Test nearest" },
-        o = { "<cmd>Neotest output-panel<cr>", "Open test file" },
-      },
       g = {
         name = "+git",
         g = { "<cmd>Neotree git_status<cr>", "Git" },
