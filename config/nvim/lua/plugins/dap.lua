@@ -4,17 +4,17 @@ return {
   {
     "mfussenegger/nvim-dap",
     keys = {
-      { "<leader>dT", "<cmd>lua require('dap').terminate()<cr>", "Terminate debugger" },
-      { "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", "Debugger UI" },
-      { "<leader>de", "<cmd>lua require('dapui').eval()<cr>", "Eval" },
-      { "<leader>ddr", "<cmd>RustDebuggables<cr>", "RustDebuggables" },
-      { "<leader>dr", "<cmd>lua require('dap').run_last()<cr>", "Run last" },
-      { "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Toggle breakpoint" },
-      { "<leader>dc", "<cmd>lua require('dap').continue()<cr>", "Continue" },
-      { "<leader>dh", "<cmd>lua require('dap').step_back()<cr>", "Step back" },
-      { "<leader>dl", "<cmd>lua require('dap').step_over()<cr>", "Step over" },
-      { "<leader>dj", "<cmd>lua require('dap').step_into()<cr>", "Step into" },
-      { "<leader>dk", "<cmd>lua require('dap').step_out()<cr>", "Step out" },
+      { "<leader>dT", "<cmd>lua require('dap').terminate()<cr>", desc = "Terminate debugger" },
+      { "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", desc = "Debugger UI" },
+      { "<leader>de", "<cmd>lua require('dapui').eval()<cr>", desc = "Eval" },
+      { "<leader>ddr", "<cmd>RustDebuggables<cr>", desc = "RustDebuggables" },
+      { "<leader>dr", "<cmd>lua require('dap').run_last()<cr>", desc = "Run last" },
+      { "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>", desc = "Toggle breakpoint" },
+      { "<leader>dc", "<cmd>lua require('dap').continue()<cr>", desc = "Continue" },
+      { "<leader>dh", "<cmd>lua require('dap').step_back()<cr>", desc = "Step back" },
+      { "<leader>dl", "<cmd>lua require('dap').step_over()<cr>", desc = "Step over" },
+      { "<leader>dj", "<cmd>lua require('dap').step_into()<cr>", desc = "Step into" },
+      { "<leader>dk", "<cmd>lua require('dap').step_out()<cr>", desc = "Step out" },
     },
     dependencies = {
       {

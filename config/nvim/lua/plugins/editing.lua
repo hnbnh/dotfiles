@@ -9,13 +9,11 @@ return {
       })
     end,
   },
-  { "mizlan/iswap.nvim", cmd = "ISwap" },
   { "godlygeek/tabular", cmd = "Tabularize" },
   { "kylechui/nvim-surround", event = "VeryLazy", config = true },
   { "tpope/vim-repeat", event = "VeryLazy" },
   { "NvChad/nvim-colorizer.lua", event = "VeryLazy", config = true },
   { "nacro90/numb.nvim", event = "VeryLazy", config = true },
-  { "ThePrimeagen/refactoring.nvim", config = true },
   {
     "gbprod/yanky.nvim",
     event = "VeryLazy",
@@ -208,6 +206,5 @@ return {
   {
     "mg979/vim-visual-multi",
     event = "BufReadPost",
-    config = true,
   },
 }

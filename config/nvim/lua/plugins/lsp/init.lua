@@ -11,10 +11,11 @@ return {
         function()
           return ":IncRename " .. vim.fn.expand("<cword>")
         end,
+        desc = "Rename",
         expr = true,
       },
-      { "<leader>lc", vim.lsp.buf.code_action, "Code action" },
-      { "<leader>lo", vim.diagnostic.open_float, "Open float" },
+      { "<leader>lc", vim.lsp.buf.code_action, desc = "Code action" },
+      { "<leader>lo", vim.diagnostic.open_float, desc = "Open float" },
     },
     dependencies = {
       "cmp-nvim-lsp",

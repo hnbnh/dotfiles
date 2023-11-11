@@ -102,5 +102,4 @@ return {
       })
     end,
   },
-  { "cshuaimin/ssr.nvim" },
 }

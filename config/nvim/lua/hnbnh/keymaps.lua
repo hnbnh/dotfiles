@@ -67,3 +67,10 @@ end, { desc = "Save file" })
 -- Better scrolling
 map("n", "<c-d>", "<c-d>zz", { desc = "Center cursor after scrolling down" })
 map("n", "<c-u>", "<c-u>zz", { desc = "Center cursor after scrolling up" })
+
+-- Quit
+map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
+
+-- Split
+map("n", "<leader>sl", "<cmd>vsplit<cr>", { desc = "Vsplit" })
+map("n", "<leader>sj", "<cmd>split<cr>", { desc = "Split" })

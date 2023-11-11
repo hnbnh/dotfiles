@@ -10,10 +10,6 @@ return {
     return merged
   end,
 
-  toggle_spell = function()
-    vim.opt.spell = not (vim.opt.spell:get())
-  end,
-
   fg = function(name)
     local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name })
     local fg = hl and (hl.fg or hl.foreground)

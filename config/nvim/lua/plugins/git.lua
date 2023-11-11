@@ -23,9 +23,18 @@ return {
     "lewis6991/gitsigns.nvim",
     event = "BufRead",
     keys = {
-      { "<leader>gx", ":GBrowse!<cr>", "Git browse", mode = { "n", "v" } },
-      { "<leader>gg", "<cmd>Neotree git_status<cr>", "Neotree git status" },
-      { "<leader>gl", "<cmd>Git blame<cr>", "Git blame" },
+      {
+        "<leader>gy",
+        function()
+          return ":GBrowse!<cr>"
+        end,
+        desc = "Copy GitHub URL to clipboard",
+        silent = true,
+        expr = true,
+        mode = { "n", "v" },
+      },
+      { "<leader>gg", "<cmd>Neotree git_status<cr>" },
+      { "<leader>gl", "<cmd>Git blame<cr>" },
       {
         "<leader>gd",
         function()
@@ -38,7 +47,7 @@ return {
             vim.cmd.DiffviewOpen()
           end
         end,
-        "Diffview",
+        desc = "Diffview",
       },
     },
     dependencies = {

@@ -1,6 +1,12 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    keys = {
+      { "<leader>/", "<cmd>Telescope live_grep_args<cr>", desc = "Live grep" },
+      { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "All buffers" },
+      { "<leader>f", "<cmd>Telescope find_files previewer=false<cr>", desc = "Find files" },
+      { "<leader>p", "<cmd>Telescope pickers<cr>", desc = "Picker history" },
+    },
     dependencies = {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "nvim-telescope/telescope-ui-select.nvim" },

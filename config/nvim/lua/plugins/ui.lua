@@ -95,6 +95,10 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     cmd = "Neotree",
+
+    keys = {
+      { "<leader>n", "<cmd>Neotree reveal<cr>", desc = "Neotree" },
+    },
     config = function()
       require("neo-tree").setup({
         buffers = {
@@ -200,21 +204,9 @@ return {
     opts = { calm_down = true, nearest_only = true },
   },
   {
-    "ziontee113/icon-picker.nvim",
-    cmd = "IconPickerInsert",
-    keys = {
-      { "<leader>ic", "<cmd>IconPickerInsert<cr>", { mode = { "i", "n" }, desc = "Pick icon" } },
-    },
-    config = function()
-      require("icon-picker").setup({
-        disable_legacy_commands = true,
-      })
-    end,
-  },
-  {
     "nvim-pack/nvim-spectre",
     keys = {
-      { "<c-f>", "<cmd>lua require('spectre').open()<cr>", "Replace with spectre" },
+      { "<c-f>", "<cmd>lua require('spectre').open()<cr>", desc = "Replace with spectre" },
     },
   },
   { "stevearc/dressing.nvim", event = "VeryLazy", config = true },
