@@ -145,11 +145,6 @@ return {
     event = "InsertEnter",
     opts = {},
   },
-  {
-    "smjonas/inc-rename.nvim",
-    cmd = "IncRename",
-    config = true,
-  },
   { "echasnovski/mini.trailspace", event = "BufReadPost", config = true },
   {
     "johmsalas/text-case.nvim",

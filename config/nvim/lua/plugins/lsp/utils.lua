@@ -40,13 +40,6 @@ return {
         R = { "<cmd>Trouble lsp_references<cr>", "Trouble references" },
         s = { vim.lsp.buf.signature_help, "Signature help" },
       },
-      ["<leader>"] = {
-        l = {
-          r = { ":IncRename " .. vim.fn.expand("<cword>"), "Rename" },
-          c = { vim.lsp.buf.code_action, "Code action" },
-          o = { vim.diagnostic.open_float, "Open float" },
-        },
-      },
       K = {
         function()
           local winid = require("ufo").peekFoldedLinesUnderCursor()

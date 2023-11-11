@@ -5,8 +5,24 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
+    keys = {
+      {
+        "<leader>lr",
+        function()
+          return ":IncRename " .. vim.fn.expand("<cword>")
+        end,
+        expr = true,
+      },
+      { "<leader>lc", vim.lsp.buf.code_action, "Code action" },
+      { "<leader>lo", vim.diagnostic.open_float, "Open float" },
+    },
     dependencies = {
       "cmp-nvim-lsp",
+      {
+        "smjonas/inc-rename.nvim",
+        cmd = "IncRename",
+        config = true,
+      },
       {
         "williamboman/mason.nvim",
         opts = { ui = { border = "rounded" } },
