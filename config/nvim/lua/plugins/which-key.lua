@@ -10,13 +10,6 @@ return {
       q = { "<cmd>q<cr>", "Quit" },
       b = { "<cmd>Neotree buffers<cr>", "List all buffers" },
       f = { "<cmd>Telescope find_files previewer=false<cr>", "Find files" },
-      h = {
-        name = "+harpoon",
-        a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add a file" },
-        t = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Toggle" },
-        n = { "<cmd>lua require('harpoon.ui').goto_next()<cr>", "Next" },
-        p = { "<cmd>lua require('harpoon.ui').goto_previous()<cr>", "Previous" },
-      },
       n = { "<cmd>Neotree reveal<cr>", "Open neo-tree" },
       z = { "<cmd>WindowsMaximize<CR>", "Maximize window" },
       d = {
