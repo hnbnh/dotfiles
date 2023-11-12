@@ -5,7 +5,7 @@ return {
       { "<leader>/", "<cmd>Telescope live_grep_args<cr>", desc = "Live grep" },
       { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "All buffers" },
       { "<leader>f", "<cmd>Telescope find_files previewer=false<cr>", desc = "Find files" },
-      { "<leader>p", "<cmd>Telescope pickers<cr>", desc = "Picker history" },
+      { "<leader>p", "<cmd>Telescope yank_history yank_history<cr>", desc = "Paste from Yanky" },
     },
     dependencies = {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -81,6 +81,7 @@ return {
       telescope.load_extension("fzf")
       telescope.load_extension("ui-select")
       telescope.load_extension("live_grep_args")
+      telescope.load_extension("yank_history")
     end,
   },
 }
