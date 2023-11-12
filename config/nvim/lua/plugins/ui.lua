@@ -1,13 +1,5 @@
 local utils = require("hnbnh.utils")
-
-local icons = {
-  diagnostics = {
-    error = " ",
-    warn = " ",
-    hint = " ",
-    info = " ",
-  },
-}
+local constants = require("hnbnh.constants")
 
 return {
   {
@@ -41,10 +33,10 @@ return {
             {
               "diagnostics",
               symbols = {
-                error = icons.diagnostics.error,
-                warn = icons.diagnostics.warn,
-                hint = icons.diagnostics.hint,
-                info = icons.diagnostics.info,
+                error = constants.icons.diagnostics.Error .. " ",
+                warn = constants.icons.diagnostics.Warn .. " ",
+                hint = constants.icons.diagnostics.Hint .. " ",
+                info = constants.icons.diagnostics.Info .. " ",
               },
             },
             {

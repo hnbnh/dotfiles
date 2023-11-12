@@ -1,5 +1,7 @@
 local utils = require("hnbnh.utils")
 local lsps = require("plugins.lsp.servers")
+local lsp_utils = require("plugins.lsp.utils")
+local keymaps = require("plugins.lsp.keymaps")
 
 return {
   {
@@ -14,7 +16,7 @@ return {
         desc = "Rename",
         expr = true,
       },
-      { "<leader>lc", vim.lsp.buf.code_action, desc = "Code action" },
+      { "<leader>lc", vim.lsp.buf.code_action, desc = "Code action", mode = { "n", "v" } },
       { "<leader>lo", vim.diagnostic.open_float, desc = "Open float" },
     },
     dependencies = {
@@ -97,6 +99,24 @@ return {
           },
         },
       },
+      diagnostics = {
+        virtual_text = false,
+        -- For lsp_lines.nvim
+        virtual_lines = { only_current_line = true },
+
+        update_in_insert = true,
+        underline = false,
+        severity_sort = true,
+        float = {
+          focusable = false,
+          style = "minimal",
+          border = "rounded",
+          source = "always",
+          header = "",
+          prefix = "",
+          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+        },
+      },
       format = {
         timeout_ms = 5000,
       },
@@ -104,12 +124,11 @@ return {
     },
     config = function(_, opts)
       local lspconfig = require("lspconfig")
-      local lsp_utils = require("plugins.lsp.utils")
 
       local default_opts = {
-        on_attach = function(client, bufnr)
-          lsp_utils.lsp_keymaps(bufnr)
-          lsp_utils.lsp_highlight_document(client, bufnr)
+        on_attach = function(client, buffer)
+          keymaps.on_attach(buffer)
+          lsp_utils.highlight_document(client, buffer)
         end,
         capabilities = vim.tbl_deep_extend("force", require("cmp_nvim_lsp").default_capabilities(), opts.capabilities),
       }
@@ -136,7 +155,7 @@ return {
 
       lsp_utils.update_signs()
       lsp_utils.update_handlers()
-      lsp_utils.update_diagnostic_config()
+      vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
     end,
   },
   {
