@@ -1,10 +1,37 @@
+local databases_path = vim.fn.stdpath("state") .. "/databases"
+
+local function append_to_history(prompt_buffer)
+  local action_state = require("telescope.actions.state")
+  action_state
+    .get_current_history()
+    :append(action_state.get_current_line(), action_state.get_current_picker(prompt_buffer))
+end
+
+local function attach_mappings(prompt_buffer)
+  require("telescope.actions").cycle_history_prev(prompt_buffer)
+
+  return true
+end
+
 return {
   {
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "<leader>/", "<cmd>Telescope live_grep_args<cr>", desc = "Live grep" },
+      {
+        "<leader>/",
+        function()
+          require("telescope").extensions.live_grep_args.live_grep_args({ attach_mappings = attach_mappings })
+        end,
+        desc = "Live grep",
+      },
       { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "All buffers" },
-      { "<leader>f", "<cmd>Telescope find_files previewer=false<cr>", desc = "Find files" },
+      {
+        "<leader>f",
+        function()
+          require("telescope.builtin").find_files({ attach_mappings = attach_mappings })
+        end,
+        desc = "Find files",
+      },
       { "<leader>p", "<cmd>Telescope yank_history yank_history<cr>", desc = "Paste from Yanky" },
     },
     dependencies = {
@@ -14,6 +41,12 @@ return {
       {
         "prochri/telescope-all-recent.nvim",
         config = true,
+      },
+      {
+        "nvim-telescope/telescope-smart-history.nvim",
+        build = function()
+          os.execute("mkdir -p " .. databases_path)
+        end,
       },
     },
     cmd = "Telescope",
@@ -43,13 +76,23 @@ return {
               ["<Tab>"] = nil,
               ["<C-d>"] = "delete_buffer",
               ["<C-t>"] = trouble.open_with_trouble,
+              ["<C-n>"] = actions.cycle_history_next,
+              ["<C-p>"] = actions.cycle_history_prev,
             },
             n = {
               ["<C-t>"] = trouble.open_with_trouble,
+              ["<esc>"] = function(prompt_buffer)
+                append_to_history(prompt_buffer)
+                actions.close(prompt_buffer)
+              end,
             },
           },
           cache_picker = {
             num_pickers = 10,
+          },
+          history = {
+            path = databases_path .. "/telescope_history.sqlite3",
+            limit = 100,
           },
         },
         extensions = {
@@ -82,6 +125,7 @@ return {
       telescope.load_extension("ui-select")
       telescope.load_extension("live_grep_args")
       telescope.load_extension("yank_history")
+      telescope.load_extension("smart_history")
     end,
   },
 }
