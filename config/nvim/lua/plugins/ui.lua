@@ -1,6 +1,21 @@
 local utils = require("hnbnh.utils")
 local constants = require("hnbnh.constants")
 
+local function activate_hlslen(direction)
+  local cmd = "normal! " .. vim.v.count1 .. direction .. "zz"
+  ---@diagnostic disable-next-line: param-type-mismatch
+  local status, msg = pcall(vim.cmd, cmd)
+
+  if not status then
+    local start_idx, _ = string.find(msg, "E486", 1, true)
+    ---@diagnostic disable-next-line: param-type-mismatch
+    local msg_part = string.sub(msg, start_idx)
+    vim.api.nvim_err_writeln(msg_part)
+    return
+  end
+  require("hlslens").start()
+end
+
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -175,23 +190,10 @@ return {
   {
     "kevinhwang91/nvim-hlslens",
     event = "BufRead",
+    -- stylua: ignore
     keys = {
-      {
-        "n",
-        function()
-          vim.fn.execute("normal! " .. vim.v.count1 .. "n" .. "zz")
-          require("hlslens").start()
-        end,
-        desc = "Next match",
-      },
-      {
-        "N",
-        function()
-          vim.fn.execute("normal! " .. vim.v.count1 .. "N" .. "zz")
-          require("hlslens").start()
-        end,
-        desc = "Previous match",
-      },
+      { "n", function() activate_hlslen("n") end, desc = "Next match" },
+      { "N", function() activate_hlslen("N") end, desc = "Previous match" },
     },
     opts = { calm_down = true, nearest_only = true },
   },
