@@ -7,12 +7,6 @@ local function append_to_history(prompt_buffer)
     :append(action_state.get_current_line(), action_state.get_current_picker(prompt_buffer))
 end
 
-local function attach_mappings(prompt_buffer)
-  require("telescope.actions").cycle_history_prev(prompt_buffer)
-
-  return true
-end
-
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -20,7 +14,7 @@ return {
       {
         "<leader>/",
         function()
-          require("telescope").extensions.live_grep_args.live_grep_args({ attach_mappings = attach_mappings })
+          require("telescope").extensions.live_grep_args.live_grep_args()
         end,
         desc = "Live grep",
       },
@@ -28,7 +22,7 @@ return {
       {
         "<leader>f",
         function()
-          require("telescope.builtin").find_files({ attach_mappings = attach_mappings })
+          require("telescope.builtin").find_files()
         end,
         desc = "Find files",
       },
