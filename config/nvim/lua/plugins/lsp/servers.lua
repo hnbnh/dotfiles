@@ -66,4 +66,5 @@ return {
       formatting = false,
     },
   },
+  typos_lsp = {},
 }
