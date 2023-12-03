@@ -47,6 +47,7 @@ return {
   },
   {
     "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
     keys = {
       { "<leader>cc", "<cmd>ChatGPT<cr>", desc = "ChatGPT", mode = { "n", "v" } },
       { "<leader>ce", "<cmd>ChatGPTEditWithInstruction<cr>", desc = "Edit with instruction", mode = { "n", "v" } },
