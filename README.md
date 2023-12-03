@@ -10,13 +10,20 @@ sudo ./install.sh
 
 ## TODO
 
+- [ ] All
+  - [ ] Add a cron job to send a notification of `Hydrate 💧`
+    - [ ] Linux
+      ```bash
+      */20 * * * * notify-send "Health notification" "Hydrate 💧"
+      ```
+    - [ ] macOS
+      ```bash
+      */20 * * * * osascript -e 'display notification "Hydrate 💧" with title "Health notification"'
+      ```
 - [ ] Support Fedora
 - [ ] Support Arch (EndeavourOS)
 - [ ] Support macOS
-  - [ ] Add flake.lock
   - [ ] Configuration
-    - [ ] yabai, skhd
-    - [ ] sketchybar
     - Built-in
       - [ ] Disable `Desktop & Dock` -> `Mission Control` -> `Automatically rearrange Spaces based on most recent use`
       - [ ] Enable `Accessibility` -> `Display` -> `Reduce motion`
