@@ -53,10 +53,6 @@ return {
           enable = true, -- false will disable the whole extension
           disable = {}, -- list of language that will be disabled
         },
-        context_commentstring = {
-          enable = true,
-          enable_autocmd = false,
-        },
         textobjects = {
           select = {
             enable = true,
