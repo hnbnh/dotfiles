@@ -33,6 +33,7 @@
       - asciinema
       - bat
       - brightnessctl
+      - cronie
       - diskonaut
       - djvulibre # DjVu utilities
       - fd-find
