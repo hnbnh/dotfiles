@@ -16,7 +16,6 @@ return {
             DataViewerColumnCyan = { fg = colors.sky },
 
             SatelliteSearch = { fg = colors.overlay0, bg = colors.peach },
-            SpellBad = { standout = true },
 
             TelescopeMatching = { fg = colors.flamingo },
             TelescopePreviewBorder = { bg = colors.mantle, fg = colors.mantle },
