@@ -1,4 +1,5 @@
 - include_tasks: repos.yml
+- include_tasks: corp.yml
 
 - name: Install the 'Development tools' package group
   become: true
@@ -71,6 +72,7 @@
       - swappy
       - swaylock
       - waybar
+      - wezterm
       - wine
       - xournalpp
       - zathura
