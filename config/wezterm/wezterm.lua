@@ -37,20 +37,43 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 end)
 
 return {
-	font_size = 12.0,
-	font = wezterm.font({ family = "Maple Mono" }),
-	line_height = 1.2,
+	font_size = 12,
+	font = wezterm.font({ family = "Fira Code" }),
+	line_height = 1.5,
+	bold_brightens_ansi_colors = true,
+	font_rules = {
+		{
+			intensity = "Bold",
+			italic = true,
+			font = wezterm.font({ family = "Maple Mono", weight = "Bold", style = "Italic" }),
+		},
+		{
+			italic = true,
+			intensity = "Half",
+			font = wezterm.font({ family = "Maple Mono", weight = "DemiBold", style = "Italic" }),
+		},
+		{
+			italic = true,
+			intensity = "Normal",
+			font = wezterm.font({ family = "Maple Mono", style = "Italic" }),
+		},
+	},
+
 	color_scheme = "Catppuccin Macchiato",
 	tab_max_width = 48,
 	use_fancy_tab_bar = false,
 	tab_bar_at_bottom = true,
 	window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
-
+	front_end = "WebGpu",
 	webgpu_power_preference = "HighPerformance",
 	animation_fps = 1,
 	cursor_blink_ease_in = "Constant",
 	cursor_blink_ease_out = "Constant",
 	default_cursor_style = "BlinkingBar",
+
+	underline_thickness = 3,
+	cursor_thickness = 4,
+	underline_position = -6,
 
 	inactive_pane_hsb = {
 		saturation = 0.6,
