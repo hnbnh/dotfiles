@@ -19,10 +19,10 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	end
 
 	local pane = tab.active_pane
-	local cwd = pane.current_working_dir
+	local cwd = pane.current_working_dir.path
 	local process_name = pane.foreground_process_name
 
-	local title = utils.shorten_path(string.sub(cwd, 8))
+	local title = utils.shorten_path(cwd)
 	local icon = icons.get(utils.basename(process_name))
 
 	return {
