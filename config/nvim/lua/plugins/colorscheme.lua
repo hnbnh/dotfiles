@@ -15,6 +15,8 @@ return {
             DataViewerColumnViolet = { fg = colors.mauve },
             DataViewerColumnCyan = { fg = colors.sky },
 
+            DropBarKindFolder = { link = "Comment" },
+
             SatelliteSearch = { fg = colors.overlay0, bg = colors.peach },
 
             TelescopeMatching = { fg = colors.flamingo },
