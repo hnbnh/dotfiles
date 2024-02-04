@@ -18,4 +18,12 @@ return {
       require("telescope").load_extension("harpoon")
     end,
   },
+  {
+    "stevearc/oil.nvim",
+    cmd = "Oil",
+    keys = {
+      { "<leader>o", "<cmd>Oil<cr>", desc = "Open oil" },
+    },
+    config = true,
+  },
 }

@@ -457,4 +457,9 @@ return {
       end,
     },
   },
+  {
+    "j-hui/fidget.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
 }
