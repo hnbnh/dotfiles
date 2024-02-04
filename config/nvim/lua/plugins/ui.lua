@@ -71,7 +71,7 @@ return {
                 right = 0,
               },
             },
-            { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+            { "filename", path = 0, symbols = { modified = "  ", readonly = "", unnamed = "" } },
           },
           lualine_x = {
             {
@@ -87,6 +87,16 @@ return {
           lualine_y = {
             { "progress", separator = " ", padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
+            function()
+              local clients = vim.lsp.get_clients()
+              local client_names = {}
+
+              for _, client in pairs(clients) do
+                table.insert(client_names, constants.icons.lsps[client.name] or "?")
+              end
+
+              return "[ " .. table.concat(client_names, " ") .. " ]"
+            end,
           },
           lualine_z = {
             function()
@@ -141,6 +151,7 @@ return {
         },
         window = {
           mappings = {
+            ["<cr>"] = "open_with_window_picker",
             ["l"] = "open",
             ["L"] = "focus_preview",
             ["h"] = "close_node",
@@ -331,16 +342,19 @@ return {
   },
   {
     "Bekaboo/dropbar.nvim",
-    event = "BufReadPre",
+    -- stylua: ignore
+    keys = {
+      { "<leader>aa", function() require("dropbar.api").pick() end, desc = "Toggle dropbar" },
+    },
+    lazy = false,
     config = true,
     opts = {
-      sources = {
-        path = {
-          relative_to = function()
-            return vim.fn.expand("%:p:h")
-          end,
-        },
+      general = { update_internal = 100 },
+      icons = {
+        ui = { bar = { separator = " " .. constants.icons.arrows.right .. " " } },
+        kinds = { symbols = { Folder = "" } },
       },
+      menu = { win_configs = { border = "shadow" } },
     },
   },
   {
