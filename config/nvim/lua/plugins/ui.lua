@@ -109,58 +109,6 @@ return {
     end,
   },
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    cmd = "Neotree",
-
-    keys = {
-      { "<leader>n", "<cmd>Neotree reveal<cr>", desc = "Neotree" },
-    },
-    config = function()
-      require("neo-tree").setup({
-        buffers = {
-          show_unloaded = true,
-          window = {
-            mappings = {
-              ["d"] = "buffer_delete",
-            },
-          },
-        },
-        filesystem = {
-          use_libuv_file_watcher = true,
-          filtered_items = {
-            hide_dotfiles = false,
-          },
-          window = {
-            mappings = {
-              ["Y"] = "yank_path",
-              ["<space>"] = "none",
-              ["s"] = "none",
-            },
-            fuzzy_finder_mappings = {
-              ["<C-j>"] = "move_cursor_down",
-              ["<C-k>"] = "move_cursor_up",
-            },
-          },
-          commands = {
-            yank_path = function(state)
-              vim.fn.setreg("+", state.tree:get_node().path)
-              vim.notify("Yanked path to clipboard")
-            end,
-          },
-        },
-        window = {
-          mappings = {
-            ["<cr>"] = "open_with_window_picker",
-            ["l"] = "open",
-            ["L"] = "focus_preview",
-            ["h"] = "close_node",
-          },
-        },
-      })
-    end,
-  },
-  {
     "nvim-zh/colorful-winsep.nvim",
     config = true,
     opts = {
@@ -304,25 +252,6 @@ return {
       })
     end,
     opts = {},
-  },
-  {
-    "sindrets/diffview.nvim",
-    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
-    config = function()
-      local actions = require("diffview.actions")
-      require("diffview").setup({
-        keymaps = {
-          view = {
-            { "n", "<leader>ch", actions.conflict_choose("ours"), { desc = "Choose the left window" } },
-            { "n", "<leader>cm", actions.conflict_choose("all"), { desc = "Choose the middle window" } },
-            { "n", "<leader>cl", actions.conflict_choose("theirs"), { desc = "Choose the right window" } },
-            { "n", "<leader>cH", actions.conflict_choose_all("ours"), { desc = "Choose the left window" } },
-            { "n", "<leader>cM", actions.conflict_choose_all("all"), { desc = "Choose the middle window" } },
-            { "n", "<leader>cL", actions.conflict_choose_all("theirs"), { desc = "Choose the right window" } },
-          },
-        },
-      })
-    end,
   },
   {
     "rcarriga/nvim-notify",

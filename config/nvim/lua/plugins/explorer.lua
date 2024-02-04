@@ -26,4 +26,56 @@ return {
     },
     config = true,
   },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    cmd = "Neotree",
+
+    keys = {
+      { "<leader>n", "<cmd>Neotree reveal<cr>", desc = "Neotree" },
+    },
+    config = function()
+      require("neo-tree").setup({
+        buffers = {
+          show_unloaded = true,
+          window = {
+            mappings = {
+              ["d"] = "buffer_delete",
+            },
+          },
+        },
+        filesystem = {
+          use_libuv_file_watcher = true,
+          filtered_items = {
+            hide_dotfiles = false,
+          },
+          window = {
+            mappings = {
+              ["Y"] = "yank_path",
+              ["<space>"] = "none",
+              ["s"] = "none",
+            },
+            fuzzy_finder_mappings = {
+              ["<C-j>"] = "move_cursor_down",
+              ["<C-k>"] = "move_cursor_up",
+            },
+          },
+          commands = {
+            yank_path = function(state)
+              vim.fn.setreg("+", state.tree:get_node().path)
+              vim.notify("Yanked path to clipboard")
+            end,
+          },
+        },
+        window = {
+          mappings = {
+            ["<cr>"] = "open_with_window_picker",
+            ["l"] = "open",
+            ["L"] = "focus_preview",
+            ["h"] = "close_node",
+          },
+        },
+      })
+    end,
+  },
 }
