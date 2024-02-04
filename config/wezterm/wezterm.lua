@@ -36,10 +36,26 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	}
 end)
 
+wezterm.on("format-window-title", function(_, _, tabs)
+	for _, tab in ipairs(tabs) do
+		for _, pane in ipairs(tab.panes) do
+			local process_name = utils.basename(pane.foreground_process_name)
+
+			if process_name == "nvim" then
+				return "💻 Neovim"
+			elseif process_name == "lazygit" then
+				return "🚀 Lazygit"
+			else
+				return "👀 Log"
+			end
+		end
+	end
+end)
+
 return {
 	font_size = 12,
-	font = wezterm.font({ family = "Fira Code" }),
-	line_height = 1.5,
+	font = wezterm.font({ family = "JetBrains Mono", weight = "DemiBold" }),
+	line_height = 1.3,
 	bold_brightens_ansi_colors = true,
 	font_rules = {
 		{
@@ -67,9 +83,6 @@ return {
 	front_end = "WebGpu",
 	webgpu_power_preference = "HighPerformance",
 	animation_fps = 1,
-	cursor_blink_ease_in = "Constant",
-	cursor_blink_ease_out = "Constant",
-	default_cursor_style = "BlinkingBar",
 
 	underline_thickness = 3,
 	cursor_thickness = 4,
