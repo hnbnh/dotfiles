@@ -53,7 +53,11 @@ return {
       },
     },
   },
-  eslint = {},
+  eslint = {
+    settings = {
+      workingDirectories = { mode = "auto" },
+    },
+  },
   gopls = {},
   prismals = {},
   bashls = {},
