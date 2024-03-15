@@ -1,0 +1,59 @@
+// v0.126.2
+{
+  "theme": "One Dark",
+  "vim_mode": true,
+  "ui_font_size": 15,
+  "buffer_font_size": 14,
+  "relative_line_numbers": true,
+  "formatter": "auto",
+  "auto_update": false,
+  "assistant": {
+    "provider": {
+      "type": "openai",
+      "api_url": "http://localhost:11434/v1"
+    }
+  },
+  "copilot": {
+    "disabled_globs": [".env"]
+  },
+  "terminal": {
+    "font_family": "JetBrainsMono Nerd Font"
+  },
+  "languages": {
+    "JavaScript": {
+      "formatter": {
+        // Work around for https://github.com/zed-industries/zed/issues/8992
+        "external": {
+          "command": "cat << EOF",
+          "arguments": []
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "TypeScript": {
+      "formatter": {
+        // Work around for https://github.com/zed-industries/zed/issues/8992
+        "external": {
+          "command": "cat << EOF",
+          "arguments": []
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "Ruby": {
+      "tab_size": 2
+    }
+  },
+  "lsp": {
+    "solargraph": {
+      "initialization_options": {
+        "diagnostics": true,
+        "formatting": true
+      }
+    }
+  }
+}

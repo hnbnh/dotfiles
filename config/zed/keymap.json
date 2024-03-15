@@ -1,0 +1,105 @@
+[
+  {
+    "bindings": {
+      "ctrl-k": "menu::SelectPrev",
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-p": ["editor::SelectPrevious", { "replace_newest": false }],
+      "ctrl-n": ["editor::SelectNext", { "replace_newest": false }],
+      "ctrl-up": "editor::AddSelectionAbove",
+      "ctrl-down": "editor::AddSelectionBelow",
+      "ctrl-shift-n": "editor::SelectAllMatches",
+      "ctrl-shift-m": "workspace::ToggleZoom"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-k": "editor::MoveUp",
+      "ctrl-j": "editor::MoveDown"
+    }
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "ctrl-k": "editor::ContextMenuPrev",
+      "ctrl-j": "editor::ContextMenuNext"
+    }
+  },
+  {
+    "context": "Editor && showing_completions",
+    "bindings": {
+      "ctrl-y": "editor::ConfirmCompletion"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "ctrl-l": "project_panel::ToggleFocus",
+      "a": "project_panel::NewFile",
+      "x": "project_panel::Cut",
+      "c": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      "r": "project_panel::Rename",
+      "d": "project_panel::Delete"
+    }
+  },
+  {
+    "context": "ConversationEditor > Editor",
+    "bindings": {
+      "ctrl-enter": "assistant::Assist",
+      "space q": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-k": "terminal_panel::ToggleFocus"
+    }
+  },
+  // ==============
+  //
+  //      Vim
+  //
+  // ==============
+  {
+    "context": "Editor && vim_mode == normal && vim_operator == none && !VimWaiting && !(showing_completions || showing_code_actions)",
+    "bindings": {
+      "space f": "file_finder::Toggle",
+      "space n": "project_panel::ToggleFocus",
+      "space q": "pane::CloseAllItems",
+      "space s j": "pane::SplitDown",
+      "space s l": "pane::SplitRight",
+      "space p": "projects::OpenRecent",
+      "space g g": ["task::Spawn", { "task_name": "Lazygit" }],
+      "space /": ["workspace::SendKeystrokes", "cmd-shift-f"],
+      // LSP
+      "space l c": "editor::ToggleCodeActions",
+      "space l r": "editor::Rename",
+      "shift-k": "editor::Hover",
+      "[ d": "editor::GoToPrevDiagnostic",
+      "] d": "editor::GoToDiagnostic",
+      "g c c": ["editor::ToggleComments", { "advance_downwards": false }],
+      "g R": "editor::FindAllReferences",
+      // Pane
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
+      "shift-h": "pane::ActivatePrevItem",
+      "shift-l": "pane::ActivateNextItem"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !VimObject",
+    "bindings": {
+      "g c": ["editor::ToggleComments", { "advance_downwards": false }]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      "shift-y": ["workspace::SendKeystrokes", "y $"],
+      "space c c": "assistant::ToggleFocus"
+    }
+  }
+]

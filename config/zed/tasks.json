@@ -1,0 +1,18 @@
+[
+  {
+    "label": "Lazygit",
+    "command": "lazygit",
+    "args": [],
+    "env": {},
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Ollama",
+    "command": "ollama",
+    "args": ["serve"],
+    "env": {},
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false
+  }
+]
