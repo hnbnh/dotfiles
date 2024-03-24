@@ -4,8 +4,8 @@ export XDG_CONFIG_HOME=~/.config
 export PATH="/run/current-system/sw/bin:$PATH"
 if [ -e /home/hnbnh/.nix-profile/etc/profile.d/nix.sh ]; then source /home/hnbnh/.nix-profile/etc/profile.d/nix.sh; fi
 
-# rtx
-eval "$(rtx activate zsh)"
+# mise
+eval "$(mise activate zsh)"
 
 # starship
 eval "$(starship init zsh)"
