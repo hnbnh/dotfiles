@@ -1,4 +1,5 @@
 local utils = require("hnbnh.utils")
+local constants = require("hnbnh.constants")
 
 local home = vim.fn.expand("$HOME")
 
@@ -75,9 +76,20 @@ return {
     config = true,
   },
   {
-    "Dhanus3133/LeetBuddy.nvim",
-    cmd = { "LBQuestions", "LBQuestion", "LBReset", "LBTest", "LBSubmit" },
-    config = true,
+    "kawre/leetcode.nvim",
+    lazy = not constants.is_leet,
+    opts = {
+      lang = "python3",
+    },
+    config = function(_, opts)
+      require("copilot")
+
+      vim.g.autoformat_enabled = false
+      vim.cmd("Copilot disable")
+
+      require("leetcode").setup(opts)
+    end,
+    build = ":TSUpdate html",
   },
   {
     "akinsho/toggleterm.nvim",

@@ -28,4 +28,5 @@ return {
       yamlls = "",
     },
   },
+  is_leet = "leetcode.nvim" == vim.fn.argv()[1],
 }
