@@ -84,7 +84,6 @@ return {
         end,
       },
       { "simrat39/rust-tools.nvim" },
-      { "jose-elias-alvarez/typescript.nvim" },
       {
         url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         opts = { underline = true },
@@ -146,8 +145,6 @@ return {
               ),
             },
           })
-        elseif server == "tsserver" then
-          require("typescript").setup({ server = o })
         else
           lspconfig[server].setup(o)
         end
