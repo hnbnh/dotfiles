@@ -27,3 +27,7 @@ cd_on_quit() {
 		rm -f "$NNN_TMPFILE" >/dev/null
 	fi
 }
+
+mkfile() {
+  mkdir -p "$(dirname "$1")" && touch "$1"
+}
