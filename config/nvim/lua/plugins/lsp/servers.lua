@@ -71,4 +71,5 @@ return {
     },
   },
   typos_lsp = {},
+  vtsls = {},
 }
