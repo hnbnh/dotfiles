@@ -197,4 +197,11 @@ return {
     "mg979/vim-visual-multi",
     event = "BufReadPost",
   },
+  {
+    "RRethy/vim-illuminate",
+    event = "CursorHold",
+    init = function()
+      vim.g.Illuminate_delay = 1000
+    end,
+  },
 }

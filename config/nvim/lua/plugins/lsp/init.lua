@@ -125,9 +125,8 @@ return {
       local lspconfig = require("lspconfig")
 
       local default_opts = {
-        on_attach = function(client, buffer)
+        on_attach = function(_, buffer)
           keymaps.on_attach(buffer)
-          lsp_utils.highlight_document(client, buffer)
         end,
         capabilities = vim.tbl_deep_extend("force", require("cmp_nvim_lsp").default_capabilities(), opts.capabilities),
       }
