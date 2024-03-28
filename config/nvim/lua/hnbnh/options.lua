@@ -82,8 +82,8 @@ o.virtualedit = "block" -- Virtual block edit
 o.synmaxcol = 200 -- Text after this column number is not highlighted
 -- o.mouse = "a" -- Allow the mouse to be used (turn on later)
 o.smartindent = true
-o.cursorline = true -- Hightlight the current line
-o.signcolumn = "auto:9"
+o.cursorline = true -- Highlight the current line
+o.signcolumn = "auto:3"
 o.termguicolors = true
 
 -- Status line
