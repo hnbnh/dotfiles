@@ -81,12 +81,12 @@ return {
           format = lspkind.cmp_format({
             mode = "symbol",
             menu = {
-              copilot = "[ Copilot]",
+              copilot = "[󰊤 Copilot]",
               nvim_lsp = "[ LSP]",
               nvim_lsp_signature_help = "[]",
               nvim_lua = "[]",
               luasnip = "[ Snippet]",
-              buffer = "[﬘ Buffer]",
+              buffer = "[󰕸 Buffer]",
               path = "[ Path]",
             },
           }),
