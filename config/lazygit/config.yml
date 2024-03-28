@@ -5,7 +5,6 @@ git:
 gui:
   mouseEvents: false
   showIcons: true
-  expandFocusedSidePanel: true
   branchColors:
     "feat": "#76946A"
     "fix": "#C34043"
