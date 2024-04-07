@@ -69,9 +69,9 @@ return {
               bash = { "beautysh" },
               lua = { "stylua" },
               python = { "black" },
-              javascript = { "prettierd" },
+              javascript = { "eslint" },
               ruby = { "rubocop" },
-              typescript = { "prettierd" },
+              typescript = { "eslint" },
             },
             format_on_save = function()
               if not vim.g.autoformat_enabled then
