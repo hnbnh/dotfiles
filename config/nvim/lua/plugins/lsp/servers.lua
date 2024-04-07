@@ -45,14 +45,6 @@ return {
   },
   pyright = {},
   rust_analyzer = {},
-  tsserver = {
-    commands = {
-      OrganizeImports = {
-        organize_imports,
-        description = "Organize Imports",
-      },
-    },
-  },
   eslint = {
     settings = {
       workingDirectories = { mode = "auto" },
