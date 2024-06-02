@@ -1,6 +1,7 @@
 return {
   {
     "ThePrimeagen/harpoon",
+    cond = not vim.g.vscode,
     keys = {
       { "<leaer>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Add a file" },
       { "<leaer>ht", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Toggle" },
@@ -20,6 +21,7 @@ return {
   },
   {
     "stevearc/oil.nvim",
+    cond = not vim.g.vscode,
     cmd = "Oil",
     keys = {
       { "<leader>o", "<cmd>Oil<cr>", desc = "Open oil" },
@@ -28,6 +30,7 @@ return {
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
+    cond = not vim.g.vscode,
     branch = "v3.x",
     cmd = "Neotree",
 

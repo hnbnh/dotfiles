@@ -3,6 +3,7 @@ local sign = vim.fn.sign_define
 return {
   {
     "mfussenegger/nvim-dap",
+    cond = not vim.g.vscode,
     keys = {
       { "<leader>dT", "<cmd>lua require('dap').terminate()<cr>", desc = "Terminate debugger" },
       { "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", desc = "Debugger UI" },

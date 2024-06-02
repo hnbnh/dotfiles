@@ -3,6 +3,7 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = false,
+    cond = not vim.g.vscode,
     config = function()
       require("catppuccin").setup({
         custom_highlights = function(colors)

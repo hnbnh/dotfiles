@@ -21,6 +21,7 @@ end
 return {
   {
     "lewis6991/gitsigns.nvim",
+    cond = not vim.g.vscode,
     event = "BufRead",
     keys = {
       {
@@ -84,6 +85,7 @@ return {
   },
   {
     "sindrets/diffview.nvim",
+    cond = not vim.g.vscode,
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
     config = function()
       local actions = require("diffview.actions")

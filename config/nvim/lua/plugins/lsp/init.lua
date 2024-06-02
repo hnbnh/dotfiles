@@ -6,6 +6,7 @@ local keymaps = require("plugins.lsp.keymaps")
 return {
   {
     "neovim/nvim-lspconfig",
+    cond = not vim.g.vscode,
     event = "BufReadPre",
     keys = {
       {
@@ -193,6 +194,7 @@ return {
   },
   {
     "rmagatti/goto-preview",
+    cond = not vim.g.vscode,
     config = true,
   },
 }

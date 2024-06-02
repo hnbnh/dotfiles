@@ -19,6 +19,7 @@ end
 return {
   {
     "nvim-lualine/lualine.nvim",
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     opts = function()
       return {
@@ -110,6 +111,7 @@ return {
   },
   {
     "nvim-zh/colorful-winsep.nvim",
+    cond = not vim.g.vscode,
     config = true,
     opts = {
       create_event = function()
@@ -128,6 +130,7 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
+    cond = not vim.g.vscode,
     main = "ibl",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
@@ -148,6 +151,7 @@ return {
   },
   {
     "kevinhwang91/nvim-hlslens",
+    cond = not vim.g.vscode,
     event = "BufRead",
     -- stylua: ignore
     keys = {
@@ -158,6 +162,7 @@ return {
   },
   {
     "nvim-pack/nvim-spectre",
+    cond = not vim.g.vscode,
     keys = {
       { "<c-f>", "<cmd>lua require('spectre').open()<cr>", desc = "Replace with spectre" },
     },
@@ -239,6 +244,7 @@ return {
   },
   {
     "luukvbaal/statuscol.nvim",
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     config = function()
       local builtin = require("statuscol.builtin")
@@ -255,6 +261,7 @@ return {
   },
   {
     "rcarriga/nvim-notify",
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     opts = {
       timeout = 3000,
@@ -271,6 +278,7 @@ return {
   },
   {
     "Bekaboo/dropbar.nvim",
+    cond = not vim.g.vscode,
     -- stylua: ignore
     keys = {
       { "<leader>aa", function() require("dropbar.api").pick() end, desc = "Toggle dropbar" },
@@ -288,6 +296,7 @@ return {
   },
   {
     "folke/noice.nvim",
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     opts = {
       cmdline = {
@@ -327,6 +336,7 @@ return {
   },
   {
     "folke/edgy.nvim",
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     enabled = false,
     opts = {
@@ -381,6 +391,7 @@ return {
   },
   {
     "levouh/tint.nvim",
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     enabled = false,
     opts = {
@@ -403,6 +414,7 @@ return {
   },
   {
     "j-hui/fidget.nvim",
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     config = true,
   },

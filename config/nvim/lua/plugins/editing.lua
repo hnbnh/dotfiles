@@ -12,7 +12,7 @@ return {
   { "godlygeek/tabular", cmd = "Tabularize" },
   { "kylechui/nvim-surround", event = "VeryLazy", config = true },
   { "tpope/vim-repeat", event = "VeryLazy" },
-  { "NvChad/nvim-colorizer.lua", event = "VeryLazy", config = true },
+  { "NvChad/nvim-colorizer.lua", cond = not vim.g.vscode, event = "VeryLazy", config = true },
   { "nacro90/numb.nvim", event = "VeryLazy", config = true },
   {
     "gbprod/yanky.nvim",
@@ -43,6 +43,7 @@ return {
   },
   {
     "kevinhwang91/nvim-ufo",
+    cond = not vim.g.vscode,
     dependencies = "kevinhwang91/promise-async",
     event = "BufReadPost",
     init = function()
@@ -127,12 +128,14 @@ return {
   },
   {
     "windwp/nvim-autopairs",
+    cond = not vim.g.vscode,
     event = "InsertEnter",
     opts = {},
   },
   { "echasnovski/mini.trailspace", event = "BufReadPost", config = true },
   {
     "johmsalas/text-case.nvim",
+    cond = not vim.g.vscode,
     config = true,
     event = "VeryLazy",
     keys = {
@@ -198,6 +201,7 @@ return {
   },
   {
     "RRethy/vim-illuminate",
+    cond = not vim.g.vscode,
     event = "CursorHold",
     init = function()
       vim.g.Illuminate_delay = 1000

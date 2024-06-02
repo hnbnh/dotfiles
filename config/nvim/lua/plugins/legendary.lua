@@ -1,6 +1,7 @@
 return {
   {
     "mrjones2014/legendary.nvim",
+    cond = not vim.g.vscode,
     priority = 10000,
     lazy = false,
     dependencies = { "kkharji/sqlite.lua" },

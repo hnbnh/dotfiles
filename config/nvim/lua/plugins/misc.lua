@@ -34,12 +34,14 @@ return {
   { "terrastruct/d2-vim", ft = { "d2" } },
   {
     "folke/persistence.nvim",
+    cond = not vim.g.vscode,
     event = "BufReadPre",
     module = "persistence",
     config = true,
   },
   {
     "s1n7ax/nvim-window-picker",
+    cond = not vim.g.vscode,
     version = "2.*",
     opts = {
       hint = "floating-big-letter",
@@ -93,6 +95,7 @@ return {
   },
   {
     "akinsho/toggleterm.nvim",
+    cond = not vim.g.vscode,
     keys = {
       {
         "<c-\\>",
@@ -132,6 +135,7 @@ return {
   },
   {
     "LunarVim/bigfile.nvim",
+    cond = not vim.g.vscode,
     event = "VeryLazy",
   },
 }
