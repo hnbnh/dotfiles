@@ -2,7 +2,7 @@ return {
   {
     "gbprod/yanky.nvim",
     opts = {
-      highlight = { timer = 3000 },
+      highlight = { timer = 300 },
     },
   },
   {
@@ -19,6 +19,22 @@ return {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       }
+
+      opts.mapping = cmp.mapping.preset.insert({
+        ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-e>"] = cmp.mapping.abort(),
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<CR>"] = LazyVim.cmp.confirm({ select = auto_select }),
+        ["<C-y>"] = LazyVim.cmp.confirm({ select = true }),
+        ["<S-CR>"] = LazyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<C-CR>"] = function(fallback)
+          cmp.abort()
+          fallback()
+        end,
+      })
 
       cmp.setup.cmdline("/", {
         mapping = cmp.mapping.preset.cmdline(),
@@ -38,5 +54,29 @@ return {
         }),
       })
     end,
+  },
+  {
+    "johmsalas/text-case.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    event = "VeryLazy",
+    config = function()
+      require("textcase").setup({})
+      require("telescope").load_extension("textcase")
+    end,
+    keys = {
+      "ga",
+      { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" },
+    },
+    cmd = {
+      "Subs",
+      "TextCaseOpenTelescope",
+      "TextCaseOpenTelescopeQuickChange",
+      "TextCaseOpenTelescopeLSPChange",
+      "TextCaseStartReplacingCommand",
+    },
+  },
+  {
+    "mg979/vim-visual-multi",
+    event = "BufReadPost",
   },
 }

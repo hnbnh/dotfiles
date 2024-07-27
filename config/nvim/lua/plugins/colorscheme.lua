@@ -3,6 +3,7 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = false,
+    priority = 1000,
     cond = not vim.g.vscode,
     config = function()
       require("catppuccin").setup({

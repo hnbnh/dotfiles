@@ -15,6 +15,15 @@ return {
         update_in_insert = false,
         virtual_text = false,
       },
+      servers = {
+        solargraph = {
+          init_options = {
+            autoformat = false,
+            formatting = false,
+          },
+        },
+        typos_lsp = {},
+      },
     },
   },
 }

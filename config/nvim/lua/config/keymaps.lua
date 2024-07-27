@@ -26,3 +26,7 @@ map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 -- Split
 map("n", "<leader>sl", "<cmd>vsplit<cr>", { desc = "Vsplit" })
 map("n", "<leader>sj", "<cmd>split<cr>", { desc = "Split" })
+
+-- Cmdline
+vim.cmd([[cmap <expr> <c-j> luaeval('require"cmp".visible()') ? "\<C-n>" : "\<C-j>"]])
+vim.cmd([[cmap <expr> <c-k> luaeval('require"cmp".visible()') ? "\<C-p>" : "\<C-k>"]])
