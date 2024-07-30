@@ -1,5 +1,18 @@
 return {
   "nvim-telescope/telescope.nvim",
+  keys = function()
+    return {
+      { "<leader>/", "<cmd>Telescope live_grep", desc = "Live grep" },
+      { "<leader>B", "<cmd>Telescope buffers<cr>", desc = "All buffers" },
+      {
+        "<leader>f",
+        function()
+          require("telescope.builtin").find_files()
+        end,
+        desc = "Find files",
+      },
+    }
+  end,
   opts = function(_, opts)
     local actions = require("telescope.actions")
 
