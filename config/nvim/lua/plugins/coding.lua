@@ -82,5 +82,9 @@ return {
   {
     "mg979/vim-visual-multi",
     event = "BufReadPost",
+    keys = {
+      { "<C-up>", "<Plug>(Add Cursor Up)" },
+      { "<C-down>", "<Plug>(Add Cursor Down)" },
+    },
   },
 }
