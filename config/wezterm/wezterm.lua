@@ -9,7 +9,7 @@ local act = wezterm.action
 local mod = "CTRL|SHIFT"
 local super_mod = "SUPER|SHIFT"
 
-wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+wezterm.on("format-tab-title", function(tab)
 	local background = colors.mantle
 	local foreground = colors.overlay1
 
@@ -54,26 +54,9 @@ end)
 
 return {
 	font_size = 12,
-	font = wezterm.font({ family = "JetBrains Mono", weight = "DemiBold" }),
-	line_height = 1.3,
-	bold_brightens_ansi_colors = true,
-	font_rules = {
-		{
-			intensity = "Bold",
-			italic = true,
-			font = wezterm.font({ family = "Maple Mono", weight = "Bold", style = "Italic" }),
-		},
-		{
-			italic = true,
-			intensity = "Half",
-			font = wezterm.font({ family = "Maple Mono", weight = "DemiBold", style = "Italic" }),
-		},
-		{
-			italic = true,
-			intensity = "Normal",
-			font = wezterm.font({ family = "Maple Mono", style = "Italic" }),
-		},
-	},
+	font = wezterm.font({ family = "JetBrains Mono", weight = "Medium" }),
+	line_height = 1.45,
+	bold_brightens_ansi_colors = "No",
 
 	color_scheme = "Catppuccin Macchiato",
 	tab_max_width = 48,
@@ -81,11 +64,10 @@ return {
 	tab_bar_at_bottom = true,
 	window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
 	front_end = "WebGpu",
+	freetype_load_flags = "NO_HINTING",
 	webgpu_power_preference = "HighPerformance",
 	animation_fps = 1,
 
-	underline_thickness = 3,
-	cursor_thickness = 4,
 	underline_position = -6,
 
 	inactive_pane_hsb = {
@@ -101,7 +83,7 @@ return {
 		-- Split
 		{ mods = mod, key = ":", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 		{ mods = mod, key = "Enter", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-		{ mods = mod, key = "q", action = act.CloseCurrentPane({ confirm = true }) },
+		{ mods = mod, key = "w", action = act.CloseCurrentPane({ confirm = true }) },
 		{ mods = mod, key = ">", action = act.MoveTabRelative(1) },
 		{ mods = mod, key = "<", action = act.MoveTabRelative(-1) },
 		{ mods = mod, key = "m", action = act.TogglePaneZoomState },
@@ -116,5 +98,6 @@ return {
 		},
 		-- Misc
 		{ mods = super_mod, key = "p", action = act.ActivateCommandPalette },
+		{ mods = super_mod, key = "Enter", action = act.ActivateCopyMode },
 	},
 }
