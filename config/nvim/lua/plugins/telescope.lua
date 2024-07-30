@@ -1,5 +1,24 @@
+local databases_path = vim.fn.stdpath("state") .. "/databases"
+
 return {
   "nvim-telescope/telescope.nvim",
+  dependencies = {
+    {
+      "prochri/telescope-all-recent.nvim",
+      config = true,
+    },
+    {
+      "nvim-telescope/telescope-smart-history.nvim",
+      build = function()
+        os.execute("mkdir -p " .. databases_path)
+      end,
+      opts = function()
+        LazyVim.on_load("telescope.nvim", function()
+          require("telescope").load_extension("smart_history")
+        end)
+      end,
+    },
+  },
   keys = function()
     return {
       { "<leader>/", "<cmd>Telescope live_grep", desc = "Live grep" },
@@ -42,6 +61,13 @@ return {
           ["<C-n>"] = actions.cycle_history_next,
           ["<C-p>"] = actions.cycle_history_prev,
         },
+      },
+      cache_picker = {
+        num_pickers = 10,
+      },
+      history = {
+        path = databases_path .. "/telescope_history.sqlite3",
+        limit = 100,
       },
     })
   end,
