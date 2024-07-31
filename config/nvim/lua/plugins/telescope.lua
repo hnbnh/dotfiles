@@ -21,7 +21,7 @@ return {
   },
   keys = function()
     return {
-      { "<leader>/", "<cmd>Telescope live_grep", desc = "Live grep" },
+      { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
       { "<leader>B", "<cmd>Telescope buffers<cr>", desc = "All buffers" },
       {
         "<leader>f",

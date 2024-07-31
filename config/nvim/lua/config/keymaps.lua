@@ -1,4 +1,9 @@
 local map = vim.keymap.set
+local del = vim.keymap.del
+
+del("n", "<leader>fn")
+del("n", "<leader>ft")
+del("n", "<leader>fT")
 
 -- Diagnostic
 map("n", "<leader>co", vim.diagnostic.open_float, { desc = "Open float" })

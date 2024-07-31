@@ -15,7 +15,10 @@ return {
     cond = not vim.g.vscode,
     branch = "v3.x",
     cmd = "Neotree",
-    keys = { { "<leader>n", "<cmd>Neotree reveal<cr>", desc = "Neotree" } },
+    init = function() end,
+    keys = function()
+      return { { "<leader>n", "<cmd>Neotree reveal<cr>", desc = "Neotree" } }
+    end,
     opts = {
       filesystem = {
         use_libuv_file_watcher = true,

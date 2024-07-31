@@ -50,14 +50,13 @@ return {
           treesitter_context = true,
         },
       })
-      vim.cmd.colorscheme("catppuccin-macchiato")
     end,
   },
 
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "catppuccin-macchiato",
     },
   },
 }
