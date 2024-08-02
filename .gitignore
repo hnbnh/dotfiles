@@ -5,3 +5,8 @@
 **/en.utf-8.add.spl
 config/karabiner/**
 !config/karabiner/assets/complex_modifications/karabiner.json
+
+config/zed/**
+!config/zed/keymap.json
+!config/zed/settings.json
+!config/zed/tasks.json
