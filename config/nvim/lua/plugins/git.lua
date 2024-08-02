@@ -19,23 +19,18 @@ local next_hunk = function()
 end
 
 return {
+  { "tpope/vim-fugitive", event = "VeryLazy" },
+  { "tpope/vim-rhubarb", event = "VeryLazy" },
   {
     "lewis6991/gitsigns.nvim",
-    cond = not vim.g.vscode,
-    event = "BufRead",
     keys = {
       {
         "<leader>gy",
-        function()
-          return ":GBrowse!<cr>"
-        end,
+        "<cmd>GBrowse!<cr>",
         desc = "Copy GitHub URL to clipboard",
-        silent = true,
-        expr = true,
-        mode = { "n", "v" },
       },
-      { "<leader>gg", "<cmd>Neotree git_status<cr>" },
-      { "<leader>gl", "<cmd>Git blame<cr>" },
+      { "<leader>gg", "<cmd>Neotree git_status<cr>", desc = "Git Status" },
+      { "<leader>gl", "<cmd>Git blame<cr>", desc = "Git Blame" },
       {
         "<leader>gd",
         function()
@@ -51,19 +46,7 @@ return {
         desc = "Diffview",
       },
     },
-    dependencies = {
-      { "tpope/vim-fugitive", event = "VeryLazy" },
-      { "tpope/vim-rhubarb", event = "VeryLazy" },
-    },
     opts = {
-      signs = {
-        add = { text = "▎" },
-        change = { text = "▎" },
-        delete = { text = "" },
-        topdelete = { text = "" },
-        changedelete = { text = "▎" },
-        untracked = { text = "▎" },
-      },
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 
@@ -78,7 +61,7 @@ return {
         map("n", "<leader>gb", gs.stage_buffer, "Stage Buffer")
         map("n", "<leader>gB", gs.reset_buffer, "Reset Buffer")
         map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
-        map("n", "<leader>go", gs.preview_hunk, "Preview Hunk")
+        map("n", "<leader>go", gs.preview_hunk_inline, "Preview Hunk Inline")
         map({ "o", "x" }, "ih", gs.select_hunk, "GitSigns Select Hunk")
       end,
     },

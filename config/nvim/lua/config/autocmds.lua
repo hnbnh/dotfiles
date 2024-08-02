@@ -1,5 +1,3 @@
-local constants = require("hnbnh.constants")
-
 local function augroup(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
@@ -31,10 +29,6 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("VimEnter", {
   group = augroup("PersistenceRestore"),
   callback = function()
-    if constants.is_leet then
-      return
-    end
-
     require("persistence").load()
   end,
   nested = true,
