@@ -19,8 +19,8 @@ local next_hunk = function()
 end
 
 return {
-  { "tpope/vim-fugitive", event = "VeryLazy" },
-  { "tpope/vim-rhubarb", event = "VeryLazy" },
+  { "tpope/vim-fugitive" },
+  { "tpope/vim-rhubarb" },
   {
     "lewis6991/gitsigns.nvim",
     keys = {

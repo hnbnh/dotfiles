@@ -3,7 +3,7 @@ return {
   { "nacro90/numb.nvim", event = "VeryLazy", config = true },
   { "kylechui/nvim-surround", event = "VeryLazy", config = true },
   { "echasnovski/mini.trailspace", event = "BufReadPost", config = true },
-  { "tpope/vim-repeat", event = "VeryLazy" },
+  { "tpope/vim-repeat" },
   {
     "nvim-zh/colorful-winsep.nvim",
     cond = not vim.g.vscode,

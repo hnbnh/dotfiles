@@ -86,5 +86,5 @@ return {
       { "<C-down>", "<Plug>(Add Cursor Down)" },
     },
   },
-  { "tpope/vim-rails", event = "VeryLazy" },
+  { "tpope/vim-rails" },
 }
