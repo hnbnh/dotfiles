@@ -40,6 +40,11 @@ return {
           }
         end,
         integrations = {
+          colorful_winsep = {
+            enabled = true,
+            color = "red",
+          },
+          diffview = true,
           dropbar = true,
           harpoon = true,
           lsp_trouble = true,
