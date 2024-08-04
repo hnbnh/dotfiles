@@ -114,6 +114,17 @@ return {
           desc = "CopyAbsoluteFilePath",
         },
         {
+          ":CopyRelativePathWithCurrentLine",
+          function()
+            local path = vim.fn.expand("%:p:.")
+            local current_line = vim.fn.line(".")
+
+            vim.fn.setreg("+", path .. ":" .. current_line)
+            vim.notify("Copied RELATIVE file path with current LINE to clipboard")
+          end,
+          desc = "CopyRelativePathWithCurrentLine",
+        },
+        {
           ":CopyRelativeFilePath",
           function()
             vim.cmd("let @+ = expand('%:p:.')")
@@ -124,21 +135,21 @@ return {
         {
           ":DisableAutoformat",
           function()
-            vim.g.autoformat_enabled = false
+            vim.g.autoformat = false
           end,
           desc = "DisableAutoformat",
         },
         {
           ":EnableAutoformat",
           function()
-            vim.g.autoformat_enabled = true
+            vim.g.autoformat = true
           end,
           desc = "EnableAutoformat",
         },
         {
           ":ToggleAutoformat",
           function()
-            vim.g.autoformat_enabled = not vim.g.autoformat_enabled
+            vim.g.autoformat = not vim.g.autoformat
           end,
           desc = "ToggleAutoformat",
         },
