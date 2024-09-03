@@ -26,7 +26,7 @@ export NNN_COLORS="#04020301;4231"
 export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$UNKNOWN"
 
 # fzf
-[ -f /usr/share/fzf/shell/key-bindings.zsh ] && source /usr/share/fzf/shell/key-bindings.zsh
+source <(fzf --zsh)
 
 # vi mode
 # Ctrl-f is not functioning after switching to vi mode, unsure of the reason
