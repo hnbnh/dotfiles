@@ -8,6 +8,11 @@ return {
         version = "2.*",
         opts = {
           hint = "floating-big-letter",
+          filter_rules = {
+            bo = {
+              filetype = { "NvimSeparator", "noice" },
+            },
+          },
         },
         config = true,
       },

@@ -22,7 +22,7 @@ return {
   keys = function()
     return {
       { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
-      { "<leader>B", "<cmd>Telescope buffers<cr>", desc = "All buffers" },
+      { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "All buffers" },
       {
         "<leader>f",
         function()
@@ -44,6 +44,7 @@ return {
       },
       find_files = {
         hidden = true,
+        previewer = false,
       },
     })
 

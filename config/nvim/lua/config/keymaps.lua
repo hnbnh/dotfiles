@@ -1,9 +1,13 @@
+local Util = require("lazyvim.util")
 local map = vim.keymap.set
 local del = vim.keymap.del
 
 del("n", "<leader>fn")
 del("n", "<leader>ft")
 del("n", "<leader>fT")
+del("n", "<leader>bb")
+del("n", "<leader>bd")
+del("n", "<leader>bD")
 
 -- Diagnostic
 map("n", "<leader>co", vim.diagnostic.open_float, { desc = "Open float" })
@@ -35,3 +39,8 @@ map("n", "<leader>sj", "<cmd>split<cr>", { desc = "Split" })
 -- Cmdline
 vim.cmd([[cmap <expr> <c-j> luaeval('require"cmp".visible()') ? "\<C-n>" : "\<C-j>"]])
 vim.cmd([[cmap <expr> <c-k> luaeval('require"cmp".visible()') ? "\<C-p>" : "\<C-k>"]])
+
+-- Floating terminal
+map("n", "<C-/>", function()
+  Util.terminal(nil, { size = { width = 0.7, height = 0.7 }, border = "rounded" })
+end, { desc = "Terminal (root dir)" })

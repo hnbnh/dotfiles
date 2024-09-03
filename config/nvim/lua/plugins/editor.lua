@@ -1,3 +1,24 @@
+local function toggle_telescope(harpoon_files)
+  local conf = require("telescope.config").values
+  local file_paths = {}
+
+  for _, item in ipairs(harpoon_files.items) do
+    table.insert(file_paths, item.value)
+  end
+
+  -- FIXME: Add missing icons
+  require("telescope.pickers")
+    .new(conf, {
+      prompt_title = "Harpoon",
+      finder = require("telescope.finders").new_table({
+        results = file_paths,
+      }),
+      previewer = false,
+      sorter = conf.generic_sorter({}),
+    })
+    :find()
+end
+
 return {
   { "NvChad/nvim-colorizer.lua", cond = not vim.g.vscode, event = "VeryLazy", config = true },
   { "nacro90/numb.nvim", event = "VeryLazy", config = true },
@@ -9,6 +30,9 @@ return {
     cond = not vim.g.vscode,
     event = { "WinLeave" },
     config = true,
+    opts = {
+      smooth = false,
+    },
   },
   {
     "folke/flash.nvim",

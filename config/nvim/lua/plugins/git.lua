@@ -26,11 +26,12 @@ return {
     keys = {
       {
         "<leader>gy",
-        "<cmd>GBrowse!<cr>",
+        "<cmd>.GBrowse!<cr>",
         desc = "Copy GitHub URL to clipboard",
-        mode = { "n", "v" },
+        silent = true,
+        expr = true,
+        mode = { "n", "v", "x" },
       },
-      { "<leader>gg", "<cmd>Neotree git_status<cr>", desc = "Git Status" },
       { "<leader>gl", "<cmd>Git blame<cr>", desc = "Git Blame" },
       {
         "<leader>gd",
