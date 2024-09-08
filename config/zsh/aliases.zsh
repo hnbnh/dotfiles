@@ -6,7 +6,7 @@ alias lzd='lazydocker'
 
 alias n='nvim'
 
-alias nn='cd_on_quit -GAHo'
+alias nn='yazi'
 alias nls='nnn -de'
 
 alias t='tmux'
