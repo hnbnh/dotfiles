@@ -5,7 +5,7 @@ export PATH="/run/current-system/sw/bin:$PATH"
 if [ -e /home/hnbnh/.nix-profile/etc/profile.d/nix.sh ]; then source /home/hnbnh/.nix-profile/etc/profile.d/nix.sh; fi
 
 # mise
-eval "$(~/.local/bin/mise activate zsh)"
+eval "$(mise activate zsh)"
 
 # starship
 eval "$(starship init zsh)"

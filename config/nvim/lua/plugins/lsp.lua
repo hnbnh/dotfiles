@@ -16,6 +16,7 @@ return {
         virtual_text = false,
       },
       servers = {
+        ts_ls = { enabled = false },
         solargraph = {
           init_options = {
             autoformat = false,
@@ -24,6 +25,7 @@ return {
         },
         typos_lsp = {},
       },
+      inlay_hints = { enabled = false },
     },
   },
 }

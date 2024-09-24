@@ -14,6 +14,10 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+if vim.g.neovide then
+  vim.o.guifont = "JetBrainsMono Nerd Font:h12"
+end
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins

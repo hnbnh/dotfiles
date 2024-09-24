@@ -26,7 +26,9 @@ return {
     keys = {
       {
         "<leader>gy",
-        "<cmd>.GBrowse!<cr>",
+        function()
+          return ":GBrowse!<cr>"
+        end,
         desc = "Copy GitHub URL to clipboard",
         silent = true,
         expr = true,

@@ -20,7 +20,6 @@ local function toggle_telescope(harpoon_files)
 end
 
 return {
-  { "NvChad/nvim-colorizer.lua", cond = not vim.g.vscode, event = "VeryLazy", config = true },
   { "nacro90/numb.nvim", event = "VeryLazy", config = true },
   { "kylechui/nvim-surround", event = "VeryLazy", config = true },
   { "echasnovski/mini.trailspace", event = "BufReadPost", config = true },
