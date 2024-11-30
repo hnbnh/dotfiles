@@ -1,0 +1,10 @@
+{
+  "byebug": {
+    "prefix": ["bb"],
+    "body": "byebug"
+  },
+  "debugger": {
+    "prefix": ["db"],
+    "body": "debugger"
+  }
+}

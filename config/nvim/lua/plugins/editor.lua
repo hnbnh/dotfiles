@@ -148,6 +148,17 @@ return {
           desc = "CopyRelativePathWithCurrentLine",
         },
         {
+          ":Rspec",
+          function()
+            local path = vim.fn.expand("%:p:.")
+            local current_line = vim.fn.line(".")
+
+            vim.fn.setreg("+", "rspec " .. path .. ":" .. current_line)
+            vim.notify("Copied rspec command")
+          end,
+          desc = "Rspec",
+        },
+        {
           ":CopyRelativeFilePath",
           function()
             vim.cmd("let @+ = expand('%:p:.')")
