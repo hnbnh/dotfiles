@@ -6,7 +6,6 @@ alias lzd='lazydocker'
 
 alias n='nvim'
 
-alias nn='yazi'
 alias nls='nnn -de'
 
 alias t='tmux'
