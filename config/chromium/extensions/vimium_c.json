@@ -7,6 +7,7 @@
     "map <c-o> goBack",
     "map <c-i> goForward",
     "map t Vomnibar.activateTabs",
+    "map <c-t> Vomnibar.activate",
     "unmap p",
     ""
   ],
