@@ -25,5 +25,6 @@ visual-studio-code-bin
 wezterm
 xclip
 yazi
+zen-browser-avx2-bin
 zoxide
 zsh
