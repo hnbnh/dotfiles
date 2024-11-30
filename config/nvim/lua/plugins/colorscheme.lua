@@ -7,6 +7,7 @@ return {
     cond = not vim.g.vscode,
     config = function()
       require("catppuccin").setup({
+        transparent_background = true,
         custom_highlights = function(colors)
           return {
             DataViewerColumnRed = { fg = colors.red },

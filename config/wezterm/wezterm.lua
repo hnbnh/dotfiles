@@ -53,12 +53,14 @@ wezterm.on("format-window-title", function(_, _, tabs)
 end)
 
 return {
-  font_size = 12,
-  font = wezterm.font({ family = "JetBrains Mono", weight = "Medium" }),
+  window_background_opacity = 0.85,
+  macos_window_background_blur = 50,
+  font_size = 17,
+  font = wezterm.font("MesloLGS Nerd Font Mono"),
   line_height = 1.45,
   bold_brightens_ansi_colors = "No",
 
-  color_scheme = "Catppuccin Frappe",
+  color_scheme = "Catppuccin Mocha",
   tab_max_width = 48,
   use_fancy_tab_bar = false,
   tab_bar_at_bottom = true,
