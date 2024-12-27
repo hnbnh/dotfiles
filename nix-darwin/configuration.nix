@@ -10,34 +10,21 @@
     bat
     curl
     delta
-    diskonaut
+    fastfetch
     fd
-    fnm
     fzf
     gh
     git
-    glow
     gnupg
-    go
-    hyperfine
     jq
-    kdash
     lazydocker
     lazygit
-    micromamba
+    mise
     neovim
-    nnn
-    nodePackages.pnpm
-    nodePackages.yarn
     ripgrep
-    rustup
-    so
+    sqlite
     starship
-    tealdeer
-    tree
-    unzip
-    w3m
-    watch
+    yazi
     yt-dlp
     zoxide
   ];
@@ -47,16 +34,8 @@
   ];
 
   fonts = {
-    fontDir.enable = true;
-    fonts = [
-      (pkgs.nerdfonts.override {
-        fonts = [
-          "DejaVuSansMono"
-          "FiraCode"
-          "JetBrainsMono"
-          "VictorMono"
-        ];
-      })
+    packages = [
+      pkgs.nerd-fonts.meslo-lg
     ];
   };
 
@@ -65,42 +44,24 @@
     enable = true;
     onActivation.cleanup = "zap";
     taps = [
-      "homebrew/bundle"
-      "homebrew/cask"
-      "homebrew/cask-drivers"
-      "homebrew/cask-fonts"
-      "homebrew/core"
-      "homebrew/services"
-
-      "koekeishiya/formulae" # yabai
-      "FelixKratz/formulae" # sketchybar
     ];
 
     brews = [
-      "mongodb-community"
-      "sketchybar"
-      "yabai"
-      "skhd"
     ];
     casks = [
       "brave-browser"
-      "dbeaver-community"
+      "datagrip"
       "docker"
       "firefox"
-      "flameshot"
-      "insomnia"
       "karabiner-elements"
-      "kitty"
-      "libreoffice"
-      "mpv"
-      "notion-enhanced"
-      "obs"
-      "sf-symbols"
-      "slack"
+      "steam"
+      "telegram"
       "tor-browser"
       "utm"
       "visual-studio-code"
-      "wine-stable"
+      "wezterm"
+      "zen-browser"
+      "zoom"
     ];
   };
 
@@ -108,8 +69,15 @@
     alf = {
       globalstate = 1;
     };
+    dock = {
+      autohide = true;
+      mru-spaces = false;
+    };
+    trackpad = {
+      # tap to click
+      Clicking = true;
+    };
     NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
       AppleKeyboardUIMode = 3;
       ApplePressAndHoldEnabled = false;
       NSAutomaticCapitalizationEnabled = false;
@@ -125,13 +93,9 @@
 
   nix = {
     settings = {
-      auto-optimise-store = true;
       experimental-features = [
         "nix-command"
         "flakes"
-      ];
-      allowed-users = [
-        "@admin"
       ];
     };
   };
@@ -140,14 +104,5 @@
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 4;
-
-  home-manager = {
-    useUserPackages = true;
-    useGlobalPkgs = true;
-    users.hnbnh = { pkgs, lib, ... }: {
-      home.stateVersion = "22.11";
-      programs.home-manager.enable = true;
-    };
-  };
+  system.stateVersion = 5;
 }

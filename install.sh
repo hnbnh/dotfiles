@@ -37,6 +37,8 @@ function setup_linux {
 }
 
 function setup_macos {
+  sudo whoami
+
   # Install nix
   if ! have "nix-build"; then
     curl -L https://nixos.org/nix/install | sh
@@ -51,12 +53,7 @@ function setup_macos {
   fi
 
   # Set up nix-darwin
-  cd nix-darwin
-  /nix/var/nix/profiles/default/bin/nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-  yes | ./result/bin/darwin-installer
-
-  /nix/var/nix/profiles/default/bin/nix --experimental-features 'nix-command flakes' build ./\#darwinConfigurations.$(hostname -s).system
-  ./result/sw/bin/darwin-rebuild switch --flake .
+  /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake './nix-darwin#hnbnh'
 }
 
 function main() {
