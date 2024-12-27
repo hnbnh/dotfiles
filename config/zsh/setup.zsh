@@ -1,9 +1,5 @@
 export XDG_CONFIG_HOME=~/.config
 
-# Nix
-export PATH="/run/current-system/sw/bin:$PATH"
-if [ -e /home/hnbnh/.nix-profile/etc/profile.d/nix.sh ]; then source /home/hnbnh/.nix-profile/etc/profile.d/nix.sh; fi
-
 # mise
 eval "$(mise activate zsh)"
 
