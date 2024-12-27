@@ -51,4 +51,20 @@ return {
       },
     },
   },
+  {
+    "ibhagwan/fzf-lua",
+    keys = {
+      { "<leader>f", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      { "<leader>b", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+      { "<leader>sj", false },
+      { "<leader>sl", false },
+      { "<leader>fb", false },
+      { "<leader>fc", false },
+      { "<leader>ff", false },
+      { "<leader>fF", false },
+      { "<leader>fr", false },
+      { "<leader>fR", false },
+      { "<leader>fg", false },
+    },
+  },
 }

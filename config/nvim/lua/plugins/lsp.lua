@@ -7,6 +7,12 @@ return {
         opts = { underline = true },
       },
     },
+    opts = function(_, opts)
+      local keys = require("lazyvim.plugins.lsp.keymaps").get()
+      keys[#keys + 1] = { "<c-k>", false }
+
+      return opts
+    end,
     opts = {
       -- options for vim.diagnostic.config()
       ---@type vim.diagnostic.Opts

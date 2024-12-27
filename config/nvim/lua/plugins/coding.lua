@@ -87,4 +87,23 @@ return {
     },
   },
   { "tpope/vim-rails" },
+  {
+    "saghen/blink.cmp",
+    opts = {
+      keymap = {
+        ["<C-k>"] = { "select_prev", "fallback" },
+        ["<C-j>"] = { "select_next", "fallback" },
+      },
+      sources = {
+        compat = { "codeium" },
+        providers = {
+          codeium = {
+            kind = "Codeium",
+            score_offset = 100,
+            async = true,
+          },
+        },
+      },
+    },
+  },
 }

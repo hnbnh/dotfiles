@@ -8,6 +8,7 @@ del("n", "<leader>fT")
 del("n", "<leader>bb")
 del("n", "<leader>bd")
 del("n", "<leader>bD")
+del("n", "<leader>bo")
 
 -- Diagnostic
 map("n", "<leader>co", vim.diagnostic.open_float, { desc = "Open float" })
