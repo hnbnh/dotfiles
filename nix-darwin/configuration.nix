@@ -47,6 +47,7 @@
     ];
 
     brews = [
+      "libyaml"
     ];
     casks = [
       "brave-browser"
