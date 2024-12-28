@@ -109,7 +109,8 @@
                         ]
                     },
                     {
-                        "description": "Use Return as Open",
+                        "description": "Finder: Use Return as Open",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -135,7 +136,8 @@
                         ]
                     },
                     {
-                        "description": "Use F2 as Rename",
+                        "description": "Finder: Use F2 as Rename",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -153,7 +155,8 @@
                         ]
                     },
                     {
-                        "description": "Use Delete as Move to Trash",
+                        "description": "Finder: Use Delete as Move to Trash",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -179,7 +182,8 @@
                         ]
                     },
                     {
-                        "description": "Use Backspace as Go to Previous Folder",
+                        "description": "Finder: Use Backspace as Go to Previous Folder",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
