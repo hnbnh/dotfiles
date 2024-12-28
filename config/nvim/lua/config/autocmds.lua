@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
   callback = function()
     local term_title = vim.b.term_title
     if term_title and term_title:match("lazygit") then
-      vim.keymap.set("t", "q", "<cmd>close<cr>", { buffer = true })
+      vim.keymap.set("t", "<c-c>", "<cmd>close<cr>", { buffer = true })
     end
   end,
 })
