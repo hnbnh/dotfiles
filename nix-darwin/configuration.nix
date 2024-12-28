@@ -87,6 +87,9 @@
       NSAutomaticQuoteSubstitutionEnabled = false;
       NSAutomaticSpellingCorrectionEnabled = false;
     };
+    WindowManager = {
+      GloballyEnabled = true;
+    };
   };
 
   # Auto upgrade nix package and the daemon service.
