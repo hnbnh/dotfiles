@@ -90,6 +90,7 @@
     };
     WindowManager = {
       GloballyEnabled = true;
+      AppWindowGroupingBehavior = false;
     };
   };
 
