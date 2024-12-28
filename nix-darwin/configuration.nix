@@ -55,6 +55,7 @@
       "docker"
       "firefox"
       "karabiner-elements"
+      "rectangle"
       "steam"
       "telegram"
       "tor-browser"
