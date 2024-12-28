@@ -4,7 +4,7 @@
 **/gtk-3.0/bookmarks
 **/en.utf-8.add.spl
 config/karabiner/**
-!config/karabiner/assets/complex_modifications/karabiner.json
+!config/karabiner/karabiner.json
 
 config/zed/**
 !config/zed/keymap.json
