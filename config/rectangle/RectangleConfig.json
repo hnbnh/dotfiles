@@ -237,10 +237,6 @@
     }
   },
   "shortcuts" : {
-    "almostMaximize" : {
-      "keyCode" : 46,
-      "modifierFlags" : 1048576
-    },
     "bottomHalf" : {
       "keyCode" : 125,
       "modifierFlags" : 786432
@@ -286,8 +282,8 @@
       "modifierFlags" : 786432
     },
     "maximize" : {
-      "keyCode" : 36,
-      "modifierFlags" : 786432
+      "keyCode" : 46,
+      "modifierFlags" : 1048576
     },
     "maximizeHeight" : {
       "keyCode" : 126,
