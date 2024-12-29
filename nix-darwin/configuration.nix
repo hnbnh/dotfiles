@@ -55,6 +55,7 @@
       "docker"
       "firefox"
       "karabiner-elements"
+      "mpv"
       "rectangle"
       "steam"
       "telegram"
