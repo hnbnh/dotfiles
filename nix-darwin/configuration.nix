@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep curl
   environment.systemPackages = with pkgs; [
@@ -20,6 +18,7 @@
     lazydocker
     lazygit
     mise
+    mpv
     neovim
     ripgrep
     sqlite
@@ -55,7 +54,6 @@
       "docker"
       "firefox"
       "karabiner-elements"
-      "mpv"
       "rectangle"
       "steam"
       "telegram"
@@ -80,6 +78,12 @@
       # tap to click
       Clicking = true;
     };
+    universalaccess = {
+      reduceMotion = true;
+      reduceTransparency = true;
+    };
+    # TODO: https://github.com/LnL7/nix-darwin/issues/1046
+    # Turn on night shift
     NSGlobalDomain = {
       AppleKeyboardUIMode = 3;
       ApplePressAndHoldEnabled = false;
