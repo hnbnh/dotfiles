@@ -53,8 +53,6 @@ wezterm.on("format-window-title", function(_, _, tabs)
 end)
 
 return {
-  window_background_opacity = 0.85,
-  macos_window_background_blur = 50,
   font_size = 17,
   font = wezterm.font("MesloLGS Nerd Font Mono"),
   line_height = 1.45,
