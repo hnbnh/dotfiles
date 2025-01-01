@@ -74,6 +74,13 @@
       autohide = true;
       mru-spaces = false;
     };
+    controlcenter = {
+      BatteryShowPercentage = true;
+      Sound = true;
+    };
+    finder = {
+      ShowPathbar = true;
+    };
     trackpad = {
       # tap to click
       Clicking = true;
