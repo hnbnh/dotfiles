@@ -21,7 +21,6 @@
     mpv
     neovim
     ripgrep
-    sqlite
     starship
     yazi
     yt-dlp
@@ -47,6 +46,7 @@
 
     brews = [
       "libyaml"
+      "sqlite3"
     ];
     casks = [
       "brave-browser"
