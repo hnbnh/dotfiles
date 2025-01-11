@@ -4,4 +4,5 @@ return {
   { "nvimdev/dashboard-nvim", enabled = false },
   { "akinsho/bufferline.nvim", enabled = false },
   { "ibhagwan/fzf-lua", enabled = false },
+  { "saghen/blink.cmp", enabled = false },
 }
