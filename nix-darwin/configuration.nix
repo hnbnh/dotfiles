@@ -49,6 +49,7 @@
       "sqlite3"
     ];
     casks = [
+      "alt-tab"
       "brave-browser"
       "datagrip"
       "docker"
