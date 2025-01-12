@@ -10,6 +10,7 @@
     delta
     fastfetch
     fd
+    ffmpeg
     fzf
     gh
     git
