@@ -36,8 +36,18 @@ return {
       desc = "Find files",
     },
   },
+  config = function(_, opts)
+    require("telescope").setup(opts)
+    require("telescope").load_extension("fzf")
+  end,
   opts = function(_, opts)
     local actions = require("telescope.actions")
+
+    opts.extensions = vim.tbl_deep_extend("force", opts.extensions or {}, {
+      fzf = {
+        case_mode = "ignore_case",
+      },
+    })
     opts.pickers = vim.tbl_deep_extend("force", opts.pickers, {
       buffers = {
         show_all_buffers = true,
