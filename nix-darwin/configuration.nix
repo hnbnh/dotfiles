@@ -55,6 +55,7 @@
       "datagrip"
       "docker"
       "firefox"
+      "ghostty"
       "karabiner-elements"
       "rectangle"
       "steam"

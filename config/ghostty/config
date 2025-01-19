@@ -1,0 +1,28 @@
+# # Fonts
+font-size = 15
+adjust-cell-height=55%
+# adjust-underline-position = 4
+
+# Mouse
+mouse-hide-while-typing = true
+
+# Theme
+theme = catppuccin-mocha
+cursor-invert-fg-bg = true
+
+# keybindings
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+shift+h=previous_tab
+keybind = ctrl+shift+l=next_tab
+keybind = ctrl+shift+comma=move_tab:-1
+keybind = ctrl+shift+period=move_tab:1
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+keybind = ctrl+shift+enter=new_split:auto
+keybind = ctrl+shift+i=inspector:toggle
+keybind = ctrl+shift+m=toggle_split_zoom
+keybind = ctrl+shift+r=reload_config
+keybind = ctrl+shift+s=write_screen_file:open
+keybind = ctrl+shift+w=close_surface
+
+gtk-tabs-location = bottom
