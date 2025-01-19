@@ -19,7 +19,7 @@ setopt HIST_SAVE_NO_DUPS
 #
 
 # Set editor default keymap to emacs (`-e`) or vi (`-v`)
-bindkey -v
+bindkey -e
 export KEYTIMEOUT=1
 
 # Prompt for spelling correction of commands.
