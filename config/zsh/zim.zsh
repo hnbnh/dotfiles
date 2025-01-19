@@ -140,3 +140,6 @@ bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+
