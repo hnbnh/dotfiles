@@ -10,3 +10,8 @@ function nn() {
 mkfile() {
   mkdir -p "$(dirname "$1")" && touch "$1"
 }
+
+function zvm_after_init() {
+  zvm_bindkey viins "^R" fzf-history-widget
+}
+
