@@ -1,4 +1,18 @@
 [[manager.prepend_keymap]]
-on = "<C-g>"
-run = 'shell "$SHELL" --block --confirm'
-desc = "Open shell here"
+on = "q"
+run = 'quit --no-cwd-file'
+desc = "Quit"
+
+[[manager.prepend_keymap]]
+on = "<c-g>"
+run = 'quit'
+desc = "Quit with cwd"
+
+[[manager.prepend_keymap]]
+on = [";", "f"]
+run = 'plugin fzf'
+desc = "fzf"
+
+[[manager.prepend_keymap]]
+on = ["?"]
+run = 'help'
