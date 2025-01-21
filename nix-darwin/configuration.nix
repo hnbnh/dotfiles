@@ -58,7 +58,6 @@
       "firefox"
       "ghostty"
       "karabiner-elements"
-      "rectangle"
       "steam"
       "telegram"
       "tor-browser"
@@ -104,7 +103,7 @@
       NSAutomaticSpellingCorrectionEnabled = false;
     };
     WindowManager = {
-      GloballyEnabled = true;
+      GloballyEnabled = false;
       AppWindowGroupingBehavior = false;
     };
   };
