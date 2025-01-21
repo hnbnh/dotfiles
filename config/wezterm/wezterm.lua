@@ -53,7 +53,7 @@ wezterm.on("format-window-title", function(_, _, tabs)
 end)
 
 return {
-  font_size = 17,
+  font_size = 15,
   font = wezterm.font("MesloLGS Nerd Font Mono"),
   line_height = 1.45,
   bold_brightens_ansi_colors = "No",
