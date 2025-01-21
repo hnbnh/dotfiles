@@ -26,6 +26,7 @@
     yazi
     yt-dlp
     zoxide
+    zellij
   ];
 
   environment.systemPath = [
