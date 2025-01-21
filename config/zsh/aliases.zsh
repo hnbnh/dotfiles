@@ -1,12 +1,7 @@
-alias sudo='sudo '
-alias apt='nala'
-
 alias lg='lazygit'
 alias lzd='lazydocker'
 
 alias n='nvim'
-
-alias nls='nnn -de'
 
 alias t='tmux'
 alias tzsh='time zsh -i -c exit'
