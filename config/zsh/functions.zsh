@@ -15,3 +15,23 @@ function zvm_after_init() {
   zvm_bindkey viins "^R" fzf-history-widget
 }
 
+function load_plugins() {
+  local dir="$ZSH_DIR/plugins"
+
+  if [[ ! -d "$dir" ]]; then
+    echo "No plugins found in $dir"
+    return
+  fi
+
+  for plugin_dir in "$dir"/*/; do
+    if [[ -d "$plugin_dir" ]]; then
+      local plugin_name=$(basename "$plugin_dir")
+      local plugin_file="$plugin_dir$plugin_name.plugin.zsh"
+
+      if [[ -f "$plugin_file" ]]; then
+        source "$plugin_file"
+      fi
+    fi
+  done
+}
+

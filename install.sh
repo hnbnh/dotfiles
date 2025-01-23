@@ -17,6 +17,7 @@ function install_dots {
   done
 
   ln -sfnv "$CFG_DIR/zsh/.zshrc" "$HOME/.zshrc"
+  ln -sfnv "$CFG_DIR/zsh/.zshenv" "$HOME/.zshenv"
   ln -sfnv "$CFG_DIR/zsh/.zimrc" "$HOME/.zimrc"
   ln -sfnv "$CFG_DIR/git/.gitconfig" "$HOME/.gitconfig"
   ln -sfnv "$CFG_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
