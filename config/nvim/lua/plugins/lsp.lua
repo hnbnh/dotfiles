@@ -34,4 +34,12 @@ return {
       inlay_hints = { enabled = false },
     },
   },
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      providers = {
+        "mason.providers.client",
+      },
+    },
+  },
 }
