@@ -1,3 +1,20 @@
 [submodule "config/awesome/lain"]
 	path = config/awesome/lain
 	url = https://github.com/lcpz/lain.git
+	shallow = true
+[submodule "config/zsh/plugins/zsh-syntax-highlighting"]
+	path = config/zsh/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
+	shallow = true
+[submodule "config/zsh/plugins/zsh-autosuggestions"]
+	path = config/zsh/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+	shallow = true
+[submodule "config/zsh/plugins/zsh-vi-mode"]
+	path = config/zsh/plugins/zsh-vi-mode
+	url = https://github.com/jeffreytse/zsh-vi-mode
+	shallow = true
+[submodule "config/zsh/plugins/fzf-tab"]
+	path = config/zsh/plugins/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab
+	shallow = true
