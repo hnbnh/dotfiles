@@ -12,3 +12,5 @@ config/zed/**
 !config/zed/tasks.json
 
 config/yazi/flavors/
+
+.DS_Store
