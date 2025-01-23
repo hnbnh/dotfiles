@@ -98,20 +98,15 @@ keybinds clear-defaults=true {
             SwitchToMode "normal"
         }
     }
-    shared_except "locked" {
-        bind "Alt +" { Resize "Increase"; }
-        bind "Alt -" { Resize "Decrease"; }
-        bind "Alt =" { Resize "Increase"; }
-        bind "Alt [" { PreviousSwapLayout; }
-        bind "Alt ]" { NextSwapLayout; }
+    shared {
         bind "Ctrl g" { SwitchToMode "locked"; }
         bind "Ctrl q" { Quit; }
         bind "Ctrl shift h" { GoToPreviousTab; }
         bind "Ctrl shift l" { GoToNextTab; }
-        bind "Ctrl shift t" { NewTab; SwitchToMode "normal"; }
-        bind "Ctrl shift w" { CloseFocus; SwitchToMode "normal"; }
-        bind "Ctrl shift enter" { NewPane "right"; SwitchToMode "normal"; }
-        bind "Ctrl shift ;" { NewPane "down"; SwitchToMode "normal"; }
+        bind "Ctrl shift t" { NewTab; SwitchToMode "locked"; }
+        bind "Ctrl shift w" { CloseFocus; SwitchToMode "locked"; }
+        bind "Ctrl shift enter" { NewPane "right"; SwitchToMode "locked"; }
+        bind "Ctrl shift ;" { NewPane "down"; SwitchToMode "locked"; }
         bind "Ctrl /" { ToggleFloatingPanes; }
     }
     shared_except "locked" "move" {
