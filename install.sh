@@ -20,13 +20,6 @@ function install_dots {
   ln -sfnv "$CFG_DIR/zsh/.zshenv" "$HOME/.zshenv"
   ln -sfnv "$CFG_DIR/zsh/.zimrc" "$HOME/.zimrc"
   ln -sfnv "$CFG_DIR/git/.gitconfig" "$HOME/.gitconfig"
-  ln -sfnv "$CFG_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
-  ln -sfnv "$CFG_DIR/betterlockscreen/betterlockscreenrc" "$HOME/.config/betterlockscreenrc"
-  ln -sfnv "$CFG_DIR/ripgrep/.ripgreprc" "$HOME/.ripgreprc"
-  ln -sfnv "$CFG_DIR/yt-dlp/yt-dlp.conf" "$HOME/yt-dlp.conf"
-
-  mkdir -p "$HOME/Library/Application Support/Rectangle"
-  ln -sfnv "$CFG_DIR/rectangle/RectangleConfig.json" "$HOME/Library/Application Support/Rectangle/RectangleConfig.json"
 }
 
 function setup_linux {
