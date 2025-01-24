@@ -2,26 +2,6 @@
 
 set -e
 
-function have {
-  command -v "$1" &>/dev/null
-}
-
-function install_dots {
-  CFG_DIR="$HOME/dotfiles/config"
-  DEST_DIR="$HOME/.config"
-
-  mkdir -p $DEST_DIR
-
-  for dir in "$CFG_DIR"/*/; do
-    ln -sfnv $dir $DEST_DIR
-  done
-
-  ln -sfnv "$CFG_DIR/zsh/.zshrc" "$HOME/.zshrc"
-  ln -sfnv "$CFG_DIR/zsh/.zshenv" "$HOME/.zshenv"
-  ln -sfnv "$CFG_DIR/zsh/.zimrc" "$HOME/.zimrc"
-  ln -sfnv "$CFG_DIR/git/.gitconfig" "$HOME/.gitconfig"
-}
-
 function setup_linux {
   # Install ansible & plugins
   have ansible || sudo dnf install ansible -y
