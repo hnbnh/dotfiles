@@ -43,3 +43,4 @@ sudo ./install.sh
 - [khuedoan/macos-setup](https://github.com/khuedoan/macos-setup)
 - [FelixKratz/dotfiles](https://github.com/FelixKratz/dotfiles)
 - [LazyVim/LazyVim](https://github.com/LazyVim/LazyVim)
+- [dreamsofautonomy/zen-omp](https://github.com/dreamsofautonomy/zen-omp)
