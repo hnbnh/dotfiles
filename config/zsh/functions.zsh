@@ -35,3 +35,10 @@ function load_plugins() {
   done
 }
 
+function clean_up() {
+  nix-collect-garbage --delete-older-than 7d
+  sudo nix-collect-garbage --delete-older-than 7d
+
+  nix-collect-garbage -d
+  sudo nix-collect-garbage -d
+}
