@@ -21,6 +21,7 @@
     mise
     mpv
     neovim
+    oh-my-posh
     ripgrep
     starship
     yazi
