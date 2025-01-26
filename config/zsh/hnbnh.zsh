@@ -11,11 +11,6 @@ setopt histignorespace
 
 load_plugins
 
-bindkey -v
-bindkey '^F' autosuggest-accept
-bindkey '^P' up-line-or-history
-bindkey '^N' down-line-or-history
-
 eval "$(mise activate zsh)"
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/hnbnh.toml)"
 eval "$(zoxide init zsh)"

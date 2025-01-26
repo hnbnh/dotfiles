@@ -10,6 +10,10 @@
 	path = config/zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
 	shallow = true
+[submodule "config/zsh/plugins/zsh-vi-mode"]
+	path = config/zsh/plugins/zsh-vi-mode
+	url = https://github.com/jeffreytse/zsh-vi-mode
+	shallow = true
 [submodule "config/zsh/plugins/fzf-tab"]
 	path = config/zsh/plugins/fzf-tab
 	url = https://github.com/Aloxaf/fzf-tab
