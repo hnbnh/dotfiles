@@ -29,7 +29,9 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("VimEnter", {
   group = augroup("PersistenceRestore"),
   callback = function()
-    require("persistence").load()
+    if vim.fn.argv(0, -1) == "." then
+      require("persistence").load()
+    end
   end,
   nested = true,
 })
