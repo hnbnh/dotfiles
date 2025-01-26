@@ -23,11 +23,14 @@
     neovim
     oh-my-posh
     ripgrep
+    sesh
     starship
+    tmux
     yazi
+    yq-go
     yt-dlp
-    zoxide
     zellij
+    zoxide
   ];
 
   environment.systemPath = [

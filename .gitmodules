@@ -14,3 +14,15 @@
 	path = config/zsh/plugins/fzf-tab
 	url = https://github.com/Aloxaf/fzf-tab
 	shallow = true
+[submodule "config/tmux/plugins/tmux-resurrect"]
+	path = config/tmux/plugins/tmux-resurrect
+	url = https://github.com/tmux-plugins/tmux-resurrect
+	shallow = true
+[submodule "config/tmux/plugins/tmux-yank"]
+	path = config/tmux/plugins/tmux-yank
+	url = https://github.com/tmux-plugins/tmux-yank
+	shallow = true
+[submodule "config/tmux/plugins/tpm"]
+	path = config/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
+	shallow = true
