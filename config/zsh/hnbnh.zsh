@@ -12,7 +12,7 @@ setopt histignorespace
 load_plugins
 
 eval "$(mise activate zsh)"
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/hnbnh.toml)"
+eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 source <(fzf --zsh)
 

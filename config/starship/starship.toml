@@ -1,6 +1,18 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+format = """
+$username\
+$localip\
+$shlvl\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$cmd_duration\
+$line_break\
+$character"""
+
 [character]
-success_symbol = '[I ❯](bold green)'
-error_symbol = '[I ❯](bold red)'
-vicmd_symbol = "[V ❯](bold blue)"
+success_symbol = '[➜](bold green) '
+error_symbol = '[✗](bold red) '
+vimcmd_symbol = '[](bold blue) '
