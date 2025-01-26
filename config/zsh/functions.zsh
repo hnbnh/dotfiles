@@ -1,3 +1,5 @@
+source ~/.config/bash/functions
+
 function nn() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
@@ -7,7 +9,7 @@ function nn() {
 	rm -f -- "$tmp"
 }
 
-mkfile() {
+function mkfile() {
   mkdir -p "$(dirname "$1")" && touch "$1"
 }
 
@@ -42,24 +44,3 @@ function clean_up() {
   nix-collect-garbage -d
   sudo nix-collect-garbage -d
 }
-
-function have {
-  command -v "$1" &>/dev/null
-}
-
-function install_dots {
-  CFG_DIR="$HOME/dotfiles/config"
-  DEST_DIR="$HOME/.config"
-
-  mkdir -p $DEST_DIR
-
-  for dir in "$CFG_DIR"/*/; do
-    ln -sfnv $dir $DEST_DIR
-  done
-
-  ln -sfnv "$CFG_DIR/zsh/.zshrc" "$HOME/.zshrc"
-  ln -sfnv "$CFG_DIR/zsh/.zshenv" "$HOME/.zshenv"
-  ln -sfnv "$CFG_DIR/zsh/.zimrc" "$HOME/.zimrc"
-  ln -sfnv "$CFG_DIR/git/.gitconfig" "$HOME/.gitconfig"
-}
-

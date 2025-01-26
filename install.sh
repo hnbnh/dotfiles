@@ -2,6 +2,8 @@
 
 set -e
 
+source ./config/bash/functions
+
 function setup_linux {
   # Install ansible & plugins
   have ansible || sudo dnf install ansible -y
