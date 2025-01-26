@@ -46,7 +46,6 @@
   # Homebrew packages
   homebrew = {
     enable = true;
-    onActivation.cleanup = "zap";
     taps = [
     ];
 
