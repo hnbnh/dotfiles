@@ -1,10 +1,16 @@
-# ~/dotfiles
+# ~/dotfiles & automated machine setup
 
-![screenshot](./assets/2023-01-18_18-16.png)
+> Commit hash: [1bc1701](https://github.com/hnbnh/dotfiles/tree/1bc170100bf58d01b002498b6b9adbba1d306e19)
 
-## Install
+![screenshot](./assets/2025-01-27-10.21.png)
+
+## Installation
+
+> [!WARNING]
+> Consider forking this repo
 
 ```bash
+git clone --recurse-submodules -j8 git@github.com:hnbnh/dotfiles.git
 sudo ./install.sh
 ```
 
@@ -26,8 +32,7 @@ sudo ./install.sh
       */20 * * * * osascript -e 'display notification "Hydrate 💧" with title "Health notification"'
       ```
 
-- [ ] Support Fedora
-- [ ] Support Arch (EndeavourOS)
+- [ ] Support nix
 - [ ] Support macOS
   - [ ] System Settings > Privacy & Security > Full Disk Access > Toggle `Terminal`
   - [ ] Configuration
