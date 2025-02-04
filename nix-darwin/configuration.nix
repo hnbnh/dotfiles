@@ -20,6 +20,7 @@
     lazydocker
     lazygit
     mise
+    mkcert
     mpv
     neovim
     oh-my-posh
@@ -61,6 +62,7 @@
       "docker"
       "firefox"
       "ghostty"
+      "input-source-pro"
       "karabiner-elements"
       "steam"
       "telegram"
@@ -69,7 +71,6 @@
       "visual-studio-code"
       "wezterm"
       "zen-browser"
-      "zoom"
     ];
   };
 
