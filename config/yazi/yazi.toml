@@ -4,3 +4,4 @@
 
 [manager]
 show_hidden = true
+linemode = "size"
