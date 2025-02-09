@@ -24,11 +24,13 @@ return {
       servers = {
         ts_ls = { enabled = false },
         solargraph = {
+          enabled = false,
           init_options = {
             autoformat = false,
             formatting = false,
           },
         },
+        ruby_lsp = { enabled = false },
         typos_lsp = {},
       },
       inlay_hints = { enabled = false },
