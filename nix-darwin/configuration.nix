@@ -52,6 +52,7 @@
     ];
 
     brews = [
+      "dockutil"
       "libyaml"
       "sqlite3"
     ];
@@ -64,12 +65,14 @@
       "ghostty"
       "input-source-pro"
       "karabiner-elements"
+      "keka"
       "steam"
       "telegram"
       "tor-browser"
       "utm"
       "visual-studio-code"
       "wezterm"
+      "whisky"
       "zen-browser"
     ];
   };
