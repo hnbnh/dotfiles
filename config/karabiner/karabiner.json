@@ -97,19 +97,6 @@
                         ]
                     },
                     {
-                        "description": "Use LEFT OPTION + s to search copied word in Dictionary.app",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "s",
-                                    "modifiers": { "mandatory": ["left_option"] }
-                                },
-                                "to": [{ "shell_command": "open \"dict://`pbpaste`\"" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Finder: Use Return as Open",
                         "enabled": false,
                         "manipulators": [
