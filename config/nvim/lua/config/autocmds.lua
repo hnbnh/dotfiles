@@ -30,6 +30,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
   group = augroup("PersistenceRestore"),
   callback = function()
     if vim.fn.argv(0, -1) == "." then
+      require("edgy").open()
       require("persistence").load()
     end
   end,
