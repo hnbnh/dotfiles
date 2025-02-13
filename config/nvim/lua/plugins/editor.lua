@@ -229,4 +229,25 @@ return {
     },
   },
   { "mrjones2014/smart-splits.nvim" },
+  {
+    "akinsho/bufferline.nvim",
+    keys = {
+      { "<leader>bh", "<cmd>BufferLineMovePrev<cr>", desc = "Move Left" },
+      { "<leader>bl", "<cmd>BufferLineMoveNext<cr>", desc = "Move Right" },
+    },
+  },
+  {
+    "folke/edgy.nvim",
+    opts = {
+      animate = { enabled = false },
+      left = {
+        {
+          title = "Neo-Tree",
+          ft = "neo-tree",
+          pinned = true,
+          open = "Neotree reveal",
+        },
+      },
+    },
+  },
 }

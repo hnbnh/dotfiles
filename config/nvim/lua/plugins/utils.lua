@@ -9,9 +9,36 @@ return {
   },
   {
     "folke/snacks.nvim",
+    -- stylua: ignore
     keys = {
+      { "<leader>bb", function () Snacks.picker.buffers() end, desc = "Buffers" },
+      { "<leader>f", function () Snacks.picker.files() end, desc = "Find Files" },
+      { "<leader>fb", false },
+      { "<leader>fB", false },
+      { "<leader>ff", false },
+      { "<leader>fF", false },
+      { "<leader>fc", false },
+      { "<leader>fg", false },
+      { "<leader>fp", false },
+      { "<leader>fr", false },
+      { "<leader>fR", false },
       { "<leader>n", false },
       { "<c-k>", false },
+    },
+    opts = {
+      scroll = { enabled = false },
+      picker = {
+        win = {
+          input = {
+            keys = {
+              ["<c-p>"] = { "history_back", mode = { "i", "n" } },
+              ["<c-n>"] = { "history_forward", mode = { "i", "n" } },
+              ["<c-d>"] = { "bufdelete", mode = { "i", "n" } },
+              ["<esc>"] = nil,
+            },
+          },
+        },
+      },
     },
   },
   {

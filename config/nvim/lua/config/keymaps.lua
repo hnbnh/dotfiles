@@ -4,10 +4,6 @@ local del = vim.keymap.del
 del("n", "<leader>fn")
 del("n", "<leader>ft")
 del("n", "<leader>fT")
-del("n", "<leader>bb")
-del("n", "<leader>bd")
-del("n", "<leader>bD")
-del("n", "<leader>bo")
 del("n", "<leader>qq")
 
 -- Diagnostic

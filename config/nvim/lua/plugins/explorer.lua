@@ -10,7 +10,7 @@ return {
           hint = "floating-big-letter",
           filter_rules = {
             bo = {
-              filetype = { "NvimSeparator", "noice" },
+              filetype = { "NvimSeparator", "noice", "neo-tree", "aerial" },
             },
           },
         },
@@ -25,6 +25,7 @@ return {
       return { { "<leader>n", "<cmd>Neotree reveal<cr>", desc = "Neotree" } }
     end,
     opts = {
+      source = nil,
       filesystem = {
         use_libuv_file_watcher = true,
         filtered_items = {
