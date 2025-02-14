@@ -31,6 +31,11 @@ gui:
       - "#8aadf4" # Blue
     unstagedChangesColor:
       - red # Red
+  filterMode: fuzzy
+keybinding:
+  branches:
+    rebaseBranch: R
+    renameBranch: r
 customCommands:
   - key: "n"
     context: "localBranches"
