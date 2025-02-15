@@ -52,7 +52,6 @@
     ];
 
     brews = [
-      "dockutil"
       "libyaml"
       "sqlite3"
     ];
