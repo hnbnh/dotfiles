@@ -62,7 +62,7 @@
       "docker"
       "firefox"
       "ghostty"
-      "input-source-pro"
+      "gotiengviet"
       "karabiner-elements"
       "keka"
       "steam"
