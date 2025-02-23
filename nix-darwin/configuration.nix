@@ -9,6 +9,7 @@
     colima
     curl
     delta
+    docker
     fastfetch
     fd
     ffmpeg
@@ -59,7 +60,6 @@
       "alt-tab"
       "brave-browser"
       "datagrip"
-      "docker"
       "firefox"
       "ghostty"
       "gotiengviet"
