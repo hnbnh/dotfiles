@@ -50,4 +50,14 @@ return {
       { "<leader>qS", false },
     },
   },
+  {
+    "pwntester/octo.nvim",
+    opts = {
+      enable_builtin = true,
+      default_to_projects_v2 = true,
+    },
+    keys = {
+      { "<leader>o", "<cmd>Octo<cr>", desc = "Octo" },
+    },
+  },
 }
