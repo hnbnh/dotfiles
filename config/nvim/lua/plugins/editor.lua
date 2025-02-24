@@ -232,8 +232,8 @@ return {
   {
     "akinsho/bufferline.nvim",
     keys = {
-      { "<leader>bh", "<cmd>BufferLineMovePrev<cr>", desc = "Move Left" },
-      { "<leader>bl", "<cmd>BufferLineMoveNext<cr>", desc = "Move Right" },
+      { "<leader>bh", "<cmd>BufferLineCyclePrev<cr>", desc = "Move Left" },
+      { "<leader>bl", "<cmd>BufferLineCycleNext<cr>", desc = "Move Right" },
     },
   },
   {
