@@ -3,5 +3,4 @@ return {
   { "folke/tokyonight.nvim", enabled = false },
   { "nvimdev/dashboard-nvim", enabled = false },
   { "ibhagwan/fzf-lua", enabled = false },
-  { "saghen/blink.cmp", enabled = false },
 }
