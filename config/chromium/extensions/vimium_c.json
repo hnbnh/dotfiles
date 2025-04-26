@@ -9,6 +9,7 @@
     "map t Vomnibar.activateTabs",
     "map <c-t> Vomnibar.activate",
     "unmap p",
+    "unmap r",
     ""
   ],
   "searchEngines": "",
