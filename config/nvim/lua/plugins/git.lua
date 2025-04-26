@@ -4,7 +4,7 @@ local prev_hunk = function()
   if vim.wo.diff then
     vim.cmd("norm! [c")
   else
-    gs.prev_hunk()
+    gs.nav_hunk("prev")
   end
 end
 
@@ -14,7 +14,7 @@ local next_hunk = function()
   if vim.wo.diff then
     vim.cmd("norm! ]c")
   else
-    gs.next_hunk()
+    gs.nav_hunk("next")
   end
 end
 
