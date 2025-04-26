@@ -1,12 +1,6 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      {
-        url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-        opts = { underline = true },
-      },
-    },
     opts = function(_, opts)
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       keys[#keys + 1] = { "<c-k>", false }
@@ -19,7 +13,7 @@ return {
       diagnostics = {
         underline = true,
         update_in_insert = false,
-        virtual_text = false,
+        virtual_lines = { current_line = true },
       },
       servers = {
         ts_ls = { enabled = false },
