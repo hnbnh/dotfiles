@@ -19,6 +19,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "qf",
     "query",
     "spectre_panel",
+    "oil",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false

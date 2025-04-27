@@ -251,4 +251,21 @@ return {
     },
     enabled = false,
   },
+  {
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    keys = {
+      { "<leader>N", "<cmd>Oil --float<cr>", desc = "Oil" },
+      {
+        "<leader>ND",
+        function()
+          require("oil").discard_all_changes()
+        end,
+        desc = "Oil",
+      },
+    },
+    lazy = false,
+  },
 }
