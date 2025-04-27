@@ -66,4 +66,5 @@ return {
       { "<leader>o", "<cmd>Octo<cr>", desc = "Octo" },
     },
   },
+  { "mbbill/undotree", cmd = { "UndotreeToggle" } },
 }
