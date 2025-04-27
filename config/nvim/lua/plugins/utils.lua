@@ -28,6 +28,7 @@ return {
     opts = {
       scroll = { enabled = false },
       picker = {
+        enabled = false,
         matcher = {
           smartcase = false,
         },

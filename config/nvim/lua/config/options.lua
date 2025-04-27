@@ -11,3 +11,5 @@ o.wrap = true
 o.showbreak = "↪"
 
 o.fileformats = "unix,dos"
+
+vim.g.lazyvim_picker = "telescope"
