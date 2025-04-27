@@ -47,10 +47,10 @@ customCommands:
     loadingText: "Pushing commit..."
     description: "Push a specific commit (and any preceding)"
     stream: yes
-  - key: "v"
+  - key: "C"
     prompts:
       - type: "input"
-        title: "PR id:"
+        title: "🚀 PR ID or URL:"
     command: "gh pr checkout {{index .PromptResponses 0}}"
     context: "localBranches"
-    loadingText: "checking out PR"
+    loadingText: "Checking out PR..."
