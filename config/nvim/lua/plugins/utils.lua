@@ -28,6 +28,12 @@ return {
     opts = {
       scroll = { enabled = false },
       picker = {
+        matcher = {
+          smartcase = false,
+        },
+        files = {
+          hidden = true,
+        },
         win = {
           input = {
             keys = {
