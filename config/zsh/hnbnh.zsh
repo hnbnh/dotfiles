@@ -1,6 +1,10 @@
 ZSH_DIR="$HOME/.config/zsh"
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=500000
+SAVEHIST=500000
+
 setopt autocd
 setopt autopushd
 setopt sharehistory
