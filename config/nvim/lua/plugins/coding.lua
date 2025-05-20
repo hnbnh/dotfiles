@@ -36,20 +36,11 @@ return {
   { "tpope/vim-rails" },
   {
     "saghen/blink.cmp",
-    dependencies = {
-      { "Exafunction/codeium.nvim" },
-    },
     opts = {
       keymap = {
         ["<c-k>"] = { "select_prev", "fallback" },
         ["<c-j>"] = { "select_next", "fallback" },
         ["<cr>"] = {},
-      },
-      sources = {
-        compat = { "codeium" },
-        providers = {
-          codeium = { name = "Codeium", module = "codeium.blink", async = true },
-        },
       },
     },
   },
