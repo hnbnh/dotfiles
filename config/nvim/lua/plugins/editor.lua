@@ -266,6 +266,5 @@ return {
         desc = "Oil",
       },
     },
-    lazy = false,
   },
 }
