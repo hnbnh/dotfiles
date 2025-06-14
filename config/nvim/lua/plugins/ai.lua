@@ -2,6 +2,7 @@
 return {
   {
     "yetone/avante.nvim",
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     dependencies = {
       "stevearc/dressing.nvim",
@@ -25,6 +26,7 @@ return {
   },
   {
     "saghen/blink.cmp",
+    cond = not vim.g.vscode,
     lazy = true,
     dependencies = { "saghen/blink.compat" },
     opts = {
@@ -61,6 +63,7 @@ return {
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
+    cond = not vim.g.vscode,
     optional = true,
     ft = function(_, ft)
       vim.list_extend(ft, { "Avante" })
@@ -71,6 +74,7 @@ return {
   },
   {
     "folke/which-key.nvim",
+    cond = not vim.g.vscode,
     optional = true,
     opts = {
       spec = {

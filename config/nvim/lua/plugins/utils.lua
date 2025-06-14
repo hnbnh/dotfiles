@@ -9,6 +9,7 @@ return {
   },
   {
     "folke/snacks.nvim",
+    cond = not vim.g.vscode,
     -- stylua: ignore
     keys = {
       { "<leader>bb", function () Snacks.picker.buffers() end, desc = "Buffers" },
@@ -50,6 +51,7 @@ return {
   },
   {
     "folke/persistence.nvim",
+    cond = not vim.g.vscode,
     keys = {
       { "<leader>qd", false },
       { "<leader>ql", false },
@@ -59,6 +61,7 @@ return {
   },
   {
     "pwntester/octo.nvim",
+    cond = not vim.g.vscode,
     opts = {
       enable_builtin = true,
       default_to_projects_v2 = true,
@@ -67,5 +70,5 @@ return {
       { "<leader>o", "<cmd>Octo<cr>", desc = "Octo" },
     },
   },
-  { "mbbill/undotree", cmd = { "UndotreeToggle" } },
+  { "mbbill/undotree", cond = not vim.g.vscode, cmd = { "UndotreeToggle" } },
 }

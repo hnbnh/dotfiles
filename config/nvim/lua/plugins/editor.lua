@@ -20,9 +20,9 @@ local function toggle_telescope(harpoon_files)
 end
 
 return {
-  { "nacro90/numb.nvim", event = "VeryLazy", config = true },
+  { "nacro90/numb.nvim", cond = not vim.g.vscode, event = "VeryLazy", config = true },
   { "kylechui/nvim-surround", event = "VeryLazy", config = true },
-  { "echasnovski/mini.trailspace", event = "BufReadPost", config = true },
+  { "echasnovski/mini.trailspace", cond = not vim.g.vscode, event = "BufReadPost", config = true },
   { "tpope/vim-repeat" },
   {
     "nvim-zh/colorful-winsep.nvim",
@@ -35,6 +35,7 @@ return {
   },
   {
     "folke/flash.nvim",
+    cond = not vim.g.vscode,
     keys = {
       {
         "s",
@@ -192,6 +193,7 @@ return {
   },
   {
     "ThePrimeagen/harpoon",
+    cond = not vim.g.vscode,
     keys = {
       -- stylua: ignore
       { "<leader>h", function() toggle_telescope(require("harpoon"):list()) end, desc = "Open harpoon window" },
@@ -199,6 +201,7 @@ return {
   },
   {
     "folke/noice.nvim",
+    cond = not vim.g.vscode,
     opts = {
       cmdline = { format = { lua = false } },
       lsp = {
@@ -219,6 +222,7 @@ return {
   },
   {
     "folke/which-key.nvim",
+    cond = not vim.g.vscode,
     opts_extend = { "spec" },
     opts = {
       spec = {
@@ -228,9 +232,10 @@ return {
       },
     },
   },
-  { "mrjones2014/smart-splits.nvim" },
+  { "mrjones2014/smart-splits.nvim", cond = not vim.g.vscode },
   {
     "akinsho/bufferline.nvim",
+    cond = not vim.g.vscode,
     keys = {
       { "<leader>bh", "<cmd>BufferLineCyclePrev<cr>", desc = "Move Left" },
       { "<leader>bl", "<cmd>BufferLineCycleNext<cr>", desc = "Move Right" },
@@ -238,6 +243,7 @@ return {
   },
   {
     "folke/edgy.nvim",
+    cond = not vim.g.vscode,
     opts = {
       animate = { enabled = false },
       left = {
@@ -253,6 +259,7 @@ return {
   },
   {
     "stevearc/oil.nvim",
+    cond = not vim.g.vscode,
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {},

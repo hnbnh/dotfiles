@@ -27,15 +27,17 @@ return {
   },
   {
     "mg979/vim-visual-multi",
+    cond = not vim.g.vscode,
     event = "BufReadPost",
     keys = {
       { "<C-up>", "<Plug>(Add Cursor Up)" },
       { "<C-down>", "<Plug>(Add Cursor Down)" },
     },
   },
-  { "tpope/vim-rails" },
+  { "tpope/vim-rails", cond = not vim.g.vscode },
   {
     "saghen/blink.cmp",
+    cond = not vim.g.vscode,
     opts = {
       keymap = {
         ["<c-k>"] = { "select_prev", "fallback" },

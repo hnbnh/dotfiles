@@ -2,6 +2,7 @@ local databases_path = vim.fn.stdpath("state") .. "/databases"
 
 return {
   "nvim-telescope/telescope.nvim",
+  cond = not vim.g.vscode,
   dependencies = {
     {
       "prochri/telescope-all-recent.nvim",

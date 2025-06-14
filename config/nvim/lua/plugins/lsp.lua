@@ -1,6 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    cond = not vim.g.vscode,
     opts = function(_, opts)
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       keys[#keys + 1] = { "<c-k>", false }
@@ -32,6 +33,7 @@ return {
   },
   {
     "williamboman/mason.nvim",
+    cond = not vim.g.vscode,
     opts = {
       providers = {
         "mason.providers.client",
