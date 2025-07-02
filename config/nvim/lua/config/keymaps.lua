@@ -1,6 +1,10 @@
 local map = vim.keymap.set
 local del = vim.keymap.del
 
+if vim.g.vscode then
+  return
+end
+
 del("n", "<leader>fn")
 del("n", "<leader>ft")
 del("n", "<leader>fT")

@@ -1,6 +1,7 @@
 return {
   {
     "andrewferrier/debugprint.nvim",
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     config = true,
     opts = {
@@ -9,7 +10,6 @@ return {
   },
   {
     "folke/snacks.nvim",
-    cond = not vim.g.vscode,
     -- stylua: ignore
     keys = {
       { "<leader>bb", function () Snacks.picker.buffers() end, desc = "Buffers" },
