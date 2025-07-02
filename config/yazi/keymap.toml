@@ -1,18 +1,18 @@
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "q"
 run = 'quit --no-cwd-file'
 desc = "Quit"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "<c-g>"
 run = 'quit'
 desc = "Quit with cwd"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = [";", "f"]
 run = 'plugin fzf'
 desc = "fzf"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["?"]
 run = 'help'
