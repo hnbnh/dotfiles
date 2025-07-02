@@ -70,7 +70,6 @@
       "utm"
       "visual-studio-code"
       "wezterm"
-      "whisky"
       "zen-browser"
     ];
   };
