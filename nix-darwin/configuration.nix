@@ -76,9 +76,6 @@
   };
 
   system.defaults = {
-    alf = {
-      globalstate = 1;
-    };
     dock = {
       autohide = true;
       mru-spaces = false;
@@ -128,4 +125,6 @@
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
+
+  system.primaryUser = "hnbnh";
 }
