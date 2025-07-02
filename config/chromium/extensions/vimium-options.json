@@ -1,0 +1,4 @@
+{
+  "keyMappings": "# Insert your preferred key mappings here.\nmapKey J K\nmapKey K J\nmapKey t T\nmap <c-o> goBack\nmap <c-i> goForward\nunmap p\nunmap r\nunmap x",
+  "settingsVersion": "2.3"
+}
