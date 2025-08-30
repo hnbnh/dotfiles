@@ -57,6 +57,11 @@ return {
         },
       })
     end,
+    -- FIXME: Remove this patch once this PR is merged https://github.com/LazyVim/LazyVim/pull/6354
+    opts = function()
+      local bufferline = require("catppuccin.groups.integrations.bufferline")
+      bufferline.get = bufferline.get or bufferline.get_theme
+    end,
   },
 
   {
