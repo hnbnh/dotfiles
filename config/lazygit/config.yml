@@ -4,6 +4,7 @@ git:
   paging:
     colorArg: always
     pager: delta --paging=never
+  localBranchSortOrder: recency
 gui:
   mouseEvents: false
   showIcons: true
