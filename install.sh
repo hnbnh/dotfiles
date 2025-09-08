@@ -32,7 +32,7 @@ function setup_macos {
   fi
 
   # Set up nix-darwin
-  /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake './nix-darwin#hnbnh'
+  /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake './nix#hnbnh'
 }
 
 function main() {

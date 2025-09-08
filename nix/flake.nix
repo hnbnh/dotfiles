@@ -1,5 +1,5 @@
 {
-  description = "hnbnh's macos workspace";
+  description = "hnbnh's workspace";
 
   inputs = {
     nixpkgs = {
@@ -11,13 +11,31 @@
     };
   };
 
-  outputs = { self, nixpkgs, darwin }: {
-    darwinConfigurations.hnbnh = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        ./configuration.nix
-      ];
-      inputs = { inherit nixpkgs darwin; };
+  outputs =
+    {
+      self,
+      nixpkgs,
+      darwin,
+    }:
+    {
+      darwinConfigurations.hnbnh = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          ./configuration.nix
+        ];
+        inputs = { inherit nixpkgs darwin; };
+      };
+
+      packages.aarch64-linux =
+        let
+          pkgs = import nixpkgs { system = "aarch64-linux"; };
+          sharedPackages = import ./packages.nix { pkgs = pkgs; };
+        in
+        {
+          default = pkgs.buildEnv {
+            name = "packages";
+            paths = sharedPackages;
+          };
+        };
     };
-  };
 }
