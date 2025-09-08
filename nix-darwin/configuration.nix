@@ -24,6 +24,7 @@
     mkcert
     mpv
     neovim
+    nixfmt
     oh-my-posh
     ripgrep
     sesh
@@ -65,7 +66,7 @@
       "karabiner-elements"
       "keka"
       "steam"
-      "telegram"
+      "telegram-desktop"
       "tor-browser"
       "utm"
       "visual-studio-code"
