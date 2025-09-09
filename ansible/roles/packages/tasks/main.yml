@@ -11,20 +11,16 @@
   become: true
   dnf:
     name:
-      - zsh
-
-      # gui
       - blueman
       - ibus
+      - ibus-bamboo # Vietnamese input method
       - network-manager-applet
       - obs-studio
       - papirus-icon-theme
       - swappy
       - xournalpp
       - zathura
-
-      # Input method
-      - ibus-bamboo # Vietnamese
+      - zsh
 
     state: latest
 
