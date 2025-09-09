@@ -109,5 +109,4 @@
       - dnf-automatic
     state: absent
 
-- include_tasks: nix.yml
 - include_tasks: post-install.yml
