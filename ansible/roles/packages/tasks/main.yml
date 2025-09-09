@@ -12,6 +12,7 @@
   dnf:
     name:
       - blueman
+      - hyprland
       - ibus
       - ibus-bamboo # Vietnamese input method
       - network-manager-applet
