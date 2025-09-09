@@ -1,5 +1,4 @@
 - name: Enable project fedora copr
   shell: sudo dnf corp enable {{ item }}
   loop:
-    - solopasha/hyprland
-    - wezfurlong/wezterm-nightly
+    - petersen/nix
