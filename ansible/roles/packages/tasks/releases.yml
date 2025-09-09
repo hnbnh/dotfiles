@@ -1,8 +1,0 @@
-- name: Download executables
-  become: true
-  ansible.builtin.get_url:
-    url: "{{ item }}"
-    dest: /usr/local/bin/nnn
-    mode: "0755"
-  loop:
-    - https://github.com/hnbnh/nnn/releases/latest/download/nnn

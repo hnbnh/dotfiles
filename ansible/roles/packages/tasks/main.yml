@@ -110,5 +110,4 @@
     state: absent
 
 - include_tasks: nix.yml
-- include_tasks: releases.yml
 - include_tasks: post-install.yml
