@@ -37,7 +37,6 @@ function setup_macos {
 
 function main() {
   if [ "$(uname)" == "Darwin" ]; then
-    install_dots
     setup_macos
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     setup_linux
@@ -45,6 +44,8 @@ function main() {
     echo "Unsupported OS"
     exit 1
   fi
+
+  install_dots
 }
 
 main
