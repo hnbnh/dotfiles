@@ -20,22 +20,6 @@
       value: ibus
     - key: GLFW_IM_MODULE
       value: ibus
-    - key: XDG_DATA_DIRS
-      value: :/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/home/hnbnh/.nix-profile/share/
-
-# TODO: Configure keyd from nixpkgs
-- name: Copy files
-  become: true
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: root
-    group: root
-    mode: "0644"
-  loop:
-    - description: Touchpad
-      src: touchpad.conf
-      dest: /etc/X11/xorg.conf.d/30-touchpad.conf
 
 - name: systemd
   become: true
@@ -48,25 +32,8 @@
       enabled: no
       state: stopped
 
-- name: Prefer libinput over synaptics
-  become: true
-  file:
-    src: /usr/share/X11/xorg.conf.d/40-libinput.conf
-    dest: /etc/X11/xorg.conf.d/40-libinput.conf
-    state: link
-
 - name: Enable firewall
   become: true
   community.general.ufw:
     state: enabled
     policy: allow
-
-- name: Add dpkg architectures
-  become: true
-  lineinfile:
-    dest: "/var/lib/dpkg/arch"
-    line: "{{ item }}"
-    create: yes
-  loop:
-    - amd64
-    - i386
