@@ -3,5 +3,3 @@
   roles:
     - packages
     - system
-    - bin
-    - fonts

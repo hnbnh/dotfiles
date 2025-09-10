@@ -1,4 +1,3 @@
-- include_tasks: repos.yml
 - include_tasks: corp.yml
 
 - name: Install the 'Development tools' package group

@@ -1,7 +1,0 @@
-- name: Add repositories
-  become: true
-  command:
-    cmd: dnf config-manager --add-repo {{ item }}
-  with_items:
-    - https://download.opensuse.org/repositories/home:lamlng/Fedora_Rawhide/home:lamlng.repo
-    - https://download.docker.com/linux/fedora/docker-ce.repo

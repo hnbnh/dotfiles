@@ -1,24 +1,3 @@
-- name: Create docker group
-  become: true
-  group:
-    name: docker
-    state: present
-
-- name: Add user to some groups
-  become: true
-  user:
-    name: "{{ lookup('env', 'USER') }}"
-    groups: "{{ item.groups }}"
-    append: yes
-  loop:
-    - groups: docker
-    - groups: libvirt
-    - groups: kvm
-
 - name: Change shell from bash to zsh
   become: true
   shell: chsh -s $(which zsh)
-
-# TODO: Commit plugins directory
-- name: Install nnn plugins
-  shell: curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
