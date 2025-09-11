@@ -6,6 +6,8 @@ let
   commonPackages = [
     aria
     bat
+    btop
+    calibre
     colima
     curl
     delta
@@ -17,6 +19,7 @@ let
     gh
     git
     gnupg
+    imagemagick
     jq
     lazydocker
     lazygit
