@@ -44,6 +44,13 @@ let
   ];
 
   linuxOnlyPackages = [
+    cliphist
+    hyprpanel
+    hyprpaper
+    hyprsunset
+    tofi
+    wob
+    xremap
   ];
 in
 commonPackages
