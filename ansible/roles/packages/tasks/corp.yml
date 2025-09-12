@@ -1,4 +1,7 @@
 - name: Enable project fedora copr
-  shell: sudo dnf corp enable {{ item }}
+  community.general.copr:
+    name: "{{ item }}"
+    state: enabled
+  become: true
   loop:
     - petersen/nix
