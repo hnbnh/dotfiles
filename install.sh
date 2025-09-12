@@ -32,12 +32,11 @@ function setup_macos {
   fi
 
   # Set up nix-darwin
-  /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake './nix-darwin#hnbnh'
+  /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake './nix#hnbnh'
 }
 
 function main() {
   if [ "$(uname)" == "Darwin" ]; then
-    install_dots
     setup_macos
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     setup_linux
@@ -45,6 +44,8 @@ function main() {
     echo "Unsupported OS"
     exit 1
   fi
+
+  install_dots
 }
 
 main

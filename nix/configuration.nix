@@ -3,39 +3,7 @@
 {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep curl
-  environment.systemPackages = with pkgs; [
-    aria
-    bat
-    colima
-    curl
-    delta
-    docker
-    fastfetch
-    fd
-    ffmpeg
-    fzf
-    gh
-    git
-    gnupg
-    jq
-    lazydocker
-    lazygit
-    mise
-    mkcert
-    mpv
-    neovim
-    nixfmt
-    oh-my-posh
-    ripgrep
-    sesh
-    starship
-    tmux
-    yazi
-    yq-go
-    yt-dlp
-    zellij
-    zoxide
-  ];
+  environment.systemPackages = import ./packages.nix { pkgs = pkgs; };
 
   environment.systemPath = [
     config.homebrew.brewPrefix # TODO https://github.com/LnL7/nix-darwin/issues/596

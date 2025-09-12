@@ -1,4 +1,3 @@
-- include_tasks: repos.yml
 - include_tasks: corp.yml
 
 - name: Install the 'Development tools' package group
@@ -11,94 +10,17 @@
   become: true
   dnf:
     name:
-      - python3-pip
-      - ufw
-      - util-linux-user
-      - zsh
-
-      # Dev tools
-      - automake
-      - gcc
-      - gcc-c++
-      - kernel-devel
-      - libtool
-      - libyaml
-      - perl
-      - sqlite3
-      - sqlite-devel
-      - sqlite-tcl
-
-      # cli
-      - ImageMagick
-      - aria2
-      - asciinema
-      - bat
-      - brightnessctl
-      - btop
-      - cronie
-      - diskonaut
-      - djvulibre # DjVu utilities
-      - fd-find
-      - ffmpeg-free
-      - ffmpegthumbs
-      - fzf
-      - gammastep
-      - git-delta
-      - gnome-epub-thumbnailer
-      - hyperfine
-      - navi
-      - poppler-utils # pdf to image
-      - ripgrep
-      - swaybg
-      - tealdeer # tldr
-      - torbrowser-launcher
-      - wlogout
-      - yt-dlp
-      - zoxide
-
-      # gui
       - blueman
-      - calibre
-      - chromium
-      - flameshot
+      - hyprland
       - ibus
-      - kitty
-      - lxappearance
-      - mpv
+      - ibus-bamboo # Vietnamese input method
       - network-manager-applet
       - obs-studio
       - papirus-icon-theme
-      - rofi
-      - rofimoji
       - swappy
-      - swaylock
-      - waybar
-      - wezterm
-      - wine
       - xournalpp
       - zathura
-
-      # tui
-      - neovim
-
-      # languages
-      - cargo
-      - golang
-      - rust
-
-      # ========== THIRD-PARTY REPOS ========= #
-
-      # cli
-      - gh # github
-
-      # docker
-      - containerd.io
-      - docker-ce
-      - docker-ce-cli
-      - docker-compose
-
-      # Input method
-      - ibus-bamboo # Vietnamese
+      - zsh
 
     state: latest
 
@@ -109,6 +31,4 @@
       - dnf-automatic
     state: absent
 
-- include_tasks: nix.yml
-- include_tasks: releases.yml
 - include_tasks: post-install.yml

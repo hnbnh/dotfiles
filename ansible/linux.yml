@@ -3,7 +3,3 @@
   roles:
     - packages
     - system
-    - bin
-    - fonts
-    # TODO: Clean up
-    - dotfiles
