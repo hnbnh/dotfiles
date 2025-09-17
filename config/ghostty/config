@@ -7,7 +7,7 @@ adjust-cell-height=55%
 mouse-hide-while-typing = true
 
 # Theme
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 cursor-invert-fg-bg = true
 cursor-style = block
 cursor-style-blink = false
