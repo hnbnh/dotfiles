@@ -32,7 +32,7 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     cond = not vim.g.vscode,
     opts = {
       providers = {
