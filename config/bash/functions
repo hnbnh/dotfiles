@@ -18,4 +18,8 @@ function install_dots {
   ln -sfnv "$CFG_DIR/zsh/.zshenv" "$HOME/.zshenv"
   ln -sfnv "$CFG_DIR/zsh/.zimrc" "$HOME/.zimrc"
   ln -sfnv "$CFG_DIR/git/.gitconfig" "$HOME/.gitconfig"
+
+  ln -sfnv "$CFG_DIR/.agent-os" "$HOME/.agent-os"
+  ln -sfnv "$CFG_DIR/.claude" "$HOME/.claude"
+  ln -sfnv "$CFG_DIR/.cursor" "$HOME/.cursor"
 }
