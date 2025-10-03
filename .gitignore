@@ -14,3 +14,10 @@ config/zed/**
 config/yazi/flavors/
 
 .DS_Store
+
+config/.claude/*
+!config/.claude/agents/
+!config/.claude/commands/
+
+config/.cursor/*
+!config/.cursor/commands/
