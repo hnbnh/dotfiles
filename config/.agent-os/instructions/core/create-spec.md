@@ -27,7 +27,7 @@ Use the context-fetcher subagent to identify spec initiation method by either fi
 <option_a_flow>
 <trigger_phrases> - "what's next?"
 </trigger_phrases>
-<actions> 1. CHECK ~/.agent-os/product/roadmap.md 2. FIND next uncompleted item 3. SUGGEST item to user 4. WAIT for approval
+<actions> 1. CHECK @.agent-os/product/roadmap.md 2. FIND next uncompleted item 3. SUGGEST item to user 4. WAIT for approval
 </actions>
 </option_a_flow>
 
@@ -43,7 +43,7 @@ Use the context-fetcher subagent to identify spec initiation method by either fi
 
 ### Step 2: Context Gathering (Conditional)
 
-Use the context-fetcher subagent to read ~/.agent-os/product/mission-lite.md and ~/.agent-os/product/tech-stack.md only if not already in context to ensure minimal context for spec alignment.
+Use the context-fetcher subagent to read @.agent-os/product/mission-lite.md and @.agent-os/product/tech-stack.md only if not already in context to ensure minimal context for spec alignment.
 
 <conditional_logic>
 IF both mission-lite.md AND tech-stack.md already read in current context:

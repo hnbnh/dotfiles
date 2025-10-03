@@ -101,7 +101,7 @@ Use the project-manager subagent to read the current spec's tasks.md file and ve
 
 ### Step 4: Roadmap Progress Update (conditional)
 
-Use the project-manager subagent to read ~/.agent-os/product/roadmap.md and mark roadmap items as complete with [x] ONLY IF the executed tasks have completed any roadmap item(s) and the spec completes that item.
+Use the project-manager subagent to read @.agent-os/product/roadmap.md and mark roadmap items as complete with [x] ONLY IF the executed tasks have completed any roadmap item(s) and the spec completes that item.
 
 <conditional_execution>
 <preliminary_check>
