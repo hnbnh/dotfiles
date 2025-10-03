@@ -13,7 +13,7 @@ encoding: UTF-8
 Follow these steps to mark your progress updates, create a recap, and deliver the final report to the user.
 
 <pre_flight_check>
-EXECUTE: @.agent-os/instructions/meta/pre-flight.md
+EXECUTE: ~/.agent-os/instructions/meta/pre-flight.md
 </pre_flight_check>
 
 <process_flow>
@@ -101,7 +101,7 @@ Use the project-manager subagent to read the current spec's tasks.md file and ve
 
 ### Step 4: Roadmap Progress Update (conditional)
 
-Use the project-manager subagent to read @.agent-os/product/roadmap.md and mark roadmap items as complete with [x] ONLY IF the executed tasks have completed any roadmap item(s) and the spec completes that item.
+Use the project-manager subagent to read ~/.agent-os/product/roadmap.md and mark roadmap items as complete with [x] ONLY IF the executed tasks have completed any roadmap item(s) and the spec completes that item.
 
 <conditional_execution>
 <preliminary_check>
@@ -242,5 +242,5 @@ afplay /System/Library/Sounds/Glass.aiff
 </process_flow>
 
 <post_flight_check>
-EXECUTE: @.agent-os/instructions/meta/post-flight.md
+EXECUTE: ~/.agent-os/instructions/meta/post-flight.md
 </post_flight_check>

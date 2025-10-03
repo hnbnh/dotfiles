@@ -13,7 +13,7 @@ encoding: UTF-8
 Install Agent OS into an existing codebase, analyze current product state and progress. Builds on plan-product.md
 
 <pre_flight_check>
-EXECUTE: @.agent-os/instructions/meta/pre-flight.md
+EXECUTE: ~/.agent-os/instructions/meta/pre-flight.md
 </pre_flight_check>
 
 <process_flow>
@@ -86,7 +86,7 @@ Execute our standard flow for installing Agent OS in existing products
 </execution_parameters>
 
 <execution_prompt>
-@.agent-os/instructions/core/plan-product.md
+~/.agent-os/instructions/core/plan-product.md
 
 I'm installing Agent OS into an existing product. Here's what I've gathered:
 
@@ -183,7 +183,7 @@ I've analyzed your [PRODUCT_TYPE] codebase and set up Agent OS with documentatio
 4. Start using Agent OS for your next feature:
 
    ```
-   @.agent-os/instructions/core/create-spec.md
+   ~/.agent-os/instructions/core/create-spec.md
    ```
 
 Your codebase is now Agent OS-enabled! 🚀
@@ -194,5 +194,5 @@ Your codebase is now Agent OS-enabled! 🚀
 </process_flow>
 
 <post_flight_check>
-EXECUTE: @.agent-os/instructions/meta/post-flight.md
+EXECUTE: ~/.agent-os/instructions/meta/post-flight.md
 </post_flight_check>

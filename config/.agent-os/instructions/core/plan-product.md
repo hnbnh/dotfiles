@@ -13,7 +13,7 @@ encoding: UTF-8
 Generate product docs for new projects: mission, tech-stack and roadmap files for AI agent consumption.
 
 <pre_flight_check>
-EXECUTE: @.agent-os/instructions/meta/pre-flight.md
+EXECUTE: ~/.agent-os/instructions/meta/pre-flight.md
 </pre_flight_check>
 
 <process_flow>
@@ -26,7 +26,7 @@ Use the context-fetcher subagent to collect all required inputs from the user in
 
 <data_sources>
 <primary>user_direct_input</primary>
-<fallback_sequence> 1. @.agent-os/standards/tech-stack.md 2. @.claude/CLAUDE.md 3. Cursor User Rules
+<fallback_sequence> 1. ~/.agent-os/standards/tech-stack.md 2. @.claude/CLAUDE.md 3. Cursor User Rules
 </fallback_sequence>
 </data_sources>
 
@@ -219,7 +219,7 @@ PROCEED: To manual resolution below
 <manual_resolution>
 <for_each item="required_items">
 <if_not_in>user_input</if_not_in>
-<then_check> 1. @.agent-os/standards/tech-stack.md 2. @.claude/CLAUDE.md 3. Cursor User Rules
+<then_check> 1. ~/.agent-os/standards/tech-stack.md 2. @.claude/CLAUDE.md 3. Cursor User Rules
 </then_check>
 <else>add_to_missing_list</else>
 </for_each>
@@ -326,5 +326,5 @@ Use the file-creator subagent to create the following file: .agent-os/product/ro
 </process_flow>
 
 <post_flight_check>
-EXECUTE: @.agent-os/instructions/meta/post-flight.md
+EXECUTE: ~/.agent-os/instructions/meta/post-flight.md
 </post_flight_check>
