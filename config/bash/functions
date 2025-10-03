@@ -8,12 +8,10 @@ function install_dots {
   CFG_DIR="$HOME/dotfiles/config"
   DEST_DIR="$HOME/.config"
 
-  mkdir -p "$DEST_DIR"
+  mkdir -p $DEST_DIR
 
-  for dir in "$CFG_DIR"/{*,.*}/; do
-    [[ -d "$dir" ]] || continue
-    [[ "$dir" == *"/." ]] || [[ "$dir" == *"/.." ]] && continue
-    ln -sfnv "$dir" "$DEST_DIR"
+  for dir in "$CFG_DIR"/*/; do
+    ln -sfnv $dir $DEST_DIR
   done
 
   ln -sfnv "$CFG_DIR/zsh/.zshrc" "$HOME/.zshrc"
