@@ -6,6 +6,7 @@
   environment.systemPackages = with pkgs; [
     aria
     bat
+    btop
     colima
     curl
     delta
