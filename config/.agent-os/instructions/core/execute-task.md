@@ -13,7 +13,7 @@ encoding: UTF-8
 Execute a specific task along with its sub-tasks systematically following a TDD development workflow.
 
 <pre_flight_check>
-EXECUTE: ~/.agent-os/instructions/meta/pre-flight.md
+EXECUTE: @~/.agent-os/instructions/meta/pre-flight.md
 </pre_flight_check>
 
 <process_flow>
@@ -63,7 +63,7 @@ FIND sections in technical-spec.md related to: - Current task functionality - Im
 
 ### Step 3: Best Practices Review
 
-Use the context-fetcher subagent to retrieve relevant sections from ~/.agent-os/standards/best-practices.md that apply to the current task's technology stack and feature type.
+Use the context-fetcher subagent to retrieve relevant sections from @~/.agent-os/standards/best-practices.md that apply to the current task's technology stack and feature type.
 
 <selective_reading>
 <search_best_practices>
@@ -88,7 +88,7 @@ FIND sections relevant to: - Task's technology stack - Feature type being implem
 
 ### Step 4: Code Style Review
 
-Use the context-fetcher subagent to retrieve relevant code style rules from ~/.agent-os/standards/code-style.md for the languages and file types being used in this task.
+Use the context-fetcher subagent to retrieve relevant code style rules from @~/.agent-os/standards/code-style.md for the languages and file types being used in this task.
 
 <selective_reading>
 <search_code_style>
@@ -213,5 +213,5 @@ IMPORTANT: In the tasks.md file, mark this task and its sub-tasks complete by up
 </process_flow>
 
 <post_flight_check>
-EXECUTE: ~/.agent-os/instructions/meta/post-flight.md
+EXECUTE: @~/.agent-os/instructions/meta/post-flight.md
 </post_flight_check>

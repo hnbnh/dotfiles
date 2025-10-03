@@ -19,7 +19,7 @@ Execute tasks for a given spec following three distinct phases:
 **IMPORTANT**: All three phases MUST be completed. Do not stop after phase 2.
 
 <pre_flight_check>
-EXECUTE: ~/.agent-os/instructions/meta/pre-flight.md
+EXECUTE: @~/.agent-os/instructions/meta/pre-flight.md
 </pre_flight_check>
 
 <process_flow>
@@ -103,10 +103,10 @@ Use the git-workflow subagent to manage git branches to ensure proper isolation 
 
 **IMPORTANT**: This is a loop. Execute ALL assigned tasks before proceeding to Phase 3.
 
-Execute all assigned parent tasks and their subtasks using ~/.agent-os/instructions/core/execute-task.md instructions, continuing until all tasks are complete.
+Execute all assigned parent tasks and their subtasks using @~/.agent-os/instructions/core/execute-task.md instructions, continuing until all tasks are complete.
 
 <execution_flow>
-LOAD ~/.agent-os/instructions/core/execute-task.md ONCE
+LOAD @~/.agent-os/instructions/core/execute-task.md ONCE
 
 FOR each parent_task assigned in Step 1:
 EXECUTE instructions from execute-task.md with: - parent_task_number - all associated subtasks
@@ -153,10 +153,10 @@ CONTINUE with next task
 
 **CRITICAL**: This step MUST be executed after all tasks are implemented. Do not end the process without completing this phase.
 
-After all tasks in tasks.md have been implemented, use ~/.agent-os/instructions/core/post-execution-tasks.md to run our series of steps we always run when finishing and delivering a new feature.
+After all tasks in tasks.md have been implemented, use @~/.agent-os/instructions/core/post-execution-tasks.md to run our series of steps we always run when finishing and delivering a new feature.
 
 <instructions>
-  LOAD: ~/.agent-os/instructions/core/post-execution-tasks.md once
+  LOAD: @~/.agent-os/instructions/core/post-execution-tasks.md once
   ACTION: execute all steps in the post-execution-tasks.md process_flow.
   **IMPORTANT**: This includes:
     - Running full test suite
@@ -173,5 +173,5 @@ After all tasks in tasks.md have been implemented, use ~/.agent-os/instructions/
 </process_flow>
 
 <post_flight_check>
-EXECUTE: ~/.agent-os/instructions/meta/post-flight.md
+EXECUTE: @~/.agent-os/instructions/meta/post-flight.md
 </post_flight_check>

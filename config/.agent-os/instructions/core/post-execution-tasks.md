@@ -13,7 +13,7 @@ encoding: UTF-8
 Follow these steps to mark your progress updates, create a recap, and deliver the final report to the user.
 
 <pre_flight_check>
-EXECUTE: ~/.agent-os/instructions/meta/pre-flight.md
+EXECUTE: @~/.agent-os/instructions/meta/pre-flight.md
 </pre_flight_check>
 
 <process_flow>
@@ -242,5 +242,5 @@ afplay /System/Library/Sounds/Glass.aiff
 </process_flow>
 
 <post_flight_check>
-EXECUTE: ~/.agent-os/instructions/meta/post-flight.md
+EXECUTE: @~/.agent-os/instructions/meta/post-flight.md
 </post_flight_check>
