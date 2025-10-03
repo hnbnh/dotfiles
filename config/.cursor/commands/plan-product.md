@@ -1,7 +1,3 @@
----
-alwaysApply: false
----
-
 # Plan Product
 
 Plan a new product and install Agent OS in its codebase.

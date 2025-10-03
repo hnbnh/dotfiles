@@ -1,7 +1,3 @@
----
-alwaysApply: false
----
-
 # Analyze Product
 
 Analyze your product's codebase and install Agent OS

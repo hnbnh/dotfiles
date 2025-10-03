@@ -1,7 +1,3 @@
----
-alwaysApply: false
----
-
 # Create Commit
 
 Create a commit message and commit the changes using git.

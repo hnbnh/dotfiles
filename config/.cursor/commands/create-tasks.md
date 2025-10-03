@@ -1,7 +1,3 @@
----
-alwaysApply: false
----
-
 # Create Tasks
 
 Create a tasks list with sub-tasks to execute a feature based on its spec.

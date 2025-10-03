@@ -1,7 +1,3 @@
----
-alwaysApply: false
----
-
 # Execute Task
 
 Execute the next task.
