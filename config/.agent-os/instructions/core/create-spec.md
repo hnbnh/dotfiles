@@ -259,7 +259,7 @@ Use the file-creator subagent to create the file: sub-specs/technical-spec.md us
   <header>
     # Technical Specification
 
-    This is the technical specification for the spec detailed in @~/.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
+    This is the technical specification for the spec detailed in @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
 
   </header>
 </file_template>
@@ -313,7 +313,7 @@ SKIP this_step
   <header>
     # Database Schema
 
-    This is the database schema implementation for the spec detailed in @~/.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
+    This is the database schema implementation for the spec detailed in @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
 
   </header>
 </file_template>
@@ -347,7 +347,7 @@ SKIP this_step
   <header>
     # API Specification
 
-    This is the API specification for the spec detailed in @~/.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
+    This is the API specification for the spec detailed in @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
 
   </header>
 </file_template>
@@ -384,9 +384,9 @@ Request user review of spec.md and all sub-specs files, waiting for approval or 
 <review_request>
 I've created the spec documentation:
 
-- Spec Requirements: @~/.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
-- Spec Summary: @~/.agent-os/specs/YYYY-MM-DD-spec-name/spec-lite.md
-- Technical Spec: @~/.agent-os/specs/YYYY-MM-DD-spec-name/sub-specs/technical-spec.md
+- Spec Requirements: @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
+- Spec Summary: @.agent-os/specs/YYYY-MM-DD-spec-name/spec-lite.md
+- Technical Spec: @.agent-os/specs/YYYY-MM-DD-spec-name/sub-specs/technical-spec.md
   [LIST_OTHER_CREATED_SPECS]
 
 Please review and let me know if any changes are needed.

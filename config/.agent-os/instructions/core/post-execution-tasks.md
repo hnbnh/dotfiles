@@ -72,44 +72,96 @@ Present to user:
 
 </step>
 
-<step number="3" subagent="git-workflow" name="git_workflow">
+<step number="3" subagent="git-workflow" name="git_commit">
 
-### Step 3: Git Workflow
+### Step 3: Git Commit
 
-Use the git-workflow subagent to create git commit, push to GitHub, and create pull request for the implemented features.
+Use the git-workflow subagent to stage files and create git commit for the implemented features.
 
 <instructions>
   ACTION: Use git-workflow subagent
-  REQUEST: "Complete git workflow for [SPEC_NAME] feature:
+  REQUEST: "Stage files and create commit for [SPEC_NAME] feature:
             - Spec: [SPEC_FOLDER_PATH]
             - Changes: All modified files
-            - Target: main branch
-            - Description: [SUMMARY_OF_IMPLEMENTED_FEATURES]"
-  WAIT: For workflow completion
-  PROCESS: Save PR URL for summary
+            - Description: [SUMMARY_OF_IMPLEMENTED_FEATURES]
+            - DO NOT push to GitHub yet"
+  WAIT: For commit completion
+  PROCESS: Verify commit was created successfully
 </instructions>
 
 <commit_process>
+<stage>
+<action>add relevant files</action>
+<verification>review staged changes</verification>
+</stage>
 <commit>
 <message>descriptive summary of changes</message>
 <format>conventional commits if applicable</format>
 </commit>
+</commit_process>
+
+</step>
+
+<step number="4" name="user_commit_review">
+
+### Step 4: User Commit Review
+
+Pause execution and wait for user to review the commit before pushing to GitHub.
+
+<instructions>
+  ACTION: Present commit details to user
+  REQUEST: Ask user to review commit and approve pushing to GitHub
+  WAIT: For explicit user approval
+  PROCESS: Only proceed to push and PR after approval
+</instructions>
+
+<review_prompt>
+Present to user:
+- Commit message
+- List of files in commit
+- Request explicit approval to push to GitHub and create PR
+</review_prompt>
+
+<approval_requirement>
+<requirement>explicit user confirmation</requirement>
+<proceed_only_after>user approves push</proceed_only_after>
+</approval_requirement>
+
+</step>
+
+<step number="5" subagent="git-workflow" name="git_push_and_pr">
+
+### Step 5: Push to GitHub and Create PR
+
+Use the git-workflow subagent to push the commit to GitHub and create pull request.
+
+<instructions>
+  ACTION: Use git-workflow subagent
+  REQUEST: "Push commit and create PR for [SPEC_NAME] feature:
+            - Push to: spec branch
+            - Target: main branch
+            - PR title: [DESCRIPTIVE_TITLE]
+            - PR description: [SUMMARY_OF_IMPLEMENTED_FEATURES]"
+  WAIT: For workflow completion
+  PROCESS: Save PR URL for summary
+</instructions>
+
+<push_and_pr_process>
 <push>
 <target>spec branch</target>
 <remote>origin</remote>
 </push>
 <pull_request>
-
 <title>descriptive PR title</title>
 <description>functionality recap</description>
 </pull_request>
-</commit_process>
+</push_and_pr_process>
 
 </step>
 
-<step number="4" subagent="project-manager" name="tasks_list_check">
+<step number="6" subagent="project-manager" name="tasks_list_check">
 
-### Step 4: Tasks Completion Verification
+### Step 6: Tasks Completion Verification
 
 Use the project-manager subagent to read the current spec's tasks.md file and verify that all tasks have been properly marked as complete with [x] or documented with blockers.
 
@@ -124,9 +176,9 @@ Use the project-manager subagent to read the current spec's tasks.md file and ve
 
 </step>
 
-<step number="5" subagent="project-manager" name="roadmap_progress_check">
+<step number="7" subagent="project-manager" name="roadmap_progress_check">
 
-### Step 5: Roadmap Progress Update (conditional)
+### Step 7: Roadmap Progress Update (conditional)
 
 Use the project-manager subagent to read @.agent-os/product/roadmap.md and mark roadmap items as complete with [x] ONLY IF the executed tasks have completed any roadmap item(s) and the spec completes that item.
 
@@ -155,9 +207,9 @@ CONTINUE with roadmap check
 
 </step>
 
-<step number="6" subagent="project-manager" name="document_recap">
+<step number="8" subagent="project-manager" name="document_recap">
 
-### Step 6: Create Recap Document
+### Step 8: Create Recap Document
 
 Use the project-manager subagent to create a recap document in .agent-os/recaps/ folder that summarizes what was built for this spec.
 
@@ -202,9 +254,9 @@ This recaps what was built for the spec documented at .agent-os/specs/[spec-fold
 
 </step>
 
-<step number="7" subagent="project-manager" name="completion_summary">
+<step number="9" subagent="project-manager" name="completion_summary">
 
-### Step 7: Completion Summary
+### Step 9: Completion Summary
 
 Use the project-manager subagent to create a structured summary message with emojis showing what was done, any issues, testing instructions, and PR link.
 
@@ -249,9 +301,9 @@ View PR: [GITHUB_PR_URL]
 
 </step>
 
-<step number="8" subagent="project-manager" name="completion_notification">
+<step number="10" subagent="project-manager" name="completion_notification">
 
-### Step 8: Task Completion Notification
+### Step 10: Task Completion Notification
 
 Use the project-manager subagent to play a system sound to alert the user that tasks are complete.
 
