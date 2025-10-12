@@ -30,3 +30,7 @@
 	path = config/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
 	shallow = true
+[submodule "config/agent-os"]
+	path = config/agent-os
+	url = https://github.com/hnbnh/agent-os
+	branch = me
