@@ -21,7 +21,7 @@ end
 
 return {
   { "nacro90/numb.nvim", cond = not vim.g.vscode, event = "VeryLazy", config = true },
-  { "kylechui/nvim-surround", event = "VeryLazy", config = true },
+  { "kylechui/nvim-surround", cond = not vim.g.vscode, event = "VeryLazy", config = true },
   { "nvim-mini/mini.trailspace", cond = not vim.g.vscode, event = "BufReadPost", config = true },
   { "tpope/vim-repeat" },
   {
