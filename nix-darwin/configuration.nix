@@ -66,6 +66,7 @@
       "gotiengviet"
       "karabiner-elements"
       "keka"
+      "nikitabobko/tap/aerospace"
       "steam"
       "telegram-desktop"
       "tor-browser"
