@@ -195,6 +195,7 @@
                     },
                     {
                         "description": "Mac OSX: disable cmd + h to prevent minimising an application window",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -232,6 +233,7 @@
                     },
                     {
                         "description": "Open Terminal",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -245,6 +247,7 @@
                     },
                     {
                         "description": "Open Browser",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -258,6 +261,7 @@
                     },
                     {
                         "description": "Open Database Tool",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -271,6 +275,7 @@
                     },
                     {
                         "description": "Open API Tool",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -284,6 +289,7 @@
                     },
                     {
                         "description": "Open Dictionary",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -297,6 +303,7 @@
                     },
                     {
                         "description": "Open Slack",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -310,6 +317,7 @@
                     },
                     {
                         "description": "Open Notion",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
