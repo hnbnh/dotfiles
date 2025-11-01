@@ -1,4 +1,5 @@
 source ~/.config/bash/functions
+source ~/.config/bash/gh
 
 function nn() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd

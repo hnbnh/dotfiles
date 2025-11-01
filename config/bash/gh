@@ -1,0 +1,37 @@
+#!/bin/bash
+
+function gh_get_unresolved_comments {
+  gh api graphql -f owner="$1" -f repo="$2" -F pr="$3" -f query='
+  query FetchReviewComments($owner: String!, $repo: String!, $pr: Int!) {
+    repository(owner: $owner, name: $repo) {
+      pullRequest(number: $pr) {
+        url
+        reviewDecision
+        reviewThreads(first: 100) {
+          edges {
+            node {
+              isResolved
+              isOutdated
+              isCollapsed
+              comments(first: 100) {
+                totalCount
+                nodes {
+                  author {
+                    login
+                  }
+                  body
+                  diffHunk
+                  path
+                  line
+                  startLine
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+' | jq '.data.repository.pullRequest.reviewThreads.edges | map(select(.node.isResolved == false))'
+}
