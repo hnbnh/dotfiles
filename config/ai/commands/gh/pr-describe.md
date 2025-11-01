@@ -4,7 +4,7 @@ Generate a comprehensive PR description based on git changes.
 
 ## Steps
 
-- Review all code changes using `git diff main...HEAD`
+- If PR id is provided, use `gh pr view <PR_ID> --json title,body` to review all code changes, otherwise use `git diff main...HEAD`
 
 1. Review all commits in the PR/branch changes
 2. Review all code changes thoroughly

@@ -10,7 +10,7 @@ Create a well-structured pull request with proper description.
    - Push branch to remote
 
 2. **Write PR description**
-   - Refer to the instructions located in this file to draft a comprehensive PR description: @~/.config/ai/commands/gh/pr-desc-gen.md
+   - Refer to the instructions located in this file to draft a comprehensive PR description: @~/.config/ai/commands/gh/pr-describe.md
 
 3. **Set up PR**
    - Extract ticket id from head branch
