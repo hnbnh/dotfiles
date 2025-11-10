@@ -37,6 +37,7 @@ return {
   { "tpope/vim-rails", cond = not vim.g.vscode },
   {
     "saghen/blink.cmp",
+    version = "1.*",
     cond = not vim.g.vscode,
     opts = {
       keymap = {
