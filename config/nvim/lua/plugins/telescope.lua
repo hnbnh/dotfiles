@@ -22,12 +22,14 @@ return {
   },
   keys = {
     { "<leader>fb", false },
+    { "<leader>fB", false },
     { "<leader>fc", false },
     { "<leader>ff", false },
     { "<leader>fF", false },
     { "<leader>fg", false },
     { "<leader>fr", false },
     { "<leader>fR", false },
+    { "<leader>gl", false },
     { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "All buffers" },
     {
       "<leader>f",
