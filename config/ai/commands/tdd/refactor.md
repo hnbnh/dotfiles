@@ -6,24 +6,30 @@ Improve the code quality, design, and structure while ensuring tests continue to
 
 ## Steps
 
-1. **Identify refactoring opportunities**
+1. **Check current git state**
+   - Run `git status` to see any uncommitted changes
+   - Run `git log --oneline -n 5` to review recent commits
+   - Run `git diff` to see current unstaged changes
+   - Understand the context of recent work before refactoring
+
+2. **Identify refactoring opportunities**
    - Look for code duplication (DRY - Don't Repeat Yourself)
    - Check for complex or unclear logic that could be simplified
    - Review naming for clarity and consistency
    - Identify potential design pattern applications
    - Look for magic numbers or hard-coded values
 
-2. **Make one small change at a time**
+3. **Make one small change at a time**
    - Refactor incrementally, not all at once
    - Choose one improvement to make
    - Apply the refactoring carefully
 
-3. **Run tests after each change**
+4. **Run tests after each change**
    - Execute the test suite immediately after each refactoring
    - Ensure the tests still pass (stay green)
    - If tests fail, revert and try a different approach
 
-4. **Improve code quality**
+5. **Improve code quality**
    - Extract methods or functions for better clarity
    - Rename variables, functions, or classes for better understanding
    - Remove duplication by extracting common code
@@ -31,7 +37,7 @@ Improve the code quality, design, and structure while ensuring tests continue to
    - Apply appropriate design patterns
    - Add constants for magic values
 
-5. **Verify final state**
+6. **Verify final state**
    - Run the test suite one final time
    - Ensure code is cleaner and more maintainable
    - Confirm no functionality was changed
