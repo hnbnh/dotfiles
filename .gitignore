@@ -21,3 +21,4 @@ config/.claude/*
 
 config/.cursor/*
 !config/.cursor/commands/
+!config/.cursor/mcp.json
