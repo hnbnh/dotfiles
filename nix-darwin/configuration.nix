@@ -4,7 +4,7 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep curl
   environment.systemPackages = with pkgs; [
-    aria
+    aria2
     bat
     btop
     colima
@@ -21,7 +21,6 @@
     jq
     lazydocker
     lazygit
-    mise
     mkcert
     mpv
     neovim
@@ -56,6 +55,7 @@
 
     brews = [
       "libyaml"
+      "mise"
       "sqlite3"
     ];
     casks = [
