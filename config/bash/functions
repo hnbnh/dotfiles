@@ -22,4 +22,5 @@ function install_dots {
   ln -sfnv "$CFG_DIR/agent-os" "$HOME/agent-os"
   ln -sfnv "$CFG_DIR/.claude" "$HOME/.claude"
   ln -sfnv "$CFG_DIR/.cursor" "$HOME/.cursor"
+  ln -sfnv "$CFG_DIR/.codex" "$HOME/.codex"
 }
