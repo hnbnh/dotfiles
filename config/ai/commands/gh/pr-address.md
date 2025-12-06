@@ -10,7 +10,7 @@ responses for each GitHub pull-request comment.
 - If user does not provide PR link, ask for it.
 
 1. **Sync and audit comments**
-   - Use `gh_get_unresolved_comments <owner> <repo> <pr id>` to fetch unresolved review comments
+   - Run bash command `gh_get_unresolved_comments <owner> <repo> <pr id>` to fetch unresolved review comments
      - If the above command fails, stop here
    - Parse and display the unresolved comment list to the user, showing:
      - Author
