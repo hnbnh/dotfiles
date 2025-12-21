@@ -1,4 +1,5 @@
 # # Fonts
+font-family = GeistMono Nerd Font
 font-size = 15
 adjust-cell-height=55%
 # adjust-underline-position = 4
