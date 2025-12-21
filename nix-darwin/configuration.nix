@@ -44,6 +44,7 @@
   fonts = {
     packages = [
       pkgs.nerd-fonts.meslo-lg
+      pkgs.nerd-fonts.geist-mono
     ];
   };
 
@@ -54,6 +55,7 @@
     ];
 
     brews = [
+      "gemini-cli"
       "libyaml"
       "mise"
       "sqlite3"
@@ -66,7 +68,6 @@
       "gotiengviet"
       "karabiner-elements"
       "keka"
-      "nikitabobko/tap/aerospace"
       "steam"
       "telegram-desktop"
       "tor-browser"
