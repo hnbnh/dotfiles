@@ -10,34 +10,15 @@ responses for each GitHub pull-request comment.
 - If user does not provide PR link, ask for it.
 
 1. **Sync and audit comments**
-   - Run the bash command below to fetch unresolved review comments (replace <OWNER>, <REPO>, and <PR> with actual values)
-
-```bash
-gh api graphql -f query='
-query {
-repository(owner: <OWNER>, name: <REPO>) {
-  pullRequest(number: <PR>) {
-    reviewThreads(first: 100) {
-      nodes {
-        isResolved
-        comments(first: 1) {
-          nodes {
-            path
-            body
-            author {
-              login
-            }
-            line
-          }
-        }
-      }
-    }
-  }
-}
-}' --jq '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false) | .comments.nodes[0] | "[\(.path):\(.line)] \(.author.login):\n\(.body)\n"'
-```
-
-     - If the above command fails, stop here
+   - Check whether the user has provided an unresolved-comments markdown file
+     (such as `unresolved-comments-pr<PR>.md`).
+     - If the user has **not** provided such a markdown file yet:
+       - Ask the user to run their helper (e.g. `gh_get_unresolved_comments <OWNER> <REPO> <PR>`) locally.
+       - Ask them to paste or attach the resulting unresolved-comments markdown
+         file into the conversation.
+       - **Stop the workflow here** until the user provides that markdown.
+     - If the user **has** provided the unresolved-comments markdown file:
+       - Proceed using that file only; do **not** re-run API calls yourself.
 
 - Parse and display the unresolved comment list to the user, showing:
   - Author

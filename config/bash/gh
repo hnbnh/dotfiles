@@ -1,30 +1,39 @@
 #!/bin/bash
 
 function gh_get_unresolved_comments {
-  gh api graphql -f owner="$1" -f repo="$2" -F pr="$3" -f query='
-  query FetchReviewComments($owner: String!, $repo: String!, $pr: Int!) {
-    repository(owner: $owner, name: $repo) {
-      pullRequest(number: $pr) {
-        url
-        reviewDecision
-        reviewThreads(first: 100) {
-          edges {
-            node {
-              isResolved
-              isOutdated
-              isCollapsed
-              comments(first: 100) {
-                totalCount
-                nodes {
-                  author {
-                    login
+  local owner="$1"
+  local repo="$2"
+  local pr_number="$3"
+  local outfile="unresolved-comments-pr${pr_number}.md"
+
+  {
+    echo "# Unresolved review comments for ${owner}/${repo} PR #${pr_number}"
+    echo
+    gh api graphql -f owner="$owner" -f repo="$repo" -F pr="$pr_number" -f query='
+    query FetchReviewComments($owner: String!, $repo: String!, $pr: Int!) {
+      repository(owner: $owner, name: $repo) {
+        pullRequest(number: $pr) {
+          url
+          reviewDecision
+          reviewThreads(first: 100) {
+            edges {
+              node {
+                isResolved
+                isOutdated
+                isCollapsed
+                comments(first: 100) {
+                  totalCount
+                  nodes {
+                    author {
+                      login
+                    }
+                    body
+                    diffHunk
+                    path
+                    line
+                    startLine
+                    url
                   }
-                  body
-                  diffHunk
-                  path
-                  line
-                  startLine
-                  url
                 }
               }
             }
@@ -32,6 +41,16 @@ function gh_get_unresolved_comments {
         }
       }
     }
-  }
-' | jq '.data.repository.pullRequest.reviewThreads.edges | map(select(.node.isResolved == false))'
+  ' \
+      | jq -r '
+        .data.repository.pullRequest.reviewThreads.edges
+        | map(select(.node.isResolved == false))
+        | .[]
+        | .node.comments.nodes[]
+        | "- [ ] \(.author.login): \(.body | gsub("\r?\n"; " "))\n" +
+          "  - Path: \(.path):\(.line) (start: \(.startLine))\n"
+      '
+  } > "$outfile"
+
+  echo "$outfile"
 }
