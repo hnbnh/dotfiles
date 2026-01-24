@@ -25,3 +25,8 @@ config/.cursor/*
 
 config/.codex/*
 !config/.codex/prompts/
+
+config/.gemini/*
+!config/.gemini/antigravity/
+config/.gemini/antigravity/*
+!config/.gemini/antigravity/global_workflows/
