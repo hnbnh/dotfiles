@@ -22,7 +22,6 @@
     lazydocker
     lazygit
     mkcert
-    mpv
     neovim
     nixfmt
     oh-my-posh
@@ -58,6 +57,7 @@
       "gemini-cli"
       "libyaml"
       "mise"
+      "mpv"
       "sqlite3"
     ];
     casks = [
