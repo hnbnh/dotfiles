@@ -19,6 +19,7 @@ eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 source <(fzf --zsh)
+export DOCKER_HOST=$(docker context inspect colima | jq -r '.[0].Endpoints.docker.Host')
 
 autoload -U compinit
 compinit
