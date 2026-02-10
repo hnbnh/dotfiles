@@ -41,5 +41,9 @@
       "Read(./.env)",
       "Read(./secrets/**)"
     ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true
   }
 }
