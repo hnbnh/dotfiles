@@ -9,31 +9,31 @@ gui:
   mouseEvents: false
   showIcons: true
   branchColors:
-    "feat": "#76946A"
-    "fix": "#C34043"
-    "refactor": "#DCA561"
-    "docs": "#89b4fa"
-  # https://github.com/catppuccin/lazygit/blob/b2ecb6d41b6f54a82104879573c538e8bdaeb0bf/themes/macchiato.yml
+    "feat": "#a6da95"
+    "fix": "#ed8796"
+    "refactor": "#eed49f"
+    "docs": "#8aadf4"
+  # https://github.com/catppuccin/lazygit/blob/c24895902ec2a3cb62b4557f6ecd8e0afeed95d5/themes/macchiato/red.yml
   theme:
-    lightTheme: false
-    selectedBgColor: default
     activeBorderColor:
-      - "#a6da95" # Green
+      - "#ed8796"
       - bold
     inactiveBorderColor:
-      - "#6e738d" # Overlay0
+      - "#a5adcb"
     optionsTextColor:
-      - "#8aadf4" # Blue
+      - "#8aadf4"
     selectedLineBgColor:
-      - "#363a4f" # Surface0
-    selectedRangeBgColor:
-      - "#363a4f" # Surface0
+      - "#363a4f"
     cherryPickedCommitBgColor:
-      - "#8bd5ca" # Teal
+      - "#494d64"
     cherryPickedCommitFgColor:
-      - "#8aadf4" # Blue
+      - "#ed8796"
     unstagedChangesColor:
-      - red # Red
+      - "#ed8796"
+    defaultFgColor:
+      - "#cad3f5"
+    searchingActiveBorderColor:
+      - "#eed49f"
   filterMode: fuzzy
 keybinding:
   branches:
