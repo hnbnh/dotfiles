@@ -20,7 +20,17 @@
     ]
   },
   "hooks": {
-    "Notification": [
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Hero.aiff"
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
       {
         "hooks": [
           {
