@@ -9,6 +9,7 @@
 
 ### DO
 
+- Use `git --no-pager diff --cached` to check for staged changes
 - Generate messages for staged files/changes
 - Follow conventional commit
 - Include message body if user explicitly requests it - otherwise keep commits to subject line only
