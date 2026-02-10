@@ -21,5 +21,25 @@
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
+  },
+  "permissions": {
+    "allow": [
+      "Task",
+      "Glob",
+      "Grep",
+      "LS",
+      "Read",
+      "Edit",
+      "MultiEdit",
+      "Write",
+      "WebFetch",
+      "WebSearch"
+    ],
+    "deny": [
+      "Bash(git push *)",
+      "Bash(rm -rf)",
+      "Read(./.env)",
+      "Read(./secrets/**)"
+    ]
   }
 }
