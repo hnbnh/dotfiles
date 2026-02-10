@@ -19,6 +19,8 @@ config/.claude/*
 !config/.claude/agents/
 !config/.claude/commands/
 !config/.claude/CLAUDE.md
+!config/.claude/settings.json
+!config/.claude/statusline.sh
 
 config/.cursor/*
 !config/.cursor/commands/
