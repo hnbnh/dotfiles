@@ -18,6 +18,7 @@ config/yazi/flavors/
 config/.claude/*
 !config/.claude/agents/
 !config/.claude/commands/
+!config/.claude/CLAUDE.md
 
 config/.cursor/*
 !config/.cursor/commands/
