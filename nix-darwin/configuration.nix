@@ -11,6 +11,7 @@
     curl
     delta
     docker
+    eza
     fastfetch
     fd
     ffmpeg
