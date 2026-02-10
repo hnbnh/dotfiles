@@ -1,27 +1,4 @@
 {
-  "hooks": {
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "afplay /System/Library/Sounds/Glass.aiff"
-          }
-        ]
-      }
-    ]
-  },
-  "enabledPlugins": {
-    "code-review@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true,
-    "figma@claude-plugins-official": true,
-    "Notion@claude-plugins-official": true
-  },
-  "alwaysThinkingEnabled": true,
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.sh"
-  },
   "permissions": {
     "allow": [
       "Task",
@@ -42,8 +19,31 @@
       "Read(./secrets/**)"
     ]
   },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  },
+  "enabledPlugins": {
+    "code-review@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "figma@claude-plugins-official": true,
+    "Notion@claude-plugins-official": true
+  },
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true
-  }
+  },
+  "alwaysThinkingEnabled": true
 }
