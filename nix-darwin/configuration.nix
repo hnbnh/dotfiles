@@ -30,6 +30,7 @@
     sesh
     starship
     tmux
+    witr
     yazi
     yq-go
     yt-dlp
