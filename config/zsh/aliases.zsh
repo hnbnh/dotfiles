@@ -24,3 +24,5 @@ alias cat='bat'
 alias find='fd'
 alias grep='rg'
 alias ls='eza'
+
+alias cld='claude --dangerously-skip-permissions'
