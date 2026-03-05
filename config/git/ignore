@@ -1,4 +1,8 @@
 **/.claude/settings.local.json
 .DS_Store
-.claude/agents/agent-os
-.claude/commands/agent-os
+**/.claude/agents/agent-os
+**/.claude/agents/gsd-*.md
+**/.claude/commands/agent-os
+**/.claude/commands/gsd
+
+ignore_me
