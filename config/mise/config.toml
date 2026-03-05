@@ -1,7 +1,9 @@
 [tools]
 air = "latest"
+bun = "latest"
 go = "latest"
 node = "24"
+opencode = "latest"
 pnpm = "latest"
 python = "3.12"
 ruby = "3"
