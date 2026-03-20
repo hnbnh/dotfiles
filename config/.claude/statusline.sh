@@ -2,9 +2,9 @@
 
 input=$(cat)
 
-model=$(echo "$input" | jq -r '.model.display_name')
-cwd=$(echo "$input" | jq -r '.workspace.current_dir')
-remaining=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty')
+model=$(echo "$input" | jaq -r '.model.display_name')
+cwd=$(echo "$input" | jaq -r '.workspace.current_dir')
+remaining=$(echo "$input" | jaq -r '.context_window.remaining_percentage // empty')
 
 branch=$(git -C "$cwd" -c core.filesRefLockTimeout=0 -c core.packedRefsTimeout=0 branch --show-current 2>/dev/null || echo 'no branch')
 
