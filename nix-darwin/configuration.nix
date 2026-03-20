@@ -99,7 +99,9 @@
       Clicking = true;
     };
     universalaccess = {
+      increaseContrast = true;
       reduceMotion = true;
+      reduceTransparency = true;
     };
     # TODO: https://github.com/LnL7/nix-darwin/issues/1046
     # Turn on night shift
