@@ -29,9 +29,9 @@ return {
     opts = {
       scroll = { enabled = false },
       picker = {
-        enabled = false,
+        enabled = true,
         matcher = {
-          smartcase = false,
+          smartcase = true,
         },
         files = {
           hidden = true,

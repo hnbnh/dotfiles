@@ -12,4 +12,4 @@ o.showbreak = "↪"
 
 o.fileformats = "unix,dos"
 
-vim.g.lazyvim_picker = "telescope"
+vim.g.lazyvim_picker = "snacks"
