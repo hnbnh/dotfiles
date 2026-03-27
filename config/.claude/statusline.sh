@@ -4,12 +4,12 @@ input=$(cat)
 
 model=$(echo "$input" | jaq -r '.model.display_name')
 cwd=$(echo "$input" | jaq -r '.workspace.current_dir')
-remaining=$(echo "$input" | jaq -r '.context_window.remaining_percentage // empty')
+used=$(echo "$input" | jaq -r '.context_window.used_percentage // empty')
 
 branch=$(git -C "$cwd" -c core.filesRefLockTimeout=0 -c core.packedRefsTimeout=0 branch --show-current 2>/dev/null || echo 'no branch')
 
-if [ -n "$remaining" ]; then
-  context=$(printf "%.0f%% left" "$remaining")
+if [ -n "$used" ]; then
+  context=$(printf "%.0f%% used" "$used")
 else
   context='N/A'
 fi
