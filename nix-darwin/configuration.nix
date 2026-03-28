@@ -7,7 +7,6 @@
     aria2
     bat
     btop
-    colima
     curl
     delta
     docker
@@ -26,7 +25,6 @@
     mkcert
     neovim
     nixfmt
-    oh-my-posh
     ripgrep
     sesh
     starship
@@ -69,9 +67,10 @@
       "datagrip"
       "firefox"
       "ghostty"
-      "gotiengviet"
+      "gonhanh"
       "karabiner-elements"
       "keka"
+      "orbstack"
       "steam"
       "telegram-desktop"
       "tor-browser"
