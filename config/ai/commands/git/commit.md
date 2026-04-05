@@ -5,7 +5,6 @@
 ### DO NOT
 
 - DO NOT add any files using `git add`
-- DO NOT add any ads such as "Generated with [Claude Code](https://claude.ai/code)"
 
 ### DO
 
