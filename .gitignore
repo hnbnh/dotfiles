@@ -33,3 +33,7 @@ config/.gemini/*
 !config/.gemini/antigravity/
 config/.gemini/antigravity/*
 !config/.gemini/antigravity/global_workflows/
+
+config/opencode/*
+config/opencode/opencode.json
+config/opencode/tui.json
