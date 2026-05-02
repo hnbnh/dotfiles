@@ -1,1 +1,3 @@
-Prefer to use LSP tools when available.
+- Prefer using LSP tools when available.
+- Use `rg` instead of `grep`.
+- Use `fd` instead of `find`.
