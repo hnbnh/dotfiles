@@ -14,7 +14,9 @@
     fastfetch
     fd
     ffmpeg
+    fx
     fzf
+    gallery-dl
     gh
     git
     gnupg
