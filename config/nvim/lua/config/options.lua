@@ -1,6 +1,12 @@
 vim.g.lazyvim_ruby_lsp = "solargraph"
 vim.treesitter.language.register("dockerfile", "Dockerfile")
 
+vim.filetype.add({
+  extension = {
+    thor = "ruby",
+  },
+})
+
 local o = vim.opt
 
 o.fileencoding = "utf-8"
