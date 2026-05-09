@@ -33,6 +33,11 @@ return {
         matcher = {
           smartcase = true,
         },
+        sources = {
+          files = {
+            hidden = true,
+          },
+        },
         files = {
           hidden = true,
         },
