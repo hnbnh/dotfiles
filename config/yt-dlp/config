@@ -1,3 +1,4 @@
 --external-downloader aria2c
 --external-downloader-args "-x 16 -s 16 -k 10M"
 --write-auto-subs
+-o %(title).100B-%(id)s.%(ext)s
