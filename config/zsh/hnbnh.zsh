@@ -15,6 +15,8 @@ setopt histignorespace
 
 load_plugins
 
+export PATH="/opt/homebrew/bin:$PATH"
+
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
