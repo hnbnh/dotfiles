@@ -1,0 +1,44 @@
+name: update-nix-darwin-flake
+
+on:
+  schedule:
+    - cron: "0 9 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Update nix-darwin flake lock
+        working-directory: nix-darwin
+        run: nix flake update
+
+      - name: Check updated nix-darwin flake
+        working-directory: nix-darwin
+        run: nix flake check
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: chore/update-nix-darwin-flake
+          add-paths: nix-darwin/flake.lock
+          commit-message: "chore(nix-darwin): update flake lock"
+          title: "chore(nix-darwin): update flake lock"
+          body: |
+            Automated monthly update for `nix-darwin/flake.lock`.
+
+            This updates flake inputs from `nix-darwin/`, including `nixpkgs` and `darwin` when upstream revisions changed.
+          delete-branch: true
