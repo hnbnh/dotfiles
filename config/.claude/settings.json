@@ -4,7 +4,15 @@
     "pr": ""
   },
   "permissions": {
-    "allow": ["Glob", "Grep", "Read", "Edit", "Write", "WebFetch", "WebSearch"],
+    "allow": [
+      "Glob",
+      "Grep",
+      "Read",
+      "Edit",
+      "Write",
+      "WebFetch",
+      "WebSearch"
+    ],
     "deny": [
       "Bash(git push *)",
       "Bash(rm -rf)",
@@ -41,10 +49,9 @@
     "command": "~/.claude/statusline.sh"
   },
   "enabledPlugins": {
-    "code-review@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true,
-    "figma@claude-plugins-official": true,
-    "Notion@claude-plugins-official": true
+    "Notion@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
   },
   "sandbox": {
     "enabled": true,
