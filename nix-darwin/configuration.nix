@@ -65,6 +65,7 @@
       "sqlite3"
     ];
     casks = [
+      "bruno"
       "datagrip"
       "firefox"
       "ghostty"
