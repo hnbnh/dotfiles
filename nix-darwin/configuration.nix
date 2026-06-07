@@ -65,7 +65,6 @@
       "sqlite3"
     ];
     casks = [
-      "brave-browser"
       "datagrip"
       "firefox"
       "ghostty"
