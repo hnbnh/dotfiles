@@ -18,4 +18,8 @@ o.showbreak = "↪"
 
 o.fileformats = "unix,dos"
 
+-- Persist buffer-local options (e.g. filetype) in sessions;
+-- detection is unreliable during session load
+o.sessionoptions:append("localoptions")
+
 vim.g.lazyvim_picker = "snacks"
