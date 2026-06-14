@@ -1,55 +1,58 @@
 # Generate PR Description
 
-Generate a comprehensive PR description based on git changes.
+Generate a **concise** PR description based on git changes.
 
 ## Steps
 
-- If PR id is provided, use `gh pr view <PR_ID> --json title,body` to review all code changes, otherwise use `git diff main...HEAD`
+- If a PR id is provided, use `gh pr view <PR_ID> --json title,body`; otherwise use `git diff main...HEAD`.
 
-1. Review all commits in the PR/branch changes
-2. Review all code changes thoroughly
-3. Analyze the changes to understand:
-   - The purpose and motivation
-   - What problems are being solved
-   - What features are being added
-   - Any breaking changes or important updates
+1. Review the commits and code changes in the branch.
+2. Understand the purpose: what problem is solved, what changed, and any breaking changes.
+3. Generate a description using the template below.
 
-4. Generate a comprehensive PR description with the following structure:
+## Conciseness rules
+
+- Summary: 1-2 sentences. Lead with the "why".
+- Changes: 3-6 bullets max. Group related edits; skip file-by-file narration.
+- Omit any section that does not apply (do not leave empty headings).
+- No filler, no restating the diff. If a bullet adds nothing, cut it.
+
+## Template
 
 ```markdown
 ## Summary
 
-[1-3 sentences explaining what this PR does and why it's needed]
+[1-2 sentences: what this PR does and why.]
 
 ## Changes
 
-- [Bullet point for each significant change]
-- [Focus on what changed and why, not just file names]
-- [Group related changes together]
+- [Significant change and its reason]
+- [Group related edits together]
 
 ## Test Plan
 
-- [ ] [How to verify the changes work]
-- [ ] [Steps to test the functionality]
-- [ ] [Any edge cases to check]
+- [ ] [How to verify it works]
 
 ## Breaking Changes
 
-[Only include this section if there are breaking changes]
-
-- [List any breaking changes]
-
-## Screenshots/Demos
-
-[Only include this section if UI/visual changes were made]
-[Note if screenshots are needed but not provided]
+[Only if applicable — list them.]
 ```
 
-5. Make the description:
-   - Clear and comprehensive
-   - Focused on the "why" not just the "what"
-   - Well-organized with proper markdown
-   - Include relevant technical details
-   - Highlight any important considerations
+## Example
 
-Return the generated description text.
+```markdown
+## Summary
+
+Restore filetype after loading a session by persisting buffer-local options, fixing lost syntax highlighting on resume.
+
+## Changes
+
+- Add `localoptions` to `sessionoptions` so filetype is saved per buffer
+- Drop the manual `filetype detect` autocmd it replaces
+
+## Test Plan
+
+- [ ] Open a file, `:mksession`, restart nvim, `:source` — filetype is correct
+```
+
+Return the generated description text only.
