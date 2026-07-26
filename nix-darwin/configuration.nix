@@ -72,6 +72,7 @@
       "gonhanh"
       "karabiner-elements"
       "keka"
+      "notion"
       "orbstack"
       "steam"
       "telegram-desktop"
