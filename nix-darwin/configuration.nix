@@ -20,6 +20,7 @@
     gh
     git
     gnupg
+    herdr
     jaq
     jq
     lazydocker

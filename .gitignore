@@ -34,6 +34,9 @@ config/.gemini/*
 config/.gemini/antigravity/*
 !config/.gemini/antigravity/global_workflows/
 
+config/herdr/*
+!config/herdr/config.toml
+
 config/opencode/*
 config/opencode/opencode.json
 config/opencode/tui.json
