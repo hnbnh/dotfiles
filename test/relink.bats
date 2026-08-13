@@ -42,3 +42,22 @@ teardown() { teardown_fixture; }
   run "$RELINK" --nope
   [ "$status" -eq 2 ]
 }
+
+@test "symlink pointing outside repo is drift, exits 1, unchanged by --apply" {
+  track config/nvim/init.lua
+  mkdir -p "$HOME/.config"
+  ln -sfn /tmp "$HOME/.config/nvim"
+  run "$RELINK" --apply
+  [ "$status" -eq 1 ]
+  assert_link "$HOME/.config/nvim" "/tmp"
+}
+
+@test "symlink pointing inside repo but wrong path is silently fixed by --apply" {
+  track config/nvim/init.lua
+  track config/old-nvim/init.lua
+  mkdir -p "$HOME/.config"
+  ln -sfn "$DOTFILES_DIR/config/old-nvim" "$HOME/.config/nvim"
+  run "$RELINK" --apply
+  [ "$status" -eq 0 ]
+  assert_link "$HOME/.config/nvim" "$DOTFILES_DIR/config/nvim"
+}

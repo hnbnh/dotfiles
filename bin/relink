@@ -63,18 +63,46 @@ build_plan() {
 }
 
 link_one() {
-  local src="$1" dest="$2" cur
+  local src="$1" dest="$2" cur cur_abs
   if [ -L "$dest" ]; then
     cur="$(readlink "$dest")"
     cur="${cur%/}"
     if [ "$cur" = "$src" ]; then return 0; fi
-    CHANGES=$((CHANGES + 1))
-    say "  relink   $dest -> $src"
-    if [ "$APPLY" -eq 1 ]; then
-      rm -f "$dest"
-      ln -sfn "$src" "$dest"
+    # Resolve relative symlink targets against the directory of $dest
+    if [[ "$cur" != /* ]]; then
+      cur_abs="$(cd "$(dirname "$dest")" && pwd -P)/$cur"
+      cur_abs="$(cd "$cur_abs" 2>/dev/null && pwd -P || echo "$cur_abs")"
+    else
+      cur_abs="$cur"
     fi
-    return 0
+    cur_abs="${cur_abs%/}"
+    # Check if symlink resolves inside DOTFILES_DIR
+    case "$cur_abs" in
+      "$DOTFILES_DIR"*)
+        # Inside repo but wrong target: silently fix it
+        CHANGES=$((CHANGES + 1))
+        say "  relink   $dest -> $src"
+        if [ "$APPLY" -eq 1 ]; then
+          rm -f "$dest"
+          ln -sfn "$src" "$dest"
+        fi
+        return 0
+        ;;
+      *)
+        # Outside repo: treat as drift
+        DRIFT=$((DRIFT + 1))
+        say "  drift    $dest is a symlink to $cur (expected -> $src)"
+        if [ "$FORCE" -eq 1 ]; then
+          CHANGES=$((CHANGES + 1))
+          say "  force    replacing $dest"
+          if [ "$APPLY" -eq 1 ]; then
+            rm -f "$dest"
+            ln -sfn "$src" "$dest"
+          fi
+        fi
+        return 0
+        ;;
+    esac
   fi
   if [ -e "$dest" ]; then
     DRIFT=$((DRIFT + 1))
