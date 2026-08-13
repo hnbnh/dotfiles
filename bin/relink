@@ -7,4 +7,114 @@ DOTFILES_DIR="$(cd "$DOTFILES_DIR" && pwd -P)"
 HOME_DIR="$(cd "$HOME" && pwd -P)"
 CFG_DIR="$DOTFILES_DIR/config"
 
-exit 0
+APPLY=0
+QUIET=0
+FORCE=0
+CHANGES=0
+DRIFT=0
+
+usage() {
+  echo "usage: relink [--apply] [--force] [-q]"
+  echo "  no flags   show the plan, exit 1 if anything differs"
+  echo "  --apply    execute the plan"
+  echo "  --force    replace a regular file sitting at a planned link site"
+  echo "  -q         suppress output"
+}
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --apply) APPLY=1 ;;
+    --force) FORCE=1 ;;
+    -q|--quiet) QUIET=1 ;;
+    -h|--help) usage; exit 0 ;;
+    *) usage >&2; exit 2 ;;
+  esac
+  shift
+done
+
+say() {
+  if [ "$QUIET" -eq 0 ]; then printf '%s\n' "$*"; fi
+}
+
+PLAN_SRC=()
+PLAN_DEST=()
+
+plan_add() {
+  PLAN_SRC+=("$1")
+  PLAN_DEST+=("$2")
+}
+
+# config/.foo -> ~/.foo ; config/foo -> ~/.config/foo
+dest_root() {
+  case "$1" in
+    .*) printf '%s/%s' "$HOME_DIR" "$1" ;;
+    *)  printf '%s/.config/%s' "$HOME_DIR" "$1" ;;
+  esac
+}
+
+build_plan() {
+  local entry name
+  for entry in "$CFG_DIR"/*/ "$CFG_DIR"/.*/; do
+    [ -d "$entry" ] || continue
+    name="$(basename "$entry")"
+    case "$name" in .|..) continue ;; esac
+    plan_add "${entry%/}" "$(dest_root "$name")"
+  done
+}
+
+link_one() {
+  local src="$1" dest="$2" cur
+  if [ -L "$dest" ]; then
+    cur="$(readlink "$dest")"
+    cur="${cur%/}"
+    if [ "$cur" = "$src" ]; then return 0; fi
+    CHANGES=$((CHANGES + 1))
+    say "  relink   $dest -> $src"
+    if [ "$APPLY" -eq 1 ]; then
+      rm -f "$dest"
+      ln -sfn "$src" "$dest"
+    fi
+    return 0
+  fi
+  if [ -e "$dest" ]; then
+    DRIFT=$((DRIFT + 1))
+    say "  drift    $dest is not a symlink (expected -> $src)"
+    if [ "$FORCE" -eq 1 ]; then
+      CHANGES=$((CHANGES + 1))
+      say "  force    replacing $dest"
+      if [ "$APPLY" -eq 1 ]; then
+        rm -rf "$dest"
+        ln -sfn "$src" "$dest"
+      fi
+    fi
+    return 0
+  fi
+  CHANGES=$((CHANGES + 1))
+  say "  link     $dest -> $src"
+  if [ "$APPLY" -eq 1 ]; then
+    mkdir -p "$(dirname "$dest")"
+    ln -sfn "$src" "$dest"
+  fi
+  return 0
+}
+
+main() {
+  build_plan
+
+  local i
+  for ((i = 0; i < ${#PLAN_DEST[@]}; i++)); do
+    link_one "${PLAN_SRC[$i]}" "${PLAN_DEST[$i]}"
+  done
+
+  if [ "$APPLY" -eq 1 ]; then
+    say "$CHANGES applied, $DRIFT drift"
+    if [ "$DRIFT" -gt 0 ]; then exit 1; fi
+    exit 0
+  fi
+
+  say "$CHANGES changes, $DRIFT drift"
+  if [ "$CHANGES" -gt 0 ] || [ "$DRIFT" -gt 0 ]; then exit 1; fi
+  exit 0
+}
+
+main
