@@ -6,6 +6,7 @@
   shell: ~/.nix-profile/bin/nix-env -iA nixpkgs.{{ item }}
   loop:
     - avizo
+    - bats
     - bottom
     - brave
     - browsh

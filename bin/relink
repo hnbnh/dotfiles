@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# relink — link dotfiles into place, keeping tool state out of the repo.
+set -euo pipefail
+
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
+DOTFILES_DIR="$(cd "$DOTFILES_DIR" && pwd -P)"
+HOME_DIR="$(cd "$HOME" && pwd -P)"
+CFG_DIR="$DOTFILES_DIR/config"
+
+exit 0
