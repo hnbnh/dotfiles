@@ -52,6 +52,25 @@ teardown() { teardown_fixture; }
   assert_link "$HOME/.config/nvim" "/tmp"
 }
 
+@test "symlink pointing outside repo is fixed by --apply --force" {
+  track config/nvim/init.lua
+  mkdir -p "$HOME/.config"
+  ln -sfn /tmp "$HOME/.config/nvim"
+  run "$RELINK" --apply --force
+  [ "$status" -eq 0 ]
+  assert_link "$HOME/.config/nvim" "$DOTFILES_DIR/config/nvim"
+}
+
+@test "symlink pointing to repo prefix-neighbor is drift, not silently fixed" {
+  track config/nvim/init.lua
+  mkdir -p "$HOME/.config" "${DOTFILES_DIR}-evil/config/nvim"
+  touch "${DOTFILES_DIR}-evil/config/nvim/init.lua"
+  ln -sfn "${DOTFILES_DIR}-evil/config/nvim" "$HOME/.config/nvim"
+  run "$RELINK" --apply
+  [ "$status" -eq 1 ]
+  assert_link "$HOME/.config/nvim" "${DOTFILES_DIR}-evil/config/nvim"
+}
+
 @test "symlink pointing inside repo but wrong path is silently fixed by --apply" {
   track config/nvim/init.lua
   track config/old-nvim/init.lua

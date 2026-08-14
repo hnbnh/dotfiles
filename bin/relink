@@ -76,9 +76,9 @@ link_one() {
       cur_abs="$cur"
     fi
     cur_abs="${cur_abs%/}"
-    # Check if symlink resolves inside DOTFILES_DIR
+    # Check if symlink resolves inside DOTFILES_DIR (exact match or /boundary)
     case "$cur_abs" in
-      "$DOTFILES_DIR"*)
+      "$DOTFILES_DIR"|"$DOTFILES_DIR"/*)
         # Inside repo but wrong target: silently fix it
         CHANGES=$((CHANGES + 1))
         say "  relink   $dest -> $src"
@@ -93,6 +93,7 @@ link_one() {
         DRIFT=$((DRIFT + 1))
         say "  drift    $dest is a symlink to $cur (expected -> $src)"
         if [ "$FORCE" -eq 1 ]; then
+          DRIFT=$((DRIFT - 1))
           CHANGES=$((CHANGES + 1))
           say "  force    replacing $dest"
           if [ "$APPLY" -eq 1 ]; then
@@ -108,6 +109,7 @@ link_one() {
     DRIFT=$((DRIFT + 1))
     say "  drift    $dest is not a symlink (expected -> $src)"
     if [ "$FORCE" -eq 1 ]; then
+      DRIFT=$((DRIFT - 1))
       CHANGES=$((CHANGES + 1))
       say "  force    replacing $dest"
       if [ "$APPLY" -eq 1 ]; then
