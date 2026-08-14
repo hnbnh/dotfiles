@@ -40,6 +40,9 @@ say() {
 PLAN_SRC=()
 PLAN_DEST=()
 
+LINK_SRC=()
+LINK_DEST=()
+
 plan_add() {
   PLAN_SRC+=("$1")
   PLAN_DEST+=("$2")
@@ -63,6 +66,10 @@ parse_conf() {
     case "$directive" in
       ''|\#*) continue ;;
       shared) SHARED+=("$a") ;;
+      link)
+        LINK_SRC+=("$a")
+        LINK_DEST+=("${b/#\~/$HOME_DIR}")
+        ;;
       *)
         echo "relink: unknown directive '$directive' in $CONF_FILE" >&2
         exit 2
@@ -114,6 +121,10 @@ build_plan() {
     else
       plan_add "${entry%/}" "$dest"
     fi
+  done
+  local i
+  for ((i = 0; i < ${#LINK_SRC[@]}; i++)); do
+    plan_add "$CFG_DIR/${LINK_SRC[$i]}" "${LINK_DEST[$i]}"
   done
   return 0
 }

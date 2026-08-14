@@ -174,3 +174,25 @@ EOF
   [ "$status" -eq 1 ]
   [ ! -e "${DOTFILES_DIR}-external/CLAUDE.md" ]
 }
+
+@test "link directive creates an explicit link and does not replace the directory link" {
+  track config/zsh/.zshrc
+  track config/zsh/functions.zsh
+  conf <<'EOF'
+link  zsh/.zshrc  ~/.zshrc
+EOF
+  run "$RELINK" --apply
+  [ "$status" -eq 0 ]
+  assert_link "$HOME/.config/zsh" "$DOTFILES_DIR/config/zsh"
+  assert_link "$HOME/.zshrc" "$DOTFILES_DIR/config/zsh/.zshrc"
+}
+
+@test "link directive can target a path under ~/.config" {
+  track config/betterlockscreen/betterlockscreenrc
+  conf <<'EOF'
+link  betterlockscreen/betterlockscreenrc  ~/.config/betterlockscreenrc
+EOF
+  "$RELINK" --apply
+  assert_link "$HOME/.config/betterlockscreenrc" \
+    "$DOTFILES_DIR/config/betterlockscreen/betterlockscreenrc"
+}
