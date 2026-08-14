@@ -125,6 +125,21 @@ EOF
   [ "$status" -eq 2 ]
 }
 
+# A typo'd shared name (e.g. ".claud" instead of ".claude") has no matching
+# directory under config/, so the real ".claude" directory falls through to
+# whole-directory-link treatment instead of per-file links — the exact
+# condition that makes a real, state-holding directory look like drift.
+# It must not fail silently; warn rather than exit 2, since a shared name
+# for a directory that doesn't exist yet on a fresh machine is legitimate.
+@test "an unknown shared name produces a warning" {
+  track config/.claude/CLAUDE.md
+  conf <<'EOF'
+shared  .claud
+EOF
+  run "$RELINK"
+  [[ "$output" == *"warn"*".claud"* ]]
+}
+
 @test "comments and blank lines in links.conf are ignored" {
   track config/.claude/CLAUDE.md
   conf <<'EOF'
@@ -491,6 +506,39 @@ EOF
   [ "$status" -eq 0 ]
   assert_link "$HOME/.claude/settings.json" "$DOTFILES_DIR/config/.claude/settings.json"
   [ "$(cat "$HOME/.claude/settings.json")" = "repo version" ]
+}
+
+# Regression test for the worst behaviour in the tool: if a `shared` line in
+# links.conf is ever lost (bad merge, stale checkout, typo), the plan reverts
+# to a whole-directory link and $HOME/.claude — a real directory that may hold
+# hundreds of megabytes of session state and credentials — becomes "drift".
+# --force must never rm -rf that directory to make room for a symlink.
+@test "--force refuses to replace a real directory at a planned link site; contents survive" {
+  track config/.claude/CLAUDE.md
+  mkdir -p "$HOME/.claude/sessions"
+  printf 'irreplaceable state\n' > "$HOME/.claude/sessions/a.jsonl"
+
+  run "$RELINK" --apply --force
+  [ "$status" -eq 1 ]
+  [ -d "$HOME/.claude" ]
+  [ ! -L "$HOME/.claude" ]
+  [ -d "$HOME/.claude/sessions" ]
+  [ "$(cat "$HOME/.claude/sessions/a.jsonl")" = "irreplaceable state" ]
+  [[ "$output" == *"drift"*"real directory"* ]]
+  [[ "$output" != *"force"* ]]
+}
+
+@test "--force refuses to replace when the planned source is missing; file survives" {
+  conf <<'EOF'
+link  zsh/.zshrc  ~/.zshrc
+EOF
+  printf 'existing content\n' > "$HOME/.zshrc"
+
+  run "$RELINK" --apply --force
+  [ "$status" -eq 1 ]
+  [ ! -L "$HOME/.zshrc" ]
+  [ "$(cat "$HOME/.zshrc")" = "existing content" ]
+  [[ "$output" != *"force"* ]]
 }
 
 @test "-q suppresses output but keeps the exit code" {

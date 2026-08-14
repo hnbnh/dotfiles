@@ -5,6 +5,13 @@ set -euo pipefail
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
 DOTFILES_DIR="$(cd "$DOTFILES_DIR" && pwd -P)"
 HOME_DIR="$(cd "$HOME" && pwd -P)"
+
+# tracked_rel relies on git ls-files; if it fails silently (see tracked_rel),
+# a migration would report success while leaving the repo directory empty.
+# Fail fast instead of discovering that partway through a migration.
+git -C "$DOTFILES_DIR" rev-parse --git-dir >/dev/null 2>&1 || {
+  echo "relink: $DOTFILES_DIR is not a git repository" >&2; exit 2; }
+
 CFG_DIR="$DOTFILES_DIR/config"
 CONF_FILE="$CFG_DIR/links.conf"
 
@@ -86,6 +93,18 @@ parse_conf() {
         ;;
     esac
   done < "$CONF_FILE"
+
+  # A shared name with no matching config/ directory silently reverts that
+  # directory to whole-directory-link treatment (build_plan's plain branch)
+  # instead of per-file links — the exact setup that turns a real,
+  # state-holding directory into reported drift. Warn, don't exit 2: a
+  # shared directory that doesn't exist yet on a fresh machine is fine.
+  local s
+  for s in ${SHARED[@]+"${SHARED[@]}"}; do
+    if [ ! -d "$CFG_DIR/$s" ]; then
+      printf '  warn     shared %s has no matching directory under config/; ignoring\n' "$s" >&2
+    fi
+  done
   return 0
 }
 
@@ -221,7 +240,11 @@ link_one() {
     dir_part="$(cd "$dir_part" 2>/dev/null && pwd -P || printf '%s' "$dir_part")"
     cur_abs="$dir_part/$base_part"
     cur_abs="${cur_abs%/}"
-    # Check if symlink resolves inside DOTFILES_DIR (exact match or /boundary)
+    # Check if symlink resolves inside DOTFILES_DIR (exact match or /boundary).
+    # Exact match included deliberately (prune_scan below is prefix-only):
+    # here $dest is a single planned link site, never $HOME itself, so
+    # matching the repo root exactly cannot catch a convenience symlink like
+    # ~/dotfiles -> $DOTFILES_DIR the way it would in prune_scan's $HOME walk.
     case "$cur_abs" in
       "$DOTFILES_DIR"|"$DOTFILES_DIR"/*)
         # Inside repo but wrong target: silently fix it
@@ -252,13 +275,25 @@ link_one() {
   fi
   if [ -e "$dest" ]; then
     DRIFT=$((DRIFT + 1))
+    if [ -d "$dest" ]; then
+      # A real directory here is exactly what a shared dest looks like once
+      # migrated (or what any plain dest looks like pre-migration): it may
+      # hold state nothing else has a copy of. --force replaces regular
+      # files, never directories — there is no recovery from rm -rf here.
+      say "  drift    $dest is a real directory (expected -> $src); refusing to replace"
+      return 0
+    fi
     say "  drift    $dest is not a symlink (expected -> $src)"
-    if [ "$FORCE" -eq 1 ]; then
+    # Require the source to exist before forcing: if a migration was
+    # interrupted between its mv and its copy-back loop, $src can be empty
+    # while $dest still holds the real, possibly-uncommitted file content.
+    # Forcing in that state would delete the only copy and link to nothing.
+    if [ "$FORCE" -eq 1 ] && [ -e "$src" ]; then
       DRIFT=$((DRIFT - 1))
       CHANGES=$((CHANGES + 1))
       say "  force    replacing $dest"
       if [ "$APPLY" -eq 1 ]; then
-        rm -rf "$dest"
+        rm -f "$dest"
         ln -sfn "$src" "$dest"
       fi
     fi
@@ -318,6 +353,10 @@ prune_scan() {
     base_part="$(basename "$target")"
     dir_part="$(cd "$dir_part" 2>/dev/null && pwd -P || printf '%s' "$dir_part")"
     target="$dir_part/$base_part"
+    # Prefix-only, deliberately unlike link_one's exact-match-or-prefix: this
+    # scan walks $HOME and ~/.config, so an exact match to $DOTFILES_DIR would
+    # be a convenience symlink such as ~/dotfiles -> $DOTFILES_DIR, which must
+    # survive pruning, not be treated as a stale link into the repo.
     case "$target" in
       "$DOTFILES_DIR"/*) ;;
       *) continue ;;
