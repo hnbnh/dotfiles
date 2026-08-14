@@ -1,47 +1,8 @@
-- name: Create ~/.config
-  file:
-    path: ~/.config
-    state: directory
-
-- name: Find .config files
-  find:
-    paths: ~/dotfiles/config/
-    recurse: no
-    file_type: any
-    hidden: yes
-  register: dot_config
-
-- name: ~/.config/
-  file:
-    src: "{{item.path}}"
-    dest: "~/.config/{{item.path | basename}}"
-    state: link
-    force: yes
-  loop: "{{ dot_config.files }}"
-  loop_control:
-    label: "~/.config/{{item.path | basename}}"
-
-- name: Link files
-  file:
-    src: "~/.config/{{ item.src }}"
-    dest: "~/{{ item.dest }}"
-    state: link
-    force: yes
-  loop:
-    - src: zsh/.zshrc
-      dest: .zshrc
-    - src: zsh/.zimrc
-      dest: .zimrc
-    - src: git/.gitconfig
-      dest: .gitconfig
-    - src: tmux/.tmux.conf
-      dest: .tmux.conf
-    - src: betterlockscreen/betterlockscreenrc
-      dest: .config/betterlockscreenrc
-    - src: yt-dlp/yt-dlp.conf
-      dest: yt-dlp.conf
-    - src: starship/starship.toml
-      dest: .config/starship.toml
+- name: Link dotfiles
+  command: "{{ ansible_env.HOME }}/dotfiles/bin/relink --apply"
+  register: relink
+  changed_when: relink.stdout is regex('[1-9][0-9]* applied')
+  failed_when: relink.rc > 1
 
 - name: Install required packages
   pip:
