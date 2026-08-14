@@ -37,7 +37,7 @@ function setup_macos {
 
 function main() {
   if [ "$(uname)" == "Darwin" ]; then
-    install_dots
+    ./bin/relink --apply
     setup_macos
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     setup_linux
