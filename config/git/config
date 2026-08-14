@@ -24,7 +24,7 @@
   colorMoved = default
 
 [include]
-  path = ~/.config/git/.themes.gitconfig
+  path = themes.gitconfig
 [pull]
 	rebase = true
 [url "ssh://git@github.com/"]
