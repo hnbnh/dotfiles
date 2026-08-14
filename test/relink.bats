@@ -80,3 +80,59 @@ teardown() { teardown_fixture; }
   [ "$status" -eq 0 ]
   assert_link "$HOME/.config/nvim" "$DOTFILES_DIR/config/nvim"
 }
+
+@test "shared directory links each tracked file, not the directory" {
+  track config/.claude/CLAUDE.md
+  track config/.claude/agents/reviewer.md
+  conf <<'EOF'
+shared  .claude
+EOF
+  run "$RELINK" --apply
+  [ "$status" -eq 0 ]
+  [ ! -L "$HOME/.claude" ]
+  [ -d "$HOME/.claude" ]
+  [ -d "$HOME/.claude/agents" ]
+  [ ! -L "$HOME/.claude/agents" ]
+  assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
+  assert_link "$HOME/.claude/agents/reviewer.md" "$DOTFILES_DIR/config/.claude/agents/reviewer.md"
+}
+
+@test "untracked files in a shared repo directory are not linked" {
+  track config/.claude/CLAUDE.md
+  printf 'state\n' > "$DOTFILES_DIR/config/.claude/history.jsonl"
+  conf <<'EOF'
+shared  .claude
+EOF
+  "$RELINK" --apply
+  [ ! -e "$HOME/.claude/history.jsonl" ]
+}
+
+@test "shared plain directory maps under ~/.config" {
+  track config/lazygit/config.yml
+  conf <<'EOF'
+shared  lazygit
+EOF
+  "$RELINK" --apply
+  [ -d "$HOME/.config/lazygit" ]
+  assert_link "$HOME/.config/lazygit/config.yml" "$DOTFILES_DIR/config/lazygit/config.yml"
+}
+
+@test "unknown directive in links.conf exits 2" {
+  conf <<'EOF'
+wat  .claude
+EOF
+  run "$RELINK"
+  [ "$status" -eq 2 ]
+}
+
+@test "comments and blank lines in links.conf are ignored" {
+  track config/.claude/CLAUDE.md
+  conf <<'EOF'
+# a comment
+
+shared  .claude
+EOF
+  run "$RELINK" --apply
+  [ "$status" -eq 0 ]
+  assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
+}

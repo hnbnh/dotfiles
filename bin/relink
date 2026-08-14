@@ -6,6 +6,7 @@ DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
 DOTFILES_DIR="$(cd "$DOTFILES_DIR" && pwd -P)"
 HOME_DIR="$(cd "$HOME" && pwd -P)"
 CFG_DIR="$DOTFILES_DIR/config"
+CONF_FILE="$CFG_DIR/links.conf"
 
 APPLY=0
 QUIET=0
@@ -52,14 +53,59 @@ dest_root() {
   esac
 }
 
+SHARED=()
+SHARED_DEST=()
+
+parse_conf() {
+  local directive a b
+  if [ ! -f "$CONF_FILE" ]; then return 0; fi
+  while read -r directive a b || [ -n "$directive" ]; do
+    case "$directive" in
+      ''|\#*) continue ;;
+      shared) SHARED+=("$a") ;;
+      *)
+        echo "relink: unknown directive '$directive' in $CONF_FILE" >&2
+        exit 2
+        ;;
+    esac
+  done < "$CONF_FILE"
+  return 0
+}
+
+is_shared() {
+  local name="$1" s
+  for s in ${SHARED[@]+"${SHARED[@]}"}; do
+    if [ "$s" = "$name" ]; then return 0; fi
+  done
+  return 1
+}
+
+# Paths tracked under config/<name>/, relative to that directory.
+tracked_rel() {
+  local name="$1" f
+  git -C "$DOTFILES_DIR" ls-files "config/$name" | while IFS= read -r f; do
+    printf '%s\n' "${f#config/$name/}"
+  done
+}
+
 build_plan() {
-  local entry name
+  local entry name dest rel
   for entry in "$CFG_DIR"/*/ "$CFG_DIR"/.*/; do
     [ -d "$entry" ] || continue
     name="$(basename "$entry")"
     case "$name" in .|..) continue ;; esac
-    plan_add "${entry%/}" "$(dest_root "$name")"
+    dest="$(dest_root "$name")"
+    if is_shared "$name"; then
+      SHARED_DEST+=("$dest")
+      while IFS= read -r rel; do
+        [ -n "$rel" ] || continue
+        plan_add "$CFG_DIR/$name/$rel" "$dest/$rel"
+      done < <(tracked_rel "$name")
+    else
+      plan_add "${entry%/}" "$dest"
+    fi
   done
+  return 0
 }
 
 link_one() {
@@ -129,6 +175,7 @@ link_one() {
 }
 
 main() {
+  parse_conf
   build_plan
 
   local i
