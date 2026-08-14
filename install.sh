@@ -37,7 +37,7 @@ function setup_macos {
 
 function main() {
   if [ "$(uname)" == "Darwin" ]; then
-    ./bin/relink --apply
+    ./bin/relink --apply || { local rc=$?; [ "$rc" -le 1 ] || exit "$rc"; }
     setup_macos
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     setup_linux
