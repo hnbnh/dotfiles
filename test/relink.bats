@@ -136,3 +136,41 @@ EOF
   [ "$status" -eq 0 ]
   assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
 }
+
+@test "shared directory whose destination root is a repo symlink is drift, not destroyed" {
+  track config/.claude/CLAUDE.md
+  "$RELINK" --apply
+  conf <<'EOF'
+shared  .claude
+EOF
+  run "$RELINK" --apply
+  [ "$status" -eq 1 ]
+  [ -f "$DOTFILES_DIR/config/.claude/CLAUDE.md" ]
+  [ ! -L "$DOTFILES_DIR/config/.claude/CLAUDE.md" ]
+  [ "$(cat "$DOTFILES_DIR/config/.claude/CLAUDE.md")" = "x" ]
+}
+
+@test "shared directory whose destination root is a repo symlink survives --apply --force" {
+  track config/.claude/CLAUDE.md
+  "$RELINK" --apply
+  conf <<'EOF'
+shared  .claude
+EOF
+  run "$RELINK" --apply --force
+  [ "$status" -eq 1 ]
+  [ -f "$DOTFILES_DIR/config/.claude/CLAUDE.md" ]
+  [ ! -L "$DOTFILES_DIR/config/.claude/CLAUDE.md" ]
+  [ "$(cat "$DOTFILES_DIR/config/.claude/CLAUDE.md")" = "x" ]
+}
+
+@test "shared directory whose destination root is a symlink outside the repo is drift, nothing written there" {
+  track config/.claude/CLAUDE.md
+  mkdir -p "${DOTFILES_DIR}-external"
+  ln -sfn "${DOTFILES_DIR}-external" "$HOME/.claude"
+  conf <<'EOF'
+shared  .claude
+EOF
+  run "$RELINK" --apply
+  [ "$status" -eq 1 ]
+  [ ! -e "${DOTFILES_DIR}-external/CLAUDE.md" ]
+}

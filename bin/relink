@@ -97,6 +97,16 @@ build_plan() {
     dest="$(dest_root "$name")"
     if is_shared "$name"; then
       SHARED_DEST+=("$dest")
+      if [ -L "$dest" ]; then
+        DRIFT=$((DRIFT + 1))
+        say "  drift    $dest is a symlink; a shared directory's root must be a real directory"
+        continue
+      fi
+      if [ -e "$dest" ] && [ ! -d "$dest" ]; then
+        DRIFT=$((DRIFT + 1))
+        say "  drift    $dest is a regular file; a shared directory's root must be a real directory"
+        continue
+      fi
       while IFS= read -r rel; do
         [ -n "$rel" ] || continue
         plan_add "$CFG_DIR/$name/$rel" "$dest/$rel"
