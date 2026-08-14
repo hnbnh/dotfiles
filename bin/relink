@@ -105,6 +105,43 @@ tracked_rel() {
   done
 }
 
+needs_migration() {
+  local dest="$1" target
+  if [ ! -L "$dest" ]; then return 1; fi
+  target="$(readlink "$dest")"
+  target="${target%/}"
+  case "$target" in
+    "$DOTFILES_DIR"|"$DOTFILES_DIR"/*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+# Turn a destination that is a symlink into the repo into a real directory:
+# move the whole directory out (a rename — instant, and open file handles
+# follow their inodes), then copy the tracked files back into the repo.
+migrate_shared() {
+  local name="$1" dest="$2" repo="$CFG_DIR/$name" rel
+  CHANGES=$((CHANGES + 1))
+  say "  migrate  config/$name -> $dest"
+  if [ "$APPLY" -eq 0 ]; then return 0; fi
+
+  rm "$dest"
+  mv "$repo" "$dest"
+  mkdir -p "$repo"
+
+  while IFS= read -r rel; do
+    [ -n "$rel" ] || continue
+    if [ ! -e "$dest/$rel" ]; then
+      say "  warn     config/$name/$rel is tracked but missing; skipped"
+      continue
+    fi
+    mkdir -p "$repo/$(dirname "$rel")"
+    cp -p "$dest/$rel" "$repo/$rel"
+    rm "$dest/$rel"
+  done < <(tracked_rel "$name")
+  return 0
+}
+
 build_plan() {
   local entry name dest rel
   for entry in "$CFG_DIR"/*/ "$CFG_DIR"/.*/; do
@@ -114,6 +151,9 @@ build_plan() {
     dest="$(dest_root "$name")"
     if is_shared "$name"; then
       SHARED_DEST+=("$dest")
+      if needs_migration "$dest"; then
+        migrate_shared "$name" "$dest"
+      fi
       if [ -L "$dest" ]; then
         DRIFT=$((DRIFT + 1))
         say "  drift    $dest is a symlink; a shared directory's root must be a real directory"

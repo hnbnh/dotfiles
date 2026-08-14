@@ -137,27 +137,33 @@ EOF
   assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
 }
 
-@test "shared directory whose destination root is a repo symlink is drift, not destroyed" {
+@test "shared directory whose destination root is a repo symlink migrates instead of drifting" {
   track config/.claude/CLAUDE.md
   "$RELINK" --apply
   conf <<'EOF'
 shared  .claude
 EOF
   run "$RELINK" --apply
-  [ "$status" -eq 1 ]
+  [ "$status" -eq 0 ]
+  [ ! -L "$HOME/.claude" ]
+  [ -d "$HOME/.claude" ]
+  assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
   [ -f "$DOTFILES_DIR/config/.claude/CLAUDE.md" ]
   [ ! -L "$DOTFILES_DIR/config/.claude/CLAUDE.md" ]
   [ "$(cat "$DOTFILES_DIR/config/.claude/CLAUDE.md")" = "x" ]
 }
 
-@test "shared directory whose destination root is a repo symlink survives --apply --force" {
+@test "shared directory whose destination root is a repo symlink migrates instead of drifting under --apply --force" {
   track config/.claude/CLAUDE.md
   "$RELINK" --apply
   conf <<'EOF'
 shared  .claude
 EOF
   run "$RELINK" --apply --force
-  [ "$status" -eq 1 ]
+  [ "$status" -eq 0 ]
+  [ ! -L "$HOME/.claude" ]
+  [ -d "$HOME/.claude" ]
+  assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
   [ -f "$DOTFILES_DIR/config/.claude/CLAUDE.md" ]
   [ ! -L "$DOTFILES_DIR/config/.claude/CLAUDE.md" ]
   [ "$(cat "$DOTFILES_DIR/config/.claude/CLAUDE.md")" = "x" ]
@@ -212,4 +218,111 @@ shared
 EOF
   run "$RELINK"
   [ "$status" -eq 2 ]
+}
+
+# Put the fixture in the pre-migration state: the repo directory holds tracked
+# files plus tool state, and the destination is a symlink pointing at it.
+premigrate() {
+  local name="$1" dest="$2"
+  mkdir -p "$(dirname "$dest")"
+  ln -sfn "$DOTFILES_DIR/config/$name" "$dest"
+}
+
+@test "migration moves state out of the repo and links tracked files back in" {
+  track config/.claude/CLAUDE.md "tracked content"
+  mkdir -p "$DOTFILES_DIR/config/.claude/sessions"
+  printf 'session\n' > "$DOTFILES_DIR/config/.claude/sessions/a.jsonl"
+  conf <<'EOF'
+shared  .claude
+EOF
+  premigrate .claude "$HOME/.claude"
+
+  run "$RELINK" --apply
+  [ "$status" -eq 0 ]
+
+  [ ! -L "$HOME/.claude" ]
+  [ -d "$HOME/.claude" ]
+  [ "$(cat "$HOME/.claude/sessions/a.jsonl")" = "session" ]
+  [ ! -e "$DOTFILES_DIR/config/.claude/sessions" ]
+  assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
+  [ "$(cat "$DOTFILES_DIR/config/.claude/CLAUDE.md")" = "tracked content" ]
+}
+
+@test "migration preserves untracked destination content byte-for-byte" {
+  track config/.claude/CLAUDE.md
+  mkdir -p "$DOTFILES_DIR/config/.claude/blabla"
+  head -c 4096 /dev/urandom > "$DOTFILES_DIR/config/.claude/blabla/x.bin"
+  local before; before="$(shasum "$DOTFILES_DIR/config/.claude/blabla/x.bin" | cut -d' ' -f1)"
+  conf <<'EOF'
+shared  .claude
+EOF
+  premigrate .claude "$HOME/.claude"
+
+  "$RELINK" --apply
+
+  local after; after="$(shasum "$HOME/.claude/blabla/x.bin" | cut -d' ' -f1)"
+  [ "$before" = "$after" ]
+}
+
+@test "migration preserves uncommitted edits to tracked files" {
+  track config/.claude/CLAUDE.md "committed"
+  git -C "$DOTFILES_DIR" commit -qm init
+  printf 'edited\n' > "$DOTFILES_DIR/config/.claude/CLAUDE.md"
+  conf <<'EOF'
+shared  .claude
+EOF
+  premigrate .claude "$HOME/.claude"
+
+  "$RELINK" --apply
+
+  [ "$(cat "$DOTFILES_DIR/config/.claude/CLAUDE.md")" = "edited" ]
+}
+
+@test "migration preserves mode bits" {
+  track config/.claude/statusline.sh
+  chmod 755 "$DOTFILES_DIR/config/.claude/statusline.sh"
+  track config/.claude/mcp.json
+  chmod 600 "$DOTFILES_DIR/config/.claude/mcp.json"
+  conf <<'EOF'
+shared  .claude
+EOF
+  premigrate .claude "$HOME/.claude"
+
+  "$RELINK" --apply
+
+  [ -x "$DOTFILES_DIR/config/.claude/statusline.sh" ]
+  [ "$(stat -f '%Lp' "$DOTFILES_DIR/config/.claude/mcp.json")" = "600" ]
+}
+
+@test "a destination that is already a real directory is left alone" {
+  track config/.claude/CLAUDE.md
+  mkdir -p "$HOME/.claude/sessions"
+  printf 'session\n' > "$HOME/.claude/sessions/a.jsonl"
+  conf <<'EOF'
+shared  .claude
+EOF
+  "$RELINK" --apply
+  [ "$(cat "$HOME/.claude/sessions/a.jsonl")" = "session" ]
+  assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
+}
+
+@test "a missing destination is created fresh without migrating" {
+  track config/.claude/CLAUDE.md
+  conf <<'EOF'
+shared  .claude
+EOF
+  "$RELINK" --apply
+  [ -d "$HOME/.claude" ]
+  assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
+}
+
+@test "dry run does not migrate" {
+  track config/.claude/CLAUDE.md
+  conf <<'EOF'
+shared  .claude
+EOF
+  premigrate .claude "$HOME/.claude"
+  run "$RELINK"
+  [ "$status" -eq 1 ]
+  [ -L "$HOME/.claude" ]
 }
