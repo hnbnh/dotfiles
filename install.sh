@@ -37,6 +37,10 @@ function setup_macos {
 
 function main() {
   if [ "$(uname)" == "Darwin" ]; then
+    if [ ! -x ./bin/relink ]; then
+      echo "install: ./bin/relink is missing or not executable" >&2
+      exit 1
+    fi
     ./bin/relink --apply || { local rc=$?; [ "$rc" -le 1 ] || exit "$rc"; }
     setup_macos
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
