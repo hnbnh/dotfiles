@@ -272,16 +272,43 @@ in_plan() {
   return 1
 }
 
+# True if $1 is itself a shared directory's destination root. A root that is
+# still a repo symlink (pre-migration) is handled by build_plan/migrate_shared
+# via the "migrate" line, not by prune — without this, the $HOME depth-1 scan
+# would report it a second time as a stale link.
+in_shared_dest() {
+  local path="$1" d
+  for d in ${SHARED_DEST[@]+"${SHARED_DEST[@]}"}; do
+    if [ "$d" = "$path" ]; then return 0; fi
+  done
+  return 1
+}
+
 prune_scan() {
-  local dir="$1" depth="$2" link target
+  local dir="$1" depth="$2" link target dir_part base_part
+  # A symlinked root (pre-migration shared dir, or drift) is never descended
+  # into: it is reported once, elsewhere, by build_plan/migrate_shared or
+  # link_one, and find's non-descent through a symlinked start path holds
+  # only by coincidence of dest_root never producing a trailing slash — make
+  # it structural instead of relying on that.
+  if [ -L "$dir" ]; then return 0; fi
   if [ ! -d "$dir" ]; then return 0; fi
   while IFS= read -r link; do
-    target="$(readlink "$link")"
+    if in_shared_dest "$link"; then continue; fi
+    target="$(readlink "$link")" || continue
     target="${target%/}"
     case "$target" in
       /*) ;;
       *) target="$(dirname "$link")/$target" ;;
     esac
+    # Canonicalize the containing directory (same cd/pwd -P approach as
+    # link_one) so a lexical ".." component can't masquerade as a path
+    # inside the repo; the basename needs no resolution since it can't
+    # itself contain "..".
+    dir_part="$(dirname "$target")"
+    base_part="$(basename "$target")"
+    dir_part="$(cd "$dir_part" 2>/dev/null && pwd -P || printf '%s' "$dir_part")"
+    target="$dir_part/$base_part"
     case "$target" in
       "$DOTFILES_DIR"/*) ;;
       *) continue ;;

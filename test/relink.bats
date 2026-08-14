@@ -356,6 +356,7 @@ EOF
   [[ "$output" == *"migrate  config/.claude"* ]]
   [[ "$output" == *"link     "*"CLAUDE.md"* ]]
   [[ "$output" != *"  drift    "* ]]
+  [[ "$output" != *"  prune    "*"/.claude"* ]]
   [ -L "$HOME/.claude" ]
 }
 
@@ -410,7 +411,7 @@ EOF
   rm "$DOTFILES_DIR/config/.claude/old.md"
 
   "$RELINK" --apply
-  [ ! -e "$HOME/.claude/old.md" ]
+  [ ! -L "$HOME/.claude/old.md" ]
   assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
 }
 
@@ -444,4 +445,22 @@ EOF
   ln -sfn /tmp "$HOME/.elsewhere"
   "$RELINK" --apply
   [ -L "$HOME/.elsewhere" ]
+}
+
+@test "a link to a prefix-colliding sibling directory survives prune" {
+  track config/nvim/init.lua
+  mkdir -p "${DOTFILES_DIR}-old/x"
+  touch "${DOTFILES_DIR}-old/x/thing.conf"
+  ln -sfn "${DOTFILES_DIR}-old/x" "$HOME/.sib"
+  "$RELINK" --apply
+  [ -L "$HOME/.sib" ]
+}
+
+@test "a link that lexically walks out of the repo via .. survives prune" {
+  track config/nvim/init.lua
+  mkdir -p "$(dirname "$DOTFILES_DIR")/outside"
+  printf 'secret\n' > "$(dirname "$DOTFILES_DIR")/outside/secret"
+  ln -sfn "$DOTFILES_DIR/../outside/secret" "$HOME/.escape"
+  "$RELINK" --apply
+  [ -L "$HOME/.escape" ]
 }
