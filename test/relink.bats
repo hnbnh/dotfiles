@@ -396,3 +396,52 @@ EOF
   run "$RELINK" --apply -q
   [[ "$output" == *"warn"*"GONE.md is tracked but missing"* ]]
 }
+
+@test "a link to a file no longer tracked is pruned" {
+  track config/.claude/CLAUDE.md
+  track config/.claude/old.md
+  conf <<'EOF'
+shared  .claude
+EOF
+  "$RELINK" --apply
+  assert_link "$HOME/.claude/old.md" "$DOTFILES_DIR/config/.claude/old.md"
+
+  git -C "$DOTFILES_DIR" rm -q --cached config/.claude/old.md
+  rm "$DOTFILES_DIR/config/.claude/old.md"
+
+  "$RELINK" --apply
+  [ ! -e "$HOME/.claude/old.md" ]
+  assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
+}
+
+@test "prune never removes untracked content at the destination" {
+  track config/.claude/CLAUDE.md
+  conf <<'EOF'
+shared  .claude
+EOF
+  "$RELINK" --apply
+  mkdir -p "$HOME/.claude/blabla"
+  printf 'state\n' > "$HOME/.claude/blabla/x.json"
+  printf 'top\n' > "$HOME/.claude/history.jsonl"
+  ln -sfn /tmp "$HOME/.claude/elsewhere"
+
+  "$RELINK" --apply
+
+  [ "$(cat "$HOME/.claude/blabla/x.json")" = "state" ]
+  [ "$(cat "$HOME/.claude/history.jsonl")" = "top" ]
+  [ -L "$HOME/.claude/elsewhere" ]
+}
+
+@test "a stale repo-pointing link at \$HOME top level is pruned" {
+  track config/nvim/init.lua
+  ln -sfn "$DOTFILES_DIR/config/gone/thing.conf" "$HOME/.oldrc"
+  "$RELINK" --apply
+  [ ! -L "$HOME/.oldrc" ]
+}
+
+@test "a link pointing outside the repo at \$HOME top level survives" {
+  track config/nvim/init.lua
+  ln -sfn /tmp "$HOME/.elsewhere"
+  "$RELINK" --apply
+  [ -L "$HOME/.elsewhere" ]
+}
