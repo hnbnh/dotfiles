@@ -123,7 +123,18 @@ migrate_shared() {
   local name="$1" dest="$2" repo="$CFG_DIR/$name" rel
   CHANGES=$((CHANGES + 1))
   say "  migrate  config/$name -> $dest"
-  if [ "$APPLY" -eq 0 ]; then return 0; fi
+  if [ "$APPLY" -eq 0 ]; then
+    # Can't touch the filesystem to preview per-file link_one results: $dest
+    # is still the pre-migration symlink, so every tracked file would appear
+    # to already exist and get misreported as drift. Preview the links the
+    # migration will create instead.
+    while IFS= read -r rel; do
+      [ -n "$rel" ] || continue
+      CHANGES=$((CHANGES + 1))
+      say "  link     $dest/$rel -> $repo/$rel"
+    done < <(tracked_rel "$name")
+    return 0
+  fi
 
   rm "$dest"
   mv "$repo" "$dest"
@@ -132,7 +143,14 @@ migrate_shared() {
   while IFS= read -r rel; do
     [ -n "$rel" ] || continue
     if [ ! -e "$dest/$rel" ]; then
-      say "  warn     config/$name/$rel is tracked but missing; skipped"
+      printf '  warn     config/%s/%s is tracked but missing; skipped\n' "$name" "$rel" >&2
+      continue
+    fi
+    # A gitlink (submodule) is a directory on disk; cp -p only handles
+    # regular files. Leave it where the mv put it rather than aborting the
+    # whole migration under set -e.
+    if [ -d "$dest/$rel" ]; then
+      printf '  warn     config/%s/%s is not a regular file; skipped\n' "$name" "$rel" >&2
       continue
     fi
     mkdir -p "$repo/$(dirname "$rel")"
@@ -153,6 +171,7 @@ build_plan() {
       SHARED_DEST+=("$dest")
       if needs_migration "$dest"; then
         migrate_shared "$name" "$dest"
+        if [ "$APPLY" -eq 0 ]; then continue; fi
       fi
       if [ -L "$dest" ]; then
         DRIFT=$((DRIFT + 1))

@@ -230,8 +230,11 @@ premigrate() {
 
 @test "migration moves state out of the repo and links tracked files back in" {
   track config/.claude/CLAUDE.md "tracked content"
+  track config/.claude/commands/gh/pr-create.md "nested tracked content"
+  chmod 644 "$DOTFILES_DIR/config/.claude/commands/gh/pr-create.md"
   mkdir -p "$DOTFILES_DIR/config/.claude/sessions"
   printf 'session\n' > "$DOTFILES_DIR/config/.claude/sessions/a.jsonl"
+  printf 'nested state\n' > "$DOTFILES_DIR/config/.claude/commands/gh/cache.json"
   conf <<'EOF'
 shared  .claude
 EOF
@@ -246,6 +249,20 @@ EOF
   [ ! -e "$DOTFILES_DIR/config/.claude/sessions" ]
   assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
   [ "$(cat "$DOTFILES_DIR/config/.claude/CLAUDE.md")" = "tracked content" ]
+
+  # Nested tracked file: copied back into the repo as a real file with mode
+  # and content intact, then linked back out.
+  assert_link "$HOME/.claude/commands/gh/pr-create.md" \
+    "$DOTFILES_DIR/config/.claude/commands/gh/pr-create.md"
+  [ -f "$DOTFILES_DIR/config/.claude/commands/gh/pr-create.md" ]
+  [ ! -L "$DOTFILES_DIR/config/.claude/commands/gh/pr-create.md" ]
+  [ "$(cat "$DOTFILES_DIR/config/.claude/commands/gh/pr-create.md")" = "nested tracked content" ]
+  [ "$(stat -f '%Lp' "$DOTFILES_DIR/config/.claude/commands/gh/pr-create.md")" = "644" ]
+
+  # Nested untracked state under the same subdirectory: moved to the
+  # destination, absent from the repo.
+  [ "$(cat "$HOME/.claude/commands/gh/cache.json")" = "nested state" ]
+  [ ! -e "$DOTFILES_DIR/config/.claude/commands/gh/cache.json" ]
 }
 
 @test "migration preserves untracked destination content byte-for-byte" {
@@ -325,4 +342,57 @@ EOF
   run "$RELINK"
   [ "$status" -eq 1 ]
   [ -L "$HOME/.claude" ]
+}
+
+@test "dry run over a repo-symlinked root previews the migration and its links without reporting drift" {
+  track config/.claude/CLAUDE.md
+  conf <<'EOF'
+shared  .claude
+EOF
+  premigrate .claude "$HOME/.claude"
+
+  run "$RELINK"
+  [ "$status" -eq 1 ]
+  [[ "$output" == *"migrate  config/.claude"* ]]
+  [[ "$output" == *"link     "*"CLAUDE.md"* ]]
+  [[ "$output" != *"  drift    "* ]]
+  [ -L "$HOME/.claude" ]
+}
+
+# A submodule (gitlink) index entry has no blob content to cp -p; it is a
+# real directory on disk. It must be skipped, not abort the whole migration.
+@test "migration skips a gitlink entry instead of aborting, and the rest of the tracked files land" {
+  track config/.claude/CLAUDE.md
+  mkdir -p "$DOTFILES_DIR/config/.claude/sub"
+  touch "$DOTFILES_DIR/config/.claude/sub/.keep"
+  git -C "$DOTFILES_DIR" update-index --add --cacheinfo \
+    160000,e69de29bb2d1d6434b8b29ae775ad8c2e48c5391,config/.claude/sub
+  conf <<'EOF'
+shared  .claude
+EOF
+  premigrate .claude "$HOME/.claude"
+
+  run "$RELINK" --apply
+  [ "$status" -eq 1 ]
+
+  [ ! -L "$HOME/.claude" ]
+  [ -d "$HOME/.claude" ]
+  assert_link "$HOME/.claude/CLAUDE.md" "$DOTFILES_DIR/config/.claude/CLAUDE.md"
+  [ "$(cat "$DOTFILES_DIR/config/.claude/CLAUDE.md")" = "x" ]
+  [ -d "$HOME/.claude/sub" ]
+  [ "$(cat "$HOME/.claude/sub/.keep" 2>/dev/null; echo ok)" = "ok" ]
+  [[ "$output" == *"warn"*"config/.claude/sub is not a regular file; skipped"* ]]
+}
+
+@test "-q does not silence the tracked-but-missing warning" {
+  track config/.claude/CLAUDE.md
+  track config/.claude/GONE.md
+  rm "$DOTFILES_DIR/config/.claude/GONE.md"
+  conf <<'EOF'
+shared  .claude
+EOF
+  premigrate .claude "$HOME/.claude"
+
+  run "$RELINK" --apply -q
+  [[ "$output" == *"warn"*"GONE.md is tracked but missing"* ]]
 }
