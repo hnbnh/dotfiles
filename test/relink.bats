@@ -43,6 +43,13 @@ teardown() { teardown_fixture; }
   [ "$status" -eq 2 ]
 }
 
+@test "--help exits 0 and prints usage even when DOTFILES_DIR is not a git repository" {
+  rm -rf "$DOTFILES_DIR/.git"
+  run "$RELINK" --help
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"usage: relink"* ]]
+}
+
 @test "symlink pointing outside repo is drift, exits 1, unchanged by --apply" {
   track config/nvim/init.lua
   mkdir -p "$HOME/.config"
@@ -400,6 +407,44 @@ EOF
   [[ "$output" == *"warn"*"config/.claude/sub is not a regular file; skipped"* ]]
 }
 
+# If git ls-files fails, or exits 0 with empty output (the real-world trigger
+# is a truncated .git/index — git treats that as "nothing tracked", not an
+# error), migrating anyway would rm the destination, mv the repo directory
+# out from under itself, and then copy nothing back: the repo directory ends
+# up empty and the run reports success. Refuse before the destructive rm/mv
+# runs at all, so both sides are left exactly as they were.
+@test "migration refuses when the tracked list comes back empty, leaving both sides untouched" {
+  track config/.claude/CLAUDE.md
+  conf <<'EOF'
+shared  .claude
+EOF
+  premigrate .claude "$HOME/.claude"
+
+  local real_git; real_git="$(command -v git)"
+  local shim_dir="$FIXTURE_ROOT/shim"
+  mkdir -p "$shim_dir"
+  cat > "$shim_dir/git" <<SH
+#!/usr/bin/env bash
+for arg in "\$@"; do
+  if [ "\$arg" = "ls-files" ]; then
+    exit 0
+  fi
+done
+exec "$real_git" "\$@"
+SH
+  chmod +x "$shim_dir/git"
+
+  PATH="$shim_dir:$PATH" run "$RELINK" --apply
+  [ "$status" -eq 2 ]
+  [[ "$output" == *"relink:"* ]]
+
+  # Nothing moved: destination is still the pre-migration symlink, and the
+  # repo directory still holds its tracked file.
+  assert_link "$HOME/.claude" "$DOTFILES_DIR/config/.claude"
+  [ -d "$DOTFILES_DIR/config/.claude" ]
+  [ -f "$DOTFILES_DIR/config/.claude/CLAUDE.md" ]
+}
+
 @test "-q does not silence the tracked-but-missing warning" {
   track config/.claude/CLAUDE.md
   track config/.claude/GONE.md
@@ -538,6 +583,18 @@ EOF
   [ "$status" -eq 1 ]
   [ ! -L "$HOME/.zshrc" ]
   [ "$(cat "$HOME/.zshrc")" = "existing content" ]
+  [[ "$output" != *"force"* ]]
+}
+
+@test "--force leaves a symlink-drift destination alone when the planned source is missing" {
+  conf <<'EOF'
+link  zsh/.zshrc  ~/.zshrc
+EOF
+  ln -sfn /tmp "$HOME/.zshrc"
+
+  run "$RELINK" --apply --force
+  [ "$status" -eq 1 ]
+  assert_link "$HOME/.zshrc" "/tmp"
   [[ "$output" != *"force"* ]]
 }
 

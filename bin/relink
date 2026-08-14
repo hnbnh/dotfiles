@@ -6,12 +6,6 @@ DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
 DOTFILES_DIR="$(cd "$DOTFILES_DIR" && pwd -P)"
 HOME_DIR="$(cd "$HOME" && pwd -P)"
 
-# tracked_rel relies on git ls-files; if it fails silently (see tracked_rel),
-# a migration would report success while leaving the repo directory empty.
-# Fail fast instead of discovering that partway through a migration.
-git -C "$DOTFILES_DIR" rev-parse --git-dir >/dev/null 2>&1 || {
-  echo "relink: $DOTFILES_DIR is not a git repository" >&2; exit 2; }
-
 CFG_DIR="$DOTFILES_DIR/config"
 CONF_FILE="$CFG_DIR/links.conf"
 
@@ -39,6 +33,13 @@ while [ $# -gt 0 ]; do
   esac
   shift
 done
+
+# tracked_rel relies on git ls-files; if it fails silently (see tracked_rel),
+# a migration would report success while leaving the repo directory empty.
+# Fail fast instead of discovering that partway through a migration. Below
+# the argument loop so --help works even outside a git checkout.
+git -C "$DOTFILES_DIR" rev-parse --git-dir >/dev/null 2>&1 || {
+  echo "relink: $DOTFILES_DIR is not a git repository" >&2; exit 2; }
 
 say() {
   if [ "$QUIET" -eq 0 ]; then printf '%s\n' "$*"; fi
@@ -139,7 +140,23 @@ needs_migration() {
 # move the whole directory out (a rename — instant, and open file handles
 # follow their inodes), then copy the tracked files back into the repo.
 migrate_shared() {
-  local name="$1" dest="$2" repo="$CFG_DIR/$name" rel
+  local name="$1" dest="$2" repo="$CFG_DIR/$name" rel rels
+  # Capture the tracked list BEFORE any destructive filesystem change, and
+  # refuse on error or on empty output. tracked_rel's pipeline can fail
+  # outright, but the realistic trigger is a truncated .git/index, where
+  # `git ls-files` exits 0 with empty output instead of erroring — an error
+  # check alone would miss that. Either way, discovering the problem after
+  # `rm "$dest"; mv "$repo" "$dest"` would leave config/$name empty and the
+  # run reporting success, so check before touching anything.
+  rels="$(tracked_rel "$name")" || {
+    echo "relink: failed to list git-tracked files under config/$name; refusing to migrate" >&2
+    exit 2
+  }
+  if [ -z "$rels" ]; then
+    echo "relink: no git-tracked files under config/$name; refusing to migrate" >&2
+    exit 2
+  fi
+
   CHANGES=$((CHANGES + 1))
   say "  migrate  config/$name -> $dest"
   if [ "$APPLY" -eq 0 ]; then
@@ -151,7 +168,7 @@ migrate_shared() {
       [ -n "$rel" ] || continue
       CHANGES=$((CHANGES + 1))
       say "  link     $dest/$rel -> $repo/$rel"
-    done < <(tracked_rel "$name")
+    done <<< "$rels"
     return 0
   fi
 
@@ -175,7 +192,7 @@ migrate_shared() {
     mkdir -p "$repo/$(dirname "$rel")"
     cp -p "$dest/$rel" "$repo/$rel"
     rm "$dest/$rel"
-  done < <(tracked_rel "$name")
+  done <<< "$rels"
   return 0
 }
 
@@ -260,7 +277,9 @@ link_one() {
         # Outside repo: treat as drift
         DRIFT=$((DRIFT + 1))
         say "  drift    $dest is a symlink to $cur (expected -> $src)"
-        if [ "$FORCE" -eq 1 ]; then
+        # Require the source to exist before forcing, same as the regular-file
+        # branch below: forcing without it would link $dest to nothing.
+        if [ "$FORCE" -eq 1 ] && [ -e "$src" ]; then
           DRIFT=$((DRIFT - 1))
           CHANGES=$((CHANGES + 1))
           say "  force    replacing $dest"
@@ -280,7 +299,7 @@ link_one() {
       # migrated (or what any plain dest looks like pre-migration): it may
       # hold state nothing else has a copy of. --force replaces regular
       # files, never directories — there is no recovery from rm -rf here.
-      say "  drift    $dest is a real directory (expected -> $src); refusing to replace"
+      say "  drift    $dest is a real directory (expected -> $src); refusing to replace; move it aside and re-run"
       return 0
     fi
     say "  drift    $dest is not a symlink (expected -> $src)"
