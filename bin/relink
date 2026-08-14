@@ -199,18 +199,27 @@ build_plan() {
 }
 
 link_one() {
-  local src="$1" dest="$2" cur cur_abs
+  local src="$1" dest="$2" cur cur_abs target dir_part base_part
   if [ -L "$dest" ]; then
     cur="$(readlink "$dest")"
     cur="${cur%/}"
     if [ "$cur" = "$src" ]; then return 0; fi
-    # Resolve relative symlink targets against the directory of $dest
-    if [[ "$cur" != /* ]]; then
-      cur_abs="$(cd "$(dirname "$dest")" && pwd -P)/$cur"
-      cur_abs="$(cd "$cur_abs" 2>/dev/null && pwd -P || echo "$cur_abs")"
-    else
-      cur_abs="$cur"
-    fi
+    # Resolve the target the same way prune_scan does: canonicalize the
+    # containing directory via cd/pwd -P so a lexical ".." component can't
+    # masquerade as a path inside the repo. This applies uniformly to
+    # relative and absolute targets, and to targets that are files or
+    # directories — the basename itself needs no resolution since it can't
+    # contain "..". Resolve into $target rather than $cur so the drift
+    # message below still shows the symlink's actual, unmodified content.
+    target="$cur"
+    case "$target" in
+      /*) ;;
+      *) target="$(dirname "$dest")/$target" ;;
+    esac
+    dir_part="$(dirname "$target")"
+    base_part="$(basename "$target")"
+    dir_part="$(cd "$dir_part" 2>/dev/null && pwd -P || printf '%s' "$dir_part")"
+    cur_abs="$dir_part/$base_part"
     cur_abs="${cur_abs%/}"
     # Check if symlink resolves inside DOTFILES_DIR (exact match or /boundary)
     case "$cur_abs" in

@@ -464,3 +464,73 @@ EOF
   "$RELINK" --apply
   [ -L "$HOME/.escape" ]
 }
+
+@test "a regular file at a planned link site is reported and not clobbered" {
+  track config/.claude/settings.json "repo version"
+  conf <<'EOF'
+shared  .claude
+EOF
+  mkdir -p "$HOME/.claude"
+  printf 'tool version\n' > "$HOME/.claude/settings.json"
+
+  run "$RELINK" --apply
+  [ "$status" -eq 1 ]
+  [ "$(cat "$HOME/.claude/settings.json")" = "tool version" ]
+  echo "$output" | grep -q drift
+}
+
+@test "--force replaces a regular file at a planned link site" {
+  track config/.claude/settings.json "repo version"
+  conf <<'EOF'
+shared  .claude
+EOF
+  mkdir -p "$HOME/.claude"
+  printf 'tool version\n' > "$HOME/.claude/settings.json"
+
+  run "$RELINK" --apply --force
+  [ "$status" -eq 0 ]
+  assert_link "$HOME/.claude/settings.json" "$DOTFILES_DIR/config/.claude/settings.json"
+  [ "$(cat "$HOME/.claude/settings.json")" = "repo version" ]
+}
+
+@test "-q suppresses output but keeps the exit code" {
+  track config/nvim/init.lua
+  run "$RELINK" -q
+  [ "$status" -eq 1 ]
+  [ -z "$output" ]
+}
+
+@test "symlink at a planned link site whose target absolutely escapes the repo via .. is drift, not silently fixed" {
+  track config/nvim/init.lua
+  mkdir -p "$(dirname "$DOTFILES_DIR")/outside"
+  printf 'secret\n' > "$(dirname "$DOTFILES_DIR")/outside/secret"
+  mkdir -p "$HOME/.config"
+  ln -sfn "$DOTFILES_DIR/../outside/secret" "$HOME/.config/nvim"
+
+  run "$RELINK" --apply
+  [ "$status" -eq 1 ]
+  assert_link "$HOME/.config/nvim" "$DOTFILES_DIR/../outside/secret"
+}
+
+@test "symlink at a planned link site whose target absolutely escapes the repo via .. is fixed by --apply --force" {
+  track config/nvim/init.lua
+  mkdir -p "$(dirname "$DOTFILES_DIR")/outside"
+  printf 'secret\n' > "$(dirname "$DOTFILES_DIR")/outside/secret"
+  mkdir -p "$HOME/.config"
+  ln -sfn "$DOTFILES_DIR/../outside/secret" "$HOME/.config/nvim"
+
+  run "$RELINK" --apply --force
+  [ "$status" -eq 0 ]
+  assert_link "$HOME/.config/nvim" "$DOTFILES_DIR/config/nvim"
+}
+
+@test "symlink at a planned link site whose relative target resolves inside the repo at the wrong file is silently fixed by --apply" {
+  track config/nvim/init.lua
+  track config/old-nvim/init.lua
+  mkdir -p "$HOME/.config"
+  ln -sfn "../../dotfiles/config/old-nvim/init.lua" "$HOME/.config/nvim"
+
+  run "$RELINK" --apply
+  [ "$status" -eq 0 ]
+  assert_link "$HOME/.config/nvim" "$DOTFILES_DIR/config/nvim"
+}
