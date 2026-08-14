@@ -65,8 +65,18 @@ parse_conf() {
   while read -r directive a b || [ -n "$directive" ]; do
     case "$directive" in
       ''|\#*) continue ;;
-      shared) SHARED+=("$a") ;;
+      shared)
+        if [ -z "$a" ]; then
+          echo "relink: 'shared' needs a name in $CONF_FILE" >&2
+          exit 2
+        fi
+        SHARED+=("$a")
+        ;;
       link)
+        if [ -z "$a" ] || [ -z "$b" ]; then
+          echo "relink: 'link' needs a source and a destination in $CONF_FILE" >&2
+          exit 2
+        fi
         LINK_SRC+=("$a")
         LINK_DEST+=("${b/#\~/$HOME_DIR}")
         ;;

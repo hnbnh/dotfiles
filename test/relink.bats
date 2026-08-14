@@ -196,3 +196,20 @@ EOF
   assert_link "$HOME/.config/betterlockscreenrc" \
     "$DOTFILES_DIR/config/betterlockscreen/betterlockscreenrc"
 }
+
+@test "link directive with missing destination exits 2" {
+  track config/zsh/.zshrc
+  conf <<'EOF'
+link  zsh/.zshrc
+EOF
+  run "$RELINK"
+  [ "$status" -eq 2 ]
+}
+
+@test "bare shared directive with no argument exits 2" {
+  conf <<'EOF'
+shared
+EOF
+  run "$RELINK"
+  [ "$status" -eq 2 ]
+}
