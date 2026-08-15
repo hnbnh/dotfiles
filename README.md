@@ -1,4 +1,4 @@
-# ~/dotfiles & automated machine setup
+# Dotfiles and machine setup
 
 > Commit hash: [1bc1701](https://github.com/hnbnh/dotfiles/tree/1bc170100bf58d01b002498b6b9adbba1d306e19)
 
@@ -7,7 +7,7 @@
 ## Installation
 
 > [!WARNING]
-> Consider forking this repo
+> Fork this repository before using it.
 
 ```bash
 git clone --recurse-submodules -j8 git@github.com:hnbnh/dotfiles.git ~/dotfiles
@@ -15,23 +15,24 @@ cd ~/dotfiles
 ./install.sh
 ```
 
-The repo must live at `~/dotfiles` — dotfile symlinks point back at that path.
+Keep the repository at `~/dotfiles`; the dotfile symlinks depend on it.
 
-On macOS, `install.sh` bootstraps Nix and Homebrew, then hands everything to
-nix-darwin. Afterwards, apply changes with:
+On macOS, the installer sets up Nix, Homebrew, and nix-darwin. Apply later
+changes with:
 
 ```bash
 darwin-rebuild switch --flake ~/dotfiles#hnbnh
 ```
 
-Config files under `modules/home/` are symlinked live, so editing them takes
-effect immediately. A rebuild is only needed when adding or removing a file.
-New files must be `git add`ed before Nix can see them.
+Files in `modules/home/` are linked live, so edits apply immediately. Rebuild
+only after adding or removing files. Add new files to Git before rebuilding.
 
-When adding a `modules/home/.config/<tool>/`, ask whether the tool writes
-state, logs, sockets, or credentials into its own config dir. If so, `touch
-.split` inside it so the directory's contents are linked individually
-instead of the whole directory being linked into the repo.
+For a config directory that stores state, logs, sockets, or credentials, add a
+`.split` file so its contents are linked individually:
+
+```bash
+touch modules/home/.config/<tool>/.split
+```
 
 ## TODO
 
