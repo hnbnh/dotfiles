@@ -11,50 +11,61 @@
 #   │   └── y
 #   └── .DS_Store
 #
-# `.split` and `.DS_Store` are ignored. A `.split` makes its directory and
-# every ancestor descend, preventing a whole-directory symlink from swallowing
-# a tool's state alongside its config.
+# A `.split` file makes its directory and every ancestor descend, so a
+# whole-directory symlink cannot swallow a tool's state alongside its config.
+# Descending drops `.split` and `.DS_Store`; a whole-directory link carries them.
 #
-# Limitation: `builtins.readDir` treats symlinked directories as leaves, so a
-# `.split` beneath one is ignored. Do not place a `.split` under a symlinked
-# directory or symlink a config directory that contains state.
+# Empty directories are skipped — git cannot reproduce them on a fresh clone.
+#
+# Footgun: under a flake the caller passes the git-filtered store copy, which
+# omits submodules, so a `.split` at or above a submodule drops it from the
+# result while the emitted symlinks still point at the working tree.
 { lib }:
 
-rec {
+let
   ignored = name: name == ".split" || name == ".DS_Store";
 
-  # True if `dir` itself, or any directory beneath it, contains `.split`.
-  hasSplitBelow =
-    dir:
-    let
-      entries = builtins.readDir dir;
-    in
-    entries ? ".split"
-    || lib.any (
-      name: entries.${name} == "directory" && hasSplitBelow (dir + "/${name}")
-    ) (builtins.attrNames entries);
+  # `readDir` calls a symlink "symlink" whatever it resolves to, and reading a
+  # non-directory is an uncatchable eval error, so probe for the marker instead.
+  # Cost: a `.split` nested deeper under a symlinked directory goes unseen.
+  isDir =
+    path: type: type == "directory" || (type == "symlink" && builtins.pathExists (path + "/.split"));
 
-  linkPaths =
-    root:
+  # One `readDir` per directory. `paths` is forced only where the walk descends,
+  # so the subtrees behind whole-directory links are never built.
+  scan =
+    rel: dir:
     let
-      walk =
-        rel:
+      raw = builtins.readDir dir;
+      entries = lib.filterAttrs (name: _: !ignored name) raw;
+
+      children = lib.mapAttrsToList (
+        name: type:
         let
-          dir = if rel == "" then root else root + "/${rel}";
-          entries = lib.filterAttrs (name: _: !ignored name) (builtins.readDir dir);
+          sub = if rel == "" then name else "${rel}/${name}";
+          path = dir + "/${name}";
         in
-        lib.concatLists (
-          lib.mapAttrsToList (
-            name: type:
-            let
-              sub = if rel == "" then name else "${rel}/${name}";
-            in
-            if type == "directory" && hasSplitBelow (root + "/${sub}") then
-              walk sub
-            else
-              [ sub ]
-          ) entries
-        );
+        if isDir path type then
+          let
+            inner = scan sub path;
+          in
+          {
+            inherit (inner) split;
+            paths = if inner.split then inner.paths else lib.optional inner.linkable sub;
+          }
+        else
+          {
+            split = false;
+            paths = [ sub ];
+          }
+      ) entries;
     in
-    lib.sort lib.lessThan (walk "");
+    {
+      split = (raw.".split" or null) == "regular" || lib.any (c: c.split) children;
+      paths = lib.concatMap (c: c.paths) children;
+      linkable = entries != { };
+    };
+in
+{
+  linkPaths = root: lib.sort lib.lessThan (scan "" root).paths;
 }
