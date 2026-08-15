@@ -2,7 +2,7 @@
 
 set -e
 
-source ./config/bash/functions
+source ./modules/home/.config/bash/functions
 
 function setup_linux {
   # Install ansible & plugins
@@ -28,16 +28,19 @@ function setup_macos {
   # Install homebrew
   if ! have brew; then
     curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o /tmp/brew-install.sh
-    NONINTERACTIVE=1 sudo -u $USERNAME bash /tmp/brew-install.sh
+    NONINTERACTIVE=1 sudo -u "$(id -un)" bash /tmp/brew-install.sh
   fi
 
-  # Set up nix-darwin
-  /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake './nix-darwin#hnbnh'
+  # Submodules provide zsh plugins and friends; without them the switch
+  # succeeds but zsh errors on every start.
+  git submodule update --init --recursive
+
+  # Set up nix-darwin + home-manager; this also places every dotfile
+  /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake '.#hnbnh'
 }
 
 function main() {
   if [ "$(uname)" == "Darwin" ]; then
-    install_dots
     setup_macos
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     setup_linux

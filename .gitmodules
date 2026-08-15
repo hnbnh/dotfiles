@@ -1,32 +1,32 @@
 [submodule "config/awesome/lain"]
-	path = config/awesome/lain
+	path = modules/home/.config/awesome/lain
 	url = https://github.com/lcpz/lain.git
 	shallow = true
 [submodule "config/zsh/plugins/zsh-syntax-highlighting"]
-	path = config/zsh/plugins/zsh-syntax-highlighting
+	path = modules/home/.config/zsh/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
 	shallow = true
 [submodule "config/zsh/plugins/zsh-autosuggestions"]
-	path = config/zsh/plugins/zsh-autosuggestions
+	path = modules/home/.config/zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
 	shallow = true
 [submodule "config/zsh/plugins/zsh-vi-mode"]
-	path = config/zsh/plugins/zsh-vi-mode
+	path = modules/home/.config/zsh/plugins/zsh-vi-mode
 	url = https://github.com/jeffreytse/zsh-vi-mode
 	shallow = true
 [submodule "config/zsh/plugins/fzf-tab"]
-	path = config/zsh/plugins/fzf-tab
+	path = modules/home/.config/zsh/plugins/fzf-tab
 	url = https://github.com/Aloxaf/fzf-tab
 	shallow = true
 [submodule "config/tmux/plugins/tmux-resurrect"]
-	path = config/tmux/plugins/tmux-resurrect
+	path = modules/home/.config/tmux/plugins/tmux-resurrect
 	url = https://github.com/tmux-plugins/tmux-resurrect
 	shallow = true
 [submodule "config/tmux/plugins/tmux-yank"]
-	path = config/tmux/plugins/tmux-yank
+	path = modules/home/.config/tmux/plugins/tmux-yank
 	url = https://github.com/tmux-plugins/tmux-yank
 	shallow = true
 [submodule "config/tmux/plugins/tpm"]
-	path = config/tmux/plugins/tpm
+	path = modules/home/.config/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
 	shallow = true

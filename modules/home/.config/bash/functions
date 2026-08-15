@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function have {
+  command -v "$1" &>/dev/null
+}

@@ -1,42 +1,6 @@
-**/packer_compiled.lua
-**/lazygit/state.yml
-**/ibus-bamboo/
-**/gtk-3.0/bookmarks
 **/en.utf-8.add.spl
-config/karabiner/**
-!config/karabiner/karabiner.json
-
-config/zed/**
-!config/zed/keymap.json
-!config/zed/settings.json
-!config/zed/tasks.json
-
-config/yazi/flavors/
 
 .DS_Store
 
-config/.claude/*
-!config/.claude/agents/
-!config/.claude/commands/
-!config/.claude/CLAUDE.md
-!config/.claude/settings.json
-!config/.claude/statusline.sh
-
-config/.cursor/*
-!config/.cursor/commands/
-!config/.cursor/mcp.json
-
-config/.codex/*
-!config/.codex/prompts/
-
-config/.gemini/*
-!config/.gemini/antigravity/
-config/.gemini/antigravity/*
-!config/.gemini/antigravity/global_workflows/
-
-config/herdr/*
-!config/herdr/config.toml
-
-config/opencode/*
-config/opencode/opencode.json
-config/opencode/tui.json
+# Marker files must always be tracked — see modules/lib/link-tree.nix
+!**/.split
