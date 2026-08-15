@@ -37,21 +37,12 @@ vim.api.nvim_create_autocmd("VimEnter", {
   nested = true,
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  group = augroup("Spell"),
+-- LazyVim turns spell on for text filetypes; opt out
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("NoSpell"),
+  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
-    ---@diagnostic disable-next-line: param-type-mismatch
-    local spell_files = vim.fn.glob("~/dotfiles/modules/home/.config/nvim/spell/*.add", 1, 1)
-
-    for _, add_file in ipairs(spell_files) do
-      local spl_file = add_file .. ".spl"
-      if
-        vim.fn.filereadable(add_file)
-        and (not vim.fn.filereadable(spl_file) or vim.fn.getftime(add_file) > vim.fn.getftime(spl_file))
-      then
-        vim.cmd("mkspell " .. vim.fn.fnameescape(add_file))
-      end
-    end
+    vim.opt_local.spell = false
   end,
 })
 

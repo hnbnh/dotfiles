@@ -1,5 +1,3 @@
-**/en.utf-8.add.spl
-
 .DS_Store
 
 # Marker files must always be tracked — see modules/lib/link-tree.nix
