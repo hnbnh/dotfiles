@@ -7,13 +7,20 @@
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, darwin }: {
+  outputs = { self, nixpkgs, darwin, home-manager }: {
     darwinConfigurations.hnbnh = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
-      modules = [ ./hosts/hnbnh ];
-      inputs = { inherit nixpkgs darwin; };
+      modules = [
+        ./hosts/hnbnh
+        home-manager.darwinModules.home-manager
+      ];
+      inputs = { inherit nixpkgs darwin home-manager; };
     };
   };
 }
