@@ -7,50 +7,13 @@
     ./fonts.nix
   ];
 
-  # mkOrder 1100 places our packages after nix-darwin's own default
-  # contributions (zsh, bash, nix, docs; all unwrapped, order 1000), which is
-  # where an unwrapped definition happened to land in the old flat
-  # configuration.nix. Unwrapped, this ties at order 1000 with those
-  # contributions and the winner depends on import-graph depth — under this
-  # module layout that tie is not guaranteed to reproduce the old order.
-  # This has no effect on the realized environment (buildEnv output is
-  # order-independent); it only pins the merge order deterministically so the
-  # built derivation matches the pre-refactor one.
+  # User-facing CLI tools live in modules/packages/common.nix (home.packages).
+  # Only things with system-level daemon or socket expectations belong here.
+  # Keep the mkOrder 1100 wrapper from Task 1: it pins these after nix-darwin's
+  # own contributions rather than letting import depth decide the tie.
   environment.systemPackages = lib.mkOrder 1100 (with pkgs; [
-    aria2
-    bat
-    btop
-    curl
-    delta
     docker
-    eza
-    fastfetch
-    fd
-    ffmpeg
-    fx
-    fzf
-    gallery-dl
-    gh
-    git
     gnupg
-    herdr
-    jaq
-    jq
-    lazydocker
-    lazygit
-    mkcert
-    neovim
-    nixfmt
-    ripgrep
-    sesh
-    starship
-    tmux
-    witr
-    yazi
-    yq-go
-    yt-dlp
-    zellij
-    zoxide
   ]);
 
   # mkOrder 1100 places Homebrew after the Nix profiles (order 1000) and
