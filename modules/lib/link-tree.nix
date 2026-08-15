@@ -1,27 +1,23 @@
-# Walks a $HOME-mirror tree and returns the set of paths to symlink.
+# Return paths to symlink from a $HOME-mirror tree:
 #
-# A directory is linked as a whole unless it (or something beneath it)
-# contains a `.split` marker file, in which case the walk descends into it
-# and links its contents individually. `.split` marks directories whose tool
-# writes state, logs, sockets, or credentials alongside its config, where a
-# whole-directory link would put that state in the repo.
+#   root/                         [ "bar" "baz/x" "baz/y" "foo" ]
+#   ├── foo
+#   ├── bar/
+#   │   ├── a
+#   │   └── b
+#   ├── baz/
+#   │   ├── .split
+#   │   ├── x
+#   │   └── y
+#   └── .DS_Store
 #
-# The marker's effect must propagate upward: an ancestor of a `.split`
-# directory can't be linked whole either, or the single symlink at that
-# ancestor would swallow the split-out subtree right back into the repo,
-# defeating the marker. So the whole-vs-descend decision for a directory
-# checks its entire subtree for `.split`, not just its own immediate
-# entries — this is what lets `.gemini/antigravity/.split` force a descent
-# through both `.gemini` and `.gemini/antigravity`.
+# `.split` and `.DS_Store` are ignored. A `.split` makes its directory and
+# every ancestor descend, preventing a whole-directory symlink from swallowing
+# a tool's state alongside its config.
 #
-# Known limitation: `builtins.readDir` reports a symlinked directory as type
-# `"symlink"`, never `"directory"`, so the walk treats it as a leaf and links
-# it whole — a `.split` beneath a symlinked directory is not honored. This is
-# left alone rather than patched: telling a symlink-to-directory apart from a
-# symlink-to-file safely is the part that needs care, and nothing in this
-# tree symlinks a config directory today. Don't place `.split` under a
-# symlinked directory, and don't symlink a config directory that has state
-# beneath it.
+# Limitation: `builtins.readDir` treats symlinked directories as leaves, so a
+# `.split` beneath one is ignored. Do not place a `.split` under a symlinked
+# directory or symlink a config directory that contains state.
 { lib }:
 
 rec {
