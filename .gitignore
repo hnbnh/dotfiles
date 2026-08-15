@@ -3,40 +3,51 @@
 **/ibus-bamboo/
 **/gtk-3.0/bookmarks
 **/en.utf-8.add.spl
-config/karabiner/**
-!config/karabiner/karabiner.json
-
-config/zed/**
-!config/zed/keymap.json
-!config/zed/settings.json
-!config/zed/tasks.json
-
-config/yazi/flavors/
 
 .DS_Store
 
-config/.claude/*
-!config/.claude/agents/
-!config/.claude/commands/
-!config/.claude/CLAUDE.md
-!config/.claude/settings.json
-!config/.claude/statusline.sh
+# Ignored independently of ~/.config/git/ignore, which is itself deployed
+# by this repo and therefore absent mid-migration.
+.superpowers/
+docs/superpowers/
+**/.claude/settings.local.json
 
-config/.cursor/*
-!config/.cursor/commands/
-!config/.cursor/mcp.json
+modules/home/.config/karabiner/**
+!modules/home/.config/karabiner/karabiner.json
 
-config/.codex/*
-!config/.codex/prompts/
+modules/home/.config/zed/**
+!modules/home/.config/zed/keymap.json
+!modules/home/.config/zed/settings.json
+!modules/home/.config/zed/tasks.json
 
-config/.gemini/*
-!config/.gemini/antigravity/
-config/.gemini/antigravity/*
-!config/.gemini/antigravity/global_workflows/
+modules/home/.config/yazi/flavors/
 
-config/herdr/*
-!config/herdr/config.toml
+modules/home/.config/herdr/*
+!modules/home/.config/herdr/config.toml
 
-config/opencode/*
-config/opencode/opencode.json
-config/opencode/tui.json
+modules/home/.config/opencode/*
+!modules/home/.config/opencode/opencode.json
+!modules/home/.config/opencode/tui.json
+
+modules/home/.claude/*
+!modules/home/.claude/agents/
+!modules/home/.claude/commands/
+!modules/home/.claude/CLAUDE.md
+!modules/home/.claude/keybindings.json
+!modules/home/.claude/settings.json
+!modules/home/.claude/statusline.sh
+
+modules/home/.cursor/*
+!modules/home/.cursor/commands/
+!modules/home/.cursor/mcp.json
+
+modules/home/.codex/*
+!modules/home/.codex/prompts/
+
+modules/home/.gemini/*
+!modules/home/.gemini/antigravity/
+modules/home/.gemini/antigravity/*
+!modules/home/.gemini/antigravity/global_workflows/
+
+# Marker files must always be tracked — see modules/lib/link-tree.nix
+!**/.split

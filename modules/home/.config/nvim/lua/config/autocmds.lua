@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
   group = augroup("Spell"),
   callback = function()
     ---@diagnostic disable-next-line: param-type-mismatch
-    local spell_files = vim.fn.glob("~/dotfiles/config/nvim/spell/*.add", 1, 1)
+    local spell_files = vim.fn.glob("~/dotfiles/modules/home/.config/nvim/spell/*.add", 1, 1)
 
     for _, add_file in ipairs(spell_files) do
       local spl_file = add_file .. ".spl"
