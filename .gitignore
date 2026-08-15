@@ -1,55 +1,6 @@
-**/packer_compiled.lua
-**/lazygit/state.yml
-**/ibus-bamboo/
-**/gtk-3.0/bookmarks
 **/en.utf-8.add.spl
 
 .DS_Store
-
-# Ignored independently of ~/.config/git/ignore, which is itself deployed
-# by this repo and therefore absent mid-migration.
-.superpowers/
-docs/superpowers/
-**/.claude/settings.local.json
-
-modules/home/.config/karabiner/**
-!modules/home/.config/karabiner/karabiner.json
-
-modules/home/.config/zed/**
-!modules/home/.config/zed/keymap.json
-!modules/home/.config/zed/settings.json
-!modules/home/.config/zed/tasks.json
-
-modules/home/.config/yazi/flavors/
-
-modules/home/.config/herdr/*
-!modules/home/.config/herdr/config.toml
-
-modules/home/.config/opencode/*
-!modules/home/.config/opencode/opencode.json
-!modules/home/.config/opencode/tui.json
-
-modules/home/.claude/*
-!modules/home/.claude/agents/
-!modules/home/.claude/commands/
-!modules/home/.claude/CLAUDE.md
-!modules/home/.claude/keybindings.json
-!modules/home/.claude/settings.json
-!modules/home/.claude/statusline.sh
-
-modules/home/.cursor/*
-!modules/home/.cursor/commands/
-!modules/home/.cursor/mcp.json
-
-modules/home/.codex/*
-!modules/home/.codex/prompts/
-
-modules/home/.gemini/*
-!modules/home/.gemini/antigravity/
-modules/home/.gemini/antigravity/*
-!modules/home/.gemini/antigravity/global_workflows/
-
-/result
 
 # Marker files must always be tracked — see modules/lib/link-tree.nix
 !**/.split
