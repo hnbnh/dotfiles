@@ -49,5 +49,7 @@ modules/home/.gemini/*
 modules/home/.gemini/antigravity/*
 !modules/home/.gemini/antigravity/global_workflows/
 
+/result
+
 # Marker files must always be tracked — see modules/lib/link-tree.nix
 !**/.split

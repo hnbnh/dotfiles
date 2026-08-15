@@ -10,9 +10,23 @@
 > Consider forking this repo
 
 ```bash
-git clone --recurse-submodules -j8 git@github.com:hnbnh/dotfiles.git
-sudo ./install.sh
+git clone --recurse-submodules -j8 git@github.com:hnbnh/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./install.sh
 ```
+
+The repo must live at `~/dotfiles` — dotfile symlinks point back at that path.
+
+On macOS, `install.sh` bootstraps Nix and Homebrew, then hands everything to
+nix-darwin. Afterwards, apply changes with:
+
+```bash
+darwin-rebuild switch --flake ~/dotfiles#hnbnh
+```
+
+Config files under `modules/home/` are symlinked live, so editing them takes
+effect immediately. A rebuild is only needed when adding or removing a file.
+New files must be `git add`ed before Nix can see them.
 
 ## TODO
 
@@ -31,12 +45,6 @@ sudo ./install.sh
       ```bash
       */20 * * * * osascript -e 'display notification "Hydrate 💧" with title "Health notification"'
       ```
-
-- [ ] Support nix
-- [ ] Support macOS
-  - [ ] System Settings > Privacy & Security > Full Disk Access > Toggle `Terminal`
-  - [ ] Configuration
-    - [ ] Enable Night Shift
 
 ## Acknowledgments
 

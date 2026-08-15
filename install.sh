@@ -2,7 +2,7 @@
 
 set -e
 
-source ./config/bash/functions
+source ./modules/home/.config/bash/functions
 
 function setup_linux {
   # Install ansible & plugins
@@ -31,13 +31,12 @@ function setup_macos {
     NONINTERACTIVE=1 sudo -u $USERNAME bash /tmp/brew-install.sh
   fi
 
-  # Set up nix-darwin
-  /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake './nix-darwin#hnbnh'
+  # Set up nix-darwin + home-manager; this also places every dotfile
+  /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake '.#hnbnh'
 }
 
 function main() {
   if [ "$(uname)" == "Darwin" ]; then
-    install_dots
     setup_macos
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     setup_linux

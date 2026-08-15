@@ -5,7 +5,7 @@
 
 - name: Find .config files
   find:
-    paths: ~/dotfiles/config/
+    paths: ~/dotfiles/modules/home/.config/
     recurse: no
     file_type: any
     hidden: yes
@@ -23,25 +23,21 @@
 
 - name: Link files
   file:
-    src: "~/.config/{{ item.src }}"
+    src: "~/dotfiles/modules/home/{{ item.src }}"
     dest: "~/{{ item.dest }}"
     state: link
     force: yes
   loop:
-    - src: zsh/.zshrc
+    - src: .zshrc
       dest: .zshrc
-    - src: zsh/.zimrc
+    - src: .zshenv
+      dest: .zshenv
+    - src: .zimrc
       dest: .zimrc
-    - src: git/.gitconfig
+    - src: .config/git/.gitconfig
       dest: .gitconfig
-    - src: tmux/.tmux.conf
-      dest: .tmux.conf
-    - src: betterlockscreen/betterlockscreenrc
+    - src: .config/betterlockscreen/betterlockscreenrc
       dest: .config/betterlockscreenrc
-    - src: yt-dlp/yt-dlp.conf
-      dest: yt-dlp.conf
-    - src: starship/starship.toml
-      dest: .config/starship.toml
 
 - name: Install required packages
   pip:
