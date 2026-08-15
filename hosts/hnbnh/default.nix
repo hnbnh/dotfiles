@@ -14,10 +14,11 @@
     useUserPackages = true;
     # Only ever applies to regular files and directories: both backup
     # branches in home-manager's check-link-targets.sh are guarded on
-    # `! -L`, so a symlink in the way is never backed up. Task 5 removes
-    # the old symlinks explicitly instead. This setting is here for the
-    # newly-linked paths (~/.claude/agents and friends), where a real
-    # directory may already exist.
+    # `! -L`, so a symlink already in the way is not backed up — it aborts
+    # activation instead. Old dotfile symlinks were removed explicitly
+    # before the first switch. This setting is here for the newly-linked
+    # paths (~/.claude/agents and friends), where a real directory may
+    # already exist.
     backupFileExtension = "hm-bak";
     users.hnbnh = import ../../modules/user.nix;
   };

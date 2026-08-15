@@ -28,6 +28,11 @@ Config files under `modules/home/` are symlinked live, so editing them takes
 effect immediately. A rebuild is only needed when adding or removing a file.
 New files must be `git add`ed before Nix can see them.
 
+When adding a `modules/home/.config/<tool>/`, ask whether the tool writes
+state, logs, sockets, or credentials into its own config dir. If so, `touch
+.split` inside it so the directory's contents are linked individually
+instead of the whole directory being linked into the repo.
+
 ## TODO
 
 - [ ] All

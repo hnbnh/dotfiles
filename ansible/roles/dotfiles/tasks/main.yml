@@ -9,6 +9,7 @@
     recurse: no
     file_type: any
     hidden: yes
+    excludes: '.split'
   register: dot_config
 
 - name: ~/.config/

@@ -8,7 +8,7 @@ let
   tree = "modules/home";
   repo = "${config.home.homeDirectory}/dotfiles";
 
-  paths = linkTree.linkPaths (../. + "/${tree}");
+  paths = linkTree.linkPaths ./home;
 in
 {
   home.file = lib.genAttrs paths (path: {
