@@ -13,6 +13,15 @@
 # checks its entire subtree for `.split`, not just its own immediate
 # entries — this is what lets `.gemini/antigravity/.split` force a descent
 # through both `.gemini` and `.gemini/antigravity`.
+#
+# Known limitation: `builtins.readDir` reports a symlinked directory as type
+# `"symlink"`, never `"directory"`, so the walk treats it as a leaf and links
+# it whole — a `.split` beneath a symlinked directory is not honored. This is
+# left alone rather than patched: telling a symlink-to-directory apart from a
+# symlink-to-file safely is the part that needs care, and nothing in this
+# tree symlinks a config directory today. Don't place `.split` under a
+# symlinked directory, and don't symlink a config directory that has state
+# beneath it.
 { lib }:
 
 rec {
