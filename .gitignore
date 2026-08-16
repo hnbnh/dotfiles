@@ -1,16 +1,4 @@
-**/packer_compiled.lua
-**/lazygit/state.yml
-**/ibus-bamboo/
-**/gtk-3.0/bookmarks
-**/en.utf-8.add.spl
-config/karabiner/**
-!config/karabiner/karabiner.json
-
-config/zed/**
-!config/zed/keymap.json
-!config/zed/settings.json
-!config/zed/tasks.json
-
-config/yazi/flavors/
-
 .DS_Store
+
+# Marker files must always be tracked — see modules/lib/link-tree.nix
+!**/.split

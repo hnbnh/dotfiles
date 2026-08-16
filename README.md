@@ -1,4 +1,4 @@
-# ~/dotfiles & automated machine setup
+# Dotfiles and machine setup
 
 > Commit hash: [1bc1701](https://github.com/hnbnh/dotfiles/tree/1bc170100bf58d01b002498b6b9adbba1d306e19)
 
@@ -7,11 +7,31 @@
 ## Installation
 
 > [!WARNING]
-> Consider forking this repo
+> Fork this repository before using it.
 
 ```bash
-git clone --recurse-submodules -j8 git@github.com:hnbnh/dotfiles.git
-sudo ./install.sh
+git clone --recurse-submodules -j8 git@github.com:hnbnh/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./install.sh
+```
+
+Keep the repository at `~/dotfiles`; the dotfile symlinks depend on it.
+
+On macOS, the installer sets up Nix, Homebrew, and nix-darwin. Apply later
+changes with:
+
+```bash
+darwin-rebuild switch --flake ~/dotfiles#hnbnh
+```
+
+Files in `modules/home/` are linked live, so edits apply immediately. Rebuild
+only after adding or removing files. Add new files to Git before rebuilding.
+
+For a config directory that stores state, logs, sockets, or credentials, add a
+`.split` file so its contents are linked individually:
+
+```bash
+touch modules/home/.config/<tool>/.split
 ```
 
 ## TODO
@@ -31,12 +51,6 @@ sudo ./install.sh
       ```bash
       */20 * * * * osascript -e 'display notification "Hydrate 💧" with title "Health notification"'
       ```
-
-- [ ] Support nix
-- [ ] Support macOS
-  - [ ] System Settings > Privacy & Security > Full Disk Access > Toggle `Terminal`
-  - [ ] Configuration
-    - [ ] Enable Night Shift
 
 ## Acknowledgments
 

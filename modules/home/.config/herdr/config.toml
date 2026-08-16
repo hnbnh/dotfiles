@@ -1,0 +1,25 @@
+onboarding = false
+
+# Mirrors ~/.config/tmux/keybindings.conf. herdr allows one binding per action,
+# so the direct ctrl+shift chords replace the prefix defaults they occupy.
+[keys]
+prefix = "ctrl+a"
+
+reload_config = "prefix+r"
+# Displaced by reload_config, which takes tmux's `bind r` slot.
+resize_mode = "prefix+shift+r"
+copy_mode = "prefix+enter"
+rename_tab = "prefix+,"
+
+new_tab = "ctrl+shift+t"
+close_pane = "ctrl+shift+w"
+previous_tab = "ctrl+shift+h"
+next_tab = "ctrl+shift+l"
+# tmux `split-window -h`: panes side by side.
+split_vertical = "ctrl+shift+enter"
+# Stands in for the sesh picker
+goto = "ctrl+shift+o"
+
+[ui]
+# tmux new-window creates immediately instead of asking for a name.
+prompt_new_tab_name = false

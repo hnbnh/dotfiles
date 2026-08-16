@@ -1,0 +1,33 @@
+name: update-submodules
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+
+jobs:
+  check-updates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Update submodules to remote latest
+        run: |
+          git submodule update --remote --recursive
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: feat/update-submodules
+          commit-message: "chore(submodules): update to latest"
+          title: "chore(submodules): update to latest"
+          body: |
+            Automated submodule update to latest remote versions.
+
+            Verified changes:
+            $(git status --porcelain)
+          delete-branch: true

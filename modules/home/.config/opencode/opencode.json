@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "read": {
+      "~/.config/opencode/get-shit-done/*": "allow",
+      "**/.env*": "ask",
+      "secrets/**": "deny"
+    },
+    "external_directory": {
+      "~/.config/opencode/get-shit-done/*": "allow"
+    },
+    "bash": {
+      "rm -rf *": "ask",
+      "git push *": "deny"
+    }
+  }
+}

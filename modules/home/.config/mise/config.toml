@@ -1,0 +1,10 @@
+[tools]
+air = "latest"
+bun = "latest"
+go = "latest"
+pnpm = "latest"
+python = "3.12"
+ruby = "3"
+rust = "latest"
+uv = "latest"
+yarn = "1"

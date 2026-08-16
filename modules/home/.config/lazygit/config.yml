@@ -1,0 +1,58 @@
+git:
+  autoFetch: true
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative -n 10 {{branchName}} --"
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never
+  localBranchSortOrder: recency
+refresher:
+  fetchInterval: 900
+gui:
+  mouseEvents: false
+  showIcons: true
+  branchColors:
+    "feat": "#a6da95"
+    "fix": "#ed8796"
+    "refactor": "#eed49f"
+    "docs": "#8aadf4"
+  # https://github.com/catppuccin/lazygit/blob/c24895902ec2a3cb62b4557f6ecd8e0afeed95d5/themes/macchiato/red.yml
+  theme:
+    activeBorderColor:
+      - "#ed8796"
+      - bold
+    inactiveBorderColor:
+      - "#a5adcb"
+    optionsTextColor:
+      - "#8aadf4"
+    selectedLineBgColor:
+      - "#363a4f"
+    cherryPickedCommitBgColor:
+      - "#494d64"
+    cherryPickedCommitFgColor:
+      - "#ed8796"
+    unstagedChangesColor:
+      - "#ed8796"
+    defaultFgColor:
+      - "#cad3f5"
+    searchingActiveBorderColor:
+      - "#eed49f"
+  filterMode: fuzzy
+keybinding:
+  branches:
+    rebaseBranch: R
+    renameBranch: r
+    createPullRequest: O
+    viewPullRequestOptions: o
+customCommands:
+  - key: "P"
+    command: "git push {{.SelectedRemote.RefName}} {{.SelectedLocalCommit.Sha}}:{{.SelectedLocalBranch.RefName}}"
+    context: "commits"
+    loadingText: "Pushing commit..."
+    description: "Push a specific commit (and any preceding)"
+  - key: "C"
+    prompts:
+      - type: "input"
+        title: "\U0001F680 PR ID or URL:"
+    command: "gh pr checkout {{index .PromptResponses 0}}"
+    context: "localBranches"
+    loadingText: "Checking out PR..."
