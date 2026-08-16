@@ -1,3 +1,0 @@
-- name: Change shell from bash to zsh
-  become: true
-  shell: chsh -s $(which zsh)

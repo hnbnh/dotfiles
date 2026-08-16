@@ -11,9 +11,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    system-manager = {
+      url = "github:numtide/system-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager }: {
+  outputs = { self, nixpkgs, darwin, home-manager, system-manager }: {
     darwinConfigurations.hnbnh = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
@@ -23,18 +27,16 @@
       inputs = { inherit nixpkgs darwin home-manager; };
     };
 
-    # Standalone home-manager for Linux: same dotfiles and CLI tools as macOS,
-    # plus the Hyprland desktop bits. System packages come from ansible.
+    # Linux (Fedora) is split in two, the way nix-darwin + home-manager is on
+    # macOS: system-manager owns /etc and system units, standalone
+    # home-manager owns the user (packages, dotfiles, desktop).
+    systemConfigs.default = system-manager.lib.makeSystemConfig {
+      modules = [ ./modules/system ];
+    };
+
     homeConfigurations.hnbnh = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-linux;
-      modules = [
-        ./modules/user.nix
-        ./modules/packages/linux.nix
-        {
-          home.username = "hnbnh";
-          home.homeDirectory = "/home/hnbnh";
-        }
-      ];
+      modules = [ ./modules/linux.nix ];
     };
   };
 }
