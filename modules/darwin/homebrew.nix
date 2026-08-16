@@ -16,7 +16,6 @@
     ];
     casks = [
       "bruno"
-      "datagrip"
       "firefox"
       "ghostty"
       "gonhanh"
@@ -30,7 +29,7 @@
       "utm"
       "visual-studio-code"
       "wezterm"
-      "zen-browser"
+      "zen"
     ];
   };
 }
