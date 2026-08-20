@@ -1,6 +1,6 @@
 # System layer for Fedora, applied with system-manager. It can only touch
 # /etc and systemd units, so package installs and user accounts stay in
-# home-manager (modules/linux.nix) or the bootstrap in install.sh.
+# home-manager (modules/linux.nix) or the bootstrap in install/linux/fedora.sh.
 { ... }:
 
 {
