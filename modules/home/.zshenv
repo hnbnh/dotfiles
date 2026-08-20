@@ -5,8 +5,8 @@ export EDITOR=vim
 
 # Linux: standalone home-manager installs into ~/.nix-profile and nothing on a
 # non-NixOS host sources its session variables. This runs for `zsh -c` too,
-# which is how greetd starts the Hyprland session. On macOS nix-darwin handles
-# both and these paths don't exist.
+# which is how the display manager starts the niri session. On macOS
+# nix-darwin handles both and these paths don't exist.
 if [ -d "$HOME/.nix-profile/bin" ]; then
   export PATH="$HOME/.nix-profile/bin:$PATH"
 fi

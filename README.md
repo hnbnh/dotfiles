@@ -27,7 +27,7 @@ darwin-rebuild switch --flake ~/dotfiles#hnbnh
 On Linux (Fedora 44+), the installer uses Fedora's packaged Nix, then
 [system-manager](https://github.com/numtide/system-manager) for the system
 layer (`/etc`, systemd units) and standalone home-manager for the user layer
-(packages, dotfiles, Hyprland). Apply later changes with:
+(packages, dotfiles). Apply later changes with:
 
 ```bash
 system-manager switch --flake ~/dotfiles --sudo   # modules/system

@@ -1,8 +1,11 @@
-# Standalone home-manager on Fedora: everything the user needs, including the
-# Hyprland desktop, comes from nixpkgs. Fedora itself only supplies the
-# kernel, nix, and the login stack (see modules/system).
+# Standalone home-manager on Fedora: everything the user needs comes from
+# nixpkgs. Fedora itself only supplies the kernel, nix, and the login stack,
+# niri included (see modules/system and install/linux/fedora.sh).
 { pkgs, ... }:
 
+let
+  ibus = pkgs.ibus-with-plugins.override { plugins = [ pkgs.ibus-engines.bamboo ]; };
+in
 {
   imports = [
     ./user.nix
@@ -13,18 +16,30 @@
   home.homeDirectory = "/home/hnbnh";
 
   # Non-NixOS host: fix XDG_DATA_DIRS for nix-installed .desktop files, and
-  # build /run/opengl-driver so nix-built Wayland/GL programs (Hyprland,
-  # wezterm, mpv, ...) can use the host GPU. The driver link needs root once
-  # per mesa update; install.sh runs `non-nixos-gpu-setup`, and later
-  # switches warn when it must be re-run.
+  # build /run/opengl-driver so nix-built Wayland/GL programs (wezterm, mpv,
+  # ...) can use the host GPU. The driver link needs root once per mesa
+  # update; install.sh runs `non-nixos-gpu-setup`, and later switches warn
+  # when it must be re-run.
   targets.genericLinux.enable = true;
 
   # Vietnamese input. home-manager has no ibus module, so this is what
   # NixOS's i18n.inputMethod would do: ibus with the engine baked in, plus
-  # the IM variables. ibus-daemon itself is started from hyprland.conf.
-  home.packages = [
-    (pkgs.ibus-with-plugins.override { plugins = [ pkgs.ibus-engines.bamboo ]; })
-  ];
+  # the IM variables. The daemon runs as a user unit rather than a
+  # compositor autostart, so it survives a change of desktop.
+  home.packages = [ ibus ];
+  systemd.user.services.ibus-daemon = {
+    Unit = {
+      Description = "IBus input method daemon";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    # No -d: systemd wants the daemon in the foreground.
+    Service = {
+      ExecStart = "${ibus}/bin/ibus-daemon --replace --xim";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
   home.sessionVariables = {
     GTK_IM_MODULE = "ibus";
     QT_IM_MODULE = "ibus";
@@ -32,14 +47,16 @@
     GLFW_IM_MODULE = "ibus";
   };
 
+  # niri has no portal of its own; its docs point at the GNOME portal for
+  # screencast, with gtk for file dialogs.
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gnome
       xdg-desktop-portal-gtk
     ];
     config.common.default = [
-      "hyprland"
+      "gnome"
       "gtk"
     ];
   };
