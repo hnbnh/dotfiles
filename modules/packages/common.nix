@@ -22,6 +22,7 @@
     jq
     lazydocker
     lazygit
+    mise
     mkcert
     neovim
     nixfmt
