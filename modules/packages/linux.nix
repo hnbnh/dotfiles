@@ -2,17 +2,12 @@
 
 {
   home.packages = with pkgs; [
-    blueman
     calibre # marked broken on aarch64-darwin, so Linux-only
-    cliphist
-    networkmanagerapplet
+    ghostty
     obs-studio
-    papirus-icon-theme
-    swappy
-    tofi
-    wob
+    satty # annotates what niri's built-in screenshot captures
+    wl-clipboard # nvim's "+ register; DMS's clipboard is its own store
     xournalpp
-    xremap
     zathura
     zsh # login shell; macOS uses the system zsh
   ];
