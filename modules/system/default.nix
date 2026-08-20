@@ -4,10 +4,6 @@
 { ... }:
 
 {
-  imports = [
-    ./greetd.nix
-  ];
-
   nixpkgs.hostPlatform = "aarch64-linux";
 
   # Fedora is not on system-manager's tested list; it only skips the

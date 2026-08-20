@@ -5,14 +5,13 @@ set -e
 source ./modules/home/.config/bash/functions
 
 function setup_linux {
-  # Bootstrap: nix itself and the login stack come from Fedora's repos.
-  # greetd/tuigreet stay RPMs on purpose (see modules/system/greetd.nix);
-  # everything else is nix.
-  sudo dnf install -y nix greetd tuigreet
+  sudo dnf install -y nix zsh util-linux-user
   sudo systemctl enable --now nix-daemon
 
-  # Submodules provide zsh plugins and friends; without them the switch
-  # succeeds but zsh errors on every start.
+  sudo dnf copr enable -y avengemedia/dms
+  sudo dnf install -y niri dms
+  systemctl --user add-wants niri.service dms
+
   git submodule update --init --recursive
 
   local nix_flags=(--extra-experimental-features "nix-command flakes")
@@ -20,20 +19,13 @@ function setup_linux {
   # System layer: /etc and systemd units.
   nix run "${nix_flags[@]}" github:numtide/system-manager -- switch --flake . --sudo
 
-  # User layer: packages, dotfiles, Hyprland.
+  # User layer: packages and dotfiles; the compositor is an RPM now.
   nix run "${nix_flags[@]}" home-manager -- switch --flake '.#hnbnh'
 
   # What neither manager can express on a non-NixOS host. All idempotent.
   #
-  # Login shell. usermod as root skips the /etc/shells check that chsh does.
-  sudo usermod -s "$HOME/.nix-profile/bin/zsh" "$USER"
-  # GPU drivers for nix-built Wayland programs (targets.genericLinux.gpu);
-  # re-run when a later home-manager switch says so.
-  sudo "$HOME/.nix-profile/bin/non-nixos-gpu-setup"
-  # Swap the display manager for greetd. Takes effect on next boot, so this
-  # is safe to run from inside the current session.
-  sudo systemctl disable display-manager.service 2>/dev/null || true
-  sudo systemctl enable greetd.service
+  # Login shell.
+  sudo chsh -s /bin/zsh "$USER"
 }
 
 function setup_macos {

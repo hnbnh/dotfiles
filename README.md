@@ -34,10 +34,11 @@ system-manager switch --flake ~/dotfiles --sudo   # modules/system
 home-manager switch --flake ~/dotfiles#hnbnh      # modules/linux.nix
 ```
 
-Only Fedora's own `nix`, `greetd`, and `tuigreet` RPMs are used; everything
-else comes from nixpkgs. Steps that neither manager can express on a non-NixOS
-host (login shell, GPU driver link, enabling greetd) live at the end of
-`setup_linux` in `install.sh` and are safe to re-run.
+Fedora's own RPMs supply `nix` and the niri desktop (`niri` plus `dms` from
+the `avengemedia/dms` copr); everything else comes from nixpkgs. Login is
+Fedora's display manager, where niri appears as a session. Steps that neither
+manager can express on a non-NixOS host (login shell, GPU driver link) live at
+the end of `setup_linux` in `install.sh` and are safe to re-run.
 
 Files in `modules/home/` are linked live, so edits apply immediately. Rebuild
 only after adding or removing files. Add new files to Git before rebuilding.
