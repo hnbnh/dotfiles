@@ -1,6 +1,7 @@
 # system-manager whitelists only a few upstream NixOS modules, so services.keyd
 # is unreachable. This is that module minus its NixOS-only parts: hardware.uinput
-# and a SupplementaryGroups reference to a uinput group Fedora lacks.
+# and a SupplementaryGroups reference to a uinput group Fedora lacks. Neither
+# matters here because the daemon runs as root.
 { config, lib, pkgs, ... }:
 
 {
@@ -15,10 +16,13 @@
     # Caps Lock: Ctrl when held, Esc when tapped.
     capslock = overload(control, esc)
 
-    # Swap meta and alt.
+    # Swap meta and alt. The tap actions are wrapped in macro() because keyd
+    # reserves the bare modifier names for its own layers -- writing `leftmeta`
+    # as an action means layer(meta), which a tap would not emit at all, so keyd
+    # warns on it. macro() sends the real keypress DMS needs to open its launcher.
     leftmeta = layer(alt)
-    leftalt = overload(meta, leftmeta)
-    rightalt = overload(meta, rightmeta)
+    leftalt = overload(meta, macro(leftmeta))
+    rightalt = overload(meta, macro(rightmeta))
   '';
 
   environment.etc."modules-load.d/keyd.conf".text = ''
