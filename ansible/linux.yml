@@ -1,0 +1,9 @@
+- name: Setup Linux Workstation
+  hosts: local
+  roles:
+    - packages
+    - system
+    - bin
+    - fonts
+    # TODO: Clean up
+    - dotfiles

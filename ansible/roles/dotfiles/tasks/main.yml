@@ -1,0 +1,54 @@
+- name: Create ~/.config
+  file:
+    path: ~/.config
+    state: directory
+
+- name: Find .config files
+  find:
+    paths: ~/dotfiles/modules/home/.config/
+    recurse: no
+    file_type: any
+    hidden: yes
+    excludes: '.split'
+  register: dot_config
+
+- name: ~/.config/
+  file:
+    src: "{{item.path}}"
+    dest: "~/.config/{{item.path | basename}}"
+    state: link
+    force: yes
+  loop: "{{ dot_config.files }}"
+  loop_control:
+    label: "~/.config/{{item.path | basename}}"
+
+- name: Link files
+  file:
+    src: "~/dotfiles/modules/home/{{ item.src }}"
+    dest: "~/{{ item.dest }}"
+    state: link
+    force: yes
+  loop:
+    - src: .zshrc
+      dest: .zshrc
+    - src: .zshenv
+      dest: .zshenv
+    - src: .zimrc
+      dest: .zimrc
+    - src: .config/git/.gitconfig
+      dest: .gitconfig
+    - src: .config/betterlockscreen/betterlockscreenrc
+      dest: .config/betterlockscreenrc
+
+- name: Install required packages
+  pip:
+    name: "{{ item }}"
+  loop:
+    - psutil
+
+- name: ibus config
+  dconf:
+    key: "/desktop/ibus/{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: "{{ IBUS_CONFIG | dict2items }}"
