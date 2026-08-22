@@ -22,9 +22,13 @@
       url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-system-graphics = {
+      url = "github:soupglasses/nix-system-graphics";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, system-manager }: {
+  outputs = { self, nixpkgs, darwin, home-manager, system-manager, nix-system-graphics }: {
     darwinConfigurations.hnbnh = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
@@ -38,7 +42,10 @@
     # macOS: system-manager owns /etc and system units, standalone
     # home-manager owns the user (packages, dotfiles, desktop).
     systemConfigs.default = system-manager.lib.makeSystemConfig {
-      modules = [ ./modules/system ];
+      modules = [
+        nix-system-graphics.systemModules.default
+        ./modules/system
+      ];
     };
 
     homeConfigurations.hnbnh = home-manager.lib.homeManagerConfiguration {

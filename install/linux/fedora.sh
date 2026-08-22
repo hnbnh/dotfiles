@@ -46,7 +46,6 @@ nix run "${nix_flags[@]}" github:numtide/system-manager -- switch --flake . --su
 # User layer: packages and dotfiles; the compositor is an RPM now.
 nix run "${nix_flags[@]}" home-manager -- switch --flake '.#hnbnh'
 
-# What neither manager can express on a non-NixOS host. All idempotent.
-#
-# Login shell.
+# The login shell: neither manager can express it on a non-NixOS host.
+# Idempotent.
 sudo chsh -s /bin/zsh "$USER"

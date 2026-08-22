@@ -19,12 +19,16 @@ in
   home.username = "hnbnh";
   home.homeDirectory = "/home/hnbnh";
 
-  # Non-NixOS host: fix XDG_DATA_DIRS for nix-installed .desktop files, and
-  # build /run/opengl-driver so nix-built Wayland/GL programs (wezterm, mpv,
-  # ...) can use the host GPU. The driver link needs root once per mesa
-  # update; install.sh runs `non-nixos-gpu-setup`, and later switches warn
-  # when it must be re-run.
+  # Non-NixOS host: fix XDG_DATA_DIRS so nix-installed .desktop files are
+  # found, and append the FHS directories nix-built programs need.
   targets.genericLinux.enable = true;
+
+  # /run/opengl-driver belongs to nix-system-graphics now (modules/system),
+  # which writes a tmpfiles rule from the system layer instead of needing
+  # `sudo non-nixos-gpu-setup` after every mesa update. This module is on by
+  # default whenever genericLinux is, and home-manager warns if both own the
+  # link, so turn it off explicitly.
+  targets.genericLinux.gpu.enable = false;
 
   # Vietnamese input: fcitx5 with the Unikey engine. The module supplies the
   # user unit and the IM variables, so only the parts specific to this host
