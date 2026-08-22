@@ -15,42 +15,18 @@ cd ~/dotfiles
 ./install.sh
 ```
 
-Keep the repository at `~/dotfiles`; the dotfile symlinks depend on it.
+## Apply changes
 
-On macOS, the installer sets up Nix, Homebrew, and nix-darwin. Apply later
-changes with:
+Re-run `./install.sh`.
 
-```bash
-darwin-rebuild switch --flake ~/dotfiles#hnbnh
-```
-
-On Linux (Fedora 44+), the installer uses Fedora's packaged Nix, then
-[system-manager](https://github.com/numtide/system-manager) for the system
-layer (`/etc`, systemd units) and standalone home-manager for the user layer
-(packages, dotfiles). Apply later changes with:
-
-```bash
-system-manager switch --flake ~/dotfiles --sudo   # modules/system
-home-manager switch --flake ~/dotfiles#hnbnh      # modules/linux.nix
-```
-
-Fedora's own RPMs supply `nix` and the niri desktop; everything else comes
-from nixpkgs. Which RPMs and coprs those are is listed in
-`install/linux/fedora.packages` and `install/linux/fedora.coprs` — plain text,
-one entry per line, `#` for comments. Login is Fedora's display manager, where
-niri appears as a session. Steps that neither manager can express on a
-non-NixOS host (login shell, GPU driver link) live at the end of
-`install/linux/fedora.sh` and are safe to re-run.
-
-Files in `modules/home/` are linked live, so edits apply immediately. Rebuild
-only after adding or removing files. Add new files to Git before rebuilding.
-
-For a config directory that stores state, logs, sockets, or credentials, add a
-`.split` file so its contents are linked individually:
-
-```bash
-touch modules/home/.config/<tool>/.split
-```
+> [!NOTE]
+> Each directory under `modules/home` is symlinked into `$HOME` as a whole.
+> Add a `.split` file to a directory to symlink its entries one by one instead, so a
+> tool writing state next to its config does not end up inside this repo:
+>
+> ```bash
+> touch modules/home/.config/<tool>/.split
+> ```
 
 ## TODO
 
