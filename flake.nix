@@ -38,9 +38,6 @@
       inputs = { inherit nixpkgs darwin home-manager; };
     };
 
-    # Linux (Fedora) is split in two, the way nix-darwin + home-manager is on
-    # macOS: system-manager owns /etc and system units, standalone
-    # home-manager owns the user (packages, dotfiles, desktop).
     systemConfigs.default = system-manager.lib.makeSystemConfig {
       modules = [
         nix-system-graphics.systemModules.default

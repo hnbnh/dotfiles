@@ -2,8 +2,9 @@
 
 set -e
 
-# Repo root: the flake references and the package lists below are relative.
 cd "$(dirname "${BASH_SOURCE[0]}")/../.."
+
+source ./modules/home/.config/bash/functions
 
 # The package lists are plain text. `#` starts a comment anywhere on a line,
 # and blank lines are ignored.
@@ -14,7 +15,6 @@ function strip_list {
 readarray -t coprs < <(strip_list install/linux/fedora.coprs)
 readarray -t packages < <(strip_list install/linux/fedora.packages)
 
-# Coprs first; some of the packages below only exist in them.
 for copr in "${coprs[@]}"; do
   sudo dnf copr enable -y "$copr"
 done
@@ -30,7 +30,7 @@ systemctl --user add-wants niri.service dms
 # like /usr/bin; new paths inherit it, so once before the first build suffices.
 #
 # https://github.com/numtide/system-manager/issues/115
-if command -v selinuxenabled >/dev/null && selinuxenabled; then
+if have selinuxenabled && selinuxenabled; then
   sudo semanage fcontext -a -t bin_t '/nix/store(/.*)?' 2>/dev/null ||
     sudo semanage fcontext -m -t bin_t '/nix/store(/.*)?'
   sudo restorecon -R /nix/store
@@ -40,12 +40,7 @@ git submodule update --init --recursive
 
 nix_flags=(--extra-experimental-features "nix-command flakes")
 
-# System layer: /etc and systemd units.
 nix run "${nix_flags[@]}" github:numtide/system-manager -- switch --flake . --sudo
-
-# User layer: packages and dotfiles; the compositor is an RPM now.
 nix run "${nix_flags[@]}" home-manager -- switch --flake '.#hnbnh'
 
-# The login shell: neither manager can express it on a non-NixOS host.
-# Idempotent.
 sudo chsh -s /bin/zsh "$USER"

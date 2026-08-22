@@ -10,7 +10,7 @@ case "$(uname -s)" in
     ;;
   Linux)
     if [ ! -f /etc/fedora-release ]; then
-      echo "Unsupported Linux distribution (no /etc/fedora-release)" >&2
+      echo "Unsupported Linux distribution" >&2
       exit 1
     fi
     exec ./install/linux/fedora.sh

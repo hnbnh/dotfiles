@@ -2,7 +2,6 @@
 
 set -e
 
-# Repo root: the flake reference and the helpers sourced below are relative.
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 source ./modules/home/.config/bash/functions
@@ -22,9 +21,6 @@ if ! have brew; then
   NONINTERACTIVE=1 sudo -u "$(id -un)" bash /tmp/brew-install.sh
 fi
 
-# Submodules provide zsh plugins and friends; without them the switch
-# succeeds but zsh errors on every start.
 git submodule update --init --recursive
 
-# Set up nix-darwin + home-manager; this also places every dotfile
 /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake '.#hnbnh'
