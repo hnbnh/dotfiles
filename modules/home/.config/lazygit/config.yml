@@ -1,9 +1,9 @@
 git:
   autoFetch: true
   branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative -n 10 {{branchName}} --"
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --paging=never
+      command: delta --paging=never
   localBranchSortOrder: recency
 refresher:
   fetchInterval: 900
