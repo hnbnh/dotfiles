@@ -23,4 +23,5 @@ fi
 
 git submodule update --init --recursive
 
-/nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake '.#hnbnh'
+sudo NIX_CONFIG="$NIX_CONFIG" /nix/var/nix/profiles/default/bin/nix run nix-darwin \
+  --extra-experimental-features "nix-command flakes" -- switch --flake '.#hnbnh'
