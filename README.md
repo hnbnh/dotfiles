@@ -15,24 +15,18 @@ cd ~/dotfiles
 ./install.sh
 ```
 
-Keep the repository at `~/dotfiles`; the dotfile symlinks depend on it.
+## Apply changes
 
-On macOS, the installer sets up Nix, Homebrew, and nix-darwin. Apply later
-changes with:
+Re-run `./install.sh`.
 
-```bash
-darwin-rebuild switch --flake ~/dotfiles#hnbnh
-```
-
-Files in `modules/home/` are linked live, so edits apply immediately. Rebuild
-only after adding or removing files. Add new files to Git before rebuilding.
-
-For a config directory that stores state, logs, sockets, or credentials, add a
-`.split` file so its contents are linked individually:
-
-```bash
-touch modules/home/.config/<tool>/.split
-```
+> [!NOTE]
+> Each directory under `modules/home` is symlinked into `$HOME` as a whole.
+> Add a `.split` file to a directory to symlink its entries one by one instead, so a
+> tool writing state next to its config does not end up inside this repo:
+>
+> ```bash
+> touch modules/home/.config/<tool>/.split
+> ```
 
 ## TODO
 

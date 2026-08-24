@@ -17,10 +17,12 @@
     gh
     git
     herdr
+    imagemagick
     jaq
     jq
     lazydocker
     lazygit
+    mise
     mkcert
     neovim
     nixfmt
