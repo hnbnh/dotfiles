@@ -1,0 +1,7 @@
+[openshell]
+version = 1
+
+[openshell.drivers.docker]
+enable_bind_mounts = true
+default_image = "openshell-sandbox:latest"
+image_pull_policy = "never"

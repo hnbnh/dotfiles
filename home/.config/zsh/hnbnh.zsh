@@ -16,6 +16,7 @@ setopt histignorespace
 load_plugins
 
 export PATH="/opt/homebrew/bin:$PATH"
+export OPENSHELL_SANDBOX_POLICY="$HOME/.config/openshell/policy.yaml"
 
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"

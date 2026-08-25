@@ -1,0 +1,198 @@
+version: 1
+filesystem_policy:
+  include_workdir: true
+  read_only:
+    - /usr
+    - /lib
+    - /proc
+    - /dev/urandom
+    - /app
+    - /etc
+    - /var/log
+    - /nix
+  read_write:
+    - /sandbox
+    - /tmp
+    - /dev/null
+    - /dev/pts
+landlock:
+  compatibility: best_effort
+process:
+  run_as_user: sandbox
+  run_as_group: sandbox
+network_policies:
+  claude_code:
+    name: claude-code
+    endpoints:
+      - {
+          host: api.anthropic.com,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: full,
+        }
+      - { host: bridge.claudeusercontent.com, port: 443 }
+      - { host: claude.ai, port: 443 }
+      - { host: claude.com, port: 443 }
+      - { host: code.claude.com, port: 443 }
+      - { host: downloads.claude.ai, port: 443 }
+      - { host: mcp-proxy.anthropic.com, port: 443 }
+      - { host: platform.claude.com, port: 443 }
+      - { host: statsig.anthropic.com, port: 443 }
+      - { host: www.claude.com, port: 443 }
+    binaries: &agent_binaries
+      - path: /usr/bin/git
+      - path: /usr/bin/node
+      - path: /usr/local/bin/claude
+      - path: /usr/bin/codex
+      - path: /usr/lib/node_modules/@openai/**
+      - path: /nix/store/*-gh-*/bin/.gh-wrapped
+      - path: /nix/store/*-mise-*/bin/mise
+  codex:
+    name: codex
+    endpoints:
+      - { host: api.openai.com, port: 443 }
+      - { host: auth.openai.com, port: 443 }
+      - { host: chatgpt.com, port: 443 }
+    binaries: *agent_binaries
+  node:
+    name: node
+    endpoints:
+      - {
+          host: nodejs.org,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
+          host: nodesource.com,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
+          host: npmjs.com,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
+          host: npmjs.org,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - host: registry.npmjs.org
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        rules:
+          - allow:
+              method: GET
+              path: /**
+    binaries: &download_binaries
+      - path: /usr/bin/curl
+      - path: /usr/bin/git
+      - path: /usr/bin/node
+      - path: /usr/local/bin/claude
+      - path: /usr/bin/codex
+      - path: /usr/lib/node_modules/@openai/**
+      - path: /nix/store/*-gh-*/bin/.gh-wrapped
+      - path: /nix/store/*-mise-*/bin/mise
+  ruby:
+    name: ruby
+    endpoints:
+      - {
+          host: "**.ruby-lang.org",
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
+          host: ruby-lang.org,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
+          host: "**.rubygems.org",
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
+          host: rubygems.org,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
+          host: rubyonrails.org,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+    binaries: *download_binaries
+  github_content:
+    name: github-content
+    endpoints:
+      - {
+          host: codeload.github.com,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
+          host: "**.githubusercontent.com",
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+    binaries: *download_binaries
+  github_fetch:
+    name: github-fetch
+    endpoints:
+      - host: github.com
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        rules:
+          - allow:
+              method: GET
+              path: /**/info/refs*
+          - allow:
+              method: POST
+              path: /**/git-upload-pack
+          - allow:
+              method: GET
+              path: /**/releases/download/**
+          - allow:
+              method: GET
+              path: /**/archive/**
+    binaries: *download_binaries
+  github_api:
+    name: github-api
+    endpoints:
+      - host: api.github.com
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        access: read-only
+      - host: api.github.com
+        port: 443
+        path: /graphql
+        protocol: graphql
+        enforcement: enforce
+        access: read-only
+    binaries: *agent_binaries
