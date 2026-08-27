@@ -20,9 +20,4 @@ alias fsd='flameshot gui -d 2000'
 alias yt='yt-dlp'
 alias dl='aria2c -x 16 -s 16 -k 1M'
 
-alias cat='bat'
-alias find='fd'
-alias grep='rg'
-alias ls='eza'
-
 alias cld='claude --permission-mode auto'
