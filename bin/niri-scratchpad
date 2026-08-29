@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Quake-style toggling terminal, replacing lain.util.quake from the AwesomeWM
+# config. niri has no scratchpad primitive, so the show/hide is done by parking
+# the window on a dedicated workspace.
+#
+# Geometry (70% x 70%, floating, centred) comes from the `app-id="scratchpad"`
+# window-rule in ~/.config/niri/config.kdl, not from here.
+set -euo pipefail
+
+app_id="scratchpad"
+hidden_workspace="scratch"
+
+windows=$(niri msg --json windows)
+target=$(printf '%s' "$windows" | jq -c --arg app "$app_id" \
+  'map(select(.app_id == $app)) | first // empty')
+
+if [ -z "$target" ]; then
+  exec kitty --class "$app_id"
+fi
+
+id=$(printf '%s' "$target" | jq -r '.id')
+
+if [ "$(printf '%s' "$target" | jq -r '.is_focused')" = "true" ]; then
+  niri msg action move-window-to-workspace --window-id "$id" "$hidden_workspace"
+  exit 0
+fi
+
+# Named workspaces are declared in config.kdl, so `.name` is normally set; fall
+# back to the index for any dynamic workspace that has no name.
+current=$(niri msg --json workspaces |
+  jq -r 'map(select(.is_focused)) | first | .name // (.idx | tostring)')
+
+niri msg action move-window-to-workspace --window-id "$id" "$current"
+niri msg action focus-window --id "$id"
