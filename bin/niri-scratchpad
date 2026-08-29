@@ -20,15 +20,18 @@ fi
 
 id=$(printf '%s' "$target" | jq -r '.id')
 
-if [ "$(printf '%s' "$target" | jq -r '.is_focused')" = "true" ]; then
-  niri msg action move-window-to-workspace --window-id "$id" "$hidden_workspace"
-  exit 0
-fi
-
 # Named workspaces are declared in config.kdl, so `.name` is normally set; fall
 # back to the index for any dynamic workspace that has no name.
 current=$(niri msg --json workspaces |
   jq -r 'map(select(.is_focused)) | first | .name // (.idx | tostring)')
+
+if [ "$(printf '%s' "$target" | jq -r '.is_focused')" = "true" ]; then
+  # move-window-to-workspace defaults --focus to true, which would drag the
+  # user along to the scratch workspace; move, then explicitly focus back.
+  niri msg action move-window-to-workspace --window-id "$id" "$hidden_workspace"
+  niri msg action focus-workspace "$current"
+  exit 0
+fi
 
 niri msg action move-window-to-workspace --window-id "$id" "$current"
 niri msg action focus-window --id "$id"

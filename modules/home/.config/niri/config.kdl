@@ -45,8 +45,9 @@ window-rule {
 
 // The only survivor of rules.lua's float list. The rest (Arandr, Wpa_gui,
 // veromix, xtightvncviewer, Tor Browser, Kruler, Sxiv, MessageWin, Event
-// Tester) are X11-era and not installed; Blueman-manager and copyq are
-// superseded by DankMaterialShell.
+// Tester, Gpick) are X11-era and not installed; Blueman-manager and copyq are
+// superseded by DankMaterialShell; the role matches (AlarmWindow,
+// ConfigManager, pop-up) are an X11 concept niri can't match on Wayland.
 window-rule {
     match app-id="pinentry"
     open-floating true
@@ -148,6 +149,6 @@ binds {
     XF86MonBrightnessUp   allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "10"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "10"; }
 
-    Print { screenshot; }             // was flameshot gui; satty annotates
+    Print { screenshot; }             // replaces flameshot gui
     Mod+I { spawn "fcitx5-remote" "-t"; }   // was utils.ibus.toggle
 }
