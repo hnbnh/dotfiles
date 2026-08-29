@@ -20,6 +20,64 @@ input {
     }
 }
 
+prefer-no-csd
+
+// Motion is split by kind, not by taste: springs for continuous, spatially
+// tracked motion, easings for discrete enter/exit. A spring carries touchpad
+// release velocity and retargets mid-flight when you interrupt it; a fixed
+// duration curve restarts from zero every time.
+animations {
+    // Driven by the vertical touchpad gesture.
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
+
+    // niri drives these three from a single config wherever they overlap (a
+    // resize that shifts the view animates both with window-resize), so they
+    // have to stay identical.
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    window-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    window-resize {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    // Four-finger swipe up opens the overview.
+    overview-open-close {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    // Decelerate in, accelerate out, exits shorter than entrances. 200ms on
+    // open also keeps the unblurred-to-blurred pop short, since non-xray blur
+    // is absent for the whole opening animation.
+    window-open {
+        duration-ms 200
+        curve "cubic-bezier" 0.05 0.7 0.1 1.0
+    }
+
+    window-close {
+        duration-ms 150
+        curve "cubic-bezier" 0.3 0.0 0.8 0.15
+    }
+
+    recent-windows-close {
+        duration-ms 200
+        curve "cubic-bezier" 0.3 0.0 0.8 0.15
+    }
+
+    screenshot-ui-open {
+        duration-ms 200
+        curve "cubic-bezier" 0.05 0.7 0.1 1.0
+    }
+
+    slowdown 1.0
+}
+
 // Nine named workspaces standing in for awesome's nine static tags. Naming
 // them makes them persistent, so Mod+N always lands on the same workspace
 // whether or not it holds windows.
@@ -34,10 +92,21 @@ workspace "8"
 workspace "9"
 
 layout {
-    gaps 16                        // theme.useless_gap was dpi(10); widened a bit
+    gaps 16
+
+    preset-column-widths {
+        proportion 0.5
+        proportion 1.0
+    }
+
+    default-column-width { proportion 1.0; }
 
     focus-ring {
-        width 5                    // theme.border_width = dpi(5)
+        off
+    }
+
+    border {
+        width 2
         active-color "#a6da95"     // theme.border_focus, was #A8C98F
         inactive-color "#494d64"   // awesome hid these; keep them quiet instead
     }
@@ -45,8 +114,15 @@ layout {
 
 // signals.lua rounded every client on manage; fullscreen squaring is automatic.
 window-rule {
-    geometry-corner-radius 10      // theme.border_radius = dpi(10)
+    geometry-corner-radius 12
     clip-to-geometry true
+    draw-border-with-background false
+    opacity 0.975
+
+    background-effect {
+        blur true
+        xray false
+    }
 }
 
 // The only survivor of rules.lua's float list. The rest (Arandr, Wpa_gui,
