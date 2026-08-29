@@ -1,0 +1,15 @@
+{
+  "currentThemeName": "custom",
+  "currentThemeCategory": "registry",
+  "customThemeFile": "/home/hnbnh/.config/DankMaterialShell/themes/catppuccin/theme.json",
+  "registryThemeVariants": {
+    "catppuccin": {
+      "dark": {
+        "flavor": "macchiato",
+        "accent": "green"
+      }
+    }
+  },
+  "showWorkspaceIndex": true,
+  "showWorkspaceApps": true
+}
