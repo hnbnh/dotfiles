@@ -24,9 +24,6 @@ workspace "7"
 workspace "8"
 workspace "9"
 
-// Parking spot for the hidden scratchpad terminal; see bin/niri-scratchpad.
-workspace "scratch"
-
 layout {
     gaps 10                        // theme.useless_gap  = dpi(10)
 
@@ -58,14 +55,6 @@ window-rule {
     open-floating true
 }
 
-// lain.util.quake geometry: centred, floating, 70% x 70%.
-window-rule {
-    match app-id="scratchpad"
-    open-floating true
-    default-column-width { proportion 0.7; }
-    default-window-height { proportion 0.7; }
-}
-
 binds {
     // --- session -----------------------------------------------------------
     // openBinds renders a cheat sheet parsed from these very binds, which is
@@ -81,9 +70,6 @@ binds {
     Mod+F { spawn "firefox"; }
     Mod+G { spawn "firefox" "--private-window"; }
     Mod+B { spawn "brave-browser"; }
-    // Absolute path: bin/ is on no PATH, and niri spawns from the systemd
-    // user session rather than a login shell. See Task 1.
-    Mod+Z { spawn "/home/hnbnh/dotfiles/bin/niri-scratchpad"; }
     Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
 
     // --- focus and movement ------------------------------------------------
