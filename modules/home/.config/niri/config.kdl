@@ -11,6 +11,15 @@ environment {
 
 spawn-at-startup "xwayland-satellite"
 
+input {
+    touchpad {
+        natural-scroll
+    }
+    mouse {
+        natural-scroll
+    }
+}
+
 // Nine named workspaces standing in for awesome's nine static tags. Naming
 // them makes them persistent, so Mod+N always lands on the same workspace
 // whether or not it holds windows.
@@ -25,7 +34,7 @@ workspace "8"
 workspace "9"
 
 layout {
-    gaps 10                        // theme.useless_gap  = dpi(10)
+    gaps 16                        // theme.useless_gap was dpi(10); widened a bit
 
     focus-ring {
         width 5                    // theme.border_width = dpi(5)
