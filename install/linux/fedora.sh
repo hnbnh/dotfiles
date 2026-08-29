@@ -50,7 +50,10 @@ nix run "${nix_flags[@]}" home-manager -- switch --flake '.#hnbnh'
 dms_config="$HOME/.config/DankMaterialShell"
 theme_dir="$dms_config/themes/catppuccin"
 
-if [ ! -d "$theme_dir" ]; then
+# Guard on the theme file, not the directory: an interrupted run can leave a
+# directory that exists but is missing (or has a partial) theme.json, which
+# would otherwise latch as "already installed" forever.
+if [ ! -f "$theme_dir/theme.json" ]; then
   tmp=$(mktemp -d)
   git clone --depth 1 --filter=blob:none --sparse \
     https://github.com/AvengeMedia/dms-plugin-registry.git "$tmp"
@@ -60,8 +63,13 @@ if [ ! -d "$theme_dir" ]; then
   rm -rf "$tmp"
 fi
 
-mkdir -p "$dms_config"
 settings="$dms_config/settings.json"
+
+# "Merge, never overwrite" also covers a corrupt file: never discard a user's
+# settings.json silently. Back it up and start fresh only if it fails to parse.
+if [ -f "$settings" ] && ! jq empty "$settings" >/dev/null 2>&1; then
+  mv "$settings" "$settings.bak.$(date +%s)"
+fi
 [ -f "$settings" ] || echo '{}' > "$settings"
 
 # JSON does no tilde expansion, so customThemeFile must be absolute.
@@ -74,7 +82,12 @@ theme_seed=$(jq -n --arg file "$theme_dir/theme.json" '{
   }
 }')
 
-jq -s '.[0] * .[1]' "$settings" <(printf '%s' "$theme_seed") > "$settings.tmp"
-mv "$settings.tmp" "$settings"
+# Only replace settings.json on success, and never leave a stray .tmp behind,
+# so a merge failure can't abort the installer before chsh runs.
+if jq -s '.[0] * .[1]' "$settings" <(printf '%s' "$theme_seed") > "$settings.tmp"; then
+  mv "$settings.tmp" "$settings"
+else
+  rm -f "$settings.tmp"
+fi
 
 sudo chsh -s /bin/zsh "$USER"
