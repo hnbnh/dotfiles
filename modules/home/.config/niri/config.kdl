@@ -1,0 +1,66 @@
+// niri, ported from the AwesomeWM config in ../awesome.
+// Design: docs/superpowers/specs/2026-08-28-niri-dms-awesome-port-design.md
+//
+// This repo owns the whole file, colors included. Do NOT enable
+// matugenTemplateNiri in DankMaterialShell: it would rewrite this file, which
+// is an out-of-store symlink into the git repo.
+
+environment {
+    DISPLAY ":0"
+}
+
+spawn-at-startup "xwayland-satellite"
+
+// Nine named workspaces standing in for awesome's nine static tags. Naming
+// them makes them persistent, so Mod+N always lands on the same workspace
+// whether or not it holds windows.
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "5"
+workspace "6"
+workspace "7"
+workspace "8"
+workspace "9"
+
+// Parking spot for the hidden scratchpad terminal; see bin/niri-scratchpad.
+workspace "scratch"
+
+layout {
+    gaps 10                        // theme.useless_gap  = dpi(10)
+
+    focus-ring {
+        width 5                    // theme.border_width = dpi(5)
+        active-color "#a6da95"     // theme.border_focus, was #A8C98F
+        inactive-color "#494d64"   // awesome hid these; keep them quiet instead
+    }
+}
+
+// signals.lua rounded every client on manage; fullscreen squaring is automatic.
+window-rule {
+    geometry-corner-radius 10      // theme.border_radius = dpi(10)
+    clip-to-geometry true
+}
+
+// The only survivor of rules.lua's float list. The rest (Arandr, Wpa_gui,
+// veromix, xtightvncviewer, Tor Browser, Kruler, Sxiv, MessageWin, Event
+// Tester) are X11-era and not installed; Blueman-manager and copyq are
+// superseded by DankMaterialShell.
+window-rule {
+    match app-id="pinentry"
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^fcitx5-config"#
+    open-floating true
+}
+
+// lain.util.quake geometry: centred, floating, 70% x 70%.
+window-rule {
+    match app-id="scratchpad"
+    open-floating true
+    default-column-width { proportion 0.7; }
+    default-window-height { proportion 0.7; }
+}
