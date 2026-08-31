@@ -4,7 +4,6 @@
   imports = [
     ./system-defaults.nix
     ./homebrew.nix
-    ./fonts.nix
   ];
 
   # User-facing CLI tools live in modules/packages/common.nix (home.packages).

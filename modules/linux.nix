@@ -16,6 +16,8 @@ in
   targets.genericLinux.enable = true;
   targets.genericLinux.gpu.enable = false;
 
+  fonts.fontconfig.enable = true;
+
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
