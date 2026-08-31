@@ -15,33 +15,23 @@
 }
 
 window {
-	transparency: "real";
 	location: center;
-	anchor: center;
-	x-offset: 0px;
   width: 50%;
-	orientation: vertical;
 	border-radius: 12px;
-  border: 5;
+  border: 5px;
   border-color: @border-color;
 }
 
-prompt {
-	enabled: false;
-}
-
-button {
-	action: "ok";
-	str: " ";
+textbox-search-icon {
+	content: " ";
 	expand: false;
 	text-color: @foreground;
 	background-color: @transparent;
 }
 
 /* To make the `Search` text appear centered. */
-button2 {
-	action: "ok";
-	str: " ";
+textbox-search-spacer {
+	content: " ";
 	expand: false;
 	text-color: @transparent;
 	background-color: @transparent;
@@ -60,11 +50,9 @@ entry {
 
 entry-wrapper {
 	orientation: horizontal;
-  horizontal-align: 0.5;
-	vertical-align: 0.5;
 	spacing: 4px;
 	background-color: @transparent;
-	children: [ button, entry, button2 ];
+	children: [ textbox-search-icon, entry, textbox-search-spacer ];
 }
 
 inputbar {
@@ -74,7 +62,6 @@ inputbar {
 	border-radius: 24px;
   margin: 0px 10em 0px 10em;
 	padding: 10px 10px 10px 10px;
-	position: north;
 	children: [ entry-wrapper ];
 }
 
@@ -153,7 +140,7 @@ element selected.urgent {
 
 element selected.active {
 	background-color: @background-active;
-	color: @foreground-selected;
+	text-color: @foreground;
 }
 
-/* vim: ft=sass
+/* vim: ft=sass */
