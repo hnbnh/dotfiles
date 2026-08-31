@@ -25,6 +25,10 @@
     mise
     mkcert
     neovim
+    nerd-fonts.fira-code
+    nerd-fonts.geist-mono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.meslo-lg
     nixfmt
     ripgrep
     sesh
