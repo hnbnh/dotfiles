@@ -15,4 +15,4 @@ listview {
 	columns: 1;
 }
 
-/* vim ft=sass
+/* vim ft=sass */
