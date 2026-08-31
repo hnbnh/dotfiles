@@ -156,6 +156,7 @@ binds {
     Mod+G { spawn "firefox" "--private-window"; }
     Mod+B { spawn "brave-browser"; }
     Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+    Mod+Space { spawn "rofi" "-show" "drun"; }
 
     // --- focus and movement ------------------------------------------------
     Mod+J { focus-window-down; }
@@ -177,11 +178,11 @@ binds {
     Mod+Period { consume-or-expel-window-right; }
 
     // --- layout and window state -------------------------------------------
-    Mod+Space { switch-preset-column-width; }
     Mod+M { maximize-column; }
     Mod+Shift+M { fullscreen-window; }
     Mod+Ctrl+M { expand-column-to-available-width; }
     Mod+Shift+Space { toggle-window-floating; }
+    Mod+Ctrl+Space { switch-preset-column-width; }
     Mod+Shift+C { close-window; }
     Mod+Ctrl+Return { move-column-to-first; }   // was swap with master
     Mod+O { move-window-to-monitor-next; }
