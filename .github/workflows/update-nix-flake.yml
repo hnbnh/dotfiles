@@ -22,6 +22,9 @@ jobs:
             experimental-features = nix-command flakes
             accept-flake-config = true
 
+      - name: Snapshot package versions before update
+        run: .github/scripts/package-versions.sh > "$RUNNER_TEMP/before.json"
+
       - name: Update flake lock
         run: nix flake update
 
@@ -36,6 +39,20 @@ jobs:
             echo
           done
 
+      - name: Build PR body
+        run: |
+          .github/scripts/package-versions.sh > "$RUNNER_TEMP/after.json"
+          {
+            echo 'Automated monthly update for `flake.lock`.'
+            echo
+            echo 'This updates all flake inputs (`nixpkgs`, `darwin`, `home-manager`, `system-manager`, `nix-system-graphics`) to their latest upstream revisions.'
+            echo
+            echo '## Package changes'
+            echo
+            .github/scripts/package-diff.sh "$RUNNER_TEMP/before.json" "$RUNNER_TEMP/after.json"
+          } > "$RUNNER_TEMP/pr-body.md"
+          cat "$RUNNER_TEMP/pr-body.md"
+
       - name: Create PR
         uses: peter-evans/create-pull-request@v8
         with:
@@ -44,8 +61,5 @@ jobs:
           add-paths: flake.lock
           commit-message: "chore(nix): update flake lock"
           title: "chore(nix): update flake lock"
-          body: |
-            Automated monthly update for `flake.lock`.
-
-            This updates all flake inputs (`nixpkgs`, `darwin`, `home-manager`, `system-manager`, `nix-system-graphics`) to their latest upstream revisions.
+          body-path: ${{ runner.temp }}/pr-body.md
           delete-branch: true
