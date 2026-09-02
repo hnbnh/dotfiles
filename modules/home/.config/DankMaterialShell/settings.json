@@ -6,7 +6,7 @@
     "catppuccin": {
       "dark": {
         "flavor": "macchiato",
-        "accent": "green"
+        "accent": "yellow"
       }
     }
   },
@@ -180,7 +180,7 @@
   "workspaceActiveAppHighlightEnabled": false,
   "workspaceColorMode": "default",
   "workspaceFocusedCustomColor": "#6750A4",
-  "workspaceOccupiedColorMode": "tertiary",
+  "workspaceOccupiedColorMode": "tertiaryContainer",
   "workspaceOccupiedCustomColor": "#625B71",
   "workspaceUnfocusedColorMode": "default",
   "workspaceUnfocusedCustomColor": "#49454E",
@@ -356,7 +356,7 @@
   },
   "launcherLogoMode": "apps",
   "launcherLogoCustomPath": "",
-  "launcherLogoColorOverride": "",
+  "launcherLogoColorOverride": "surface",
   "launcherLogoColorInvertOnMode": false,
   "launcherLogoBrightness": 0.5,
   "launcherLogoContrast": 1,
@@ -587,14 +587,7 @@
   "displayProfileAutoSelect": false,
   "displayShowDisconnected": false,
   "displaySnapToEdge": true,
-  "connectedFrameBarStyleBackups": {
-    "default": {
-      "shadowIntensity": 0,
-      "squareCorners": false,
-      "gothCornersEnabled": false,
-      "borderEnabled": false
-    }
-  },
+  "connectedFrameBarStyleBackups": {},
   "barConfigs": [
     {
       "id": "default",
@@ -606,7 +599,6 @@
       ],
       "showOnLastDisplay": true,
       "leftWidgets": [
-        "launcherButton",
         "workspaceSwitcher",
         "focusedWindow"
       ],
@@ -739,7 +731,14 @@
   "desktopWidgetGridSettings": {},
   "desktopWidgetInstances": [],
   "desktopWidgetGroups": [],
-  "builtInPluginSettings": {},
+  "builtInPluginSettings": {
+    "dms_settings_search": {
+      "trigger": "?"
+    },
+    "dms_clipboard_search": {
+      "trigger": "cb"
+    }
+  },
   "clipboardClickToPaste": false,
   "clipboardEnterToPaste": false,
   "clipboardRememberTypeFilter": false,
@@ -749,7 +748,14 @@
     "edit",
     "delete"
   ],
-  "launcherPluginVisibility": {},
+  "launcherPluginVisibility": {
+    "dms_settings_search": {
+      "allowWithoutTrigger": true
+    },
+    "dms_clipboard_search": {
+      "allowWithoutTrigger": true
+    }
+  },
   "launcherPluginOrder": [],
   "frameEnabled": true,
   "frameThickness": 2,
