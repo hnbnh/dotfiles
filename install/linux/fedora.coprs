@@ -1,2 +1,2 @@
-# Quickshell-based desktop shell (dms); niri's panel, lock and notification stack.
-avengemedia/dms
+# Extra dnf repositories to enable before installing fedora.packages. Prefer
+# packages from Fedora proper; a COPR only belongs here when Fedora has none.
