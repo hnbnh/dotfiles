@@ -1,0 +1,27 @@
+// signals.lua rounded every client on manage; fullscreen squaring is automatic.
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+    draw-border-with-background false
+    opacity 0.9
+
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
+// The only survivor of rules.lua's float list. The rest (Arandr, Wpa_gui,
+// veromix, xtightvncviewer, Tor Browser, Kruler, Sxiv, MessageWin, Event
+// Tester, Gpick) are X11-era and not installed; Blueman-manager and copyq are
+// superseded by DankMaterialShell; the role matches (AlarmWindow,
+// ConfigManager, pop-up) are an X11 concept niri can't match on Wayland.
+window-rule {
+    match app-id="pinentry"
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^fcitx5-config"#
+    open-floating true
+}

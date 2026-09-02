@@ -1,0 +1,30 @@
+// Five named workspaces standing in for awesome's static tags. Naming them
+// makes them persistent, so Mod+N always lands on the same workspace whether
+// or not it holds windows.
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "5"
+
+layout {
+    gaps 16
+
+    preset-column-widths {
+        proportion 0.5
+        proportion 1.0
+    }
+
+    default-column-width { proportion 1.0; }
+
+    focus-ring {
+        off
+    }
+
+    border {
+        on
+        width 5
+        active-color "#eed49f"     // dms accent: catppuccin macchiato yellow
+        inactive-color "#494d64"   // awesome hid these; keep them quiet instead
+    }
+}
