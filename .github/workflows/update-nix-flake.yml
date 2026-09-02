@@ -1,0 +1,51 @@
+name: update-nix-flake
+
+on:
+  schedule:
+    - cron: "0 9 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            accept-flake-config = true
+
+      - name: Update flake lock
+        run: nix flake update
+
+      - name: Check updated flake
+        run: |
+          nix flake check
+          for attr in \
+            darwinConfigurations.hnbnh.system \
+            systemConfigs.default \
+            homeConfigurations.hnbnh.activationPackage; do
+            nix eval --raw ".#${attr}.drvPath"
+            echo
+          done
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: chore/update-nix-flake
+          add-paths: flake.lock
+          commit-message: "chore(nix): update flake lock"
+          title: "chore(nix): update flake lock"
+          body: |
+            Automated monthly update for `flake.lock`.
+
+            This updates all flake inputs (`nixpkgs`, `darwin`, `home-manager`, `system-manager`, `nix-system-graphics`) to their latest upstream revisions.
+          delete-branch: true
