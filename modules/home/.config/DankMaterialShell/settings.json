@@ -331,10 +331,10 @@
     }
   ],
   "networkPreference": "auto",
-  "iconThemeDark": "System Default",
+  "iconThemeDark": "Papirus",
   "iconThemeLight": "System Default",
   "iconThemePerMode": false,
-  "lastAppliedIconTheme": "",
+  "lastAppliedIconTheme": "Papirus",
   "cursorSettings": {
     "theme": "System Default",
     "size": 24,
