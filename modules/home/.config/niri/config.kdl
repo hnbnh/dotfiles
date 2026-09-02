@@ -1,11 +1,3 @@
-// niri, ported from the AwesomeWM config in ../awesome.
-// Design: docs/superpowers/specs/2026-08-28-niri-dms-awesome-port-design.md
-//
-// This repo owns every file here, colors included. Do NOT enable
-// matugenTemplateNiri in DankMaterialShell: it would rewrite them, and they are
-// out-of-store symlinks into the git repo.
-//
-// Includes are positional, so this order is the file order niri sees.
 include "input.kdl"
 include "animations.kdl"
 include "layout.kdl"

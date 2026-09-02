@@ -1,7 +1,5 @@
 binds {
     // --- session -----------------------------------------------------------
-    // openBinds renders a cheat sheet parsed from these very binds, which is
-    // closer to awesome's hotkeys_popup than niri's own show-hotkey-overlay.
     Mod+S { spawn "dms" "ipc" "call" "keybinds" "openBinds"; }
     Mod+Ctrl+Q { quit; }
 
@@ -25,13 +23,12 @@ binds {
     Mod+Shift+K { move-window-up; }
     Mod+Shift+H { move-column-left; }
     Mod+Shift+L { move-column-right; }
-    Mod+Ctrl+H { set-column-width "-5%"; }   // was incmwfact -0.05
-    Mod+Ctrl+L { set-column-width "+5%"; }   // was incmwfact +0.05
+    Mod+Ctrl+H { set-column-width "-5%"; }
+    Mod+Ctrl+L { set-column-width "+5%"; }
     Mod+Ctrl+J { focus-monitor-next; }
     Mod+Ctrl+K { focus-monitor-previous; }
     Mod+Tab { focus-window-previous; }
 
-    // No awesome ancestor: niri's core column management.
     Mod+Comma { consume-or-expel-window-left; }
     Mod+Period { consume-or-expel-window-right; }
 
@@ -42,7 +39,7 @@ binds {
     Mod+Shift+Space { toggle-window-floating; }
     Mod+Ctrl+Space { switch-preset-column-width; }
     Mod+Shift+C { close-window; }
-    Mod+Ctrl+Return { move-column-to-first; }   // was swap with master
+    Mod+Ctrl+Return { move-column-to-first; }
     Mod+O { move-window-to-monitor-next; }
 
     // --- workspaces --------------------------------------------------------
@@ -58,19 +55,17 @@ binds {
     Mod+Shift+4 { move-window-to-workspace "4"; }
     Mod+Shift+5 { move-window-to-workspace "5"; }
 
-    Mod+P { focus-workspace-up; }     // awful.tag.viewprev
-    Mod+N { focus-workspace-down; }   // awful.tag.viewnext
+    Mod+P { focus-workspace-up; }
+    Mod+N { focus-workspace-down; }
 
     // --- hardware ----------------------------------------------------------
-    // DMS draws its own OSD, replacing utils/volume.lua's naughty.notify.
     XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "5"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "5"; }
     XF86AudioMute        allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "mute"; }
 
-    // awesome marked these "-- FIXME: Doesn't work"; routing via DMS fixes them.
     XF86MonBrightnessUp   allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "10"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "10"; }
 
-    Print { screenshot; }             // replaces flameshot gui
-    Mod+I { spawn "fcitx5-remote" "-t"; }   // was utils.ibus.toggle
+    Print { screenshot; }
+    Mod+I { spawn "fcitx5-remote" "-t"; }
 }
