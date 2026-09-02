@@ -103,7 +103,7 @@ layout {
 
     border {
         width 5
-        active-color "#a6da95"     // theme.border_focus, was #A8C98F
+        active-color "#eed49f"     // dms accent: catppuccin macchiato yellow
         inactive-color "#494d64"   // awesome hid these; keep them quiet instead
     }
 }
