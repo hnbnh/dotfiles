@@ -1,16 +1,14 @@
-// Motion is split by kind, not by taste: springs for continuous, spatially
-// tracked motion, easings for discrete enter/exit. A spring carries touchpad
-// release velocity and retargets mid-flight when you interrupt it; a fixed
-// duration curve restarts from zero every time.
+// Springs for gesture-driven motion, easings for discrete enter/exit. A spring
+// keeps touchpad release velocity and retargets when interrupted; a fixed
+// duration curve restarts from zero.
 animations {
-    // Driven by the vertical touchpad gesture.
+    // Vertical touchpad swipe.
     workspace-switch {
         spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
     }
 
-    // niri drives these three from a single config wherever they overlap (a
-    // resize that shifts the view animates both with window-resize), so they
-    // have to stay identical.
+    // niri animates overlapping cases (a resize that shifts the view) with one
+    // of these, so all three must match.
     horizontal-view-movement {
         spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
     }
@@ -23,14 +21,13 @@ animations {
         spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
     }
 
-    // Four-finger swipe up opens the overview.
+    // Four-finger swipe.
     overview-open-close {
         spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
     }
 
-    // Decelerate in, accelerate out, exits shorter than entrances. 200ms on
-    // open also keeps the unblurred-to-blurred pop short, since non-xray blur
-    // is absent for the whole opening animation.
+    // Decelerate in, accelerate out, exits shorter than entrances. Blur is
+    // absent while a window opens, so a longer open makes the blur pop worse.
     window-open {
         duration-ms 200
         curve "cubic-bezier" 0.05 0.7 0.1 1.0
