@@ -752,8 +752,8 @@
   "launcherPluginVisibility": {},
   "launcherPluginOrder": [],
   "frameEnabled": true,
-  "frameThickness": 16,
-  "frameRounding": 23,
+  "frameThickness": 2,
+  "frameRounding": 0,
   "frameColor": "",
   "frameOpacity": 0.92,
   "frameScreenPreferences": [
@@ -769,6 +769,6 @@
   "frameMode": "separate",
   "barInsetPaddingShared": -1,
   "barInsetPaddingSyncAll": false,
-  "frameBarInsetPadding": 16,
+  "frameBarInsetPadding": 24,
   "configVersion": 13
 }

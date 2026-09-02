@@ -106,7 +106,7 @@ layout {
     }
 
     border {
-        width 2
+        width 5
         active-color "#a6da95"     // theme.border_focus, was #A8C98F
         inactive-color "#494d64"   // awesome hid these; keep them quiet instead
     }
