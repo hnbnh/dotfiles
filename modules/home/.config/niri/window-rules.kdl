@@ -35,9 +35,3 @@ layer-rule {
         xray false
     }
 }
-
-// Keep the wallpaper stationary across workspaces and in the overview.
-layer-rule {
-    match namespace="^noctalia-wallpaper"
-    place-within-backdrop true
-}

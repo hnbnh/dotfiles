@@ -7,10 +7,6 @@ workspace "5"
 layout {
     gaps 16
 
-    // The wallpaper lives in the backdrop (see window-rules.kdl), so the
-    // workspace itself must not paint over it.
-    background-color "transparent"
-
     preset-column-widths {
         proportion 0.5
         proportion 1.0
