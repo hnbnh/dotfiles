@@ -8,6 +8,7 @@ in
   imports = [
     ./user.nix
     ./packages/linux.nix
+    ./noctalia.nix
     ./wallpaper.nix
   ];
 

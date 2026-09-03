@@ -1,17 +1,17 @@
 binds {
     // --- session -----------------------------------------------------------
-    Mod+S { spawn "dms" "ipc" "call" "keybinds" "openBinds"; }
+    Mod+S { show-hotkey-overlay; }
     Mod+Ctrl+Q { quit; }
 
     // --- launchers ---------------------------------------------------------
     Mod+Return { spawn "kitty"; }
-    Mod+R { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Mod+R { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+W { toggle-overview; }
-    Mod+X { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+    Mod+X { spawn "noctalia" "msg" "panel-toggle" "session"; }
     Mod+F { spawn "firefox"; }
     Mod+G { spawn "firefox" "--private-window"; }
     Mod+B { spawn "brave-browser"; }
-    Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+    Mod+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
     Mod+Space { spawn "rofi" "-show" "drun"; }
 
     // --- focus and movement ------------------------------------------------
@@ -59,12 +59,12 @@ binds {
     Mod+N { focus-workspace-down; }
 
     // --- hardware ----------------------------------------------------------
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "5"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "5"; }
-    XF86AudioMute        allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "mute"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-up" "5"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-down" "5"; }
+    XF86AudioMute        allow-when-locked=true { spawn "noctalia" "msg" "volume-mute"; }
 
-    XF86MonBrightnessUp   allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "10"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "10"; }
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "noctalia" "msg" "brightness-up" "*" "10"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "noctalia" "msg" "brightness-down" "*" "10"; }
 
     Print { screenshot; }
     Mod+I { spawn "fcitx5-remote" "-t"; }

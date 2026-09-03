@@ -19,3 +19,25 @@ window-rule {
     match app-id=r#"^fcitx5-config"#
     open-floating true
 }
+
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 920; }
+}
+
+// Noctalia publishes blur regions for its own surfaces; without this they
+// would inherit the x-ray look from the global window rule above.
+layer-rule {
+    match namespace=r#"^noctalia-(bar-[^"]+|notification|dock|panel|attached-panel|osd)$"#
+    background-effect {
+        xray false
+    }
+}
+
+// Keep the wallpaper stationary across workspaces and in the overview.
+layer-rule {
+    match namespace="^noctalia-wallpaper"
+    place-within-backdrop true
+}

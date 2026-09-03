@@ -22,7 +22,6 @@ done
 sudo dnf install -y "${packages[@]}"
 
 sudo systemctl enable --now nix-daemon
-systemctl --user add-wants niri.service dms
 
 # Hacky workaround: Fedora has no SELinux context for /nix, so store paths get
 # default_t, which systemd won't load units from or exec (203/EXEC; the denial

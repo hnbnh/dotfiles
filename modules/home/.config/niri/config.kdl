@@ -3,3 +3,8 @@ include "animations.kdl"
 include "layout.kdl"
 include "window-rules.kdl"
 include "binds.kdl"
+
+debug {
+    // Lets Noctalia notification actions and its window switcher activate windows.
+    honor-xdg-activation-with-invalid-serial
+}

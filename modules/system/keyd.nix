@@ -19,7 +19,7 @@
           # Caps Lock: Ctrl when held, Esc when tapped.
           capslock = "overload(control, esc)";
 
-          # Swap meta and alt; macro() emits actual modifier keypresses for DMS.
+          # Swap meta and alt; macro() emits actual modifier keypresses for the shell.
           leftmeta = "layer(alt)";
           leftalt = "overload(meta, macro(leftmeta))";
           rightalt = "overload(meta, macro(rightmeta))";
