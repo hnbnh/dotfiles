@@ -5,6 +5,13 @@ on:
     - cron: "0 9 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  PR_BRANCH: feat/update-submodules
+
 jobs:
   check-updates:
     runs-on: ubuntu-latest
@@ -15,19 +22,21 @@ jobs:
           submodules: true
 
       - name: Update submodules to remote latest
-        run: |
-          git submodule update --remote --recursive
+        run: git submodule update --remote
+
+      - name: Decide whether the PR needs a push
+        id: decide
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: .github/scripts/submodule-gate.sh
 
       - name: Create PR
+        if: steps.decide.outputs.skip == 'false'
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: feat/update-submodules
+          branch: ${{ env.PR_BRANCH }}
           commit-message: "chore(submodules): update to latest"
           title: "chore(submodules): update to latest"
-          body: |
-            Automated submodule update to latest remote versions.
-
-            Verified changes:
-            $(git status --porcelain)
+          body-path: ${{ runner.temp }}/pr-body.md
           delete-branch: true
