@@ -10,3 +10,7 @@ debug {
     // launcher, dock, and window switcher do not need this.
     honor-xdg-activation-with-invalid-serial
 }
+
+hotkey-overlay {
+    skip-at-startup
+}
