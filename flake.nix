@@ -45,6 +45,8 @@
       ];
     };
 
+    packages.aarch64-linux.system-manager = system-manager.packages.aarch64-linux.default;
+
     homeConfigurations.hnbnh = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-linux;
       modules = [ ./modules/linux.nix ];

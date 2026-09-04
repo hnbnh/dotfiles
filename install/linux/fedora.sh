@@ -39,7 +39,7 @@ git submodule update --init --recursive
 
 nix_flags=(--extra-experimental-features "nix-command flakes")
 
-nix run "${nix_flags[@]}" github:numtide/system-manager -- switch --flake . --sudo
+nix run "${nix_flags[@]}" .#system-manager -- switch --flake . --sudo
 nix run "${nix_flags[@]}" home-manager -- switch --flake '.#hnbnh'
 
 sudo chsh -s /bin/zsh "$USER"

@@ -34,7 +34,8 @@ jobs:
           for attr in \
             darwinConfigurations.hnbnh.system \
             systemConfigs.default \
-            homeConfigurations.hnbnh.activationPackage; do
+            homeConfigurations.hnbnh.activationPackage \
+            packages.aarch64-linux.system-manager; do
             nix eval --raw ".#${attr}.drvPath"
             echo
           done
