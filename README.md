@@ -57,3 +57,4 @@ Re-run `./install.sh`.
 - [FelixKratz/dotfiles](https://github.com/FelixKratz/dotfiles)
 - [LazyVim/LazyVim](https://github.com/LazyVim/LazyVim)
 - [dreamsofautonomy/zen-omp](https://github.com/dreamsofautonomy/zen-omp)
+- [dharmx/walls](https://github.com/dharmx/walls)
