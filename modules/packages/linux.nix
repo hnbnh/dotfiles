@@ -6,6 +6,7 @@ let
   softwareGL = pkg: pkgs.symlinkJoin {
     name = "${pkg.pname}-software-gl";
     paths = [ pkg ];
+    passthru = { inherit (pkg) pname version; };
     nativeBuildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/${pkg.meta.mainProgram} \
