@@ -5,6 +5,8 @@ include "window-rules.kdl"
 include "binds.kdl"
 
 debug {
-    // Lets Noctalia notification actions and its window switcher activate windows.
+    // Clicking a Noctalia notification makes apps like Discord and Telegram request
+    // focus with a stale serial, which niri rejects by default. Noctalia's own
+    // launcher, dock, and window switcher do not need this.
     honor-xdg-activation-with-invalid-serial
 }
