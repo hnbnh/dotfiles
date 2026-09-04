@@ -9,7 +9,6 @@ in
     ./user.nix
     ./packages/linux.nix
     ./noctalia.nix
-    ./wallpaper.nix
   ];
 
   home.username = "hnbnh";

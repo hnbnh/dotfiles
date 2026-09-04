@@ -111,10 +111,10 @@ source = "community"
     enable_community_templates = false
 
 [wallpaper.default]
-path = "/home/hnbnh/.local/share/wallpapers/nord-wolf-and-lion.png"
+path = "/home/hnbnh/.local/share/wallpapers/a_drawing_of_a_wolf_and_a_lion_cropped.png"
 
 [wallpaper.last]
-path = "/usr/share/noctalia/assets/noctalia-wallpaper.png"
+path = "/home/hnbnh/.local/share/wallpapers/a_drawing_of_a_wolf_and_a_lion_cropped.png"
 
 [widget.media]
 enabled = false
