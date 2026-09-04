@@ -19,12 +19,13 @@ in
     (softwareGL ghostty)
     (softwareGL kitty)
     calibre # marked broken on aarch64-darwin, so Linux-only
+    inter # Noctalia's UI font; Fedora does not ship it
     keyd
     obs-studio
     papirus-icon-theme
     rofi
     satty # annotates what niri's built-in screenshot captures
-    wl-clipboard # nvim's "+ register; DMS's clipboard is its own store
+    wl-clipboard # nvim's "+ register; Noctalia's clipboard is its own store
     xournalpp
     zathura
     zsh

@@ -1,0 +1,16 @@
+environment {
+    DISPLAY ":0"
+}
+
+spawn-at-startup "xwayland-satellite"
+
+input {
+    touchpad {
+        natural-scroll
+    }
+    mouse {
+        natural-scroll
+    }
+}
+
+prefer-no-csd

@@ -1,0 +1,71 @@
+binds {
+    // --- session -----------------------------------------------------------
+    Mod+S { show-hotkey-overlay; }
+    Mod+Ctrl+Q { quit; }
+
+    // --- launchers ---------------------------------------------------------
+    Mod+Return { spawn "kitty"; }
+    Mod+R { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    Mod+W { toggle-overview; }
+    Mod+X { spawn "noctalia" "msg" "panel-toggle" "session"; }
+    Mod+F { spawn "firefox"; }
+    Mod+G { spawn "firefox" "--private-window"; }
+    Mod+B { spawn "brave-browser"; }
+    Mod+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
+    Mod+Space { spawn "rofi" "-show" "drun"; }
+
+    // --- focus and movement ------------------------------------------------
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+    Mod+H { focus-column-left; }
+    Mod+L { focus-column-right; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Ctrl+H { set-column-width "-5%"; }
+    Mod+Ctrl+L { set-column-width "+5%"; }
+    Mod+Ctrl+J { focus-monitor-next; }
+    Mod+Ctrl+K { focus-monitor-previous; }
+    Mod+Tab { focus-window-previous; }
+
+    Mod+Comma { consume-or-expel-window-left; }
+    Mod+Period { consume-or-expel-window-right; }
+
+    // --- layout and window state -------------------------------------------
+    Mod+M { maximize-column; }
+    Mod+Shift+M { fullscreen-window; }
+    Mod+Ctrl+M { expand-column-to-available-width; }
+    Mod+Shift+Space { toggle-window-floating; }
+    Mod+Ctrl+Space { switch-preset-column-width; }
+    Mod+Q { close-window; }
+    Mod+Ctrl+Return { move-column-to-first; }
+    Mod+O { move-window-to-monitor-next; }
+
+    // --- workspaces --------------------------------------------------------
+    Mod+1 { focus-workspace "1"; }
+    Mod+2 { focus-workspace "2"; }
+    Mod+3 { focus-workspace "3"; }
+    Mod+4 { focus-workspace "4"; }
+    Mod+5 { focus-workspace "5"; }
+
+    Mod+Shift+1 { move-window-to-workspace "1"; }
+    Mod+Shift+2 { move-window-to-workspace "2"; }
+    Mod+Shift+3 { move-window-to-workspace "3"; }
+    Mod+Shift+4 { move-window-to-workspace "4"; }
+    Mod+Shift+5 { move-window-to-workspace "5"; }
+
+    Mod+P { focus-workspace-up; }
+    Mod+N { focus-workspace-down; }
+
+    // --- hardware ----------------------------------------------------------
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-up" "5"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-down" "5"; }
+    XF86AudioMute        allow-when-locked=true { spawn "noctalia" "msg" "volume-mute"; }
+
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "noctalia" "msg" "brightness-up" "*" "10"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "noctalia" "msg" "brightness-down" "*" "10"; }
+
+    Print { screenshot; }
+    Mod+I { spawn "fcitx5-remote" "-t"; }
+}

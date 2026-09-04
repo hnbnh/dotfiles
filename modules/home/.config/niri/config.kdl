@@ -1,0 +1,16 @@
+include "input.kdl"
+include "animations.kdl"
+include "layout.kdl"
+include "window-rules.kdl"
+include "binds.kdl"
+
+debug {
+    // Clicking a Noctalia notification makes apps like Discord and Telegram request
+    // focus with a stale serial, which niri rejects by default. Noctalia's own
+    // launcher, dock, and window switcher do not need this.
+    honor-xdg-activation-with-invalid-serial
+}
+
+hotkey-overlay {
+    skip-at-startup
+}

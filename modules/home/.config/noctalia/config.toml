@@ -1,0 +1,124 @@
+[audio]
+enable_sounds = true
+
+[bar.main]
+background_opacity = 0.69999998435378075
+capsule_radius = 13
+center = [ "media", "clock" ]
+end = [ "tray", "clipboard", "notifications", "battery", "control-center" ]
+font_scale = 1.2499999795109034
+margin_edge = 20
+margin_ends = 20
+padding = 20
+position = "top"
+radius = 25
+shadow = false
+start = [ "workspaces", "active_window" ]
+thickness = 50
+widget_spacing = 16
+
+[control_center]
+width = 800
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@Virtual-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@Virtual-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 735.0
+    cy = 700.00006103515625
+    output = "Virtual-1"
+    placement_height = 882.0
+    placement_width = 1470.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@Virtual-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[shell]
+font_family = "Inter Variable"
+setup_wizard_enabled = false
+
+    [shell.panel]
+    control_center_placement = "floating"
+
+    [[shell.session.actions]]
+    action = "lock"
+    countdown_seconds = 5.0
+    enabled = true
+    shortcut = "1"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "logout"
+    countdown_seconds = 5.0
+    enabled = true
+    shortcut = "2"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "lock_and_suspend"
+    countdown_seconds = 5.0
+    enabled = true
+    shortcut = "3"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "reboot"
+    countdown_seconds = 5.0
+    enabled = true
+    shortcut = "4"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "shutdown"
+    countdown_seconds = 5.0
+    enabled = true
+    shortcut = "5"
+    variant = "destructive"
+
+[theme]
+builtin = "Kanagawa"
+community_palette = "Catppuccin Macchiato Peach"
+custom_palette = "catppuccin-macchiato-yellow"
+mode = "dark"
+source = "community"
+
+    [theme.templates]
+    enable_builtin_templates = false
+    enable_community_templates = false
+
+[wallpaper.default]
+path = "/home/hnbnh/.local/share/wallpapers/a_drawing_of_a_wolf_and_a_lion_cropped.png"
+
+[wallpaper.last]
+path = "/home/hnbnh/.local/share/wallpapers/a_drawing_of_a_wolf_and_a_lion_cropped.png"
+
+[widget.media]
+enabled = false
+
+[widget.workspaces]
+occupied_color = "tertiary"
+show_labels = false

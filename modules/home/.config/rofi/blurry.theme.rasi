@@ -7,7 +7,7 @@
   background-selected: @white;
   background-active: #2D4F6733;
 	foreground: white / 70%;
-  border-color: #7AA89F;
+  border-color: #eed49f;
 	urgent: #E91E6366;
 	urgent-selected: #E91E6377;
 

@@ -1,0 +1,37 @@
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+    draw-border-with-background false
+    opacity 0.9
+
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
+window-rule {
+    match app-id="pinentry"
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^fcitx5-config"#
+    open-floating true
+}
+
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 920; }
+}
+
+// Noctalia publishes blur regions for its own surfaces; without this they
+// would inherit the x-ray look from the global window rule above.
+layer-rule {
+    match namespace=r#"^noctalia-(bar-[^"]+|notification|dock|panel|attached-panel|osd)$"#
+    background-effect {
+        xray false
+    }
+}
