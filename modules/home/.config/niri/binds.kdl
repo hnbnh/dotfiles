@@ -38,7 +38,7 @@ binds {
     Mod+Ctrl+M { expand-column-to-available-width; }
     Mod+Shift+Space { toggle-window-floating; }
     Mod+Ctrl+Space { switch-preset-column-width; }
-    Mod+Shift+C { close-window; }
+    Mod+Q { close-window; }
     Mod+Ctrl+Return { move-column-to-first; }
     Mod+O { move-window-to-monitor-next; }
 
