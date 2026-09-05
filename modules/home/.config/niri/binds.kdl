@@ -4,7 +4,7 @@ binds {
     Mod+Ctrl+Q { quit; }
 
     // --- launchers ---------------------------------------------------------
-    Mod+Return { spawn "kitty"; }
+    Mod+Return { spawn "ghostty"; }
     Mod+R { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+W { toggle-overview; }
     Mod+X { spawn "noctalia" "msg" "panel-toggle" "session"; }
