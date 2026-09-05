@@ -2,19 +2,18 @@
 enable_sounds = true
 
 [bar.main]
-background_opacity = 0.69999998435378075
-capsule_radius = 13
-center = [ "media", "clock" ]
-end = [ "tray", "clipboard", "notifications", "battery", "control-center" ]
-font_scale = 1.2499999795109034
-margin_edge = 20
-margin_ends = 20
-padding = 20
+background_opacity = 0.80
+center = ["media", "clock"]
+end = ["tray", "clipboard", "notifications", "battery", "control-center"]
+font_scale = 1.0
+margin_edge = 16
+margin_ends = 16
+padding = 16
 position = "top"
-radius = 25
+radius = 16
 shadow = false
-start = [ "workspaces", "active_window" ]
-thickness = 50
+start = ["workspaces", "active_window"]
+thickness = 32
 widget_spacing = 16
 
 [control_center]
