@@ -15,7 +15,8 @@
     ],
     "deny": [
       "Bash(git push *)",
-      "Bash(rm -rf)",
+      "Bash(rm -rf *)",
+      "Bash(rm -fr *)",
       "Read(**/.bundle/config)",
       "Read(**/.npmrc)",
       "Read(./.env)",
