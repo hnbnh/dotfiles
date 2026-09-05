@@ -1,6 +1,6 @@
 binds {
     // --- session -----------------------------------------------------------
-    Mod+S { show-hotkey-overlay; }
+    Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Ctrl+Q { quit; }
 
     // --- launchers ---------------------------------------------------------
@@ -12,6 +12,8 @@ binds {
     Mod+G { spawn "firefox" "--private-window"; }
     Mod+B { spawn "brave-browser"; }
     Mod+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
+    Mod+S { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
+    Mod+Shift+N { spawn "noctalia" "msg" "panel-toggle" "control-center" "notifications"; }
     Mod+Space { spawn "rofi" "-show" "drun"; }
 
     // --- focus and movement ------------------------------------------------
