@@ -9,7 +9,6 @@
     brews = [
       "gemini-cli"
       "libyaml"
-      "mise"
       "mole"
       "mpv"
       "sqlite3"
