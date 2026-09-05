@@ -17,11 +17,16 @@ fi
 
 # Install homebrew
 if ! have brew; then
-  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o /tmp/brew-install.sh
-  NONINTERACTIVE=1 sudo -u "$(id -un)" bash /tmp/brew-install.sh
+  brew_install="$(mktemp)"
+  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o "$brew_install"
+  NONINTERACTIVE=1 sudo -u "$(id -un)" bash "$brew_install"
+  rm -f "$brew_install"
 fi
 
 git submodule update --init --recursive
 
-sudo NIX_CONFIG="$NIX_CONFIG" /nix/var/nix/profiles/default/bin/nix run nix-darwin \
-  --extra-experimental-features "nix-command flakes" -- switch --flake '.#hnbnh'
+nix=/run/current-system/sw/bin/nix
+[ -x "$nix" ] || nix=/nix/var/nix/profiles/default/bin/nix
+
+sudo "$nix" run --extra-experimental-features "nix-command flakes" \
+  .#darwin-rebuild -- switch --flake '.#hnbnh'
