@@ -20,7 +20,6 @@ jobs:
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes
-            accept-flake-config = true
 
       - name: Snapshot package versions before update
         run: .github/scripts/package-versions.sh > "$RUNNER_TEMP/before.json"
@@ -35,7 +34,9 @@ jobs:
             darwinConfigurations.hnbnh.system \
             systemConfigs.default \
             homeConfigurations.hnbnh.activationPackage \
-            packages.aarch64-linux.system-manager; do
+            packages.aarch64-darwin.darwin-rebuild \
+            packages.aarch64-linux.system-manager \
+            packages.aarch64-linux.home-manager; do
             nix eval --raw ".#${attr}.drvPath"
             echo
           done
