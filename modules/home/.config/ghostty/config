@@ -23,5 +23,7 @@ keybind = ctrl+shift+v=paste_from_clipboard
 keybind = ctrl+shift+i=inspector:toggle
 keybind = ctrl+shift+r=reload_config
 keybind = ctrl+shift+s=write_screen_file:open
+keybind = ctrl+shift+o=unbind
+keybind = ctrl+shift+t=unbind
 
 gtk-tabs-location = bottom
