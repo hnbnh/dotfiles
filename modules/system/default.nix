@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   imports = [ ./keyd.nix ];
@@ -14,9 +14,10 @@
 
   systemd.maskedUnits = [ "NetworkManager-wait-online.service" ];
 
-  # Fedora's pam_env also reads /etc/environment.d but doesn't expand ${...},
-  # so this file leaves sudo sessions with a literal PATH (no /usr/bin) and the
-  # next `switch` can't find systemd-tmpfiles. Login shells still get the nix
-  # PATH via /etc/profile.d/system-manager-path.sh.
+  # NixOS plumbing with nothing to do on Fedora.
+  services.userborn.enable = false; # host owns /etc/passwd; userborn dies on colliding GIDs
+  security.enableWrappers = false; # Fedora already ships setuid mount/umount
+  # Fedora's pam_env reads this without expanding ${...},
+  # so sudo gets a literal PATH (no /usr/bin) and the next `switch` loses systemd-tmpfiles.
   environment.etc."environment.d/10-system-manager.conf".enable = false;
 }
