@@ -7,7 +7,6 @@ spawn-at-startup "xwayland-satellite"
 input {
     touchpad {
         natural-scroll
-        tap
     }
     mouse {
         natural-scroll
