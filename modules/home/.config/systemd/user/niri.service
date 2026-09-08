@@ -1,0 +1,15 @@
+[Unit]
+Description=A scrollable-tiling Wayland compositor
+BindsTo=graphical-session.target
+Before=graphical-session.target
+Wants=graphical-session-pre.target
+After=graphical-session-pre.target
+
+; Ref: https://github.com/niri-wm/niri/discussions/2733#discussioncomment-15891806
+; Wants=xdg-desktop-autostart.target
+; Before=xdg-desktop-autostart.target
+
+[Service]
+Slice=session.slice
+Type=notify
+ExecStart=niri --session
