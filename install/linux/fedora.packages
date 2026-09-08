@@ -2,5 +2,8 @@ nix
 zsh
 util-linux-user
 
+@c-development
+@development-tools
+
 niri
 noctalia
