@@ -54,6 +54,19 @@
         inherit username;
       };
 
+      # Bootstrap tools are per-system, so they follow the registry: a host on
+      # a new architecture would otherwise build fine but have nothing to
+      # switch it with.
+      packagesFor =
+        system:
+        if (lib.systems.elaborate system).isDarwin then
+          { darwin-rebuild = darwin.packages.${system}.darwin-rebuild; }
+        else
+          {
+            system-manager = system-manager.packages.${system}.default;
+            home-manager = home-manager.packages.${system}.home-manager;
+          };
+
       # Shared by the embedded (Darwin) and standalone (Fedora) home-manager
       # paths so the module list is decided in exactly one place.
       #
@@ -77,7 +90,13 @@
           home-manager.darwinModules.home-manager
           ./base/darwin.nix
           ./hosts/${name}/darwin.nix
-          { home-manager.users.${username}.imports = homeModules name; }
+          {
+            # Both home-manager paths draw their arguments from one expression;
+            # mkHome does the same. Re-declaring these separately is how the two
+            # platforms drift apart.
+            home-manager.extraSpecialArgs = specialArgs host;
+            home-manager.users.${username}.imports = homeModules name;
+          }
         ];
       };
 
@@ -88,7 +107,11 @@
       };
 
       mkSystem = name: host: system-manager.lib.makeSystemConfig {
-        specialArgs = specialArgs host;
+        # Deliberately not `specialArgs host`: the system class is evaluated
+        # without --impure, so `username` here would silently be the pure-eval
+        # fallback on every machine. Omitting it makes a future reference fail
+        # loudly instead.
+        specialArgs = { platform = platformOf host; };
         modules = [
           nix-system-graphics.systemModules.default
           ./base/system.nix
@@ -101,8 +124,6 @@
       systemConfigs = lib.mapAttrs mkSystem (hostsWhere (p: p.isLinux));
       homeConfigurations = lib.mapAttrs mkHome (hostsWhere (p: p.isLinux));
 
-      packages.aarch64-darwin.darwin-rebuild = darwin.packages.aarch64-darwin.darwin-rebuild;
-      packages.aarch64-linux.system-manager = system-manager.packages.aarch64-linux.default;
-      packages.aarch64-linux.home-manager = home-manager.packages.aarch64-linux.home-manager;
+      packages = lib.genAttrs (lib.unique (lib.mapAttrsToList (_: host: host.system) hosts)) packagesFor;
     };
 }

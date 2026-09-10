@@ -31,7 +31,6 @@
     # paths (~/.claude/agents and friends), where a real directory may
     # already exist.
     backupFileExtension = "hm-bak";
-    extraSpecialArgs = { inherit platform username; };
   };
 
   # Used for backwards compatibility, please read the changelog before changing.

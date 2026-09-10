@@ -1,4 +1,5 @@
-# system-manager, every Fedora host.
+# system-manager, every Linux host. Content below is Fedora-specific; a
+# non-Fedora Linux host in the registry would inherit it and need a split.
 { pkgs, platform, ... }:
 
 {

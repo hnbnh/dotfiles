@@ -2,7 +2,18 @@
 
 set -e
 
-cd "$(dirname "${BASH_SOURCE[0]}")/.."
+# BASH_SOURCE is not symlink-resolved and ansible symlinks bin/* into
+# ~/.local/bin, so follow the link before locating the repo root.
+src="${BASH_SOURCE[0]}"
+while [ -L "$src" ]; do
+  dir="$(cd -P "$(dirname "$src")" && pwd)"
+  src="$(readlink "$src")"
+  case "$src" in
+    /*) ;;
+    *) src="$dir/$src" ;;
+  esac
+done
+cd "$(cd -P "$(dirname "$src")/.." && pwd)"
 
 # Nothing persists experimental-features on Fedora: base/darwin.nix writes it
 # into /etc/nix/nix.conf on macOS, but base/system.nix has no equivalent, so
@@ -11,13 +22,21 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 # before the first switch has written nix.conf.
 nix_flags=(--extra-experimental-features "nix-command flakes")
 
+# Any remaining arguments are forwarded to the switch commands, so on Fedora
+# they must be flags that BOTH system-manager and home-manager accept.
 case "$(uname -s)" in
   Darwin)
-    sudo nix run "${nix_flags[@]}" .#darwin-rebuild -- switch --flake '.#mac' --impure "$@"
+    if [ $# -gt 0 ]; then host="$1"; shift; else host="mac"; fi
+    sudo nix run "${nix_flags[@]}" .#darwin-rebuild -- switch --flake ".#${host}" --impure "$@"
     ;;
   Linux)
-    nix run "${nix_flags[@]}" .#system-manager -- switch --flake '.#fedora' --sudo "$@"
-    nix run "${nix_flags[@]}" .#home-manager -- switch --flake '.#fedora' --impure "$@"
+    if [ ! -f /etc/fedora-release ]; then
+      echo "Unsupported Linux distribution" >&2
+      exit 1
+    fi
+    if [ $# -gt 0 ]; then host="$1"; shift; else host="fedora"; fi
+    nix run "${nix_flags[@]}" .#system-manager -- switch --flake ".#${host}" --sudo "$@"
+    nix run "${nix_flags[@]}" .#home-manager -- switch --flake ".#${host}" --impure "$@"
     ;;
   *)
     echo "Unsupported OS: $(uname -s)" >&2
