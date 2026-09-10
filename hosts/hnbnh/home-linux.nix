@@ -1,5 +1,5 @@
 # home-manager, standalone on Fedora.
-{ username, ... }:
+{ ... }:
 
 let
   # Fedora only.
@@ -7,15 +7,11 @@ let
 in
 {
   imports = [
-    ./home.nix
     ../../modules/cli/linux.nix
     ../../modules/desktop
     ../../modules/fonts/linux.nix
     ../../modules/gui/linux.nix
   ];
-
-  home.username = username;
-  home.homeDirectory = "/home/${username}";
 
   targets.genericLinux.enable = true;
   targets.genericLinux.gpu.enable = false;

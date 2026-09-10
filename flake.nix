@@ -51,8 +51,10 @@
         system = "aarch64-darwin";
         specialArgs = specialArgs "aarch64-darwin";
         modules = [
-          ./hosts/hnbnh/darwin.nix
           home-manager.darwinModules.home-manager
+          ./base/darwin.nix
+          ./hosts/hnbnh/darwin.nix
+          { home-manager.users.${username}.imports = [ ./base/home.nix ]; }
         ];
       };
 
@@ -60,6 +62,7 @@
         specialArgs = specialArgs "aarch64-linux";
         modules = [
           nix-system-graphics.systemModules.default
+          ./base/system.nix
           ./hosts/hnbnh/system.nix
         ];
       };
@@ -71,7 +74,11 @@
       homeConfigurations.hnbnh = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = specialArgs "aarch64-linux";
-        modules = [ ./hosts/hnbnh/home-linux.nix ];
+        # Order is load-bearing — see the note in Task 3's homeModules.
+        modules = [
+          ./hosts/hnbnh/home-linux.nix
+          ./base/home.nix
+        ];
       };
     };
 }
