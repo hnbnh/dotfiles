@@ -1,5 +1,5 @@
 # nix-darwin.
-{ ... }:
+{ platform, username, ... }:
 
 {
   imports = [
@@ -10,9 +10,9 @@
     ../../modules/macos/homebrew.nix
   ];
 
-  system.primaryUser = "hnbnh";
+  system.primaryUser = username;
 
-  users.users.hnbnh.home = "/Users/hnbnh";
+  users.users.${username}.home = "/Users/${username}";
 
   nix = {
     settings = {
@@ -36,7 +36,8 @@
     # paths (~/.claude/agents and friends), where a real directory may
     # already exist.
     backupFileExtension = "hm-bak";
-    users.hnbnh = import ./home.nix;
+    extraSpecialArgs = { inherit platform username; };
+    users.${username} = import ./home.nix;
   };
 
   # Used for backwards compatibility, please read the changelog before changing.

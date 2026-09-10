@@ -1,5 +1,5 @@
 # home-manager, standalone on Fedora.
-{ ... }:
+{ username, ... }:
 
 let
   # Fedora only.
@@ -14,8 +14,8 @@ in
     ../../modules/gui/linux.nix
   ];
 
-  home.username = "hnbnh";
-  home.homeDirectory = "/home/hnbnh";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
 
   targets.genericLinux.enable = true;
   targets.genericLinux.gpu.enable = false;

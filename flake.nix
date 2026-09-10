@@ -21,30 +21,57 @@
     };
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, system-manager, nix-system-graphics }: {
-    darwinConfigurations.hnbnh = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        ./hosts/hnbnh/darwin.nix
-        home-manager.darwinModules.home-manager
-      ];
-      inputs = { inherit nixpkgs darwin home-manager; };
-    };
+  outputs = { self, nixpkgs, darwin, home-manager, system-manager, nix-system-graphics }:
+    let
+      inherit (nixpkgs) lib;
 
-    systemConfigs.default = system-manager.lib.makeSystemConfig {
-      modules = [
-        nix-system-graphics.systemModules.default
-        ./hosts/hnbnh/system.nix
-      ];
-    };
+      # Impure by design: a fresh machine should need no repo edit. macOS
+      # switches under sudo (install/macos.sh), so SUDO_USER is the real
+      # account, not USER. In pure evaluation every getEnv returns "", so CI
+      # falls back to hnbnh.
+      username =
+        let
+          sudoUser = builtins.getEnv "SUDO_USER";
+          user = builtins.getEnv "USER";
+        in
+        if sudoUser != "" then
+          sudoUser
+        else if user != "" then
+          user
+        else
+          "hnbnh";
 
-    packages.aarch64-darwin.darwin-rebuild = darwin.packages.aarch64-darwin.darwin-rebuild;
-    packages.aarch64-linux.system-manager = system-manager.packages.aarch64-linux.default;
-    packages.aarch64-linux.home-manager = home-manager.packages.aarch64-linux.home-manager;
+      specialArgs = system: {
+        platform = lib.systems.elaborate system;
+        inherit username;
+      };
+    in
+    {
+      darwinConfigurations.hnbnh = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = specialArgs "aarch64-darwin";
+        modules = [
+          ./hosts/hnbnh/darwin.nix
+          home-manager.darwinModules.home-manager
+        ];
+      };
 
-    homeConfigurations.hnbnh = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.aarch64-linux;
-      modules = [ ./hosts/hnbnh/home-linux.nix ];
+      systemConfigs.default = system-manager.lib.makeSystemConfig {
+        specialArgs = specialArgs "aarch64-linux";
+        modules = [
+          nix-system-graphics.systemModules.default
+          ./hosts/hnbnh/system.nix
+        ];
+      };
+
+      packages.aarch64-darwin.darwin-rebuild = darwin.packages.aarch64-darwin.darwin-rebuild;
+      packages.aarch64-linux.system-manager = system-manager.packages.aarch64-linux.default;
+      packages.aarch64-linux.home-manager = home-manager.packages.aarch64-linux.home-manager;
+
+      homeConfigurations.hnbnh = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        extraSpecialArgs = specialArgs "aarch64-linux";
+        modules = [ ./hosts/hnbnh/home-linux.nix ];
+      };
     };
-  };
 }
