@@ -20,12 +20,12 @@ cd ~/dotfiles
 Re-run `./install.sh`.
 
 > [!NOTE]
-> Each directory under `modules/home` is symlinked into `$HOME` as a whole.
+> Each directory under `home` is symlinked into `$HOME` as a whole.
 > Add a `.split` file to a directory to symlink its entries one by one instead, so a
 > tool writing state next to its config does not end up inside this repo:
 >
 > ```bash
-> touch modules/home/.config/<tool>/.split
+> touch home/.config/<tool>/.split
 > ```
 
 ## TODO

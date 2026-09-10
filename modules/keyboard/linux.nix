@@ -1,3 +1,7 @@
+# system-manager, Fedora only.
+#
+# The Fedora half of the keyboard story; macOS's is modules/keyboard/darwin.nix.
+# The keyd CLI package lives in modules/cli/linux.nix (home-manager); this file is the service.
 { lib, nixosModulesPath, ... }:
 
 {

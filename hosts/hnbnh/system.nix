@@ -1,7 +1,8 @@
-{ lib, pkgs, ... }:
+# system-manager, Fedora only.
+{ pkgs, ... }:
 
 {
-  imports = [ ./keyd.nix ];
+  imports = [ ../../modules/keyboard/linux.nix ];
 
   nixpkgs.hostPlatform = "aarch64-linux";
 

@@ -25,7 +25,7 @@
     darwinConfigurations.hnbnh = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
-        ./hosts/hnbnh
+        ./hosts/hnbnh/darwin.nix
         home-manager.darwinModules.home-manager
       ];
       inputs = { inherit nixpkgs darwin home-manager; };
@@ -34,7 +34,7 @@
     systemConfigs.default = system-manager.lib.makeSystemConfig {
       modules = [
         nix-system-graphics.systemModules.default
-        ./modules/system
+        ./hosts/hnbnh/system.nix
       ];
     };
 
@@ -44,7 +44,7 @@
 
     homeConfigurations.hnbnh = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-linux;
-      modules = [ ./modules/linux.nix ];
+      modules = [ ./hosts/hnbnh/home-linux.nix ];
     };
   };
 }
