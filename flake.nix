@@ -21,7 +21,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, system-manager, nix-system-graphics }:
+  outputs = { nixpkgs, darwin, home-manager, system-manager, nix-system-graphics, ... }:
     let
       inherit (nixpkgs) lib;
 
@@ -41,44 +41,68 @@
         else
           "hnbnh";
 
-      specialArgs = system: {
-        platform = lib.systems.elaborate system;
+      hosts = {
+        mac = { system = "aarch64-darwin"; };
+        fedora = { system = "aarch64-linux"; };
+      };
+
+      platformOf = host: lib.systems.elaborate host.system;
+      hostsWhere = pred: lib.filterAttrs (_: host: pred (platformOf host)) hosts;
+
+      specialArgs = host: {
+        platform = platformOf host;
         inherit username;
       };
-    in
-    {
-      darwinConfigurations.hnbnh = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = specialArgs "aarch64-darwin";
+
+      # Shared by the embedded (Darwin) and standalone (Fedora) home-manager
+      # paths so the module list is decided in exactly one place.
+      #
+      # Order is load-bearing, and the host module deliberately comes first.
+      # home.packages is a list, so module order fixes its concatenation order,
+      # which in turn fixes fontconfig's font-directory precedence in
+      # 10-hm-fonts.conf and buildEnv's file-collision resolution. Before the
+      # refactor base/home.nix's content was nested inside the host module's
+      # own imports; listing base first instead reorders home.packages and
+      # changes the activation derivation. Verified against the pre-refactor
+      # drvPath: this order reproduces it byte for byte, the reverse does not.
+      homeModules = name: [
+        ./hosts/${name}/home.nix
+        ./base/home.nix
+      ];
+
+      mkDarwin = name: host: darwin.lib.darwinSystem {
+        inherit (host) system;
+        specialArgs = specialArgs host;
         modules = [
           home-manager.darwinModules.home-manager
           ./base/darwin.nix
-          ./hosts/hnbnh/darwin.nix
-          { home-manager.users.${username}.imports = [ ./base/home.nix ]; }
+          ./hosts/${name}/darwin.nix
+          { home-manager.users.${username}.imports = homeModules name; }
         ];
       };
 
-      systemConfigs.default = system-manager.lib.makeSystemConfig {
-        specialArgs = specialArgs "aarch64-linux";
+      mkHome = name: host: home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${host.system};
+        extraSpecialArgs = specialArgs host;
+        modules = homeModules name;
+      };
+
+      mkSystem = name: host: system-manager.lib.makeSystemConfig {
+        specialArgs = specialArgs host;
         modules = [
           nix-system-graphics.systemModules.default
           ./base/system.nix
-          ./hosts/hnbnh/system.nix
+          ./hosts/${name}/system.nix
         ];
       };
+    in
+    {
+      darwinConfigurations = lib.mapAttrs mkDarwin (hostsWhere (p: p.isDarwin));
+      systemConfigs = lib.mapAttrs mkSystem (hostsWhere (p: p.isLinux));
+      homeConfigurations = lib.mapAttrs mkHome (hostsWhere (p: p.isLinux));
 
       packages.aarch64-darwin.darwin-rebuild = darwin.packages.aarch64-darwin.darwin-rebuild;
       packages.aarch64-linux.system-manager = system-manager.packages.aarch64-linux.default;
       packages.aarch64-linux.home-manager = home-manager.packages.aarch64-linux.home-manager;
-
-      homeConfigurations.hnbnh = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-linux;
-        extraSpecialArgs = specialArgs "aarch64-linux";
-        # Order is load-bearing — see the note in Task 3's homeModules.
-        modules = [
-          ./hosts/hnbnh/home-linux.nix
-          ./base/home.nix
-        ];
-      };
     };
 }
