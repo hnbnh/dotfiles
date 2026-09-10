@@ -4,7 +4,7 @@ set -e
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-source ./home/.config/bash/functions
+source ./modules/home/.config/bash/functions
 
 sudo whoami
 

@@ -1,13 +1,13 @@
 # home-manager, both platforms.
 #
-# Places every file in the home tree into $HOME as an out-of-store symlink, so
-# edits in the repo take effect immediately without a rebuild.
+# Places every file in the modules/home tree into $HOME as an out-of-store
+# symlink, so edits in the repo take effect immediately without a rebuild.
 { config, lib, ... }:
 
 let
   linkTree = import ./link-tree.nix { inherit lib; };
 
-  tree = "home";
+  tree = "modules/home";
   repo = "${config.home.homeDirectory}/dotfiles";
 
   paths = linkTree.linkPaths (../.. + "/${tree}");
