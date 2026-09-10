@@ -9,8 +9,8 @@ expr='ps: builtins.listToAttrs (builtins.filter (v: v.value != "") (map (p:
   { name = p.pname or d.name; value = p.version or d.version; }) ps))'
 
 for attr in \
-  homeConfigurations.hnbnh.config.home.packages \
-  darwinConfigurations.hnbnh.config.home-manager.users.hnbnh.home.packages \
-  darwinConfigurations.hnbnh.config.environment.systemPackages; do
+  homeConfigurations.fedora.config.home.packages \
+  darwinConfigurations.mac.config.home-manager.users.hnbnh.home.packages \
+  darwinConfigurations.mac.config.environment.systemPackages; do
   nix eval --json ".#${attr}" --apply "$expr"
 done | jq -s add

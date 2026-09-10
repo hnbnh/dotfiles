@@ -29,4 +29,4 @@ nix=/run/current-system/sw/bin/nix
 [ -x "$nix" ] || nix=/nix/var/nix/profiles/default/bin/nix
 
 sudo "$nix" run --extra-experimental-features "nix-command flakes" \
-  .#darwin-rebuild -- switch --flake '.#hnbnh'
+  .#darwin-rebuild -- switch --flake '.#mac' --impure

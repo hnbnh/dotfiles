@@ -47,7 +47,7 @@ git submodule update --init --recursive
 
 nix_flags=(--extra-experimental-features "nix-command flakes")
 
-nix run "${nix_flags[@]}" .#system-manager -- switch --flake . --sudo
-nix run "${nix_flags[@]}" .#home-manager -- switch --flake '.#hnbnh'
+nix run "${nix_flags[@]}" .#system-manager -- switch --flake '.#fedora' --sudo
+nix run "${nix_flags[@]}" .#home-manager -- switch --flake '.#fedora' --impure
 
 sudo chsh -s /bin/zsh "$USER"
