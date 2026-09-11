@@ -8,7 +8,7 @@ in
 {
   imports = [
     ../../modules/cli/linux.nix
-    ../../modules/desktop
+    ../../modules/desktop/linux
     ../../modules/fonts/linux.nix
     ../../modules/gui/linux.nix
   ];
