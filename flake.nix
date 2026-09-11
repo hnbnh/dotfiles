@@ -67,6 +67,25 @@
             home-manager = home-manager.packages.${system}.home-manager;
           };
 
+      # A host file holds one module per class, `system` and `home`. Taken out
+      # of the file as plain values, their definitions would show up in
+      # evaluation errors as <unknown-file>, so each gets the path attached.
+      # Not via lib.setDefaultModuleLocation: its wrapper adds an import level,
+      # imports are collected breadth-first, and the extra level reorders
+      # home.packages (see homeModules below).
+      hostModules =
+        name:
+        let
+          file = ./hosts/${name}.nix;
+          locate =
+            m:
+            if lib.isFunction m then
+              lib.mirrorFunctionArgs m (args: m args // { _file = file; })
+            else
+              m // { _file = file; };
+        in
+        lib.mapAttrs (_: locate) (import file);
+
       # Shared by the embedded (Darwin) and standalone (Fedora) home-manager
       # paths so the module list is decided in exactly one place.
       #
@@ -79,7 +98,7 @@
       # changes the activation derivation. Verified against the pre-refactor
       # drvPath: this order reproduces it byte for byte, the reverse does not.
       homeModules = name: [
-        ./hosts/${name}/home.nix
+        (hostModules name).home
         ./base
       ];
 
@@ -89,7 +108,7 @@
         modules = [
           home-manager.darwinModules.home-manager
           ./base/darwin.nix
-          ./hosts/${name}/system.nix
+          (hostModules name).system
           {
             # Both home-manager paths draw their arguments from one expression;
             # mkHome does the same. Re-declaring these separately is how the two
@@ -115,7 +134,7 @@
         modules = [
           nix-system-graphics.systemModules.default
           ./base/linux.nix
-          ./hosts/${name}/system.nix
+          (hostModules name).system
         ];
       };
     in
