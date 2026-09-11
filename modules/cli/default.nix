@@ -1,7 +1,11 @@
 # nix-darwin on Darwin, system-manager on Linux.
-{ pkgs, ... }:
+{ lib, pkgs, platform, ... }:
 
 {
+  imports =
+    lib.optional platform.isDarwin ./darwin.nix
+    ++ lib.optional platform.isLinux ./linux.nix;
+
   environment.systemPackages = with pkgs; [
     aria2
     bat

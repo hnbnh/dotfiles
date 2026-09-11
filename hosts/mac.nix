@@ -3,10 +3,9 @@
   # nix-darwin.
   system = {
     imports = [
-      ../modules/cli/darwin.nix
-      ../modules/desktop/darwin.nix
-      ../modules/gui/darwin.nix
-      ../modules/keyboard/darwin.nix
+      ../modules/desktop
+      ../modules/gui
+      ../modules/keyboard
     ];
   };
 

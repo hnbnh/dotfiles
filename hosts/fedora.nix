@@ -3,9 +3,8 @@
   # system-manager.
   system = {
     imports = [
-      ../modules/cli/linux.nix
-      ../modules/gui/linux.nix
-      ../modules/keyboard/linux.nix
+      ../modules/gui
+      ../modules/keyboard
     ];
   };
 
@@ -15,10 +14,7 @@
       caBundle = "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem";
     in
     {
-      imports = [
-        ../modules/desktop/linux
-        ../modules/fonts/linux.nix
-      ];
+      imports = [ ../modules/session ];
 
       targets.genericLinux.enable = true;
       targets.genericLinux.gpu.enable = false;
