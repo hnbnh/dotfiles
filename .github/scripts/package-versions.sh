@@ -12,6 +12,7 @@ expr='ps: builtins.listToAttrs (builtins.filter (v: v.value != "") (map (p:
 # never passes --impure, so that is the account name in the evaluated config.
 # Adding --impure here would export the runner's USER and break this path.
 for attr in \
+  systemConfigs.fedora.config.environment.systemPackages \
   homeConfigurations.fedora.config.home.packages \
   darwinConfigurations.mac.config.home-manager.users.hnbnh.home.packages \
   darwinConfigurations.mac.config.environment.systemPackages; do
