@@ -89,10 +89,11 @@
       # Shared by the embedded (Darwin) and standalone (Fedora) home-manager
       # paths so the module list is decided in exactly one place.
       #
-      # Order is load-bearing: home.packages is a list, so module order fixes
-      # its concatenation order, which in turn fixes fontconfig's
-      # font-directory precedence in 10-hm-fonts.conf and buildEnv's
-      # file-collision resolution.
+      # home.packages is a list, so module order fixes its concatenation order
+      # and with it the home-manager-path derivation. Nothing functional
+      # depends on it: 10-hm-fonts.conf lists profile directories rather than
+      # packages, and home-manager's buildEnv rejects colliding files instead
+      # of letting one win by position.
       homeModules = name: [
         (hostModules name).home
         ./base
