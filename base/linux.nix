@@ -1,13 +1,22 @@
 # system-manager, every Linux host. Content below is Fedora-specific; a
 # non-Fedora Linux host in the registry would inherit it and need a split.
-{ pkgs, platform, ... }:
+{ nixosModulesPath, pkgs, platform, ... }:
 
 {
-  imports = [ ../modules/cli ];
+  imports = [
+    ../modules/cli
+    # Builds the MIME and desktop-file caches in /run/system-manager/sw, as
+    # home-manager's profile did before the packages moved here.
+    (nixosModulesPath + "/config/xdg/mime.nix")
+  ];
 
   nixpkgs.hostPlatform = platform.system;
 
   system-manager.allowAnyDistro = true;
+
+  # home-manager's profile linked man outputs; keep that for the packages
+  # that moved here.
+  environment.extraOutputsToInstall = [ "man" ];
 
   system-graphics = {
     enable = true;
