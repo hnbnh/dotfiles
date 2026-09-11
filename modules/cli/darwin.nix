@@ -2,7 +2,7 @@
 { lib, pkgs, ... }:
 
 {
-  # User-facing CLI tools live in modules/cli/common.nix (home.packages).
+  # User-facing CLI tools live in modules/cli/default.nix (home.packages).
   # Only things with system-level daemon or socket expectations belong here.
   # mkOrder 1100 here only affects buildEnv collision resolution inside
   # /run/current-system/sw, not PATH ordering; kept for symmetry with

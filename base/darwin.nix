@@ -4,7 +4,7 @@
 {
   system.primaryUser = username;
 
-  # Must agree with home.homeDirectory in base/home.nix: home-manager's
+  # Must agree with home.homeDirectory in base/default.nix: home-manager's
   # nix-darwin module derives that option from this one, and the two
   # definitions have to be equal for the merge to succeed.
   users.users.${username}.home = "/Users/${username}";

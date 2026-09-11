@@ -3,9 +3,9 @@
 
 {
   imports = [
-    ../modules/cli/common.nix
+    ../modules/cli
     ../modules/dotfiles
-    ../modules/fonts/common.nix
+    ../modules/fonts
   ];
 
   home.username = username;

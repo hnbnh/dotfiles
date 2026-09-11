@@ -16,7 +16,7 @@ done
 cd "$(cd -P "$(dirname "$src")/.." && pwd)"
 
 # Nothing persists experimental-features on Fedora: base/darwin.nix writes it
-# into /etc/nix/nix.conf on macOS, but base/system.nix has no equivalent, so
+# into /etc/nix/nix.conf on macOS, but base/linux.nix has no equivalent, so
 # every nix invocation there must carry the flag. Both install scripts already
 # do the same; passing it on Darwin too costs nothing and keeps this usable
 # before the first switch has written nix.conf.

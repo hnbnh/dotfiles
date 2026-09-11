@@ -74,13 +74,13 @@
       # home.packages is a list, so module order fixes its concatenation order,
       # which in turn fixes fontconfig's font-directory precedence in
       # 10-hm-fonts.conf and buildEnv's file-collision resolution. Before the
-      # refactor base/home.nix's content was nested inside the host module's
+      # refactor base/default.nix's content was nested inside the host module's
       # own imports; listing base first instead reorders home.packages and
       # changes the activation derivation. Verified against the pre-refactor
       # drvPath: this order reproduces it byte for byte, the reverse does not.
       homeModules = name: [
         ./hosts/${name}/home.nix
-        ./base/home.nix
+        ./base
       ];
 
       mkDarwin = name: host: darwin.lib.darwinSystem {
@@ -89,7 +89,7 @@
         modules = [
           home-manager.darwinModules.home-manager
           ./base/darwin.nix
-          ./hosts/${name}/darwin.nix
+          ./hosts/${name}/system.nix
           {
             # Both home-manager paths draw their arguments from one expression;
             # mkHome does the same. Re-declaring these separately is how the two
@@ -114,7 +114,7 @@
         specialArgs = { platform = platformOf host; };
         modules = [
           nix-system-graphics.systemModules.default
-          ./base/system.nix
+          ./base/linux.nix
           ./hosts/${name}/system.nix
         ];
       };
