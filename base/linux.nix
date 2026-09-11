@@ -3,6 +3,8 @@
 { pkgs, platform, ... }:
 
 {
+  imports = [ ../modules/cli ];
+
   nixpkgs.hostPlatform = platform.system;
 
   system-manager.allowAnyDistro = true;

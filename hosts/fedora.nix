@@ -2,7 +2,11 @@
 {
   # system-manager.
   system = {
-    imports = [ ../modules/keyboard/linux.nix ];
+    imports = [
+      ../modules/cli/linux.nix
+      ../modules/gui/linux.nix
+      ../modules/keyboard/linux.nix
+    ];
   };
 
   # home-manager, standalone.
@@ -12,10 +16,8 @@
     in
     {
       imports = [
-        ../modules/cli/linux.nix
         ../modules/desktop/linux
         ../modules/fonts/linux.nix
-        ../modules/gui/linux.nix
       ];
 
       targets.genericLinux.enable = true;

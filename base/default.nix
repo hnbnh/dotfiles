@@ -3,7 +3,6 @@
 
 {
   imports = [
-    ../modules/cli
     ../modules/dotfiles
     ../modules/fonts
   ];

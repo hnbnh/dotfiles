@@ -1,8 +1,8 @@
-# home-manager, Fedora only.
+# system-manager, Fedora only.
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     calibre # marked broken on aarch64-darwin, so Linux-only
     ghostty
     kitty

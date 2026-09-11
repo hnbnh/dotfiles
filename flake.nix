@@ -89,14 +89,10 @@
       # Shared by the embedded (Darwin) and standalone (Fedora) home-manager
       # paths so the module list is decided in exactly one place.
       #
-      # Order is load-bearing, and the host module deliberately comes first.
-      # home.packages is a list, so module order fixes its concatenation order,
-      # which in turn fixes fontconfig's font-directory precedence in
-      # 10-hm-fonts.conf and buildEnv's file-collision resolution. Before the
-      # refactor base/default.nix's content was nested inside the host module's
-      # own imports; listing base first instead reorders home.packages and
-      # changes the activation derivation. Verified against the pre-refactor
-      # drvPath: this order reproduces it byte for byte, the reverse does not.
+      # Order is load-bearing: home.packages is a list, so module order fixes
+      # its concatenation order, which in turn fixes fontconfig's
+      # font-directory precedence in 10-hm-fonts.conf and buildEnv's
+      # file-collision resolution.
       homeModules = name: [
         (hostModules name).home
         ./base

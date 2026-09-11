@@ -2,6 +2,8 @@
 { config, lib, platform, username, ... }:
 
 {
+  imports = [ ../modules/cli ];
+
   system.primaryUser = username;
 
   # Must agree with home.homeDirectory in base/default.nix: home-manager's

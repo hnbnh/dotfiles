@@ -1,8 +1,8 @@
-# home-manager, both platforms.
+# nix-darwin on Darwin, system-manager on Linux.
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     aria2
     bat
     btop
