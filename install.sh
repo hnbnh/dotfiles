@@ -4,6 +4,8 @@ set -e
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
+git submodule update --init --recursive
+
 case "$(uname -s)" in
   Darwin)
     exec ./install/macos.sh

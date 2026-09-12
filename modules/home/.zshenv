@@ -3,6 +3,8 @@ export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/.ripgreprc
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 export EDITOR=vim
 
-if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
-  . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-fi
+for hm_vars in "$HOME/.nix-profile" "/etc/profiles/per-user/$USER"; do
+  if [ -f "$hm_vars/etc/profile.d/hm-session-vars.sh" ]; then
+    . "$hm_vars/etc/profile.d/hm-session-vars.sh"
+  fi
+done

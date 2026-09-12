@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd ~/dotfiles
+
+nix_flags=(--extra-experimental-features "nix-command flakes")
+
+case "$(uname -s)" in
+  Darwin)
+    sudo nix run "${nix_flags[@]}" .#darwin-rebuild -- switch --flake .#mac --impure "$@"
+    ;;
+  Linux)
+    if [ ! -f /etc/fedora-release ]; then
+      echo "Unsupported Linux distribution" >&2
+      exit 1
+    fi
+    nix run "${nix_flags[@]}" .#system-manager -- switch --flake .#fedora --sudo "$@"
+    nix run "${nix_flags[@]}" .#home-manager -- switch --flake .#fedora --impure "$@"
+    ;;
+  *)
+    echo "Unsupported OS: $(uname -s)" >&2
+    exit 1
+    ;;
+esac
