@@ -45,4 +45,4 @@ if have selinuxenabled && selinuxenabled; then
   sudo restorecon -R /nix/store
 fi
 
-exec ./modules/home/.local/bin/switch
+exec ./modules/home/.local/bin/nix-switch

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+nix-collect-garbage --delete-older-than 7d
+sudo nix-collect-garbage --delete-older-than 7d
+
+nix-collect-garbage -d
+sudo nix-collect-garbage -d

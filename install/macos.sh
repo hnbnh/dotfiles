@@ -25,4 +25,4 @@ fi
 
 export PATH="/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
 
-exec ./modules/home/.local/bin/switch
+exec ./modules/home/.local/bin/nix-switch
