@@ -19,15 +19,6 @@ cd ~/dotfiles
 
 Run `nix-switch` day to day — `./install.sh` puts it on `PATH`. Re-run `./install.sh` only for first-time setup, since it repeats the whole bootstrap.
 
-> [!NOTE]
-> Each directory under `modules/home` is symlinked into `$HOME` as a whole.
-> Add a `.split` file to a directory to symlink its entries one by one instead, so a
-> tool writing state next to its config does not end up inside this repo:
->
-> ```bash
-> touch modules/home/.config/<tool>/.split
-> ```
-
 ## TODO
 
 - [ ] All

@@ -1,11 +1,11 @@
-# Places every file in the modules/home tree into $HOME as an out-of-store
+# Places every file in the home tree into $HOME as an out-of-store
 # symlink, so edits in the repo take effect immediately without a rebuild.
 { config, lib, ... }:
 
 let
   linkTree = import ./link-tree.nix { inherit lib; };
 
-  tree = "modules/home";
+  tree = "home";
   repo = "${config.home.homeDirectory}/dotfiles";
 
   submodules =

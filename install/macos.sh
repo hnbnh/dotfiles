@@ -4,7 +4,7 @@ set -e
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-source ./modules/home/.config/bash/functions
+source ./home/.config/bash/functions
 
 sudo whoami
 
@@ -25,4 +25,4 @@ fi
 
 export PATH="/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
 
-exec ./modules/home/.local/bin/nix-switch
+exec ./home/.local/bin/nix-switch

@@ -4,7 +4,7 @@ set -e
 
 cd "$(dirname "${BASH_SOURCE[0]}")/../.."
 
-source ./modules/home/.config/bash/functions
+source ./home/.config/bash/functions
 
 # The package lists are plain text. `#` starts a comment anywhere on a line,
 # and blank lines are ignored.
@@ -45,4 +45,4 @@ if have selinuxenabled && selinuxenabled; then
   sudo restorecon -R /nix/store
 fi
 
-exec ./modules/home/.local/bin/nix-switch
+exec ./home/.local/bin/nix-switch

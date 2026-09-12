@@ -5,7 +5,7 @@
 
 - name: Find .config files
   find:
-    paths: ~/dotfiles/modules/home/.config/
+    paths: ~/dotfiles/home/.config/
     recurse: no
     file_type: any
     hidden: yes
@@ -24,7 +24,7 @@
 
 - name: Link files
   file:
-    src: "~/dotfiles/modules/home/{{ item.src }}"
+    src: "~/dotfiles/home/{{ item.src }}"
     dest: "~/{{ item.dest }}"
     state: link
     force: yes
