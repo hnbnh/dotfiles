@@ -21,30 +21,91 @@
     };
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, system-manager, nix-system-graphics }: {
-    darwinConfigurations.hnbnh = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        ./hosts/hnbnh
-        home-manager.darwinModules.home-manager
+  outputs = { nixpkgs, darwin, home-manager, system-manager, nix-system-graphics, ... }:
+    let
+      inherit (nixpkgs) lib;
+
+      username =
+        let
+          sudoUser = builtins.getEnv "SUDO_USER";
+          user = builtins.getEnv "USER";
+        in
+        if sudoUser != "" then
+          sudoUser
+        else if user != "" then
+          user
+        else
+          "hnbnh";
+
+      hosts = {
+        mac = { system = "aarch64-darwin"; };
+        fedora = { system = "aarch64-linux"; };
+      };
+
+      platformOf = host: lib.systems.elaborate host.system;
+      hostsWhere = pred: lib.filterAttrs (_: host: pred (platformOf host)) hosts;
+
+      specialArgs = host: {
+        platform = platformOf host;
+        inherit username;
+      };
+
+      packagesFor =
+        system:
+        if (lib.systems.elaborate system).isDarwin then
+          { darwin-rebuild = darwin.packages.${system}.darwin-rebuild; }
+        else
+          {
+            system-manager = system-manager.packages.${system}.default;
+            home-manager = home-manager.packages.${system}.home-manager;
+          };
+
+      hostModules =
+        name:
+        let
+          file = ./hosts/${name}.nix;
+        in
+        lib.mapAttrs (_: lib.setDefaultModuleLocation file) (import file);
+
+      homeModules = name: [
+        (hostModules name).home
+        ./base
       ];
-      inputs = { inherit nixpkgs darwin home-manager; };
-    };
 
-    systemConfigs.default = system-manager.lib.makeSystemConfig {
-      modules = [
-        nix-system-graphics.systemModules.default
-        ./modules/system
-      ];
-    };
+      mkDarwin = name: host: darwin.lib.darwinSystem {
+        inherit (host) system;
+        specialArgs = specialArgs host;
+        modules = [
+          home-manager.darwinModules.home-manager
+          ./base/darwin.nix
+          (hostModules name).system
+          {
+            home-manager.extraSpecialArgs = specialArgs host;
+            home-manager.users.${username}.imports = homeModules name;
+          }
+        ];
+      };
 
-    packages.aarch64-darwin.darwin-rebuild = darwin.packages.aarch64-darwin.darwin-rebuild;
-    packages.aarch64-linux.system-manager = system-manager.packages.aarch64-linux.default;
-    packages.aarch64-linux.home-manager = home-manager.packages.aarch64-linux.home-manager;
+      mkHome = name: host: home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${host.system};
+        extraSpecialArgs = specialArgs host;
+        modules = homeModules name;
+      };
 
-    homeConfigurations.hnbnh = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.aarch64-linux;
-      modules = [ ./modules/linux.nix ];
+      mkSystem = name: host: system-manager.lib.makeSystemConfig {
+        specialArgs = { platform = platformOf host; };
+        modules = [
+          nix-system-graphics.systemModules.default
+          ./base/linux.nix
+          (hostModules name).system
+        ];
+      };
+    in
+    {
+      darwinConfigurations = lib.mapAttrs mkDarwin (hostsWhere (p: p.isDarwin));
+      systemConfigs = lib.mapAttrs mkSystem (hostsWhere (p: p.isLinux));
+      homeConfigurations = lib.mapAttrs mkHome (hostsWhere (p: p.isLinux));
+
+      packages = lib.genAttrs (lib.unique (lib.mapAttrsToList (_: host: host.system) hosts)) packagesFor;
     };
-  };
 }

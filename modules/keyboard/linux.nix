@@ -1,4 +1,4 @@
-{ lib, nixosModulesPath, ... }:
+{ config, lib, nixosModulesPath, ... }:
 
 {
   imports = [ (nixosModulesPath + "/services/hardware/keyd.nix") ];
@@ -28,6 +28,8 @@
     };
 
     systemd.services.keyd.serviceConfig.SupplementaryGroups = lib.mkForce [ ];
+
+    environment.systemPackages = [ config.services.keyd.package ];
 
     environment.etc."modules-load.d/keyd.conf".text = ''
       uinput

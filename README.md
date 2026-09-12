@@ -17,7 +17,7 @@ cd ~/dotfiles
 
 ## Apply changes
 
-Re-run `./install.sh`.
+Run `nix-switch` day to day — `./install.sh` puts it on `PATH`. Re-run `./install.sh` only for first-time setup, since it repeats the whole bootstrap.
 
 > [!NOTE]
 > Each directory under `modules/home` is symlinked into `$HOME` as a whole.

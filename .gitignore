@@ -1,4 +1,4 @@
 .DS_Store
 
-# Marker files must always be tracked — see modules/lib/link-tree.nix
+# Marker files must always be tracked — see modules/dotfiles/link-tree.nix
 !**/.split

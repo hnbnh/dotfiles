@@ -21,6 +21,8 @@ done
 
 sudo dnf install -y "${packages[@]}"
 
+sudo chsh -s /bin/zsh "$USER"
+
 if ! grep -q 'cache.numtide.com' /etc/nix/nix.conf 2>/dev/null; then
   sudo tee -a /etc/nix/nix.conf >/dev/null <<'NIXCONF'
 extra-substituters = https://cache.numtide.com
@@ -43,11 +45,4 @@ if have selinuxenabled && selinuxenabled; then
   sudo restorecon -R /nix/store
 fi
 
-git submodule update --init --recursive
-
-nix_flags=(--extra-experimental-features "nix-command flakes")
-
-nix run "${nix_flags[@]}" .#system-manager -- switch --flake . --sudo
-nix run "${nix_flags[@]}" .#home-manager -- switch --flake '.#hnbnh'
-
-sudo chsh -s /bin/zsh "$USER"
+exec ./modules/home/.local/bin/nix-switch

@@ -1,7 +1,11 @@
-{ pkgs, ... }:
+{ lib, pkgs, platform, ... }:
 
 {
-  home.packages = with pkgs; [
+  imports =
+    lib.optional platform.isDarwin ./darwin.nix
+    ++ lib.optional platform.isLinux ./linux.nix;
+
+  environment.systemPackages = with pkgs; [
     aria2
     bat
     btop
@@ -25,10 +29,6 @@
     mise
     mkcert
     neovim
-    nerd-fonts.fira-code
-    nerd-fonts.geist-mono
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.meslo-lg
     nixfmt
     ripgrep
     sesh

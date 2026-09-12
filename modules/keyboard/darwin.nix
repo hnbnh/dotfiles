@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  homebrew.casks = [
+    "karabiner-elements"
+  ];
+}

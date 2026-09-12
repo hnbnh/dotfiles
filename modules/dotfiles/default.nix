@@ -3,12 +3,12 @@
 { config, lib, ... }:
 
 let
-  linkTree = import ./lib/link-tree.nix { inherit lib; };
+  linkTree = import ./link-tree.nix { inherit lib; };
 
   tree = "modules/home";
   repo = "${config.home.homeDirectory}/dotfiles";
 
-  paths = linkTree.linkPaths ./home;
+  paths = linkTree.linkPaths (../.. + "/${tree}");
 in
 {
   home.file = lib.genAttrs paths (path: {

@@ -23,10 +23,6 @@ if ! have brew; then
   rm -f "$brew_install"
 fi
 
-git submodule update --init --recursive
+export PATH="/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
 
-nix=/run/current-system/sw/bin/nix
-[ -x "$nix" ] || nix=/nix/var/nix/profiles/default/bin/nix
-
-sudo "$nix" run --extra-experimental-features "nix-command flakes" \
-  .#darwin-rebuild -- switch --flake '.#hnbnh'
+exec ./modules/home/.local/bin/nix-switch

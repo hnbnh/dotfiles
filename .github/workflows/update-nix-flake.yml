@@ -31,9 +31,9 @@ jobs:
         run: |
           nix flake check
           for attr in \
-            darwinConfigurations.hnbnh.system \
-            systemConfigs.default \
-            homeConfigurations.hnbnh.activationPackage \
+            darwinConfigurations.mac.system \
+            systemConfigs.fedora \
+            homeConfigurations.fedora.activationPackage \
             packages.aarch64-darwin.darwin-rebuild \
             packages.aarch64-linux.system-manager \
             packages.aarch64-linux.home-manager; do
