@@ -1,5 +1,3 @@
-# home-manager, Fedora only.
-#
 # The Fedora package ships the binary but no user unit; niri starts
 # graphical-session.target once it is up, which pulls this in.
 {

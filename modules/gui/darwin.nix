@@ -1,9 +1,8 @@
-# nix-darwin.
 { ... }:
 
 {
   homebrew.brews = [
-    "mpv" # a video player, so GUI; the other brews are in modules/cli/darwin.nix
+    "mpv"
   ];
 
   homebrew.casks = [

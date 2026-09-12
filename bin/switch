@@ -2,8 +2,6 @@
 
 set -e
 
-# BASH_SOURCE is not symlink-resolved and ansible symlinks bin/* into
-# ~/.local/bin, so follow the link before locating the repo root.
 src="${BASH_SOURCE[0]}"
 while [ -L "$src" ]; do
   dir="$(cd -P "$(dirname "$src")" && pwd)"
@@ -15,15 +13,8 @@ while [ -L "$src" ]; do
 done
 cd "$(cd -P "$(dirname "$src")/.." && pwd)"
 
-# Nothing persists experimental-features on Fedora: base/darwin.nix writes it
-# into /etc/nix/nix.conf on macOS, but base/linux.nix has no equivalent, so
-# every nix invocation there must carry the flag. Both install scripts already
-# do the same; passing it on Darwin too costs nothing and keeps this usable
-# before the first switch has written nix.conf.
 nix_flags=(--extra-experimental-features "nix-command flakes")
 
-# Any remaining arguments are forwarded to the switch commands, so on Fedora
-# they must be flags that BOTH system-manager and home-manager accept.
 case "$(uname -s)" in
   Darwin)
     if [ $# -gt 0 ]; then host="$1"; shift; else host="mac"; fi

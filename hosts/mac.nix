@@ -1,6 +1,4 @@
-# The Mac: nix-darwin for the machine, home-manager embedded in it.
 {
-  # nix-darwin.
   system = {
     imports = [
       ../modules/desktop
@@ -9,6 +7,5 @@
     ];
   };
 
-  # home-manager. Nothing host-specific yet.
   home = { };
 }

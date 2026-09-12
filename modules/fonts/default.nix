@@ -1,4 +1,3 @@
-# home-manager, both platforms.
 { lib, pkgs, platform, ... }:
 
 {

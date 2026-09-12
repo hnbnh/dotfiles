@@ -1,4 +1,3 @@
-# system-manager, Fedora only.
 { pkgs, ... }:
 
 {

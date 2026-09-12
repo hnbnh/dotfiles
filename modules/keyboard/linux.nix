@@ -1,7 +1,3 @@
-# system-manager, Fedora only.
-#
-# The Fedora half of the keyboard story; macOS's is modules/keyboard/darwin.nix.
-# The keyd CLI is installed here too, from the daemon's own package.
 { config, lib, nixosModulesPath, ... }:
 
 {

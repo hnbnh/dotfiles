@@ -1,5 +1,3 @@
-# Not a module — a helper consumed by ./default.nix.
-#
 # Return paths to symlink from a $HOME-mirror tree:
 #
 #   root/                         [ "bar" "baz/x" "baz/y" "foo" ]

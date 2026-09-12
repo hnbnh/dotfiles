@@ -1,5 +1,3 @@
-# home-manager, both platforms.
-#
 # Places every file in the modules/home tree into $HOME as an out-of-store
 # symlink, so edits in the repo take effect immediately without a rebuild.
 { config, lib, ... }:

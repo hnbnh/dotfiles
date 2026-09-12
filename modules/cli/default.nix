@@ -1,4 +1,3 @@
-# nix-darwin on Darwin, system-manager on Linux.
 { lib, pkgs, platform, ... }:
 
 {
