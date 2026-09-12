@@ -1,71 +1,45 @@
 # Return paths to symlink from a $HOME-mirror tree:
 #
-#   root/                         [ "bar" "baz/x" "baz/y" "foo" ]
+#   root/                         [ "bar/a" "bar/b" "foo" "vendor" ]
 #   ├── foo
 #   ├── bar/
 #   │   ├── a
 #   │   └── b
-#   ├── baz/
-#   │   ├── .split
-#   │   ├── x
-#   │   └── y
+#   ├── vendor/                   (listed in `whole`)
 #   └── .DS_Store
 #
-# A `.split` file makes its directory and every ancestor descend, so a
-# whole-directory symlink cannot swallow a tool's state alongside its config.
-# Descending drops `.split` and `.DS_Store`; a whole-directory link carries them.
+# Every file gets its own symlink, so each directory in $HOME stays a real
+# directory and a tool writing state next to its config cannot reach the repo.
 #
-# Empty directories are skipped — git cannot reproduce them on a fresh clone.
-#
-# Footgun: under a flake the caller passes the git-filtered store copy, which
-# omits submodules, so a `.split` at or above a submodule drops it from the
-# result while the emitted symlinks still point at the working tree.
+# `whole` names directories to link in one piece instead. They are contributed
+# unconditionally and never descended into, because the caller passes the
+# git-filtered store copy: a submodule is empty there, or missing outright, yet
+# the working tree the symlink points at is populated.
 { lib }:
 
 let
-  ignored = name: name == ".split" || name == ".DS_Store";
+  ignored = name: name == ".DS_Store";
 
-  # `readDir` calls a symlink "symlink" whatever it resolves to, and reading a
-  # non-directory is an uncatchable eval error, so probe for the marker instead.
-  # Cost: a `.split` nested deeper under a symlinked directory goes unseen.
-  isDir =
-    path: type: type == "directory" || (type == "symlink" && builtins.pathExists (path + "/.split"));
-
-  # One `readDir` per directory. `paths` is forced only where the walk descends,
-  # so the subtrees behind whole-directory links are never built.
   scan =
-    rel: dir:
-    let
-      raw = builtins.readDir dir;
-      entries = lib.filterAttrs (name: _: !ignored name) raw;
-
-      children = lib.mapAttrsToList (
+    whole: rel: dir:
+    lib.concatLists (
+      lib.mapAttrsToList (
         name: type:
         let
           sub = if rel == "" then name else "${rel}/${name}";
-          path = dir + "/${name}";
         in
-        if isDir path type then
-          let
-            inner = scan sub path;
-          in
-          {
-            inherit (inner) split;
-            paths = if inner.split then inner.paths else lib.optional inner.linkable sub;
-          }
+        if type == "directory" && !(builtins.elem sub whole) then
+          scan whole sub (dir + "/${name}")
         else
-          {
-            split = false;
-            paths = [ sub ];
-          }
-      ) entries;
-    in
-    {
-      split = (raw.".split" or null) == "regular" || lib.any (c: c.split) children;
-      paths = lib.concatMap (c: c.paths) children;
-      linkable = entries != { };
-    };
+          [ sub ]
+      ) (lib.filterAttrs (name: _: !ignored name) (builtins.readDir dir))
+    );
 in
 {
-  linkPaths = root: lib.sort lib.lessThan (scan "" root).paths;
+  linkPaths =
+    {
+      root,
+      whole ? [ ],
+    }:
+    lib.sort lib.lessThan (lib.unique (scan whole "" root ++ whole));
 }

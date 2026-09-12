@@ -8,7 +8,17 @@ let
   tree = "modules/home";
   repo = "${config.home.homeDirectory}/dotfiles";
 
-  paths = linkTree.linkPaths (../.. + "/${tree}");
+  submodules =
+    let
+      lines = lib.splitString "\n" (builtins.readFile (../.. + "/.gitmodules"));
+      pathOf = builtins.match "[[:space:]]*path[[:space:]]*=[[:space:]]*([^[:space:]]+)[[:space:]]*";
+    in
+    map lib.head (lib.filter (m: m != null) (map pathOf lines));
+
+  paths = linkTree.linkPaths {
+    root = ../.. + "/${tree}";
+    whole = map (lib.removePrefix "${tree}/") (lib.filter (lib.hasPrefix "${tree}/") submodules);
+  };
 in
 {
   home.file = lib.genAttrs paths (path: {
