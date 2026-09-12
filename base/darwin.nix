@@ -1,7 +1,10 @@
 { config, lib, platform, username, ... }:
 
 {
-  imports = [ ../modules/cli ];
+  imports = [
+    ../modules/cli
+    ../modules/toolchain
+  ];
 
   system.primaryUser = username;
 
@@ -30,11 +33,9 @@
     ];
   };
 
-  # mkOrder 1100 places Homebrew after the Nix profiles (order 1000) and
-  # before nix-darwin's own /usr/local/bin:/usr/bin:... group (mkOrder 1200).
-  # 1100 is the only order band between the two, so it's the only way to pin
-  # this position without tying at 1000 and leaving the result to
-  # module-import order.
+  # Homebrew and the Nix profiles both ship git, gh, sqlite3. 1100 sits between
+  # the Nix profiles (1000) and /usr/bin (1200), so Nix wins without relying on
+  # how the module system breaks a 1000-way tie.
   environment.systemPath = lib.mkOrder 1100 [
     "${config.homebrew.prefix}/bin"
   ];
