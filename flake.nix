@@ -64,14 +64,8 @@
         name:
         let
           file = ./hosts/${name}.nix;
-          locate =
-            m:
-            if lib.isFunction m then
-              lib.mirrorFunctionArgs m (args: m args // { _file = file; })
-            else
-              m // { _file = file; };
         in
-        lib.mapAttrs (_: locate) (import file);
+        lib.mapAttrs (_: lib.setDefaultModuleLocation file) (import file);
 
       homeModules = name: [
         (hostModules name).home

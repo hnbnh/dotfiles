@@ -4,7 +4,10 @@ set -e
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-git submodule update --init --recursive
+if [ "$(pwd -P)" != "$(cd ~ && pwd -P)/dotfiles" ]; then
+  echo "Clone this repository to ~/dotfiles; $(pwd -P) cannot be applied" >&2
+  exit 1
+fi
 
 case "$(uname -s)" in
   Darwin)
