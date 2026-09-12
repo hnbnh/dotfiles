@@ -9,7 +9,6 @@
   ]);
 
   homebrew.brews = [
-    "gemini-cli"
     "libyaml"
     "mole"
     "sqlite3"
