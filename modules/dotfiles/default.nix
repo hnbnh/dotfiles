@@ -10,7 +10,10 @@ let
 
   submodules =
     let
-      lines = lib.splitString "\n" (builtins.readFile (../.. + "/.gitmodules"));
+      gitmodules = ../.. + "/.gitmodules";
+      lines = lib.optionals (builtins.pathExists gitmodules) (
+        lib.splitString "\n" (builtins.readFile gitmodules)
+      );
       pathOf = builtins.match "[[:space:]]*path[[:space:]]*=[[:space:]]*([^[:space:]]+)[[:space:]]*";
     in
     map lib.head (lib.filter (m: m != null) (map pathOf lines));

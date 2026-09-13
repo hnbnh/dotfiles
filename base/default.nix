@@ -4,6 +4,7 @@
   imports = [
     ../modules/dotfiles
     ../modules/fonts
+    ../modules/plugins
   ];
 
   home.username = lib.mkDefault username;

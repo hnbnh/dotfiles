@@ -29,11 +29,14 @@ function load_plugins() {
   for plugin_dir in "$dir"/*/; do
     if [[ -d "$plugin_dir" ]]; then
       local plugin_name=$(basename "$plugin_dir")
-      local plugin_file="$plugin_dir$plugin_name.plugin.zsh"
 
-      if [[ -f "$plugin_file" ]]; then
-        source "$plugin_file"
-      fi
+      # nixpkgs' zsh-syntax-highlighting ships no .plugin.zsh shim
+      for plugin_file in "$plugin_dir$plugin_name".{plugin.zsh,zsh}; do
+        if [[ -f "$plugin_file" ]]; then
+          source "$plugin_file"
+          break
+        fi
+      done
     fi
   done
 }
