@@ -31,6 +31,7 @@
     mkcert
     neovim
     nixfmt
+    ollama
     ripgrep
     sesh
     starship
