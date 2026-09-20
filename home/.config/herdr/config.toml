@@ -10,6 +10,7 @@ reload_config = "prefix+r"
 resize_mode = "prefix+shift+r"
 copy_mode = "prefix+enter"
 rename_tab = "prefix+,"
+detach = "prefix+d"
 
 new_tab = "ctrl+shift+t"
 close_pane = "ctrl+shift+w"
