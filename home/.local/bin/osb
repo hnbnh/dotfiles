@@ -13,7 +13,21 @@ creds_volume="osb-creds"
 workdir=""
 
 build() {
-  docker build -t openshell-sandbox:latest -f "$dotfiles/home/.config/openshell/sandbox/Dockerfile" "$dotfiles"
+  local flags=()
+
+  case "${1:-}" in
+  "") ;;
+  # The nix install layer is cached on its instruction text, so a moved
+  # nixpkgs-unstable never invalidates it on its own.
+  --update) flags=(--pull --no-cache-filter tools) ;;
+  *)
+    echo "$self: unknown build option: $1" >&2
+    usage
+    exit 2
+    ;;
+  esac
+
+  docker build "${flags[@]}" -t openshell-sandbox:latest -f "$dotfiles/home/.config/openshell/sandbox/Dockerfile" "$dotfiles"
 }
 
 provider() {
@@ -135,7 +149,7 @@ connect() {
 usage() {
   cat >&2 <<EOF
 usage: $self <dir> [name]            build, ensure provider, recreate (full setup)
-       $self build                   build the sandbox image
+       $self build [--update]        build the sandbox image (--update refreshes base images and nix packages)
        $self provider                create the github provider if missing
        $self recreate <dir> [name]   delete and recreate the sandbox
        $self start [dir] [name]      start a stopped sandbox (dir defaults to .)
@@ -147,7 +161,7 @@ EOF
 }
 
 case "${1:-}" in
-build) build ;;
+build) build "${2:-}" ;;
 provider) provider ;;
 recreate) recreate "${2:-}" "${3:-}" ;;
 start) start "${2:-}" "${3:-}" ;;
