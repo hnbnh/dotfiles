@@ -31,5 +31,10 @@ RUN git config --file /sandbox/.config/git/config --remove-section url.ssh://git
   && git config --file /sandbox/.config/git/config core.editor vi \
   && git config --file /sandbox/.config/git/config interactive.diffFilter cat
 
+# osb mounts a volume at .creds so agent logins outlive the sandbox.
+RUN mkdir -p /sandbox/.creds /sandbox/.claude /sandbox/.codex \
+  && ln -s ../.creds/claude-credentials.json /sandbox/.claude/.credentials.json \
+  && ln -s ../.creds/codex-auth.json /sandbox/.codex/auth.json
+
 COPY --chown=sandbox:sandbox home/.config/openshell/.bashrc /tmp/mise.bashrc
 RUN cat /tmp/mise.bashrc >> /sandbox/.bashrc && rm /tmp/mise.bashrc

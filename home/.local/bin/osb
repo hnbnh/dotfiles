@@ -8,6 +8,8 @@ dotfiles="$HOME/dotfiles"
 
 policy="${OPENSHELL_SANDBOX_POLICY:-$HOME/.config/openshell/policy.yaml}"
 
+creds_volume="osb-creds"
+
 workdir=""
 
 build() {
@@ -71,9 +73,16 @@ recreate() {
 
   target="/sandbox/$(slug "$workdir")"
   name="${2:-$(slug "$workdir")}"
+  # The image symlinks the agents' OAuth files into .creds, so logins outlive
+  # `sandbox delete`. /sandbox itself is reserved and cannot be a mount target.
   # Built before the delete so a jq failure aborts with the old sandbox intact.
-  mounts=$(jq -nc --arg source "$workdir" --arg target "$target" \
-    '{docker: {mounts: [{type: "bind", source: $source, target: $target, read_only: false}]}}')
+  mounts=$(jq -nc --arg source "$workdir" --arg target "$target" --arg volume "$creds_volume" \
+    '{docker: {mounts: [
+      {type: "volume", source: $volume, target: "/sandbox/.creds", read_only: false},
+      {type: "bind", source: $source, target: $target, read_only: false}
+    ]}}')
+  # The gateway rejects a volume it cannot find; creating an existing one is a no-op.
+  docker volume create "$creds_volume" >/dev/null
 
   openshell sandbox delete "$name" || true
   openshell sandbox create --name "$name" --detach --provider github --policy "$policy" \
@@ -81,12 +90,42 @@ recreate() {
   echo "mounted $workdir -> $target"
 }
 
+# Sets name to the sandbox for a directory, which defaults to the current one.
+resolve_name() {
+  resolve "${1:-.}"
+  name="${2:-$(slug "$workdir")}"
+}
+
+start() {
+  local name
+  resolve_name "$@"
+
+  openshell sandbox start "$name" && return
+
+  # Recreating is destructive, so it is only suggested when nothing else can
+  # help: the sandbox is gone or errored, not when the gateway is unreachable.
+  local phase
+  phase=$(openshell sandbox get "$name" -o json 2>&1 | jq -r '.phase' 2>/dev/null) || phase=""
+  case "$phase" in
+  Error) echo "$self: $name is errored; recreate it with: $self $workdir${2:+ $2}" >&2 ;;
+  "") openshell sandbox list >/dev/null 2>&1 &&
+    echo "$self: no sandbox named $name; create it with: $self $workdir${2:+ $2}" >&2 ;;
+  esac
+  exit 1
+}
+
+stop() {
+  local name
+  resolve_name "$@"
+
+  openshell sandbox stop "$name"
+}
+
 connect() {
   local target name
-  resolve "${1:-.}"
+  resolve_name "$@"
 
   target="/sandbox/$(slug "$workdir")"
-  name="${2:-$(slug "$workdir")}"
 
   # A fresh process rather than `sandbox connect`, which attaches to the main
   # shell: exiting that one tears the sandbox down.
@@ -99,8 +138,11 @@ usage: $self <dir> [name]            build, ensure provider, recreate (full setu
        $self build                   build the sandbox image
        $self provider                create the github provider if missing
        $self recreate <dir> [name]   delete and recreate the sandbox
+       $self start [dir] [name]      start a stopped sandbox (dir defaults to .)
+       $self stop [dir] [name]       stop the sandbox, keeping its state
        $self connect [dir] [name]    open a shell in the sandbox (dir defaults to .)
 <dir> is mounted at /sandbox/<basename>; name defaults to <basename>
+agent logins persist across recreate in the docker volume osb-creds
 EOF
 }
 
@@ -108,6 +150,8 @@ case "${1:-}" in
 build) build ;;
 provider) provider ;;
 recreate) recreate "${2:-}" "${3:-}" ;;
+start) start "${2:-}" "${3:-}" ;;
+stop) stop "${2:-}" "${3:-}" ;;
 connect) connect "${2:-}" "${3:-}" ;;
 -h | --help) usage ;;
 -* | "")
