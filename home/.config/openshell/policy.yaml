@@ -44,8 +44,9 @@ network_policies:
       - path: /usr/bin/git
       - path: /usr/bin/node
       - path: /usr/local/bin/claude
-      - path: /usr/bin/codex
-      - path: /usr/lib/node_modules/@openai/**
+      - path: /usr/local/bin/codex
+      - path: /nix/store/*-claude-code-*/bin/.claude-wrapped
+      - path: /nix/store/*-codex-*/bin/.codex-wrapped
       - path: /nix/store/*-gh-*/bin/.gh-wrapped
       - path: /nix/store/*-mise-*/bin/mise
   codex:
@@ -99,8 +100,9 @@ network_policies:
       - path: /usr/bin/git
       - path: /usr/bin/node
       - path: /usr/local/bin/claude
-      - path: /usr/bin/codex
-      - path: /usr/lib/node_modules/@openai/**
+      - path: /usr/local/bin/codex
+      - path: /nix/store/*-claude-code-*/bin/.claude-wrapped
+      - path: /nix/store/*-codex-*/bin/.codex-wrapped
       - path: /nix/store/*-gh-*/bin/.gh-wrapped
       - path: /nix/store/*-mise-*/bin/mise
   ruby:

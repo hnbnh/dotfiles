@@ -3,13 +3,15 @@ ARG NIXPKGS=github:nixos/nixpkgs/nixpkgs-unstable
 
 FROM nixos/nix:latest AS tools
 ARG NIXPKGS
-RUN nix --extra-experimental-features 'nix-command flakes' \
-  profile install --profile /out \
+RUN NIXPKGS_ALLOW_UNFREE=1 nix --extra-experimental-features 'nix-command flakes' \
+  profile install --impure --profile /out \
   ${NIXPKGS}#ripgrep \
   ${NIXPKGS}#fd \
   ${NIXPKGS}#gh \
   ${NIXPKGS}#herdr \
-  ${NIXPKGS}#mise
+  ${NIXPKGS}#mise \
+  ${NIXPKGS}#claude-code \
+  ${NIXPKGS}#codex
 # Copy only the profile's closure.
 RUN mkdir /closure \
   && nix --extra-experimental-features nix-command path-info -r /out \
