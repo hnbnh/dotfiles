@@ -35,6 +35,7 @@
     sesh
     starship
     tmux
+    vim
     witr
     yazi
     yq-go
