@@ -2,13 +2,15 @@
 
 set -e
 
+self="${0##*/}"
+
 dotfiles="$HOME/dotfiles"
 
 policy="${OPENSHELL_SANDBOX_POLICY:-$HOME/.config/openshell/policy.yaml}"
 
 workdir=""
 
-image() {
+build() {
   docker build -t openshell-sandbox:latest -f "$dotfiles/home/.config/openshell/sandbox/Dockerfile" "$dotfiles"
 }
 
@@ -27,30 +29,37 @@ slug() {
   printf '%s' "${s:-workspace}"
 }
 
-# Validates the directory to mount and sets workdir to its absolute path.
+# Sets workdir to the absolute path of an existing directory.
 resolve() {
+  local dir="$1"
+
+  if [ ! -d "$dir" ]; then
+    echo "$self: not a directory: $dir" >&2
+    exit 2
+  fi
+
+  # Physical path, so a symlink to the home cannot slip past the mount check.
+  workdir=$(cd "$dir" && pwd -P)
+}
+
+# Validates the directory to mount and sets workdir to its absolute path.
+resolve_mount() {
   local dir="${1:-}"
 
   if [ -z "$dir" ]; then
-    echo "openshell-sandbox: a directory to mount is required (use . for the current one)" >&2
+    echo "$self: a directory to mount is required (use . for the current one)" >&2
     usage
     exit 2
   fi
 
-  if [ ! -d "$dir" ]; then
-    echo "openshell-sandbox: not a directory: $dir" >&2
-    exit 2
-  fi
-
-  # Physical paths, so a symlink to the home cannot slip past the check below.
-  workdir=$(cd "$dir" && pwd -P)
+  resolve "$dir"
   local home
   home=$(cd "$HOME" && pwd -P)
 
   # Mounting the home, or anything above it, would hand the sandbox every credential in it.
   case "$home/" in
   "${workdir%/}/"*)
-    echo "openshell-sandbox: refusing to mount $workdir" >&2
+    echo "$self: refusing to mount $workdir" >&2
     exit 1
     ;;
   esac
@@ -58,7 +67,7 @@ resolve() {
 
 recreate() {
   local target name mounts
-  resolve "${1:-}"
+  resolve_mount "${1:-}"
 
   target="/sandbox/$(slug "$workdir")"
   name="${2:-$(slug "$workdir")}"
@@ -72,23 +81,42 @@ recreate() {
   echo "mounted $workdir -> $target"
 }
 
+connect() {
+  local target name
+  resolve "${1:-.}"
+
+  target="/sandbox/$(slug "$workdir")"
+  name="${2:-$(slug "$workdir")}"
+
+  # A fresh process rather than `sandbox connect`, which attaches to the main
+  # shell: exiting that one tears the sandbox down.
+  exec openshell sandbox exec -n "$name" --workdir "$target" -- bash -l
+}
+
 usage() {
-  echo "usage: openshell-sandbox <dir> [name] | image | provider | recreate <dir> [name]" >&2
-  echo "<dir> is mounted at /sandbox/<basename>; name defaults to <basename>" >&2
+  cat >&2 <<EOF
+usage: $self <dir> [name]            build, ensure provider, recreate (full setup)
+       $self build                   build the sandbox image
+       $self provider                create the github provider if missing
+       $self recreate <dir> [name]   delete and recreate the sandbox
+       $self connect [dir] [name]    open a shell in the sandbox (dir defaults to .)
+<dir> is mounted at /sandbox/<basename>; name defaults to <basename>
+EOF
 }
 
 case "${1:-}" in
-image) image ;;
+build) build ;;
 provider) provider ;;
 recreate) recreate "${2:-}" "${3:-}" ;;
+connect) connect "${2:-}" "${3:-}" ;;
 -h | --help) usage ;;
 -* | "")
   usage
   exit 2
   ;;
 *)
-  resolve "$1"
-  image
+  resolve_mount "$1"
+  build
   provider
   recreate "$workdir" "${2:-}"
   ;;
