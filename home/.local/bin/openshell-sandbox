@@ -6,6 +6,8 @@ dotfiles="$HOME/dotfiles"
 
 policy="${OPENSHELL_SANDBOX_POLICY:-$HOME/.config/openshell/policy.yaml}"
 
+workdir=""
+
 image() {
   docker build -t openshell-sandbox:latest -f "$dotfiles/home/.config/openshell/sandbox/Dockerfile" "$dotfiles"
 }
@@ -15,28 +17,79 @@ provider() {
     GH_TOKEN=$(gh auth token) openshell provider create --name github --type github --credential GH_TOKEN
 }
 
+slug() {
+  local s
+  s=$(basename "$1" | tr '[:upper:]' '[:lower:]')
+  s=${s//[^a-z0-9-]/-}
+  while [[ $s == *--* ]]; do s=${s//--/-}; done
+  s=${s#-}
+  s=${s%-}
+  printf '%s' "${s:-workspace}"
+}
+
+# Validates the directory to mount and sets workdir to its absolute path.
+resolve() {
+  local dir="${1:-}"
+
+  if [ -z "$dir" ]; then
+    echo "openshell-sandbox: a directory to mount is required (use . for the current one)" >&2
+    usage
+    exit 2
+  fi
+
+  if [ ! -d "$dir" ]; then
+    echo "openshell-sandbox: not a directory: $dir" >&2
+    exit 2
+  fi
+
+  # Physical paths, so a symlink to the home cannot slip past the check below.
+  workdir=$(cd "$dir" && pwd -P)
+  local home
+  home=$(cd "$HOME" && pwd -P)
+
+  # Mounting the home, or anything above it, would hand the sandbox every credential in it.
+  case "$home/" in
+  "${workdir%/}/"*)
+    echo "openshell-sandbox: refusing to mount $workdir" >&2
+    exit 1
+    ;;
+  esac
+}
+
 recreate() {
-  local name="${1:-dev}"
+  local target name mounts
+  resolve "${1:-}"
+
+  target="/sandbox/$(slug "$workdir")"
+  name="${2:-$(slug "$workdir")}"
+  # Built before the delete so a jq failure aborts with the old sandbox intact.
+  mounts=$(jq -nc --arg source "$workdir" --arg target "$target" \
+    '{docker: {mounts: [{type: "bind", source: $source, target: $target, read_only: false}]}}')
+
   openshell sandbox delete "$name" || true
-  openshell sandbox create --name "$name" --detach --provider github --policy "$policy"
+  openshell sandbox create --name "$name" --detach --provider github --policy "$policy" \
+    --driver-config-json "$mounts"
+  echo "mounted $workdir -> $target"
 }
 
 usage() {
-  echo "usage: openshell-sandbox [name] | image | provider | recreate [name]" >&2
+  echo "usage: openshell-sandbox <dir> [name] | image | provider | recreate <dir> [name]" >&2
+  echo "<dir> is mounted at /sandbox/<basename>; name defaults to <basename>" >&2
 }
 
 case "${1:-}" in
 image) image ;;
 provider) provider ;;
-recreate) recreate "${2:-}" ;;
+recreate) recreate "${2:-}" "${3:-}" ;;
 -h | --help) usage ;;
--*)
+-* | "")
   usage
   exit 2
   ;;
 *)
+  resolve "$1"
   image
   provider
-  recreate "${1:-}"
+  recreate "$workdir" "${2:-}"
   ;;
 esac
