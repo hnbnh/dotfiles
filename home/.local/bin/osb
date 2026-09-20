@@ -136,14 +136,10 @@ stop() {
 }
 
 connect() {
-  local target name
+  local name
   resolve_name "$@"
 
-  target="/sandbox/$(slug "$workdir")"
-
-  # A fresh process rather than `sandbox connect`, which attaches to the main
-  # shell: exiting that one tears the sandbox down.
-  exec openshell sandbox exec -n "$name" --workdir "$target" -- bash -l
+  exec openshell sandbox connect "$name"
 }
 
 usage() {
