@@ -24,6 +24,7 @@
     imagemagick
     jaq
     jq
+    just
     lazydocker
     lazygit
     mise
