@@ -55,19 +55,13 @@ network_policies:
       - { host: api.openai.com, port: 443 }
       - { host: auth.openai.com, port: 443 }
       - { host: chatgpt.com, port: 443 }
+      - { host: "**.chatgpt.com", port: 443 }
     binaries: *agent_binaries
   node:
     name: node
     endpoints:
       - {
           host: nodejs.org,
-          port: 443,
-          protocol: rest,
-          enforcement: enforce,
-          access: read-only,
-        }
-      - {
-          host: nodesource.com,
           port: 443,
           protocol: rest,
           enforcement: enforce,
@@ -81,7 +75,21 @@ network_policies:
           access: read-only,
         }
       - {
+          host: www.npmjs.com,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
           host: npmjs.org,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
+          host: www.npmjs.org,
           port: 443,
           protocol: rest,
           enforcement: enforce,
@@ -105,6 +113,7 @@ network_policies:
       - path: /nix/store/*-codex-*/bin/.codex-wrapped
       - path: /nix/store/*-gh-*/bin/.gh-wrapped
       - path: /nix/store/*-mise-*/bin/mise
+      - path: /sandbox/.local/share/mise/installs/*/*/bin/*
   ruby:
     name: ruby
     endpoints:
@@ -137,7 +146,32 @@ network_policies:
           access: read-only,
         }
       - {
+          host: "**.rubyonrails.org",
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
           host: rubyonrails.org,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+    binaries: *download_binaries
+  mise:
+    name: mise
+    endpoints:
+      - {
+          host: tuf-repo-cdn.sigstore.dev,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
+          host: mise-versions.jdx.dev,
           port: 443,
           protocol: rest,
           enforcement: enforce,
