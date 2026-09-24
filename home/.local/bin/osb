@@ -102,6 +102,9 @@ recreate() {
   openshell sandbox create --name "$name" --detach --provider github --policy "$policy" \
     --driver-config-json "$mounts"
   echo "mounted $workdir -> $target"
+
+  docker image prune -f --filter dangling=true \
+    --filter "label=org.opencontainers.image.source=https://github.com/NVIDIA/OpenShell-Community" >/dev/null || true
 }
 
 # Sets name to the sandbox for a directory, which defaults to the current one.
@@ -153,6 +156,7 @@ usage: $self <dir> [name]            build, ensure provider, recreate (full setu
        $self connect [dir] [name]    open a shell in the sandbox (dir defaults to .)
 <dir> is mounted at /sandbox/<basename>; name defaults to <basename>
 agent logins persist across recreate in the docker volume osb-creds
+recreate removes superseded sandbox images
 EOF
 }
 
