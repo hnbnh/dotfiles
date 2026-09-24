@@ -161,6 +161,11 @@ network_policies:
           access: read-only,
         }
     binaries: *download_binaries
+  mysql:
+    name: mysql
+    endpoints:
+      - { host: host.docker.internal, port: 3306, tls: skip }
+    binaries: *download_binaries
   mise:
     name: mise
     endpoints:
