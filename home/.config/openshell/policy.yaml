@@ -179,6 +179,32 @@ network_policies:
           access: read-only,
         }
     binaries: *download_binaries
+  playwright:
+    name: playwright
+    endpoints:
+      - {
+          host: cdn.playwright.dev,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - {
+          host: playwright.download.prss.microsoft.com,
+          port: 443,
+          protocol: rest,
+          enforcement: enforce,
+          access: read-only,
+        }
+      - host: storage.googleapis.com
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        rules:
+          - allow:
+              method: GET
+              path: /chrome-for-testing-public/**
+    binaries: *download_binaries
   github_content:
     name: github-content
     endpoints:

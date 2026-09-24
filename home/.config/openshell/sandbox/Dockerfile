@@ -21,6 +21,11 @@ FROM ${BASE}
 COPY --from=tools /closure/nix /nix
 COPY --from=tools /out/bin/ /usr/local/bin/
 
+USER root
+RUN npx -y -p @playwright/cli@latest playwright install-deps \
+  && rm -rf /var/lib/apt/lists/* /root/.npm
+USER sandbox
+
 COPY --chown=sandbox:sandbox home/ /sandbox/
 
 RUN git config --file /sandbox/.config/git/config --remove-section url.ssh://git@github.com/ \
