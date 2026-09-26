@@ -7,6 +7,7 @@ RUN NIXPKGS_ALLOW_UNFREE=1 nix --extra-experimental-features 'nix-command flakes
   profile install --impure --profile /out \
   ${NIXPKGS}#ripgrep \
   ${NIXPKGS}#fd \
+  ${NIXPKGS}#jaq \
   ${NIXPKGS}#gh \
   ${NIXPKGS}#herdr \
   ${NIXPKGS}#mise \
@@ -27,6 +28,7 @@ RUN npx -y -p @playwright/cli@latest playwright install-deps \
 USER sandbox
 
 COPY --chown=sandbox:sandbox home/ /sandbox/
+COPY --chown=sandbox:sandbox home/.config/openshell/claude/settings.json /sandbox/.claude/settings.json
 
 RUN git config --file /sandbox/.config/git/config --remove-section url.ssh://git@github.com/ \
   && git config --file /sandbox/.config/git/config --add url.https://github.com/.insteadOf git@github.com: \
