@@ -31,6 +31,8 @@ build() {
 }
 
 provider() {
+  openshell profile export github --global >/dev/null 2>&1 ||
+    openshell profile import --global -f "$dotfiles/home/.config/openshell/providers/github.yaml"
   openshell provider get github >/dev/null 2>&1 ||
     GH_TOKEN=$(gh auth token) openshell provider create --name github --type github --credential GH_TOKEN
 }
