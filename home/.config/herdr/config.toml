@@ -18,8 +18,13 @@ previous_tab = "ctrl+shift+h"
 next_tab = "ctrl+shift+l"
 # tmux `split-window -h`: panes side by side.
 split_vertical = "ctrl+shift+enter"
-# Stands in for the sesh picker
-goto = "ctrl+shift+o"
+
+[[keys.command]]
+key = "ctrl+shift+o"
+type = "popup"
+command = "herdr-switch"
+width = "80%"
+height = "70%"
 
 [ui]
 # tmux new-window creates immediately instead of asking for a name.

@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+
+# fzf project switcher for herdr, modelled on the sesh picker that tmux binds
+# to ctrl+shift+o. herdr runs it in a popup; see ~/.config/herdr/config.toml.
+
+set -e
+
+bin="$0"
+
+# Rows are "kind<TAB>target<TAB>display", and fzf shows only the display
+# column. kind "ws" targets a workspace id, kind "dir" an absolute path.
+ws_icon=$'\e[34m\xee\xaf\x88\e[39m'
+dir_icon=$'\e[36m\xef\x84\x94\e[39m'
+
+workspaces() {
+  herdr workspace list | jq -r '.result.workspaces[] | [.workspace_id, .label] | @tsv' |
+    while IFS=$'\t' read -r id label; do
+      printf 'ws\t%s\t%s %s\n' "$id" "$ws_icon" "$label"
+    done
+}
+
+dirs() {
+  while read -r path; do
+    path="${path%/}"
+    printf 'dir\t%s\t%s %s\n' "$path" "$dir_icon" "${path/#"$HOME"/"~"}"
+  done
+}
+
+list() {
+  case "${1:-all}" in
+  all)
+    workspaces
+    zoxide query -l | dirs
+    ;;
+  workspaces) workspaces ;;
+  zoxide) zoxide query -l | dirs ;;
+  find) fd -H -d 2 -t d -E .Trash . ~ | dirs ;;
+  esac
+}
+
+# A dir that already has a pane in some workspace switches there, the way
+# sesh connect attaches to an existing session instead of making a new one.
+connect() {
+  local id
+
+  case "$1" in
+  ws) herdr workspace focus "$2" >/dev/null ;;
+  dir)
+    id="$(herdr pane list | jq -r --arg cwd "$2" 'first(.result.panes[] | select(.cwd == $cwd) | .workspace_id) // empty')"
+    if [ -n "$id" ]; then
+      herdr workspace focus "$id" >/dev/null
+    else
+      herdr workspace create --cwd "$2" --label "${2##*/}" --focus >/dev/null
+    fi
+    ;;
+  esac
+}
+
+preview() {
+  local tab pane
+
+  case "$1" in
+  ws)
+    tab="$(herdr workspace get "$2" | jq -r .result.workspace.active_tab_id)"
+    pane="$(herdr pane list --workspace "$2" | jq -r --arg tab "$tab" 'first(.result.panes[] | select(.tab_id == $tab) | .pane_id) // empty')"
+    [ -n "$pane" ] && herdr pane read "$pane" --source visible --raw
+    ;;
+  dir) eza -1 --icons=always --color=always --group-directories-first "$2" ;;
+  esac
+}
+
+pick() {
+  local row kind target
+
+  row="$(
+    list all | fzf \
+      --no-sort --ansi --border --border-label ' herdr ' --prompt '⚡  ' \
+      --delimiter '\t' --with-nth 3.. \
+      --header '  ^a all ^t workspaces ^x zoxide ^d close ^f find' \
+      --bind 'tab:down,btab:up' \
+      --bind "ctrl-a:change-prompt(⚡  )+reload('$bin' list all)" \
+      --bind "ctrl-t:change-prompt(🪟  )+reload('$bin' list workspaces)" \
+      --bind "ctrl-x:change-prompt(📁  )+reload('$bin' list zoxide)" \
+      --bind "ctrl-f:change-prompt(🔎  )+reload('$bin' list find)" \
+      --bind "ctrl-d:execute-silent('$bin' close {1} {2})+change-prompt(⚡  )+reload('$bin' list all)" \
+      --preview-window 'right:55%' \
+      --preview "'$bin' preview {1} {2}"
+  )" || exit 0
+
+  IFS=$'\t' read -r kind target _ <<<"$row"
+  connect "$kind" "$target"
+}
+
+case "${1:-}" in
+"") pick ;;
+list) list "$2" ;;
+preview) preview "$2" "$3" ;;
+close)
+  if [ "$2" = ws ]; then
+    herdr workspace close "$3" >/dev/null
+  fi
+  ;;
+*)
+  echo "${0##*/}: unknown command: $1" >&2
+  exit 2
+  ;;
+esac
