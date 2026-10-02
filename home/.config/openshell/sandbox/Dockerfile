@@ -1,5 +1,5 @@
 ARG BASE=ghcr.io/nvidia/openshell-community/sandboxes/base:latest
-ARG NIXPKGS=github:nixos/nixpkgs/nixpkgs-unstable
+ARG NIXPKGS=github:nixos/nixpkgs/nixos-unstable
 
 FROM nixos/nix:latest AS tools
 ARG NIXPKGS

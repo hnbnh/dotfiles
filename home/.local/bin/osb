@@ -18,7 +18,7 @@ build() {
   case "${1:-}" in
   "") ;;
   # The nix install layer is cached on its instruction text, so a moved
-  # nixpkgs-unstable never invalidates it on its own.
+  # nixos-unstable never invalidates it on its own.
   --update) flags=(--pull --no-cache-filter tools) ;;
   *)
     echo "$self: unknown build option: $1" >&2
