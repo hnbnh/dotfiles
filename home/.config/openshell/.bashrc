@@ -1,3 +1,6 @@
+# The base .bashrc hardcodes PATH; claude and codex are native installs here.
+export PATH="$HOME/.local/bin:$PATH"
+
 # Agents run their commands through non-interactive bash, where mise's prompt
 # hook never fires; shims resolve a project's tools at call time instead.
 if [[ $- != *i* ]]; then

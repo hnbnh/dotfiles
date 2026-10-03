@@ -43,10 +43,8 @@ network_policies:
     binaries: &agent_binaries
       - path: /usr/bin/git
       - path: /usr/bin/node
-      - path: /usr/local/bin/claude
-      - path: /usr/local/bin/codex
-      - path: /nix/store/*-claude-code-*/bin/.claude-wrapped
-      - path: /nix/store/*-codex-*/bin/.codex-wrapped
+      - path: /sandbox/.local/share/claude/versions/*
+      - path: /sandbox/.codex/packages/standalone/releases/*/bin/codex
       - path: /nix/store/*-gh-*/bin/.gh-wrapped
       - path: /nix/store/*-mise-*/bin/mise
   codex:
@@ -56,6 +54,7 @@ network_policies:
       - { host: auth.openai.com, port: 443 }
       - { host: chatgpt.com, port: 443 }
       - { host: "**.chatgpt.com", port: 443 }
+      - { host: releases.openai.com, port: 443 }
     binaries: *agent_binaries
   node:
     name: node
@@ -108,10 +107,8 @@ network_policies:
       - path: /usr/bin/curl
       - path: /usr/bin/git
       - path: /usr/bin/node
-      - path: /usr/local/bin/claude
-      - path: /usr/local/bin/codex
-      - path: /nix/store/*-claude-code-*/bin/.claude-wrapped
-      - path: /nix/store/*-codex-*/bin/.codex-wrapped
+      - path: /sandbox/.local/share/claude/versions/*
+      - path: /sandbox/.codex/packages/standalone/releases/*/bin/codex
       - path: /nix/store/*-gh-*/bin/.gh-wrapped
       - path: /nix/store/*-mise-*/bin/mise
       - path: /sandbox/.local/share/mise/installs/*/*/bin/*

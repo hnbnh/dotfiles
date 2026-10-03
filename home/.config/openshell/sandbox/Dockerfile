@@ -3,16 +3,15 @@ ARG NIXPKGS=github:nixos/nixpkgs/nixos-unstable
 
 FROM nixos/nix:latest AS tools
 ARG NIXPKGS
-RUN NIXPKGS_ALLOW_UNFREE=1 nix --extra-experimental-features 'nix-command flakes' \
-  profile install --impure --profile /out \
+RUN nix --extra-experimental-features 'nix-command flakes' \
+  profile install --profile /out \
   ${NIXPKGS}#ripgrep \
   ${NIXPKGS}#fd \
   ${NIXPKGS}#jaq \
   ${NIXPKGS}#gh \
   ${NIXPKGS}#herdr \
   ${NIXPKGS}#mise \
-  ${NIXPKGS}#claude-code \
-  ${NIXPKGS}#codex
+  ${NIXPKGS}#ffmpeg-headless
 # Copy only the profile's closure.
 RUN mkdir /closure \
   && nix --extra-experimental-features nix-command path-info -r /out \
@@ -25,7 +24,19 @@ COPY --from=tools /out/bin/ /usr/local/bin/
 USER root
 RUN npx -y -p @playwright/cli@latest playwright install-deps \
   && rm -rf /var/lib/apt/lists/* /root/.npm
+# The base image's agents are stale and would win wherever PATH lacks
+# ~/.local/bin; a second codex on PATH also makes its installer edit .profile.
+RUN rm /usr/local/bin/claude && npm uninstall -g @openai/codex
 USER sandbox
+
+ADD --chown=sandbox:sandbox https://downloads.claude.ai/claude-code-releases/latest /tmp/claude-release
+ADD --chown=sandbox:sandbox https://releases.openai.com/codex/channels/latest /tmp/codex-release
+RUN export PATH="$HOME/.local/bin:$PATH" \
+  && curl -fsSL https://claude.ai/install.sh -o /tmp/claude-install.sh \
+  && curl -fsSL https://chatgpt.com/codex/install.sh -o /tmp/codex-install.sh \
+  && bash /tmp/claude-install.sh \
+  && CODEX_NON_INTERACTIVE=1 sh /tmp/codex-install.sh \
+  && rm /tmp/claude-release /tmp/codex-release /tmp/claude-install.sh /tmp/codex-install.sh
 
 COPY --chown=sandbox:sandbox home/ /sandbox/
 COPY --chown=sandbox:sandbox home/.config/openshell/claude/settings.json /sandbox/.claude/settings.json
