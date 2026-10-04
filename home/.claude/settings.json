@@ -61,7 +61,8 @@
     "allowUnsandboxedCommands": false,
     "enableWeakerNetworkIsolation": true,
     "network": {
-      "allowLocalBinding": true
+      "allowLocalBinding": true,
+      "allowMachLookup": ["com.apple.speech.speechsynthesisd.*"]
     }
   },
   "alwaysThinkingEnabled": true,
