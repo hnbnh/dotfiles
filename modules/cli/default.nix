@@ -39,6 +39,7 @@
     vim
     witr
     yazi
+    youtubeuploader
     yq-go
     yt-dlp
     zellij
