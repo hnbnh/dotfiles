@@ -1,3 +1,8 @@
+---
+name: gh-pr-review
+description: Use when asked to review a GitHub pull request and post review comments
+---
+
 # Review PR and Suggest Edits
 
 ## Overview
@@ -50,7 +55,7 @@ and let the user select which comments to submit.
      - Description
      - Suggested fix
 
-   - Use the AskUserQuestion tool to let the user select which suggestions to submit as PR comments
+   - Ask the user which suggestions to submit as PR comments
    - Allow multiple selection
 
 5. **Submit selected comments**

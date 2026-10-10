@@ -1,3 +1,8 @@
+---
+name: git-commit
+description: Use when asked to commit staged changes or write a commit message
+---
+
 # Create a commit with a detailed message
 
 ## Overview

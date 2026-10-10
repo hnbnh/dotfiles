@@ -1,5 +1,7 @@
 # Places every file in the home tree into $HOME as an out-of-store
 # symlink, so edits in the repo take effect immediately without a rebuild.
+# Agent skills are also linked into the skill directories of tools that do
+# not read ~/.agents/skills.
 { config, lib, ... }:
 
 let
@@ -22,9 +24,20 @@ let
     root = ../.. + "/${tree}";
     whole = map (lib.removePrefix "${tree}/") (lib.filter (lib.hasPrefix "${tree}/") submodules);
   };
+
+  skillMirrors = linkTree.mirrorPaths {
+    from = ".agents/skills";
+    to = [
+      ".claude/skills"
+      ".gemini/antigravity/skills"
+    ];
+    inherit paths;
+  };
+
+  link = path: {
+    source = config.lib.file.mkOutOfStoreSymlink "${repo}/${tree}/${path}";
+  };
 in
 {
-  home.file = lib.genAttrs paths (path: {
-    source = config.lib.file.mkOutOfStoreSymlink "${repo}/${tree}/${path}";
-  });
+  home.file = lib.genAttrs paths link // lib.mapAttrs (_: link) skillMirrors;
 }

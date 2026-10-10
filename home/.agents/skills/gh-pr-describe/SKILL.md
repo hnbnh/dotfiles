@@ -1,3 +1,8 @@
+---
+name: gh-pr-describe
+description: Use when asked to draft or generate a PR description without publishing it
+---
+
 # Generate PR Description
 
 Generate a **concise** PR description based on git changes.

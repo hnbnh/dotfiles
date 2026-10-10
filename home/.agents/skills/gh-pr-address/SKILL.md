@@ -1,3 +1,8 @@
+---
+name: gh-pr-address
+description: Use when asked to address or respond to review comments on a GitHub pull request
+---
+
 # Address PR comments
 
 ## Overview

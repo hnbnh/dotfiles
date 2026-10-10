@@ -1,3 +1,8 @@
+---
+name: gh-pr-create
+description: Use when asked to open or create a GitHub pull request for the current branch
+---
+
 # Create Pull Request
 
 ## Overview
@@ -10,7 +15,7 @@ Create a well-structured pull request with proper description.
    - Push branch to remote
 
 2. **Draft the PR description**
-   - Refer to the instructions in this file to draft a **concise** PR description: @~/.config/ai/commands/gh/pr-describe.md
+   - Draft a **concise** PR description using the `gh-pr-describe` skill.
    - Extract the ticket id from the head branch and draft a title (see PR Title below).
 
 3. **Confirm with the human (REQUIRED — hard gate)**

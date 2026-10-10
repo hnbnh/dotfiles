@@ -15,6 +15,16 @@
 # unconditionally and never descended into, because the caller passes the
 # git-filtered store copy: a submodule is empty there, or missing outright, yet
 # the working tree the symlink points at is populated.
+#
+# `mirrorPaths` re-roots every path under `from` beneath each directory in
+# `to`, mapping target to original, so one repo file can be linked into
+# several tools' directories:
+#
+#   mirrorPaths {                 { ".claude/skills/x/SKILL.md"
+#     from = ".agents/skills";        = ".agents/skills/x/SKILL.md"; }
+#     to = [ ".claude/skills" ];
+#     paths = [ ".agents/skills/x/SKILL.md" "foo" ];
+#   }
 { lib }:
 
 let
@@ -42,4 +52,20 @@ in
       whole ? [ ],
     }:
     lib.sort lib.lessThan (lib.unique (scan whole "" root ++ whole));
+
+  mirrorPaths =
+    {
+      from,
+      to,
+      paths,
+    }:
+    let
+      prefix = "${from}/";
+      under = lib.filter (lib.hasPrefix prefix) paths;
+    in
+    lib.listToAttrs (
+      lib.concatMap (
+        dir: map (path: lib.nameValuePair "${dir}/${lib.removePrefix prefix path}" path) under
+      ) to
+    );
 }

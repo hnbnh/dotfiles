@@ -40,6 +40,8 @@ RUN export PATH="$HOME/.local/bin:$PATH" \
 
 COPY --chown=sandbox:sandbox home/ /sandbox/
 COPY --chown=sandbox:sandbox home/.config/openshell/claude/settings.json /sandbox/.claude/settings.json
+# Claude Code reads skills only from ~/.claude/skills, so this mirrors skillMirrors in modules/dotfiles/default.nix.
+COPY --chown=sandbox:sandbox home/.agents/skills/ /sandbox/.claude/skills/
 
 RUN git config --file /sandbox/.config/git/config --remove-section url.ssh://git@github.com/ \
   && git config --file /sandbox/.config/git/config --add url.https://github.com/.insteadOf git@github.com: \
