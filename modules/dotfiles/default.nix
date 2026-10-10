@@ -27,10 +27,7 @@ let
 
   skillMirrors = linkTree.mirrorPaths {
     from = ".agents/skills";
-    to = [
-      ".claude/skills"
-      ".gemini/antigravity/skills"
-    ];
+    to = [ ".claude/skills" ];
     inherit paths;
   };
 
