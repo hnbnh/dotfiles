@@ -7,7 +7,7 @@ description: Use when asked to open or create a GitHub pull request for the curr
 
 ## Overview
 
-Draft the PR title and description, then hand the user the commands that publish it. You run read-only commands only; the user runs `git push` and `gh pr create`.
+Draft the PR title and description, then hand the user the one-line command that publishes it. You run read-only commands and write the body draft; the user runs `git push` and `gh pr create`.
 
 ## Steps
 
@@ -23,17 +23,18 @@ Draft the PR title and description, then hand the user the commands that publish
    - **STOP.** Wait for explicit approval.
    - If the human requests edits, revise, show the updated draft, and again STOP for explicit approval.
 
-4. **Hand off the commands**
-   - Reply with this block for the user to paste, or run here with a `!` prefix. Drop the `git push` line when step 1 shows the branch pushed and up to date. The quoted `'EOF'` keeps backticks in the body intact.
+4. **Hand off the command**
+   - Write the approved body, exactly as approved, to `PR_BODY.md` in the absolute git dir (`git rev-parse --absolute-git-dir`), replacing any earlier draft.
+   - Reply with this single line for the user to paste, or run here with a `!` prefix:
 
      ```
-     git push -u origin HEAD &&
-     gh pr create --draft --base <base> --title "<approved title>" --body-file - <<'EOF'
-     <approved body>
-     EOF
+     git push -u origin HEAD && gh pr create --draft --base <base> --title '<approved title>' --body-file <absolute git dir>/PR_BODY.md
      ```
 
-   - Add the compare URL, `https://github.com/<owner>/<repo>/compare/<base>...<branch>?expand=1`, for creating it in the browser with "Create draft pull request".
+     - Drop `git push -u origin HEAD && ` when step 1 shows the branch pushed and up to date.
+     - Spell out the absolute path, so the line runs from any directory.
+     - Single quotes keep backticks and `$` in the title literal. Write each `'` in the title as `'\''`.
+   - Add the compare URL, `https://github.com/<owner>/<repo>/compare/<base>...<branch>?expand=1`, for creating it in the browser with "Create draft pull request", pasting the body from the draft file.
    - Always a **draft** PR — never ready-for-review.
    - Once the user says it's done, run `gh pr view --json url,isDraft` and return the PR URL.
 
@@ -41,9 +42,9 @@ Draft the PR title and description, then hand the user the commands that publish
 
 | You | The user |
 |---|---|
-| `git status`, `git log`, `git diff`, `gh pr view`, `gh repo view` | `git push`, `gh pr create`, any other command that changes the remote or GitHub |
+| `git status`, `git log`, `git diff`, `gh pr view`, `gh repo view`, writing `PR_BODY.md` | `git push`, `gh pr create`, any other command that changes the remote or GitHub |
 
-The user keeps their column when they approve the draft, are short on time, or ask you to "just push it": answer with the step 4 block. This is the global CLAUDE.md rule that `gh` is read-only, and a push counts.
+The user keeps their column when they approve the draft, are short on time, or ask you to "just push it": answer with the step 4 line. This is the global CLAUDE.md rule that `gh` is read-only, and a push counts.
 
 ## PR Title
 
