@@ -1,6 +1,6 @@
 ---
 name: gh-pr-describe
-description: Use when asked to draft or generate a PR description without publishing it
+description: Use when asked to draft, generate, update, or rewrite a pull request description, including for an existing GitHub PR
 ---
 
 # Generate PR Description
@@ -109,3 +109,11 @@ Restore filetype after loading a session by persisting buffer-local options, fix
 ```
 
 Return the generated description text only.
+
+For an existing PR, return it inside this block instead, for the user to paste or run with a `!` prefix. The quoted `'EOF'` keeps backticks intact.
+
+```
+gh pr edit <PR_ID> --body-file - <<'EOF'
+<description>
+EOF
+```
