@@ -1,23 +1,20 @@
 ---
 name: git-commit
-description: Use when asked to commit staged changes or write a commit message
+description: Use when asked to commit changes or write a commit message
 ---
 
 # Create a commit with a detailed message
 
 ## Overview
 
-### DO NOT
-
-- DO NOT add any files using `git add`
-
 ### DO
 
 - Use `git --no-pager diff --cached` to check for staged changes
+- If changes are staged, commit exactly those; mention related unstaged files in your reply
+- If nothing is staged, stage the changes for this commit with `git add <path>...`
 - Generate messages for staged files/changes
 - Follow conventional commit
 - Include message body if user explicitly requests it - otherwise keep commits to subject line only
-- If no files are staged, ask user to stage files first before creating a commit
 
 ## Format
 
