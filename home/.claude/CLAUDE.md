@@ -4,6 +4,7 @@
 - Use `rg` instead of `grep`, and `fd` instead of `find`.
 - Use `mise` to install and manage language and tool versions.
 - Use `gh` for read-only actions only. Never use it to create, edit, or delete anything: no PRs, issues, comments, reviews, merges, or write calls through `gh api`.
+- Never run `git push`, in any form. Commit locally and leave pushing to me.
 
 ## Superpowers skills
 
