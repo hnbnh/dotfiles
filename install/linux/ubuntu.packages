@@ -1,0 +1,5 @@
+curl     # Nix installer
+xz-utils # Nix installer
+zsh
+
+build-essential

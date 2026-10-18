@@ -37,9 +37,12 @@
         else
           "hnbnh";
 
+      # `file` names the hosts/*.nix to use when it differs from the host name.
       hosts = {
         mac = { system = "aarch64-darwin"; };
         fedora = { system = "aarch64-linux"; };
+        ubuntu-x86_64 = { system = "x86_64-linux"; file = "ubuntu"; };
+        ubuntu-aarch64 = { system = "aarch64-linux"; file = "ubuntu"; };
       };
 
       platformOf = host: lib.systems.elaborate host.system;
@@ -61,14 +64,14 @@
           };
 
       hostModules =
-        name:
+        name: host:
         let
-          file = ./hosts/${name}.nix;
+          file = ./hosts/${host.file or name}.nix;
         in
         lib.mapAttrs (_: lib.setDefaultModuleLocation file) (import file);
 
-      homeModules = name: [
-        (hostModules name).home
+      homeModules = name: host: [
+        (hostModules name host).home
         ./base
       ];
 
@@ -78,10 +81,10 @@
         modules = [
           home-manager.darwinModules.home-manager
           ./base/darwin.nix
-          (hostModules name).system
+          (hostModules name host).system
           {
             home-manager.extraSpecialArgs = specialArgs host;
-            home-manager.users.${username}.imports = homeModules name;
+            home-manager.users.${username}.imports = homeModules name host;
           }
         ];
       };
@@ -89,7 +92,7 @@
       mkHome = name: host: home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${host.system};
         extraSpecialArgs = specialArgs host;
-        modules = homeModules name;
+        modules = homeModules name host;
       };
 
       mkSystem = name: host: system-manager.lib.makeSystemConfig {
@@ -97,7 +100,7 @@
         modules = [
           nix-system-graphics.systemModules.default
           ./base/linux.nix
-          (hostModules name).system
+          (hostModules name host).system
         ];
       };
     in

@@ -13,7 +13,11 @@ case "$(uname -s)" in
     sudo nix run "${nix_flags[@]}" .#darwin-rebuild -- switch --flake .#mac --impure "$@"
     ;;
   Linux)
-    if [ ! -f /etc/fedora-release ]; then
+    if [ -f /etc/fedora-release ]; then
+      host=fedora
+    elif grep -qx 'ID=ubuntu' /etc/os-release; then
+      host="ubuntu-$(uname -m)"
+    else
       echo "Unsupported Linux distribution" >&2
       exit 1
     fi
@@ -22,8 +26,8 @@ case "$(uname -s)" in
       echo "system-manager and home-manager take different flags; run them directly" >&2
       exit 2
     fi
-    nix run "${nix_flags[@]}" .#system-manager -- switch --flake .#fedora --sudo
-    nix run "${nix_flags[@]}" .#home-manager -- switch --flake .#fedora --impure
+    nix run "${nix_flags[@]}" .#system-manager -- switch --flake ".#$host" --sudo
+    nix run "${nix_flags[@]}" .#home-manager -- switch --flake ".#$host" --impure
     ;;
   *)
     echo "Unsupported OS: $(uname -s)" >&2

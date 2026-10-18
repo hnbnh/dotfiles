@@ -14,11 +14,13 @@ case "$(uname -s)" in
     exec ./install/macos.sh
     ;;
   Linux)
-    if [ ! -f /etc/fedora-release ]; then
-      echo "Unsupported Linux distribution" >&2
-      exit 1
+    if [ -f /etc/fedora-release ]; then
+      exec ./install/linux/fedora.sh
+    elif grep -qx 'ID=ubuntu' /etc/os-release; then
+      exec ./install/linux/ubuntu.sh
     fi
-    exec ./install/linux/fedora.sh
+    echo "Unsupported Linux distribution" >&2
+    exit 1
     ;;
   *)
     echo "Unsupported OS: $(uname -s)" >&2

@@ -34,9 +34,13 @@ jobs:
             darwinConfigurations.mac.system \
             systemConfigs.fedora \
             homeConfigurations.fedora.activationPackage \
+            systemConfigs.ubuntu-x86_64 \
+            homeConfigurations.ubuntu-x86_64.activationPackage \
             packages.aarch64-darwin.darwin-rebuild \
             packages.aarch64-linux.system-manager \
-            packages.aarch64-linux.home-manager; do
+            packages.aarch64-linux.home-manager \
+            packages.x86_64-linux.system-manager \
+            packages.x86_64-linux.home-manager; do
             nix eval --raw ".#${attr}.drvPath"
             echo
           done

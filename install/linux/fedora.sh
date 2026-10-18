@@ -5,12 +5,7 @@ set -e
 cd "$(dirname "${BASH_SOURCE[0]}")/../.."
 
 source ./home/.config/bash/functions
-
-# The package lists are plain text. `#` starts a comment anywhere on a line,
-# and blank lines are ignored.
-function strip_list {
-  sed -e 's/#.*//' -e 's/[[:space:]]*$//' -e '/^[[:space:]]*$/d' "$1"
-}
+source ./install/linux/common.sh
 
 readarray -t coprs < <(strip_list install/linux/fedora.coprs)
 readarray -t packages < <(strip_list install/linux/fedora.packages)
@@ -23,13 +18,7 @@ sudo dnf install -y "${packages[@]}"
 
 sudo chsh -s /bin/zsh "$USER"
 
-if ! grep -q 'cache.numtide.com' /etc/nix/nix.conf 2>/dev/null; then
-  sudo tee -a /etc/nix/nix.conf >/dev/null <<'NIXCONF'
-extra-substituters = https://cache.numtide.com
-extra-trusted-public-keys = niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=
-NIXCONF
-  sudo systemctl try-restart nix-daemon
-fi
+use_numtide_cache
 
 sudo systemctl enable --now nix-daemon
 
